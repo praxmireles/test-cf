@@ -13,8 +13,8 @@ phases:
     commands:
       #- echo Preparing database to run tests...
       #- cp config/database.yml.example config/database.yml
-      #- RAILS_ENV=test bundle exec rake db:setup
-      #- RAILS_ENV=test bundle exec rake db:migrate
+      - RAILS_ENV=test bundle exec rake db:setup
+      - RAILS_ENV=test bundle exec rake db:migrate
   build:
     commands:
       - echo Running rspec tests...
