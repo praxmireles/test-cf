@@ -205,9 +205,6 @@ group :development, :test do
   # Generate Entity-Relationship Diagrams for Rails applications
   # https://github.com/voormedia/rails-erd
   gem 'rails-erd'
-
-  # SQLite for testing
-  gem 'sqlite3', '~> 1.3.6'
 end
 
 group :development do

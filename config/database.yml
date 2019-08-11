@@ -16,8 +16,7 @@ development:
 
 test: &test
   <<: *DEFAULTS
-  adapter: sqlite3
-  database: db/test.sqlite3
+  database: <%= ENV["TESTING_DATABASE"] %>  
 
 staging:
   <<: *DEFAULTS
