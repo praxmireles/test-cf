@@ -1,0 +1,3 @@
+$("#<%= current_user.id%>_unread_count").html("<%= current_user&.unread_notifications.count %>");
+$("#<%= current_user.id%>_white_count").html("<%= current_user&.unread_notifications.count %>");
+$("#<%= current_user.id%>_notifications").html("<%=escape_javascript( render :partial => 'clients/notification_list')%>");

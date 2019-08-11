@@ -1,0 +1,36 @@
+- if @appointment_packs.any?
+  - @appointment_packs.each do |appointment_pack|
+    .packageContainer.appointment_packs
+      .titleContainer
+        %h5= appointment_pack.name
+        %p= appointment_pack.description
+        %h5= "#{appointment_pack.past_appointments.count} / #{appointment_pack.appointments.count}"
+      .row.my-3.flexRow
+        .col-sm-3
+          %input.cardBtn{"data-target" => "#appointmentView", "data-toggle" => "modal", :type => "button", :value => "#{appointment_pack.service.type}"}/
+        .cardInfo
+          .imageInfo.ml-3
+            = image_tag(appointment_pack.expert.avatar_url, width: '20px', class: "img-fluid")
+          %p= appointment_pack.expert.fullname
+      .packageDiv.inProgress
+        - appointment_pack.appointments.order_by_type.each do |appointment|
+          .packageDiv{class: "#{appointment_class(appointment.type)}"}
+            %p= set_in_timezone(appointment.start_date, current_user.id).strftime("%A %B %d")
+            .card
+              .col-sm-7
+                %h3= appointment.subject
+                %p= appointment.description
+              .col-sm-5.packageDate
+                - if appointment.type == 'ClosedAppointment'
+                  %b Closed
+                - elsif appointment.type == 'CancelledAppointment'
+                  %b Cancelled
+                - elsif appointment.type == 'CompletedAppointment'
+                  %b Completed
+                - elsif appointment.type == 'InProgressAppointment'
+                  = link_to 'Join', video_conference_path(appointment.id), class: 'btn-submit'
+                - elsif appointment.type == 'ScheduledAppointment'
+                  = link_to 'Cancel', destroy_appointment_path(appointment.id), method: :delete, class: 'btn-submit'
+                - elsif appointment.type == 'OpenAppointment'
+                  = link_to 'Cancel Request', destroy_request_path(appointment.request.id), method: :delete, class: 'btn-submit'
+                %p.date= date_to_time(set_in_timezone(appointment.start_date, current_user.id))

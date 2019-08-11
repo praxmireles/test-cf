@@ -1,0 +1,117 @@
+%br
+%br
+%br
+.row
+  .col-sm-10.col-sm-offset-1
+    .panel
+      .panel-header
+        %span.text-md= t('layout.balance')
+      .panel-content.text-md{:style => "text-align:justify"}
+        .row{:style => "margin:20px"}
+          .col-md-12
+            .row.justify-content-center{:style => "margin:0px;"}
+              .col-sm-12
+                - if current_user.stripe_account_id
+                  - if current_user.balance.total_amount > 0
+                    = link_to t('view_experts.balance.withdraw_balance_to_stripe'), withdraw_fund_path, class: "btn btn-primary btn-md", method: :post
+                  - else
+                    = link_to t('view_experts.balance.nothing_to_withdraw'), "#", class: "btn btn-primary btn-md", disabled: :disabled
+                  = link_to t('view_experts.balance.disconnect_stripe_account'), disconnect_stripe_path, class: "btn btn-secondary"
+                - elsif current_user.payout_method == 'Paypal'
+                  - if ENV['PAYPAL_CLIENT_ID'].present? && ENV['PAYPAL_CLIENT_SECRET'].present?
+                    = link_to t('view_experts.balance.withdraw_balance_to_paypal'), withdraw_fund_path, class: 'btn btn-primary', method: :post
+                  - else
+                    %p= t('view_experts.balance.error') + ':'
+                    = t('view_experts.balance.contact_your_admin')
+                - else
+                  = link_to t('view_experts.balance.connect_bank_account'), "https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_E4AV8wPgBi2EVlaC8al6Yump6dRZgjw9&scope=read_write", class: 'btn btn-primary'
+                  %p
+                    = t('view_experts.balance.if_you_prefer_using')
+                %h1
+                  = "$ #{@balance&.total_amount ? @balance&.total_amount : 0.0 }"
+                %p
+                  = t('view_experts.balance.your_current_balance')
+
+                %p
+                  %b
+                    = t('view_experts.balance.available_payout')
+                .col-sm-12
+                  .table-responsive
+                    %table.table.table-striped
+                      %thead
+                        %tr
+                          %th
+                            = t('view_experts.balance.date')
+                          %th
+                            = t('view_experts.balance.client')
+                          %th
+                            = t('view_experts.balance.service')
+                          %th
+                            = t('view_experts.balance.amount_paid')
+                          %th
+                            = t('view_experts.balance.fees') + " (20%)"
+                          %th
+                            = t('view_experts.balance.your_earning') + " (80%)"
+                          %th
+                            = t('view_experts.balance.status')
+                      %tbody
+                        - @unpaid_balance_items.each do |balance_item|
+                          %tr
+                            %td
+                              = balance_item.created_at.strftime( '%b %d %Y at %T%p' )
+                            %td
+                              = balance_item.appointment.client.fullname
+                            %td
+                              = balance_item.appointment.service.type.titleize
+                            %td
+                              = "$ #{balance_item.appointment.price.round(2)}"
+                            %td
+                              = "$ #{balance_item.due_to_application.round(2) }"
+                            %td
+                              = "$ #{balance_item.due_to_expert.round(2)}"
+                            %td
+                              - if balance_item.appointment.payment
+                                - if  balance_item.appointment.payment.paid == true
+                                  = t('view_experts.balance.paid')
+                                - else
+                                  = t('view_experts.balance.pre_authorized')
+                              - else
+                                = t('view_experts.balance.missing_payment_details')
+
+                %p
+                  %b
+                    = t('view_experts.balance.withdrawals')
+                .col-sm-12
+                  .table-responsive
+                    %table.table.table-striped
+                      %thead
+                        %tr
+                          %th
+                            = t('view_experts.balance.date')
+                          %th
+                            = t('view_experts.balance.client')
+                          %th
+                            = t('view_experts.balance.service')
+                          %th
+                            = t('view_experts.balance.amount_paid')
+                          %th
+                            = t('view_experts.balance.status')
+                      %tbody
+                        - @paid_balance_items.each do |balance_item|
+                          %tr
+                            %td
+                              = balance_item.created_at.strftime( '%b %d %Y' )
+                            %td
+                              = balance_item.appointment.client.fullname
+                            %td
+                              = balance_item.appointment.service.type.titleize
+                            %td
+                              = "$ #{balance_item.amount}"
+                            %td
+                              - if balance_item.appointment.payment
+                                - if  balance_item.appointment.payment.paid == true
+                                  = t('view_experts.balance.paid')
+                                - else
+                                  = t('view_experts.balance.pre_authorized')
+                              - else
+                                = t('view_experts.balance.missing_payment_details')

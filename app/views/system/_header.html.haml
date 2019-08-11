@@ -1,0 +1,69 @@
+%html{:lang => "en"}
+  %head
+    %meta{:charset => "utf-8"}
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
+    %meta{:content => "width=device-width, initial-scale=1, shrink-to-fit=no", :name => "viewport"}/
+    %meta{:content => "MAVIA - Register, Reservation, Questionare, Reviews form wizard", :name => "description"}/
+    %meta{:content => "Ansonika", :name => "author"}/
+    %title 
+      = = t('view_system.header.services')
+      | Minds With Purpose
+    / Favicons
+    %link{:href => "img/favicon.ico", :rel => "shortcut icon", :type => "image/x-icon"}/
+    %link{:href => "img/apple-touch-icon-57x57-precomposed.png", :rel => "apple-touch-icon", :type => "image/x-icon"}/
+    %link{:href => "img/apple-touch-icon-72x72-precomposed.png", :rel => "apple-touch-icon", :sizes => "72x72", :type => "image/x-icon"}/
+    %link{:href => "img/apple-touch-icon-114x114-precomposed.png", :rel => "apple-touch-icon", :sizes => "114x114", :type => "image/x-icon"}/
+    %link{:href => "img/apple-touch-icon-144x144-precomposed.png", :rel => "apple-touch-icon", :sizes => "144x144", :type => "image/x-icon"}/
+    -# = stylesheet_link_tag 'search', media: 'all', 'data-turbolinks-track' => true
+    -# = javascript_include_tag 'search', media: 'all', 'data-turbolinks-track' => true
+    / GOOGLE WEB FONT
+    %link{:href => "https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i", :rel => "stylesheet"}/
+    -# %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css", :rel => "stylesheet"}/
+    / BASE CSS
+
+    / Modernizr
+  %body
+    #preloader
+      %div{"data-loader" => "circle-side"}
+    / /Preload
+    #loader_form
+      %div{"data-loader" => "circle-side-2"}
+    / /loader_form
+    %header
+      .container-fluid
+        .row
+          .col-3
+            #logo_home
+              %h1
+                %a{:href => "http://www.mindswithpurpose.com/index-1.html"} Minds With purpose
+          .col-9
+            #social
+              %ul
+                %li
+                  %a{:href => "index.html#0"}
+                    %i.fa.fa-facebook
+                %li
+                  %a{:href => "index.html#0"}
+                    %i.fa.fa-twitter
+                %li
+                  %a{:href => "index.html#0"}
+                    %i.fa.fa-google
+                %li
+                  %a{:href => "index.html#0"}
+                    %i.fa.fa-linkedin
+            / /social
+            -#
+            -# %nav
+            -#   %ul.cd-primary-nav
+            -#     %li
+            -#       %a.animated_link{:href => "index.html"} Register Version
+            -#     %li
+            -#       %a.animated_link{:href => "reservation_version.html"} Reservation Version
+            -#     %li
+            -#       %a.animated_link{:href => "index.html"} Questionare Version
+            -#     %li
+            -#       %a.animated_link{:href => "review_version.html"} Review Version
+            -#     %li
+            -#       %a.animated_link{:href => "about_color_3.html"} About Us
+            -#     %li
+            -#       %a.animated_link{:href => "contacts_color_3.html"} Contact Us

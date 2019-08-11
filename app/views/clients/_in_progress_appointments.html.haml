@@ -1,0 +1,12 @@
+- if @in_progress_appointments.any?
+  %h5{style: 'color: black;'} In Progress
+  - @in_progress_appointments.each do |date|
+    %p= date.first
+    - date.second.each do |appointment|
+      = link_to(modal_path(appointment.id), remote: true, data: {target: "#appointmentUser", toggle: "modal"}) do
+        .card
+          .col-sm-7
+            =render partial: 'appointment', locals: {appointment: appointment}
+          .col-sm-5.cardDate
+            = link_to 'Join', video_conference_path(appointment.id), class: 'btn btn-lighter-1'
+            %p.date= date_to_time(set_in_timezone(appointment.start_date, current_user.id))

@@ -1,0 +1,64 @@
+---
+client_unfinished_enrollment:
+  mailer: ClientMailer
+  method: find_an_expert
+client_finished_enrollment:
+  mailer: ClientMailer
+  method: welcome
+client_didnt_hire_expert:
+  mailer: ClientMailer
+  method: find_an_expert
+expert_unfinished_enrollment:
+  mailer: ExpertMailer
+  method: unfinished_enrollment
+expert_finished_enrollment:
+  mailer: ExpertMailer
+  method: finished_enrollment
+admin_approve_expert:
+  mailer: ExpertMailer
+  method: account_approved
+admin_reject_expert:
+  mailer: ExpertMailer
+  method: account_rejected
+new_appointment_request:
+  mailer: AppointmentMailer
+  method: new_appointment_request
+approved_appointment:
+  mailer: AppointmentMailer
+  method: approved_appointment
+appointment_is_rejected:
+  mailer: AppointmentMailer
+  method: appointment_is_rejected
+appointment_is_cancelled:
+  mailer: AppointmentMailer
+  method: appointment_is_cancelled
+appointment_is_scheduled:
+  mailer: AppointmentMailer
+  method: appointment_is_scheduled
+appointment_will_start:
+  mailer: AppointmentMailer
+  method: appointment_will_start
+appointment_started:
+  mailer: AppointmentMailer
+  method: appointment_started
+appointment_completed:
+  mailer: AppointmentMailer
+  method: appointment_completed
+received_client_feedback:
+  mailer: AppointmentMailer
+  method: received_client_feedback
+unanswered_request:
+  mailer: AppointmentMailer
+  method: unanswered_request
+paid_appointment:
+  mailer: PaymentMailer
+  method: paid_appointment
+sent_payout:
+  mailer: PaymentMailer
+  method: sent_payout
+send_receipt:
+  mailer: PaymentMailer
+  method: send_receipt
+pre_authorized_appointment:
+  mailer: PaymentMailer
+  method: pre_authorized_appointment

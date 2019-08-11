@@ -1,0 +1,39 @@
+Hi <%= @appointment.client.first_name %>, 
+
+ 
+
+Congratulations!! Your request for the First Available Expert for Express Advice has been accepted by NAME OF THE EXPERT. 
+
+ 
+
+Expert: <%= @appointment.expert.fullname %>  
+
+Expert Profile: <%= expert_url(@appointment.expert.id) %>  
+
+Request:  
+
+Date and Time of accepted session: <%= @appointment.start_date %> 
+
+ 
+
+Click the link below to start your session 
+
+<%= video_conference_url(appointment_id: @appointment.id) %> 
+
+Add this session to your calendar with the LINK 
+
+ 
+
+The amount of XXX has been charge to your provided account, please see the attached receipt. 
+
+ 
+
+Be sure to have all the necessary details to get the most from your session, thank you! 
+
+ 
+
+Minds With Purpose Team 
+
+ 
+
+Check your dashboard <%= expert_dashboard_url %> 

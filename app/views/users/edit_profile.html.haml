@@ -1,0 +1,261 @@
+%br
+%br
+%br
+.row
+  .col-xs-12
+    .panel
+      .panel-header
+        %span.text-md
+          = t('view_users.edit_profile.edit_profile')
+        .panel-actions
+          %ul
+            %li.action.toggle-panel.panel-expand
+              %span
+            %li.action
+              %span.fa.fa-bars.action{"aria-hidden" => "true"}
+      .panel-content.text-md{:style => "text-align:justify"}
+        %p
+          = t('view_users.edit_profile.please_review')
+
+.row
+  .col-sm-4
+    .panel
+      .panel-header
+        %span
+        %strong= t('layout.general_information')
+      .panel-body
+        %b{:style => "font-size:16px"}= "Expert Information"
+        %p
+          %strong= t('users.first_name:')
+          = current_user.fullname
+        %p
+          %strong= t('users.email:')
+          = current_user.email
+        - if current_user.location.present?
+          %p
+            %strong= t('users.location:')
+            = current_user.location
+        - if current_user.timezone.present?
+          %p
+            %strong= t('user.timezone:')
+            = current_user.timezone.name
+
+        - if current_user.contact_information.primary_phone.present?
+          %p
+            %strong= t('users.primary_phone:')
+            = current_user.contact_information.primary_phone
+
+        - if current_user.contact_information.phone_contact_time.present?
+          %p
+            %strong= t('users.phone_contact_time:')
+            = current_user.contact_information.phone_contact_time
+
+        - if current_user.contact_information.mobile_contact_time.present?
+          %p
+            %strong= t('user.mobile_contact_time:')
+            = current_user.contact_information.mobile_contact_time
+
+        - if current_user.contact_information.primary_mobile.present?
+          %p
+            %strong= t('users.primary_mobile:')
+            = current_user.contact_information.primary_mobile
+
+        - if current_user.contact_information.secondary_phone.present?
+          %p
+            %strong= t('user.secondary_phone:')
+            = current_user.contact_information.secondary_phone
+
+        - if current_user.contact_information.secondary_mobile.present?
+          %p
+            %strong= t('users.secondary_mobile:')
+            = current_user.contact_information.secondary_mobile
+        .text-right
+          = link_to general_information_path, style: "margin-left:10px", class: "btn btn-xs btn-primary" do
+            %i.fa.fa-pencil-alt
+
+        %hr
+        %strong
+          = t('view_users.edit_profile.resume') + ':'
+        %br
+        = link_to "Resume #{current_user.fullname}",current_user.profile.resume.to_xml
+        .text-right
+          = link_to resume_path, style: "margin-left:10px", class: "btn btn-xs btn-primary" do
+            %i.fa.fa-pencil-alt
+
+
+  .col-sm-4
+    .panel
+      .panel-header
+        %span
+          %strong= t('view_users.edit_profile.language')
+      .panel-body
+        - current_user.profile.languages.each do |language|
+          %ul
+            %li= language.all_language.name
+        .text-right
+          = link_to languages_path, style: "margin-left:10px", class: "btn btn-xs btn-primary" do
+            %i.fa.fa-pencil-alt
+
+  .col-sm-4
+    .panel
+      .panel-header
+        %span
+          %strong= t('view_users.edit_profile.services')
+      .panel-body
+        - current_user.services.each do |service|
+          %ul
+            %li= service.name
+        .text-right
+          = link_to experts_onboarding_services_path, style: "margin-left:10px", class: "btn btn-xs btn-primary" do
+            %i.fa.fa-pencil-alt
+
+.row
+  .col-sm-4
+    .panel
+      .panel-header
+        %span
+          %strong= t('view_users.edit_profile.job_function')
+      .panel-body
+        %p
+        - current_user.job_functions.each do |job_function|
+          %ul{:style => "padding-left:14px;"}
+            %li= t(job_function.all_job_function&.locale)
+        %hr
+        %strong Skills
+        - current_user.skills.each do |skill|
+          %ul{:style => "padding-left:14px;"}
+            %li= t(skill.locale)
+        .text-right
+          = link_to job_function_path, style: "margin-left:10px", class: "btn btn-xs btn-primary" do
+            %i.fa.fa-pencil-alt
+
+  .col-sm-4
+    .panel
+      .panel-header
+        %span
+          %strong= t('view_users.edit_profile.industries')
+      .panel-body
+        - current_user.profile.industries.each do |industry|
+          %ul
+            %li= t(industry.industry.locale)
+            %i= "#{industry.years} years"
+        .text-right
+          = link_to work_industries_path, style: "margin-left:10px", class: "btn btn-xs btn-primary" do
+            %i.fa.fa-pencil-alt
+
+  .col-sm-4
+    .panel
+      .panel-header
+        %span
+          %strong= t('view_users.edit_profile.seniority_levels')
+      .panel-body
+        %p
+
+          %br
+            - current_user.seniority_levels.each do |seniority_level|
+              %ul
+                %li= seniority_level.short_name if seniority_level.seniority_level_id
+            .text-right
+              = link_to top_level_seniority_path, style: "margin-left:10px", class: "btn btn-xs btn-primary" do
+                %i.fa.fa-pencil-alt
+
+
+.row
+  .col-sm-4
+    .panel
+      .panel-header
+        %span
+          %strong
+            = t('view_users.edit_profile.positions')
+      .panel-body
+        %p
+        - current_user.work_histories.each do |work_history|
+          %ul
+            %strong
+              %li= work_history.title
+            %i= work_history.company
+            %p= link_to "Company url", work_history.company_url
+            %p= work_history.location
+            %p= work_history.size
+
+        .text-right
+          = link_to positions_path, style: "margin-left:10px", class: "btn btn-xs btn-primary" do
+            %i.fa.fa-pencil-alt
+
+  .col-sm-4
+    .panel
+      .panel-header
+        %span
+          %strong
+            = t('view_users.edit_profile.degrees')
+      .panel-body
+        %p
+        - current_user.education_histories.all.each do |education_history|
+          %ul
+            %li
+              %strong= education_history.degree
+            %i.small= education_history.field_of_study
+        .text-right
+          = link_to degrees_path, style: "margin-left:10px", class: "btn btn-xs btn-primary" do
+            %i.fa.fa-pencil-alt
+
+
+
+  .col-sm-4
+    .panel
+      .panel-header
+        %string
+          %strong= t('view_users.edit_profile.career_highlights')
+      .panel-body
+        - current_user.career_highlights.all.each do |highlights|
+          %ul
+            %li
+              %strong= highlights.name
+            %i.small= highlights.description
+        .text-right
+          = link_to career_highlights_path, style: "margin-left:10px", class: "btn btn-xs btn-primary" do
+            %i.fa.fa-pencil-alt
+
+.row
+  .col-sm-10.col-sm-offset-1
+    .panel
+      .panel-header
+        %string
+          %strong= t('view_users.edit_profile.schedule')
+      .panel-body
+        .jscalendar.fc.fc-unthemed.fc-ltr
+          .fc-view-container{:style => ""}
+            .fc-view.fc-agendaWeek-view.fc-agenda-view{:style => ""}
+              %table.table.table-bordered
+                %thead
+                  %tr{:style => "width:100%"}
+                    %th{:style => "width:6.5%"}= t('layout.hour')
+                    %th{:style => "width:6.5%"}= t('layout.monday')
+                    %th{:style => "width:6.5%"}= t('layout.tuesday')
+                    %th{:style => "width:6.5%"}= t('layout.wednesday')
+                    %th{:style => "width:6.5%"}= t('layout.thursday')
+                    %th{:style => "width:6.5%"}= t('layout.friday')
+                    %th{:style => "width:6.5%"}= t('layout.saturday')
+                    %th{:style => "width:6.5%"}= t('layout.sunday')
+
+                %tbody
+                  - Time.zone = current_user.timezone.zone_name
+                  - @availabilities_slots.each do |x|
+                    %tr
+                      %td= "#{x}"
+                      - ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'].each do |day_of_week|
+                        - if current_user.availabilities.find_by(user_id: current_user.id, day_of_week: day_of_week, start_time: Time.zone.parse("#{Date.today.to_s} #{x}").in_time_zone('UTC'))
+                          %td.no-week-day
+                            = check_box_tag("availabilities[#{day_of_week}][#{x}]", "#{x}", true, style: 'display: none;')
+                        - else
+                          %td.week-day
+                            = check_box_tag("availabilities[#{day_of_week}][#{x}]", "#{x}", false, style: 'display: none;')
+
+            .text-right
+              = link_to schedule_path, style: "margin-left:10px", class: "btn btn-xs btn-primary" do
+                %i.fa.fa-pencil-alt
+
+  %hr
+  .row
+    .col-sm-2.col-sm-offset-10
+      %a.btn.btn-lighter-1.btn-wide{ href: "/experts/dashboard" }= "Return"

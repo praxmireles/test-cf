@@ -1,0 +1,50 @@
+%style
+  .reserved { background: 'red';}
+
+.row
+  .col-sm-10.col-sm-offset-1
+    = form_tag create_client_appointment_packs_path, url: url_for(controller: 'appointment_packs', action: 'create'), method: :post do
+      .panel
+        .panel-header.text-md
+          %span= t('layout.schedule')
+        .panel-content
+          .row{:style => "margin:20px"}
+            .block-content
+              .row.items-push
+                .col-xl-12
+                  .fc-view-container{:style => ""}
+                    %h2
+                      %span
+                        = link_to('Previous', '#', class: 'previous-week btn btn-xl btn-success')
+                      %span
+                        = link_to('Next', '#', class: 'next-week btn btn-xl btn-success')
+                      %span
+                        %b= "#{@month} #{@year}"
+                .col-xl-12
+                  .jscalendar.fc.fc-unthemed.fc-ltr
+                    .fc-view-container{:style => ""}
+                      .fc-view.fc-agendaWeek-view.fc-agenda-view{:style => ""}
+                        %table.table.table-bordered
+                          %thead
+                            %tr{:style => "width:100%"}
+                              %th{:style => "width:12.5%"}= t('layout.hour')
+                              - @week_dates.each_with_index do |date, index|
+                                %th{:style => "width:12.5%", class: "#{append_date_class(index, @week_dates.length)}" }= t("view_experts_onboarding.summary.#{date.to_date.strftime('%A').downcase}").titleize + ", #{date.to_date.strftime('%b %e')}"
+
+                          %tbody
+                            %p{id: 'expert_id', style: 'display: none;'}= @expert.id
+                            - Time.zone = current_user.timezone.zone_name
+                            - @availabilities_slots.each do |x|
+                              %tr
+                                %td= "#{x}"
+                                - ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'].each do |day_of_week|
+                                  - if @expert.availabilities.find_by(user_id: @expert.id, day_of_week: day_of_week, start_time: Time.zone.parse("2000-01-01 #{x}").in_time_zone('UTC'))
+                                    %td.week-day.available
+                                      = check_box_tag("availabilities[#{day_of_week}][#{x}]", "#{x}", false, style: "display: none;")
+                                  - else
+                                    %td.no-week-day.not_available
+                                      = check_box_tag("availabilities[#{day_of_week}][#{x}]", "#{x}", false, style: 'display: none;', disabled: true)
+
+:css
+  .not_available { background: repeating-linear-gradient( 45deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 10px, rgba(0, 0, 0, 0.3) 10px, rgba(0, 0, 0, 0.3) 20px ) !important };
+  

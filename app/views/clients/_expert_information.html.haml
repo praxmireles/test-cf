@@ -1,0 +1,186 @@
+.modal-dialog.modal-lg
+  / Modal content
+  .modal-content
+    .modal-header
+      %button.close{"data-dismiss" => "modal", :type => "button"} ×
+      %h4.modal-title
+        = t('view_clients.expert_information.about_the_user')
+    .modal-body.container-fluid
+      .col-sm-5
+        %div
+          .userHeader.mb-3
+            .col-sm-5.expertImage.pl-0
+              - if appointment.expert.avatar.present?
+                %img.img-responsive= image_tag appointment.expert.avatar.url
+            .col-sm-7.px-0
+              %h3.userName.my-1= current_user.fullname if signed_in?
+              .editProfile{:action => ""}
+                %input{:disabled => "disable", :type => "text", :value => "EXPERT"}/
+      .col-sm-5
+        .usermodalInfo.mb-4
+          %h4
+            %strong
+              = t('view_clients.expert_information.email') + ':'
+            = "#{appointment.expert.email}"
+          - if appointment.expert.location.present?
+            %h4
+              %strong
+                = t('view_clients.expert_information.location') + ':'
+              = "#{appointment.expert.location}"
+          - if appointment.expert.timezone.present?
+            %h4
+              %strong
+                = t('view_clients.expert_information.timezone') + ':'
+              = "#{appointment.expert.timezone.name}"
+          - if appointment.expert.job.present?
+            %h4
+              %strong
+                = t('view_clients.expert_information.position') + ':'
+              = "#{appointment.expert.job}"
+          - if appointment.expert.work_histories.present?
+            %h4
+              %strong
+                = t('view_clients.expert_information.company') + ':'
+              = appointment.expert.work_histories.first.company
+          - if appointment.expert.linkedin_url.present?
+            %h4
+              = link_to "Linkedin", appointment.expert.linkedin_url
+
+
+
+
+      -# .col-sm-12
+      -#   .userNeeds.panel.b-primary.bt-sm.mt-4
+      -#
+      -#     %h3.taskInstruction About the expert
+      -#     %p= appointment.expert.profile.about
+      -#     -# %p.taskSubject Subject
+      -#     -# %h2.taskDescription Description requires at least 150 characters
+      -#     -# .panel.b-primary.bt-sm
+      -#     -#   .panel-content
+      -#     -#     %ul.user-contact-info.ph-sm
+      -#     -#       %li.grayBackground.pl-4
+      -#     -#         %p.my-1
+      -#     -#           %i.color-green.mr-md.fa.fa-check
+      -#     -#           %span 95 Jobs
+      -#     -#           completed
+      -#     -#       %li.grayBackground.pl-4
+      -#     -#         %p.my-1
+      -#     -#           %i.color-alert.mr-md.fa.fa-clock-o
+      -#     -#           %span 3 projects
+      -#     -#           working on
+      -#     -#       %li.grayBackground.pl-4
+      -#     -#         %p.my-1
+      -#     -#           %i.color-yellow.mr-md.fa.fa-star
+      -#     -#           %span 5
+      -#     -#           Rating
+      -#     / .panel.b-primary.bt-sm
+      -#     /   .panel-content
+      -#     /     %ul.user-contact-info.ph-sm
+      -#     /       %li
+      -#     /         %h4
+      -#     /           %i.color-primary.mr-md.fa.fa-user>
+      -#     /           Client Filters for this section
+      -#     /       %li.mt-sm.text-md
+      -#     /         %p Industries
+      -#     /         %p Function
+      -#     /         %p skills
+      -#     /         %p Seniority level
+      -#
+      -#
+      -#
+      -#
+
+      %hr
+
+      .col-sm-12
+        .chartContainer.col-sm-3.pl-4
+          %p.data-attributes
+            %span{"data-peity" => "{ \"fill\": [\"#85b93e\", \"#efefef\"], \"innerRadius\": 18, \"radius\": 30 }"}
+          -# %p.ammount 50%
+        .chartHeader.col-sm-9
+          %h4.my-1
+            = t('view_clients.expert_information.appointment_information')
+          %p.my-1
+            = t('view_clients.expert_information.last_update') + ':'
+            %span.greenText
+              = appointment.expert.updated_at 
+
+      .col-sm-12
+        / Projet Info
+        .panel.b-primary.bt-sm
+          .panel-content
+            %ul.user-contact-info.ph-sm
+              %li
+                %h4
+                  %i.color-primary.mr-md.fa.fa-user>
+                  = appointment.subject
+
+      .col-sm-12.col-md-6.grayBackground
+        %h5.blueHeader
+          = t('services.mentoring_with_purpose')
+        %p.projectinfoCompany= appointment.service.type.titleize
+      .col-sm-12.col-md-6.grayBackground
+        %h5.greenText
+          = t('view_clients.expert_information.contact_person')
+        %p.blackText= appointment.expert.fullname
+      / Created and status
+
+      .col-sm-12.col-md-4
+        %h5.greenText
+          = t('view_clients.expert_information.created')
+        %p.projectinfoCompany= appointment.created_at.strftime("%D")
+
+      .col-sm-12.col-md-4
+        - if appointment.appointment_packs.any?
+          %h5.blueHeader
+            = t('view_clients.expert_information.status_of_sessions')
+          .projectinfoCompany
+            %ul.sessionsContainer
+              %li= "#{appointment.appointment_pack.completed_appointments_count} / #{appointment.appointment_pack.appointments.count}"
+      / Actions container
+      .row
+        .col-sm-12.col-md-4
+          %h5.blueHeader
+            = t('view_clients.expert_information.duration') + ':'
+          = "#{appointment.duration_in_min} min."
+
+      - if  appointment.search_history && appointment.search_history.industry.present?
+        .row
+          .col-sm-12.col-sm-6
+            .descriptionContainer.grayBackground.py-2.px-2
+              %h4{:style => "font-weight: bold;"}= t('view_clients.expert_information.client_filters_for') + ':'
+              %strong
+                = t('view_clients.expert_information.industries') + ':'
+              %ul
+                %li= appointment.search_history.industry_name
+              %strong
+                = t('view_clients.expert_information.functions') + ':'
+              %ul
+                %li= appointment.search_history.job_functions_names
+              %strong
+                = t('view_clients.expert_information.skills') + ':'
+              %ul
+                %li= appointment.search_history.skills_names
+              %strong
+                = t('view_clients.expert_information.seniority_level') + ':'
+              %ul
+                %li= appointment.search_history.seniority_levels_names
+          .col-sm-12.col-sm-6
+            .descriptionContainer.grayBackground.py-2.px-2
+              %h4{:style => "font-weight: bold;"}
+                = t('view_clients.expert_information.description_of_the_service') + ':'
+              %p.blackText= appointment.search_history&.description
+          -#   .descriptionContainer.grayBackground.py-2.px-2
+          -#     %h4{:style => "font-weight: bold;"} My notes:
+          -#     %p.blackText
+          -# .col-sm-12
+          -#   .descriptionContainer.grayBackground.py-2.px-2
+          -#     %h4{:style => "font-weight: bold;"} Note visible for me and my Expert:
+          -#     %p.blackText
+          -#   .descriptionContainer.grayBackground.py-2.px-2
+          -#     %h4{:style => "font-weight: bold;"} Shared Documens:
+          -#     %p.blackText
+          -#   .descriptionContainer.grayBackground.py-2.px-2
+          -#     %h4{:style => "font-weight: bold;"} Agreements:
+          -#     %p.blackText

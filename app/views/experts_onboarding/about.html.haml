@@ -1,0 +1,50 @@
+= render partial: 'tab_steps'
+.row
+  .col-sm-10.col-sm-offset-1
+    .panel
+      .panel-header
+        %span.text-md
+          = t('view_expert_onboarding.career_highlight.about_yourself')
+      .panel-body.text-justify
+        %p 
+          = t('view_expert_onboarding.career_highlight.please_consider')
+.row
+  .col-sm-10.col-sm-offset-1
+    = form_for @about, url: url_for(controller: 'profiles', action: 'update'),method: :put, html: { class: 'form-horizontal' } do |f|
+      .panel
+        .panel-header.text-md
+          %span= t('layout.about_me')
+        .panel-content
+          .row{:style => "margin:20px"}
+            .block-content
+              .row
+                .col-sm-12
+                  %h3
+                    = t('view_expert_onboarding.career_highlight.tell_us_about_yourself')
+                  %br
+                  = hidden_field_tag "experts_id", current_user.id
+                  .row
+                    .col-sm-12
+                      = f.text_area :about, size: "139", input_html: {minlength: 130, maxlength: 350}
+                  %br
+
+                  .row
+                    .col-sm-12.text-center
+                      = submit_tag t('buttons.save'), { class: "btn  btn-primary btn-wide", :style => "display: none; margin-left:20%" }
+
+
+
+        %hr
+        .panel-footer
+          .row
+            .col-sm-4
+              %a.btn.btn-lighter-1.btn-wide{:style => "margin-left:20%", href: "/experts/onboarding/skills" }= t('buttons.back')
+            .col-sm-4.col-sm-offset-4
+
+              %a.btn.btn-primary.btn-wide.next-button{type: "submit", :style => "margin-left:20%", href: "/experts/onboarding/schedule" }= t('buttons.next')
+
+:javascript
+  $(".next-button").click(function(e){
+    e.preventDefault();
+    $("input[name='commit']").click();
+  })

@@ -1,0 +1,47 @@
+#invoice.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "invoiceTitle", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog.modal-dialog-centered{:role => "document"}
+    .modal-content
+      .modal-header
+        %h5#exampleModalLongTitle.modal-title
+          = t('view_clients.invoices_information.invoice')
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+      .modal-body
+        .row
+          .col-sm-12
+            %strong
+              = t('view_clients.invoices_information.client') + ':'
+            = invoice.payment.appointment.client.fullname
+        %hr
+        .row
+          .col-sm-6
+            %strong
+              = t('view_clients.invoices_information.expert') + ':'
+            = invoice.payment.appointment.expert.fullname
+
+          .col-sm-6
+            %strong
+              = t('view_clients.invoices_information.service') + ':'
+            = invoice.payment.appointment.service.type.titleize
+        .row
+          .col-sm-6
+            %strong
+              = t('view_clients.invoices_information.date') + ':'
+            = invoice.date.strftime('%D')
+
+          .col-sm-6
+            %strong
+              = t('view_clients.invoices_information.due_date') + ':'
+            = invoice.due_date.strftime('%A')
+
+        .row
+          .col-sm-12
+            %strong
+              = t('view_clients.invoices_information.amount') + ':'
+            = "$ #{invoice.payment.amount} dls"
+
+
+
+      .modal-footer
+        %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"}
+          = t('view_clients.invoices_information.close')

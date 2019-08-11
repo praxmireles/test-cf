@@ -1,0 +1,401 @@
+.page-header
+  / LEFTSIDE header
+  .leftside-header
+    .logo
+      %a.on-click{:href => "http://www.mindswithpurpose.com/index-1.html"}
+        =image_tag "logo-mwp-bco_preview.png", :style => "width:100%;", :class => "minds-header-logo"
+    #menu-toggle.visible-xs.toggle-left-sidebar{"data-target" => "html", "data-toggle-class" => "left-sidebar-open"}
+      %i.fa.fa-bars{"aria-label" => "Toggle sidebar"}
+  / RIGHTSIDE header
+  .rightside-header
+    .header-middle
+    .header-separator
+    #language.header-section
+      - if locale == :en
+        = link_to(locale_path(:en), method: :patch, style: 'color: black') do
+          %b
+            %u English
+        %span
+          = "-"
+          = link_to(locale_path(:es), method: :patch, style: 'color: black') do
+            Spanish
+      - elsif  locale == :es
+        = link_to(locale_path(:en), method: :patch, style: 'color: black') do
+          English
+        = "-"
+        = link_to(locale_path(:es), method: :patch, style: 'color: black') do
+          %b
+            %u Spanish
+      - else
+        English - Spanish
+
+    -# #search-headerbox.header-section
+    -#   %input#search{:name => "search", :placeholder => "Search...", :type => "text"}/
+    -#   %i#search-icon.fa.fa-search.search{"aria-hidden" => "true"}
+      -# .header-separator
+    / NOCITE HEADERBOX
+    -# #notice-headerbox.header-section.hidden-xs
+      / check list
+      -# #checklist-notice.notice
+        -# %i.fa.fa-check-square-o{"aria-hidden" => "true"}
+        -# .dropdown-box.basic
+        -#   .drop-header
+        -#     %h3
+        -#       %i.fa.fa-check-square-o{"aria-hidden" => "true"}
+        -#       To-Do List
+          .drop-content
+            .widget-list.list-to-do
+              %ul
+                %li
+                  .checkbox-custom.checkbox-primary
+                    %input#check-s1{:type => "checkbox", :value => "option1"}/
+                    %label.check{:for => "check-s1"} Accusantium eveniet ipsam neque
+                %li
+                  .checkbox-custom.checkbox-primary
+                    %input#check-s2{:checked => "checked", :type => "checkbox", :value => "option1"}/
+                    %label.check{:for => "check-s2"} Lorem ipsum dolor sit
+                %li
+                  .checkbox-custom.checkbox-primary
+                    %input#check-s3{:type => "checkbox", :value => "option1"}/
+                    %label.check{:for => "check-s3"} Dolor eligendi in ipsum sapiente
+                %li
+                  .checkbox-custom.checkbox-primary
+                    %input#check-s4{:type => "checkbox", :value => "option1"}/
+                    %label.check{:for => "check-s4"} Natus recusandae vel
+                %li
+                  .checkbox-custom.checkbox-primary
+                    %input#check-s5{:type => "checkbox", :value => "option1"}/
+                    %label.check{:for => "check-s5"} Adipisci amet officia tempore ut
+          .drop-footer
+            %a= t('view_system.navbar.see_all_items')
+      / messages
+      -# #messages-notice.notice
+      -#   %i.fa.fa-comments-o{"aria-hidden" => "true"}
+      -#     %span.badge.badge-xs.badge-top-right.x-danger
+      -#       %i.fa.fa-exclamation
+      -#   .dropdown-box.basic
+      -#     .drop-header
+      -#       %h3
+      -#         %i.fa.fa-comments{"aria-hidden" => "true"}
+      -#         Messages
+      -#       %span.badge.x-danger.b-rounded 120
+      -#     .drop-content
+      -#       .widget-list.list-left-element
+      -#         %ul
+      -#           %li
+      -#             %a{:href => "#"}
+      -#               .left-element
+      -#                 %img{:alt => "profile photo", :src => "images/avatar/avatar_1.jpg"}/
+      -#               .text
+      -#                 %span.title John Doe
+      -#                 %span.subtitle hello world
+      -#           %li
+      -#             %a{:href => "#"}
+      -#               .left-element
+      -#                 %img{:alt => "profile photo", :src => "images/avatar/avatar_2.jpg"}/
+      -#               .text
+      -#                 %span.title Alice Smith
+      -#                 %span.subtitle hello world
+      -#           %li
+      -#             %a{:href => "#"}
+      -#               .left-element
+      -#                 %img{:alt => "profile photo", :src => "images/avatar/avatar_3.jpg"}/
+      -#               .text
+      -#                 %span.title Klaus Wolf
+      -#                 %span.subtitle hello world
+      -#           %li
+      -#             %a{:href => "#"}
+      -#               .left-element
+      -#                 %img{:alt => "profile photo", :src => "images/avatar/avatar_4.jpg"}/
+      -#               .text
+      -#                 %span.title Sun Li
+      -#                 %span.subtitle hello world
+      -#           %li
+      -#             %a{:href => "#"}
+      -#               .left-element
+      -#                 %img{:alt => "profile photo", :src => "images/avatar/avatar_5.jpg"}/
+      -#               .text
+      -#                 %span.title Sonia Valera
+      -#                 %span.subtitle hello world
+      -#     .drop-footer
+      -#       %a See all messages
+    - if current_user.present?
+      .header-separator
+      .btn-group.dropleft{:role => "group"}
+        .dropdown-toggle.dropdown-toggle-split{"aria-expanded" => "true", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+          %i.fas.fa-bell.icon-open.white
+          %span.badge.badge-xs.badge-top-left.x-danger.unread-count{:id => "#{current_user.id}_unread_count"}= current_user.notifications.count
+        %ul.dropdown-menu{:style => "right: 0; left: auto;"}
+
+          %li
+            %a
+              %span.badge.x-danger.white.unread-count{:id => "#{current_user.id}_white_count"}= "#{current_user.notifications.count}"
+              = t('view_system.navbar.notifications')
+
+      .header-separator
+      / USER HEADERBOX
+
+      #user-headerbox.header-section
+        .dropdown-toggle.dropdown-toggle-split{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+          .user-header-wrap
+            .user-photo
+              = image_tag current_user.avatar.url if signed_in? and current_user.avatar.present?
+            .user-info
+              %span.user-name
+                = current_user.fullname if signed_in?
+
+              %span.user-profile= t("user_types.#{current_user.type.downcase}")
+        %ul.dropdown-menu{:style => "right: 0; left: auto;"}
+          - if current_user.type == "Client"
+            %li
+              %a{:href => client_dashboard_path}
+                = t('view_system.navbar.profile')
+          - else
+            %li
+              %a{:href => expert_dashboard_path}
+                = t('view_system.navbar.profile')
+          - if current_user.type == "Client"
+            %li
+              %a{:href => client_settings_path}
+                = t('view_system.navbar.settings')
+          - else
+            %li
+              %a{:href => "/users/edit"}
+                = t('view_system.navbar.settings')
+          - if current_user.completed_onboarding == true
+            - if current_user.type == "Client"
+              %li
+                %a{:href => client_payments_path}
+                  = t('view_system.navbar.invoices')
+            - else
+              %li
+                %a{:href => balance_expert_path}
+                  = t('view_system.navbar.balance')
+          %li
+            %a{:href => logout_path}
+              = t('view_system.navbar.sign_out')
+
+
+
+          -# %i.fa.fa-plus.icon-open{"aria-hidden" => "true"}
+          -# %i.fa.fa-minus.icon-close{"aria-hidden" => "true"}
+        .user-options
+
+        -#   .drop-content.basic
+        -#     %ul
+        -#       - if current_user
+        -#         %li
+        -#           %a{:href => "#"}
+        -#             %i.fa.fa-lock{"aria-hidden" => "true"}
+        -#             My Workspace
+        -#         %li
+        -#           %a{:href => "#"}
+        -#             %i.fa.fa-user{"aria-hidden" => "true"}
+        -#             Profile
+        -#         -# %li
+        -#         -#   %a{:href => "/users/invoices"}
+        -#         -#     %i.fa.fa-lock{"aria-hidden" => "true"}
+        -#         -#     Invoices
+        -#         %li
+        -#           %a{:href => "#"}
+        -#             %i.fa.fa-cog{"aria-hidden" => "true"}
+        -#             Configurations
+        -#       - else
+        -#         %li
+        -#           %a{:href => "#"}
+        -#             %i.fa.fa-user{"aria-hidden" => "true"}
+        -#             Profile
+        -#         %li
+        -#           %a{:href => "#"}
+        -#             %i.fa.fa-user{"aria-hidden" => "true"}
+        -#             Workcenter
+        -#         %li
+        -#           %a{:href => "#"}
+        -#             %i.fa.fa-lock{"aria-hidden" => "true"}
+        -#             Invoices
+        -#         %li
+        -#           %a{:href => "#"}
+        -#             %i.fa.fa-cog{"aria-hidden" => "true"}
+        -#             Configurations
+      .header-separator
+
+      / Log out
+
+      .btn-group.dropleft{:role => "group"}
+        .dropdown-toggle.dropdown-toggle-split{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+          %i.fa.fa-plus.icon-open.white
+        %ul.dropdown-menu{:style => "right: 0; left: auto;"}
+          - if current_user.type == "Client"
+            %li
+              %a{:href => client_dashboard_path}
+                = t('view_system.navbar.profile')
+          - else
+            %li
+              %a{:href => expert_dashboard_path}
+                = t('view_system.navbar.profile')
+          - if current_user.type == "Client"
+            %li
+              %a{:href => client_settings_path}
+                = t('view_system.navbar.settings')
+          - else
+            %li
+              %a{:href => "/users/edit"}
+                = t('view_system.navbar.settings')
+          - if current_user.completed_onboarding == true
+            - if current_user.type == "Client"
+              %li
+                %a{:href => client_payments_path}
+                  = t('view_system.navbar.invoices')
+            - else
+              %li
+                %a{:href => balance_expert_path}
+                  = t('view_system.navbar.balance')
+          %li
+            %a{:href => logout_path}
+              = t('view_system.navbar.sign_out')
+      .header-separator
+
+
+
+-# %header#page-header{:style=>"background-color:#2c3e50"}
+-#   / Header Content
+-#   .content-header
+-#     / Left Section
+-#     .content-header-section
+-#       / Toggle Sidebar
+-#       / Layout API, functionality initialized in Codebase() -> uiApiLayout()
+-#       %button.btn.btn-circle.btn-dual-secondary{"data-action" => "sidebar_toggle", :style =>"color:white", "data-toggle" => "layout", :type => "button"}
+-#         %i.fa.fa-navicon
+-#       / END Toggle Sidebar
+-#       / Open Search Section
+-#       / Layout API, functionality initialized in Codebase() -> uiApiLayout()
+-#       %button.btn.btn-circle.btn-dual-secondary{"data-action" => "header_search_on", :style =>"color:white", "data-toggle" => "layout", :type => "button"}
+-#         %i.fa.fa-search
+-#       / END Open Search Section
+-#       / Layout Options (used just for demonstration)
+-#       / Layout API, functionality initialized in Codebase() -> uiApiLayout()
+-#       .btn-group{:role => "group"}
+-#         %button#page-header-options-dropdown.btn.btn-circle.btn-dual-secondary{"aria-expanded" => "false", :style =>"color:white", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+-#           %i.fa.fa-wrench
+-#         .dropdown-menu{"aria-labelledby" => "page-header-options-dropdown"}
+-#           %h6.dropdown-header Header
+-#           %button.btn.btn-sm.btn-block.btn-alt-secondary{"data-action" => "header_fixed_toggle", :style =>"color:white", "data-toggle" => "layout", :type => "button"} Fixed Mode
+-#           %button.btn.btn-sm.btn-block.btn-alt-secondary.d-none.d-lg-block.mb-10{"data-action" => "header_style_classic", :style =>"color:white", "data-toggle" => "layout", :type => "button"} Classic Style
+-#           .d-none.d-xl-block
+-#             %h6.dropdown-header Main Content
+-#             %button.btn.btn-sm.btn-block.btn-alt-secondary.mb-10{"data-action" => "content_layout_toggle", :style =>"color:white", "data-toggle" => "layout", :type => "button"} Toggle Layout
+-#           .dropdown-divider
+-#           %a.dropdown-item{:href => "be_layout_api.html"}
+-#             %i.si.si-chemistry
+-#             All Options (API)
+-#       / END Layout Options
+-#       / Color Themes (used just for demonstration)
+-#       / Themes functionality initialized in Codebase() -> uiHandleTheme()
+-#       .btn-group{:role => "group"}
+-#         %button#page-header-themes-dropdown.btn.btn-circle.btn-dual-secondary{"aria-expanded" => "false", :style =>"color:white", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+-#           %i.fa.fa-paint-brush
+-#         .dropdown-menu.min-width-150{"aria-labelledby" => "page-header-themes-dropdown"}
+-#           %h6.dropdown-header.text-center Color Themes
+-#           .row.no-gutters.text-center.mb-5
+-#             .col-4.mb-5
+-#               %a.text-default{"data-theme" => "default", "data-toggle" => "theme", :href => "javascript:void(0)"}
+-#                 %i.fa.fa-2x.fa-circle
+-#             .col-4.mb-5
+-#               %a.text-elegance{"data-theme" => "assets/css/themes/elegance.min.css", "data-toggle" => "theme", :href => "javascript:void(0)"}
+-#                 %i.fa.fa-2x.fa-circle
+-#             .col-4.mb-5
+-#               %a.text-pulse{"data-theme" => "assets/css/themes/pulse.min.css", "data-toggle" => "theme", :href => "javascript:void(0)"}
+-#                 %i.fa.fa-2x.fa-circle
+-#             .col-4.mb-5
+-#               %a.text-flat{"data-theme" => "assets/css/themes/flat.min.css", "data-toggle" => "theme", :href => "javascript:void(0)"}
+-#                 %i.fa.fa-2x.fa-circle
+-#             .col-4.mb-5
+-#               %a.text-corporate{"data-theme" => "assets/css/themes/corporate.min.css", "data-toggle" => "theme", :href => "javascript:void(0)"}
+-#                 %i.fa.fa-2x.fa-circle
+-#             .col-4.mb-5
+-#               %a.text-earth{"data-theme" => "assets/css/themes/earth.min.css", "data-toggle" => "theme", :href => "javascript:void(0)"}
+-#                 %i.fa.fa-2x.fa-circle
+-#           .dropdown-divider
+-#           %button.btn.btn-sm.btn-block.btn-alt-secondary.mb-10{"data-action" => "sidebar_style_inverse_toggle", "data-toggle" => "layout", :type => "button"} Sidebar Style
+-#           .dropdown-divider
+-#           %a.dropdown-item{:href => "be_ui_color_themes.html"}
+-#             %i.fa.fa-paint-brush
+-#             All Color Themes
+-#       / END Color Themes
+-#     / END Left Section
+-#     / Right Section
+-#     .content-header-section
+-#       / User Dropdown
+-#       .btn-group{:role => "group"}
+-#         - if signed_in?
+-#           = link_to destroy_session_path, title: t('layout.sign_out'), :style =>"color:white", class: 'dropdown-item' do
+-#             %i.si.si-logout.mr-5
+-#             = t('layout.sign_out')
+-#           %button#page-header-user-dropdown.btn.btn-rounded.btn-dual-secondary{"aria-expanded" => "false", :style =>"color:white", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+-#             = current_user.first_name
+-#             %i.fa.fa-angle-down.ml-5
+-#           .dropdown-menu.dropdown-menu-right.min-width-150{"aria-labelledby" => "page-header-user-dropdown"}
+-#             - if current_user
+-#               %a.dropdown-item{:href => "/be_advisor/public_profile"}
+-#                 %i.si.si-user.mr-5
+-#                 Profile
+-#               %a.dropdown-item.d-flex.align-items-center.justify-content-between{:href => "/be_advisor/public_profile"}
+-#                 %span
+-#                   %i.si.si-user.mr-5
+-#                   Edit Profile
+-#             - else
+-#               %a.dropdown-item{:href => "/users/#{current_user.id}"}
+-#                 %i.si.si-user.mr-5
+-#                 Profile
+-#               %a.dropdown-item.d-flex.align-items-center.justify-content-between{:href => "/users/#{current_user.id}/edit"}
+-#                 %span
+-#                   %i.si.si-user.mr-5
+-#                   Edit Profile
+-#             %a.dropdown-item{:href => "/users/invoices"}
+-#               %i.si.si-note.mr-5
+-#               Invoices
+-#             .dropdown-divider
+-#             / Toggle Side Overlay
+-#             / Layout API, functionality initialized in Codebase() -> uiApiLayout()
+-#             %a.dropdown-item{"data-action" => "side_overlay_toggle", "data-toggle" => "layout", :href => "javascript:void(0)"}
+-#               %i.si.si-wrench.mr-5
+-#               Settings
+-#             / END Side Overlay
+-#             .dropdown-divider
+-#             = link_to destroy_session_path, title: t('layout.sign_out'), class: 'dropdown-item' do
+-#               %i.si.si-logout.mr-5
+-#               = t('layout.sign_out')
+-#         - else
+-#           = link_to new_user_session_path, title: t('layout.sign_in'), class: 'link-effect text-dual-primary-dark' do
+-#             %i.si.si-login
+-#       / END User Dropdown
+-#       / Toggle Side Overlay
+-#       / Layout API, functionality initialized in Codebase() -> uiApiLayout()
+-#       %button.btn.btn-circle.btn-dual-secondary{"data-action" => "side_overlay_toggle", :style =>"color:white", "data-toggle" => "layout", :type => "button"}
+-#         %i.fa.fa-tasks
+-#       / END Toggle Side Overlay
+-#     / END Right Section
+-#   / END Header Content
+-#   / Header Search
+-#   #page-header-search.overlay-header
+-#     .content-header.content-header-fullrow
+-#       %form{:action => "be_pages_generic_search.html", :method => "post"}
+-#         .input-group
+-#           %span.input-group-btn
+-#             / Close Search Section
+-#             / Layout API, functionality initialized in Codebase() -> uiApiLayout()
+-#             %button.btn.btn-secondary{"data-action" => "header_search_off", "data-toggle" => "layout", :type => "button"}
+-#               %i.fa.fa-times
+-#             / END Close Search Section
+-#           %input#page-header-search-input.form-control{:name => "page-header-search-input", :placeholder => "Search or hit ESC..", :type => "text"}
+-#           %span.input-group-btn
+-#             %button.btn.btn-secondary{:type => "submit"}
+-#               %i.fa.fa-search
+-#   / END Header Search
+-#   / Header Loader
+-#   / Please check out the Activity page under Elements category to see examples of showing/hiding it
+-#   #page-header-loader.overlay-header.bg-primary
+-#     .content-header.content-header-fullrow.text-center
+-#       .content-header-item
+-#         %i.fa.fa-sun-o.fa-spin.text-white
+-#   / END Header Loader

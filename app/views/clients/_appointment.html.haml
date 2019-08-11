@@ -1,0 +1,11 @@
+.flexRow.cardInfo
+  .col-sm-3
+    .imageInfo.ml-3
+      - if appointment.expert.avatar.present?
+        = image_tag(appointment.expert.try(:avatar).try(:url), width: '20px', class: 'img-fluid')
+  .col-sm-10
+    %h3= appointment.expert.fullname
+.col-sm-3
+  %input.cardBtn{type: "button", :value => "#{appointment.service.type.titleize}"}/
+.col-sm-12
+  %p= appointment.search_history.description&.first(40) if appointment.search_history

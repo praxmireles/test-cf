@@ -1,0 +1,9 @@
+facebook_user:
+  id: 1
+  provider: facebook
+  facebook_uid: 123_facebook
+
+linkedin_user:
+  id: 2
+  provider: facebook
+  linkedin_uid: 123_linkedin

@@ -1,0 +1,37 @@
+= render partial: 'tab_steps'
+.row
+  .col-sm-10.col-sm-offset-1
+    .panel
+      .panel-header
+        %span.text-md= t('view_experts_onboarding.services.select_your_portfolio') + ":"
+        .panel-body
+          .text-align-justify
+            %p
+              = t('view_experts_onboarding.services.please_select')
+
+%br
+.row
+  .col-sm-10.col-sm-offset-1
+    = form_tag create_expert_services_path, url: url_for(controller: 'expert_services', action: 'create'), method: :post do
+      .panel
+        .panel-header
+          %span.text-md= t('view_experts_onboarding.services.services')
+        .panel-body.text-md.text-justify
+          .col-sm-12.text-center
+            %h3
+              = t('view_experts_onboarding.services.select_services')
+
+            .row
+              .col-sm-12.text-center
+                - Service.all.each_with_index do |service, index|
+                  = check_box_tag "services_ids[]", service.id, (current_user.services.where(service_id: service.id).present? ? true : false ), data:{index: index}
+                  = service.type.titleize
+
+        %hr
+
+        .panel-footer
+          .row
+            .col-sm-4
+              %a.btn.btn-lighter-1.btn-wide{:style => "margin-left:20%", href: "/experts/onboarding/resume" }= t('buttons.back')
+            .col-sm-4.col-sm-offset-4
+              = submit_tag t('buttons.next'), { class: "btn btn-primary btn-wide" }

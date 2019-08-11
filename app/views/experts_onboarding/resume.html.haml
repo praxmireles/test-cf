@@ -1,0 +1,41 @@
+= render partial: 'tab_steps'
+.row
+  .col-sm-10.col-sm-offset-1
+    .panel
+      .panel-header
+        %span.text-md= "#{t('view_experts_onboarding.resume.your_resume')}:"
+        .panel-actions
+          %ul
+            %li.action.toggle-panel.panel-expand
+              %span
+            %li.action
+              %span.fa.fa-bars.action{"aria-hidden" => "true"}
+      .panel-content.text-md{:style => "text-align:justify"}
+        %p
+          = t('view_experts_onboarding.resume.your_resume_wont_be_shared')
+
+
+.row
+  .col-sm-10.col-sm-offset-1
+    = form_for @my_resume, url: url_for(controller: 'profiles', action: 'update'),method: :put, html: { class: 'form-horizontal' } do |f|
+      .panel
+        .panel-header
+          %span.text-md= t("activerecord.models.resume")
+        .panel-content.text-md{:style => "text-align:justify"}
+          .row
+            .col-sm-12
+              %h3{:style => "text-align:center"}= t('layout.upload_resume')
+              %p.text-center
+                - if current_user.profile.resume.present?
+                  = current_user.profile.resume.file.filename
+            .col-sm-6.col-sm-offset-4{:style => "text-align:center"}
+              %br
+              = f.file_field :resume, required: ( current_user.profile.resume.present? ? false : true), accept: "application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, text/plain, application/pdf, image/*"
+              %br
+          %hr
+          .panel-footer
+            .row
+              .col-sm-4
+                %a.btn.btn-lighter-1.btn-wide{:style => "margin-left:20%", href: "/experts/onboarding/general_information" }= t('buttons.back')
+              .col-sm-4.col-sm-offset-4
+                = f.submit t('buttons.next'),  class: 'btn btn-primary btn-wide'

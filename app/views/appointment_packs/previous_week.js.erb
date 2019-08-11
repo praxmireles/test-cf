@@ -1,0 +1,1 @@
+$('.appointment_pack_calendar').html("<%= escape_javascript(render partial: 'appointment_packs/calendar', locals: { week_dates: @week_dates, availabilities_slots: @availabilities_slots, expert: @expert, month: @month, appointment_pack: @appointment_pack  } ) %>"); 

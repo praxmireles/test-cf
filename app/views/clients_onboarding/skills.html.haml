@@ -1,0 +1,61 @@
+%br
+%br
+.content
+  .row
+    .col-sm-10.col-sm-offset-1
+      .panel.bg-scale-0.b-primary.bt-sm.mt-xl
+        .row
+          .col-sm-5{:style => "background-color:#003F5A"}
+            %figure.text-center
+              =image_tag "registration_bg.svg"
+              -# Client service name
+              %h2.white
+                = show_service_name(@search_history.service)
+
+          .col-sm-5
+            .step
+              %h3.main_question
+                %strong
+                  = t('view_clients_onboarding.skills.select_the_skill')
+
+                %h5= t('view_clients_onboarding.skills.skills') + ':'
+                = form_tag update_search_history_path(params[:search_history_id]), method: :put do
+                  - @job_functions.each_with_index do |job_function, index|
+                    .col-md-6{style: " white-space: nowrap;  overflow:hidden"}
+                      = check_box_tag "search_history[functions][]", job_function.id, false, data:{index: index}, class: 'check-skill-father css-control-input'
+                      %strong= t(job_function.locale)
+                      %br
+                      .check-skill-son{:class => "check-skill-son"+index.to_s, :style => "display:none;"}
+                        - job_function.skills.order('name ASC').each do |skill|
+                          %p
+                            &nbsp;&nbsp;
+                            = check_box_tag "search_history[skills][]", skill.id, false, class: 'check-skill-father css-control-input'
+                            = t(skill.locale)
+                            %br
+
+                  = hidden_field_tag :current_path, 'skills'
+                  = submit_tag t('buttons.next'), class: 'btn btn-lighter-1 btn-wide', :style => "display: none; margin-left:20%"
+            .row
+              #bottom-wizard
+                .col-sm-3.col-sm-offset-2
+                  = link_to(t('buttons.back'), previous_path(search_history_id: params[:search_history_id], current_path: 'skills'), class: "btn btn-lighter-1 btn-wide", style: "margin-left: 20%")
+                .col-sm-6
+                  = link_to(t('buttons.next'), '', class: 'btn btn-primary btn-wide next-button', :style => "margin-left: 20%")
+
+:javascript
+  $(".check-skill-father").change(function(){
+    if($(this).is(':checked')){
+      $(".check-skill-father").show();
+      var index_token = $(this).data("index");
+      $(".check-skill-son"+index_token+"").show();
+    }else{
+      $(".check-skill-son").hide();
+    }
+  });
+
+:javascript
+  $(".next-button").click(function(e){
+    e.preventDefault();
+    $("input[name='commit']").click();
+  })
+

@@ -1,0 +1,1 @@
+$('.appointment_pack_summary').html("<%= escape_javascript(render partial: 'appointment_packs/summary', locals: { expert: @expert, dates_selected: @dates_selected, package_option: @package_option, service: @service, appointment_pack: @appointment_pack } ) %>"); 

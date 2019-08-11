@@ -1,0 +1,53 @@
+#programming-session.modal{ tabindex: "-1", role: "dialog", "aria-labelledby" => "modal-primary-label" }
+  .modal-dialog{ role: "document" }
+    .modal-content
+      .modal-header.state.modal-primary
+        %button.close{ type: "button", "data-dismiss" => "modal", "aria-label" => "Close" }
+          %span{ "aria-hidden" => "true" }
+            &times;
+        %h4#modal-primary-label.modal-title
+          %i.fa.fa-clock-o
+          = t('view_video_conferences.programming_session.programming_session')}
+      .modal-body
+        .sessions
+          = form_tag create_appointment_packs_path do |f|
+            = f.label :session_count
+            = f.select :sessions_count, [["5 #{t('view_video_conferences.programming_session.session')}", 5],["8 #{t('view_video_conferences.programming_session.session')}", 8]], prompt: "Select"
+            %br
+            %br
+            = f.label "#{t('view_video_conferences.programming_session.session')} 1"
+            = f.input_field 'appointment_packages[start_dates][]', hint: false, required: true, as: :hidden, input_html: { value: nil }
+            %br
+            %br
+            = f.label "#{t('view_video_conferences.programming_session.session')} 2"
+            = f.input_field 'appointment_packages[start_dates][]', hint: false, required: true, as: :hidden, input_html: { value: nil }
+            %br
+            %br
+            = f.label "#{t('view_video_conferences.programming_session.session')} 3"
+            = f.input_field 'appointment_packages[start_dates][]', hint: false, required: true, as: :hidden, input_html: { value: nil }
+            %br
+            %br
+            = f.label "#{t('view_video_conferences.programming_session.session')} 4"
+            = f.input_field 'appointment_packages[start_dates][]', hint: false, required: true, as: :hidden, input_html: { value: nil }
+            %br
+            %br
+            = f.label "#{t('view_video_conferences.programming_session.session')} 5"
+            = f.input_field 'appointment_packages[start_dates][]', hint: false, required: true, as: :hidden, input_html: { value: nil }
+            %br
+            %span.additional_sessions
+            %br
+            = f.label "#{t('view_video_conferences.programming_session.session')} 6"
+            = f.input_field 'appointment_packages[start_dates][]', hint: false, as: :hidden, input_html: { value: nil }
+            %br
+            %br
+            = f.label "#{t('view_video_conferences.programming_session.session')} 7"
+            = f.input_field 'appointment_packages[start_dates][]', hint: false, as: :hidden, input_html: { value: nil }
+            %br
+            %br
+            = f.label "#{t('view_video_conferences.programming_session.session')} 8"
+            = f.input_field 'appointment_packages[start_dates][]', hint: false, as: :hidden, input_html: { value: nil }%br
+            %br
+            = f.submit_tag t('view_video_conferences.programming_session.schedule_project_sessions')
+      .modal-footer
+        %button.btn.btn-default{ type: "button", "data-dismiss" => "modal" }
+          = t('buttons.close')

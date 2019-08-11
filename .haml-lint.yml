@@ -1,0 +1,81 @@
+linters:
+  ImplicitDiv:
+    enabled: false
+    severity: error
+
+  AltText:
+    enabled: false
+  
+  ClassAttributeWithStaticValue:
+    enabled: false
+  
+  ClassesBeforeIds:
+    enabled: false
+  
+  ConsecutiveComments:
+    enabled: false
+  
+  ConsecutiveSilentScripts:
+    enabled: false
+  
+  EmptyObjectReference:
+    enabled: false
+  
+  EmptyScript:
+    enabled: false
+  
+  # FinalNewline:
+ 
+  HtmlAttributes:
+    enabled: false
+ 
+  IdNames:
+    enabled: false
+ 
+  # Indentation:
+ 
+  InlineStyles:
+    enabled: false
+ 
+  InstanceVariables:
+    enabled: false
+ 
+  # LeadingCommentSpace:
+ 
+  LineLength:
+    enabled: false
+ 
+  # MultilinePipe:
+ 
+  # MultilineScript:
+ 
+  ObjectReferenceAttributes:
+    enabled: false
+ 
+  # RepeatedId:
+ 
+  RuboCop:
+    enabled: false
+ 
+  RubyComments:
+    enabled: false
+ 
+  SpaceBeforeScript:
+    enabled: false
+ 
+  SpaceInsideHashAttributes:
+    enabled: false
+ 
+  # Syntax:
+ 
+  TagName:
+    enabled: false
+ 
+  # TrailingWhitespace:
+ 
+  # UnnecessaryInterpolation:
+ 
+  # UnnecessaryStringOutput:
+ 
+  ViewLength:
+    enabled: false

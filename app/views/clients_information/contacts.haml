@@ -1,0 +1,25 @@
+
+%br
+%br
+%br
+%br
+.row
+  .col-sm-10.col-sm-offset-1
+    .panel
+      .panel-header
+        %span.text-md
+          = t('view_clients_information.contacts.complete_booking')
+.row
+  .col-sm-10.col-sm-offset-1
+    .panel
+      .panel-content
+        .row{:style => "margin:20px"}
+          .block-content
+            .row
+              .col-sm-12
+                %h3
+                  = t('view_clients_information.contacts.contact_information')
+                %br
+                .row
+                  .col-sm-12.text-center
+                    = render partial: 'clients/settings/contact_information'

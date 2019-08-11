@@ -1,0 +1,1336 @@
+es:
+  user_types:
+    expert: Experto
+    client: Cliente
+  admin_notifications:
+    expert_unfinished_enrollment: "no completaste tu enrolamiento."
+    expert_finished_enrollment: 'enrolamiento finalizado.'
+  notifications:
+    # send_client_enrollment_notification
+    client_unfinished_enrollment: "No olvides completar tu proceso de enrolamiento."
+    client_finished_enrollment: "Felicitaciones! Has completado tu enrolamiento!"
+    client_didnt_hire_expert: "Necesitas ayuda para encontrar un experto?"
+    find_an_expert: "Busca a tu experto."
+    # send_expert_enrollment_notification
+    expert_unfinished_enrollment: "No olvides finalizar tu enrolamiento."
+    expert_finished_enrollment: "Gracias por completar tu enrolamiento. Tu solicitud está en proceso de revisión. Una vez aceptada, recibiras una confirmación."
+    admin_approve_expert: "Tu solicitud para ser parte de la comunidad ha sido aceptada."
+    admin_reject_expert: "Tu solicitud no fue aceptada, agradecemos tu interés"
+    # send_appointment_notification
+    new_appointment_request: "Has recibido una nueva solicitud de cita"
+    approved_appointment: "Tu cita con [wildcard] fue aceptada."
+    appointment_is_rejected: "Cita no aceptada."
+    appointment_is_cancelled: "Cita cancelada con"
+    appointment_request_is_cancelled: "Solicitud de cita cancelada."
+    appointment_is_scheduled: "Tu cita ha sido agendada para"
+    appointment_will_start: "Tu cita inicia en 15 minutos."
+    appointment_started: "Tu cita está empezando."
+    appointment_completed: "Tu cita con [wildcard] ha finalizado."
+    received_client_feedback: "Gracias por compartir tu opinión sobre la cita de hoy."
+    unanswered_request: "El experto que elegiste para tu cita no está disponible."
+    # send_payment_notification
+    paid_appointment: "Gracias por tu pago."
+    sent_payout: "Cargo realizado a tu tarjeta de credito"
+    send_receipt: "Aquí el recibo pago de tu transacción"
+    pre_authorized_appointment: "Hemos recibido la preaprobación de pago de tu sesión"
+    
+  actions:
+    new: 'Nuevo'
+  activerecord:
+    models:
+       appointment: 'Cita'
+
+  services:
+    mentoring_with_purpose: "Mentoring With Purpose"
+    coaching_with_purpose: "Coaching With Purpose"
+    coaching: "Coaching"
+    express_advice: "Express Advice"
+    project_in_mind: "Project in Mind"
+
+  billing:
+    street: "Calle y numero"
+    city: "Ciudad"
+    state: "Estado"
+    country: "País"
+    zip: "Codigo Postal"
+
+  contact_information:
+    mobile: Celular
+    mobile_contact_time: Horario de contacto por celular
+    phone: Telefóno
+    phone_contact_time: Horario de contacto telefonico
+    primary_mobile: Celular principal
+    primary_phone: Telefóno principal
+    secondary_phone: Telefóno alterno
+    secondary_mobile: Celular alterno
+
+  general_information:
+    first_name: Nombre(s)
+    last_name: Apellido(s)
+    email: Email
+    location: Localidad
+    timezone: Zona horaria
+
+  buttons:
+    save: Salvar
+    update: Actualizar
+    continue: Continuar 
+    close: Cerrar
+    back: Anterior
+    next: Siguiente
+    accept: Aceptar
+    reject: Rechazar
+
+  invoice:
+    business_name: Nombre de la compañia - Cliente
+    invoice: Factura
+    date: Fecha
+    due_date: Fecha de pago
+    total_amount: Monto total
+    total_due: Monto vencido
+    description: Descripción
+    memo: MEMO
+    amount: MONTO
+    total_amount: MONTO TOTAL
+    invoice_created_via: Factura creada via
+    from: Facturado por
+    bill_to: Facturado a
+
+  # BEGIN -- INDUSTRIES / SKILLS / JOB FUNCTIONS / SENIORITY LEVEL
+  all_industries:
+    accounting: Contabilidad
+    advanced_materials: Materiales avanzados
+    agriculture: Agricultura
+    airlinesoraviation: Aviación comercial
+    apparel_and_fashion: Moda y vestido
+    architecture_and_planning: Arquitectura y planeación
+    automotive: Automotriz
+    aviation_and_aerospace: Aeronautica y Aeroespacial
+    banking_and_financial_services: Banca y servicios financieros
+    biotechnology: Biotecnología
+    broadcast_media: Medios
+    capital_markets: Mercados de capitales
+    chemicals: Química
+    civic_and_social_organization: Organizaciones sociales y civiles
+    civil_engineering: Ingenieria Civil
+    coaching: Coaching
+    commercial_real_estate: Bienes raíces
+    computer_and_network_security: Seguridad informatica y de redes
+    computer_games: Juegos en computadora
+    computer_hardware: Equipo de computo
+    computer_networking: Redes de computo
+    construction: Construcción
+    consulting_services: Servicios de consultoria
+    consumer_electronics: Electrónica
+    consumer_products_and_goods: Bienes y productos de consumo
+    consumer_services: Servicios de consumo
+    cosmetics: Cosméticos
+    crypto__currency: Crypto monedas
+    cybersecurity: Seguridad cibernetíca
+    data_analytics_and_performance_technology: Análisis 
+    defense_and_space: Defensa y espacio
+    design: Diseño
+    distribution_and_logistics: Distribución y Logistica
+    ecommerce: Comercio electrónico
+    education: Educación
+    e__learning: Aprendizaje en linea
+    e__marketing: Comercio electrónico
+    energy___non__renewable: Energias no renovables
+    energy___renewable: Energias renovables
+    engineering: Ingenieria
+    enterprise_software: Software de empresa
+    entertainment: Entretenimiento
+    environmental_services: Servicios ambientales
+    financial_services: Servicios funerarios
+    food_and_beverages: Alimentos y bebidas
+    fundraising: Recaudación de fondod
+    furniture: Mobiliario
+    government_administration: Administración gubernamental
+    government_relations: Relaciones con gobierno
+    graphic_design: Diseño gráfico
+    green_buildings: Edificios verdes
+    health_wellness_and_fitness: Salud y bienestar
+    healthcare: Cuidado de la salud
+    human_resources: Recursos humanos
+    industrial_automation: Automatización industrial
+    information_services: Servicios de información
+    information_technology_and_services: Tecnología
+    insurance: Seguros
+    international_affairs: Asuntos internacionales
+    international_trade_and_development: Comercio internacional y desarrollo
+    internet: Internet
+    investment_banking: Inversiones bancarias
+    investment_management: Gestión de inversiones
+    legal_services: Servicios legales
+    leisure_travel_and_tourism: Viajes, ocio y turismo
+    logistics_and_supply_chain: Logística y cadena de suministro
+    machinery: Maquinaria
+    management_consulting: Consultoria en gestión
+    marketing_and_advertising: Marketing y publicidad
+    mechanical_or_industrial_engineering: Ingenieria mecanica o industrial
+    media_production: Producción de medios
+    medical_devices_and_diagnostics: Dispositivos y diagnosticos medicos 
+    medical_practice: Práctica médica
+    military: Militar
+    mining_minerals_and_metals: Mineria
+    mobile_commerce: Comercio en dispositivos mobiles
+    music: Música
+    nanotechnology: Nano tecnología
+    newspapers: Periodicos
+    non__profit_organization: Organizaciones sin fines de lucro
+    not__for__profit: Sin fines de lucro
+    online_media: Medios online
+    packaging_and_containers: Empaques
+    paper_and_forest_products: Papel y productos forestales
+    payments: Pagos
+    performing_arts: Artes escénicas
+    petrochemical: Petroquímica
+    pharmaceuticals: Farmaceutica
+    philanthropy: Filantropia
+    photography: Fotografia
+    private_equity: Capitales privados
+    professional_training: Entrenamiento profesional
+    program_development: Desarrollo de programas
+    public_policy: Política publica
+    public_relations_and_communications: Relaciones publicas y comunicaciones
+    public_safety: Seguridad pública
+    publishing: Editorial y publicaciones
+    real_estate: Bienes raíces
+    recreational_facilities_and_services: Instalaciones recreativas y de servicio
+    recycling_and_waste: Reciclaje y residuos
+    religious_institutions: Instituciones religiosas
+    remittance: Remesas
+    research: Investigación
+    restaurants: Restaurantes
+    retail: Retail - Venta al por menor
+    retail_enterprise_technology: Tecnología de retail
+    security_and_investigations: Seguridad e investigaciones
+    sporting_goods: Artículos deportivos
+    sports: Deportes
+    staffing_and_recruiting: Dotación de personal y reclutamiento
+    supermarkets: Supermercados
+    technology___biotech: Biotecnología
+    technology___hardware: Tecnología hardware
+    technology___services: Servicios tecnológicos
+    technology___software: Software de tecnología
+    telecommunications: Telecomunicaciones
+    venture_capital_and_private_equity: Capital de riesgo y privado
+    warehousing: Almacenamiento
+    water_and_wastewater: Agua y aguas residuales
+    wealth_management: Gestión patrimonial
+    wholesale: Venta al mayoreo
+    wine_and_spirits: Vinos y licores
+    wireless: Inalámbrica
+    writing_and_editing: Escritura y edición
+  all_skills:
+    advertising: Publicidad
+    agile_marketing: Agile marketing
+    b2b_marketing: B2B Marketing
+    b2c_marketing: B2C Marketing
+    brand_reputation: Reputación de marca
+    brand_strategyormarketing: Estrategia de marca
+    content_marketing: Mercadotecnia y contenido 
+    content_strategy_and_creation: Creación y estrategia de contenido
+    crm: CRM Gestión de relación con clientes
+    cross_sellorupsell: Venta cruzada y crecimiento de ventas
+    customer_loyalty_and_retention_marketing: Retención y fidelización del cliente
+    customer_onboarding: Incorporación de clientes
+    database_marketing: Comercialización de base de datos
+    digital_marketing: Mercadotecnia digital
+    direct_marketing___mail_email: Publicidad directa por correspondencia
+    ecommerce: Comercio electrónico
+    event_marketing: Eventos de mercadeo
+    go_to_market_strategy: Estrategia de mercado
+    inbound_marketing: Mercadotecnia interna
+    integrated_marketing: Mercadotecnia integral
+    lead_generation: Generación de nuevas oportunidades de venta
+    marketing_tools_and_automation: Herramientas de mercadotencia y automatización
+    market_research_and_analytics: Investigación de mercado y análisis
+    media_planning_and_buying: Planificación y compra de medios
+    mobile_marketing: Mercadotecnia movil
+    mobile_marketing_systems___hardware_applications: Sistemas de mercadotecnia digital y aplicaciones
+    multi_channel_marketing: Mercadotencia multicanal
+    partnership_marketing: Mercadotecnia asociada
+    pricing_strategy: Estartegia de precios
+    product_marketing: Mercadeo de producto
+    promotions: Promociones
+    public_relations: Relaciones publicas
+    retail_marketing: Mercadotecnia retail
+    sem: SEM posicionamiento en buscadores
+    seo: SEO Marketing en buscadores
+    social_media_marketing: Mercadotecnia en redes sociales
+    startups: Startups
+    systems_integration_services_technology: Sistemas de integración en servicios de tecnología
+    traditional_marketing: Mercadotecnia tradicional
+    uxorui_design: UX-UI Diseño de experiencia del usuario e interfases
+    budgeting: Presupuestos
+    business_analysis: Análisis del negocio
+    business_development: Desarrollo del negocio
+    business_process_improvement: Procesos de mejora de negocio
+    business_transformation: Transformación del negocio
+    business_valuation: Valuacion del negocio
+    change_management: Administración del cambio
+    communications: Comunicaciones
+    continuous_improvement: Mejora continua
+    contract_management: Administración de contratos
+    corporate_governance: Gobierno corporativo
+    cost_efficiency: Eficiencia de costos
+    customer_life_cycle_management: Gestión del ciclo de vida del cliente
+    data_modeling: Modelación de datos
+    distribution: Distribución
+    erp: ERP Sistemas de planificación de recursos
+    financial_planning_modeling_reporting: Modelos de planeación financiera
+    financial_risk_management : Administración de riesgos financieros
+    international_business_development: Desarrollo de negocios internacionales
+    international_operations: Operaciones internacionales
+    it_operations: Operaciones de tecnología de la información
+    kpi_implementation_dashboard_results: Indicadores y manejo de resultados
+    manufacturing: Manufactura
+    negotiation: Negociación
+    offshore_operations: Operaciones en el extrangero
+    operational_efficiency: Eficiencia operacional
+    operational_excellence: Excelencia operacional
+    operational_oversight: Supervisión de operaciones
+    operations_planning: Planeación de operaciones
+    organizational_leadership: Liderazgo operativo
+    partnerships: Asociaciones
+    performance_analytics: Análisis de desempeño
+    performance_improvement: Mejora de desempeño
+    performance_management: Desarrollo de desempeño
+    problem_solving: Solución de problemas
+    procurement: Compras 
+    product_management: Administración de producto
+    program_management: Programa de gestión
+    project_management: Administración de proyectos
+    quality_control_improvement: Control y mejora de calidad
+    risk_management: Administración de riesgos
+    shared_services: Servicios compartidos
+    strategic_planning: Planeación estartegica
+    supply_chain: Cadena de suministro
+    blue_ocean_strategy: Estrategia de océano azul
+    boardroom_communications: Comunicación con junta de consejo
+    brand_development: Desarrollo de marca
+    brand_strategy: Estrategia de marca
+    business_development: Desarrollo de negocio
+    business_plan_development: Desarrollo de plan de negocio
+    business_strategy_and_transformation: Estrategia y transformación de negocio
+    ceo_coaching: Coaching a CEO
+    change_management: Administración de cambio
+    corporate_communications: Comunicación corporativa
+    corporate_development: Desarrollo corporativo
+    digital_strategy: Estrategia digital
+    digital_transformation: Transformación digital
+    emerging_markets: Mercados emergentes
+    financial_modeling_and_forecasting: Modelos financieros y pronósticos
+    global_markets: Mercados globales
+    go_to_market_plans: Planes de mercado
+    marketing_strategy: Estrategia de mercado
+    market_research____advanced_statistical_analysis: Investigación de mercado y análisis estadistico
+    market_research____qualitative: Investigación de mercado cualitativa
+    market_research____quantitative: Investigación de mercado cuantitativa
+    media_relations_and_training: Relaciones con medios y entrenamiento
+    media_strategy_and_planning: Estrategia y planificación de medios
+    mergers_and_acquisitions: Fusiones y adquisiciones
+    omnichannel_marketing_strategy_development: Mercadotecnia omnicanal y estrategia de desarrollo
+    organizational_design: Diseño organizacional
+    social_media_strategy_governance_training: Estrategia de redes sociales y gobernancia
+    startups: Startups
+    workshop_development_and_moderation: Desarrollo e impartición de talleres
+    b2b_marketing: Mercadeo B2B 
+    b2c_marketing: Mercadeo B2C
+    board____corporate_governance: Gobierno corporativo
+    business_development: Desarrollo de negocio
+    change_management: Administración de cambio
+    coaching: Coaching
+    communications: Comunicaciones
+    continuous_improvement: Mejora continua
+    cost_reduction: Reducción de costos
+    creates_vision: Creación de visión
+    ecommerce: Comercio electrónico
+    emerging_markets: Mercados emergentes
+    entrepreneurship: Emprendimiento
+    financial_acumen: Visión financiera
+    global_markets: Mercados globales
+    investor_relations: Relación con inversionistas
+    mergers_and_acquisitions: Fusiones y adquisiciones
+    negotiations: Negociaciones
+    operational_excellence: Excelencia operativo
+    operational_leadership: Liderazgo operativo
+    partnerships: Asociaciones - Sociedades
+    product_development: Desarrollo de producto
+    public_speaking: Hablar en publico
+    sales: Ventas
+    scaling: Escalamiento de ventas
+    startups: Startups
+    strategic_partnerships: Asociaciones 
+    strategic_planning: Planeación 
+    strategy_execution: Ejecución
+    talent_acquisition_and_retention: Atracción y retención de talento
+    transformation: Transformación
+    aboriginal: Aborigen 
+    banking_and_finance: Banca y finanzas
+    competition_and_foreign_investment: Competencia e inversiones en el extrangero
+    construction: Construcción
+    corporate_finance_and_securities: Finanzas corporativas
+    corporate_governance: Gobierno corporativo
+    corporate_restructuring_and_advisory: Restructuración y asesoría corporativa
+    cybersecurity: Seguridad cibernética
+    derivatives: Derivados
+    emerging_companies: Empresas emergentes
+    employment_and_labour_law: Empleo y derecho laboral
+    energy: Energía
+    enterprise_risk_and_crisis_response: Riesgo corporativo y respuesta a la crisis
+    environmental: Ambiental
+    family_wealth_counsel: Consultoria a patrimonio familiar
+    financial_services: Servicios financieros
+    franchise: Franquicias
+    health: Salud
+    infrastructure: Infraestructura
+    insolvency_and_restructuring: Insolvencia y reestructuración
+    insurance_and_tort_liability: Seguros y responsabilidad extracontractual
+    insurance____corporate_and_regulatory: Seguros corporativos y regulatorios
+    intellectual_property: Propiedad intelectual
+    international_trade_and_investment_law: Derecho internacional y leyes de inversión
+    labour_and_employment: Trabajo y empleo
+    litigation_arbitration_and_dispute_resolution: Litigio arbitral y resolución de disputas
+    marketing_and_distribution: Comercialización y distribución
+    mergers_and_acquisitions: Fusiones y adquisiciones
+    municipal_law: Leyes municipales
+    outsourcing: Subcontratación
+    pension_fund_investment: Inversión en fondos de pensiones
+    pensions_benefits_and_executive_compensation: Compensación ejecutiva y beneficios
+    plan_nord: Plan Nord 
+    privacy_and_data_management: Privacidad y administración de datos
+    procurement: Compras
+    projects: Proyectos
+    public_policy_and_government_relations: Política pública 
+    real_estate: Bienes raices
+    risk_management_and_crisis_response: Administración de riesgo y respuesta a crisis
+    taxation: Impuestos
+    technology: Tecnología
+    translation: Traducción
+    trusts_and_estates: Fideicomisos
+    cash_management: Administración de efectivo
+    category_management:  Administración de categorías de productos
+    compliance_management: Gestión de cumplimiento
+    contract_management: Administración de contratos
+    data_analysis: Análisis de datos
+    data_security: Seguridad de datos
+    demand_management: Administración de la demanda
+    ecommerce: Comercio electrónico
+    financial_analysis: Análisis financiero
+    global_sourcing: Compras globales
+    human_resource_management: Gestión de Recursos Humanos
+    information_and_knowledge_management: Administración de información y conocimiento
+    infrastructure: Infraestructura
+    life_cycle_costing: Costo del ciclo de vida
+    logistics: Logística
+    negotiations: Negociaciones
+    operating_process_management: Administración de procesos operativos
+    organizational_alignment: Alineación organizacional
+    outsourcing: Subcontratación
+    performance_based_procurement: Compras basadas en rendimiento
+    performance_management: Administración de desempeño
+    policy_development: Desarrollo de politicas
+    product_substitution: Sustitución de producto
+    project_management: Administración de proyectos
+    purchasing_strategy: Compras estrategicas
+    relationship_management: Gestión de relaciones
+    strategic_industry_management: Administración de estrategia de industria
+    strategic_sourcing: Fuentes estrategicas
+    supplier_relationship_management: Administración de relación con proveedores
+    supplier_value_management: Administración de valor del proveedor
+    supply_chain_strategy: Estrategia de cadena de suministro
+    supply_management_strategy: Estrategia de abastecimiento
+    syndicate_purchasing: Unión de compras
+    technology_aptitude: Aptitud tecnológica
+    transaction_management: Administración de transacciones
+    transformation: Transformación
+    accounting_advisory: Asesoría contable
+    annual_financial_goals_establishment: Establecimiento de objetivos financieros
+    board_of_governance: Junta de gobierno
+    business_compliance: Cumplimiento comercial
+    capital_funding_management: Administración de fondos de capital
+    cash_management: Administración de efectivo
+    commodities_management: Commodities management
+    debt_origination_and_management: Administración de deuda
+    enterprise_risk_management: Administración de riesgo empresarial
+    executive_compensation: Compensación a ejecutivos
+    financial_decision_making_models: Modelos de decisión financiera
+    financial_statement_audit: Auditoria a estados financieros
+    governance_risk_and_compliance: Gobierno para riesgos y cumplimiento
+    health_and_welfare_benefits: Beneficios de salud y bienestar
+    hr_transaction: HR transaction
+    ifrs_readiness_and_conversions:  IFRS
+    ifrs_tax: IFRS impuestos
+    indirect_tax: Impuestos indirectos
+    initial_public_offerings: IPO ofertas publicas
+    internal_audit: Auditoria interna
+    international_assignment: Asignaciones internacionales
+    international_tax: Impuestos internacionales
+    investment_modelling: Modelos de inversión
+    investor_relations_management: Relaciones con inversionistas
+    it_and_project_assurance: TI y aseguramiento de proyectos
+    kpis_and_metrics: Indicadores y metricos
+    lending_agency_management: Manejo de agencias de credito
+    long_term_strategic_planning: Planeación estrategica de largo plazo
+    mergers_and_acquisitions: Fusiones y adquisiciones
+    national_economics_and_statistics: Economia nacional y estadistica
+    operational_efficiency_monitoring_and_controls_implementation: Eficiencia operacional y controles
+    operations_expertise: Experiencia operativa
+    order_to_cash_governance: Gobierno de ordenes de efectivo
+    people_and_change: Gente y cambio
+    process_assurance: Aseguramiento de procesos
+    procure_to_pay_governance: Gobierno en pagos
+    regulatory_compliance_and_reporting: Cumplimiento normativo y reporte
+    retirement_benefits: Beneficios de jubilación
+    risk_assurance_services: Servicios de seguro de riesgos
+    startups: Startups
+    state_and_local_tax: Impuestos locales y federales
+    sustainable_business_solutions: Soluciones sostenibles de negocio
+    tax_accounting: Impuestos Contabilidad 
+    tax_projects_delivery: Impuestos entrega de proyectos
+    tax_reporting_and_performance_improvement: Reporteo de impuestos y mejora de desempeño
+    third_party_assurance: Aseguramiento de terceros
+    total_compensation: Compensación total
+    administration: Administración
+    anti__money_laundering: Anti lavado de dinero
+    best_practices: Mejores practicas
+    board_of_directors_support: Soporte a la junta de consejo
+    compliance: Cumplimiento
+    compliance_and_regulatory: Cumplimiento y regulaciones
+    enterprise_risk_management: Administración de riesgo empresarial
+    financial_investigations: Investigaciones financieras
+    fintrac_compliance: Fintrac 
+    fraud_risk_management: Manejo de riesgo de fraude
+    fund_administration_and_recordkeeping: Administraci[on de fondos y mantenimiento de registros
+    governance_and_oversight: Gobierno y supervisión
+    osc_reporting: OSC reporting
+    overseeing_employee_trading:  Supervisión de transacciones de empleados
+    performance_reporting_for_pooled_funds: Reportes de fondos comunes
+    performance_reporting_for_segregated_accounts: Informe de desempeño de cuentas segregadas
+    policy_and_framework_development: Desarrollo de politicas y reglamentos
+    regulatory_filings: Presentación de requerimientos regulatorios
+    risk_assessment: Evaluación de riesgos
+    risk_strategy_and_management: Estrategia de gestión de riesgos
+    sedi_filings: Documentación SEDI
+    trading: Comercio
+    agile_methodologies: Metodologia Agile
+    application_architecture: Arquitectura de aplicaciones
+    assistive_technologies: Tecnologías de asistencia
+    big_data: Big data
+    business_intelligence: Inteligencia de negocios
+    content_management_systems: Sistemas de administración de contenidos
+    data_warehousing: Almacenamiento de datos
+    devops: Devops Desarrollo de sistemas y operación
+    ecommerce: Comercio electrónico
+    embedded_systems: Sistemas embebidos
+    fundraising: Recaudación de fondos
+    image_processing: Procesamiento de imagenes
+    informationornetwork_security: Seguridad de información y redes
+    internet_of_things: Internet de las cosas
+    investor_relations: Relación con inversionistas
+    iptv: Televisión por protocolo
+    machine_learning: Maquinas de aprendizaje
+    microservices: Microservicios
+    mobile_application_development: Desarrollo de aplicaciones moviles
+    mobile_payments: Pagos moviles
+    offshoring: Offshoring 
+    os_x_development:  Desarrollo operativo
+    patents: Patentes
+    private_cloud: Nube privada
+    procurement: Abastecimiento
+    product_development: Desarrollo de producto
+    product_management: Administración de producto
+    project_management: Administración de proyectos
+    public_cloud: Nube publica
+    quality_assurance: Aseguramiento de calidad
+    requirements_gathering: Recopilación de requisitos
+    saas: SaaS
+    stakeholder_management: Gestión del negocio y sus participantes
+    systems_integration: Integración de sistemas
+    technical_writing: Escritura tecnica
+    technology_policy_andoror_law: Politica tecnológica
+    ux_design: Diseño UX
+    vendor_management: Gestión de proveedores
+    web_development: Desarrollo Web
+    windows_development: Desarrollo en Windows
+    applicant_tracking_systems: Sistemas de seguimiento al solicitante
+    assessment_methods_and_tools: Metodos y herramientas de evaluación
+    benefits_strategy_and_planning: Estrategia de beneficios y pleneación
+    business_process_integration: Procesos de integración del negocio
+    change_management: Administración del cambio
+    coaching_and_counseling: Coaching y asesoramiento
+    compensation_design: Diseño de compensaciones
+    competency_models: Modelos de competencia
+    contract_administration: Administración de contratos
+    corporate_citizenship_programs: Programas de gobierno corporativo
+    corporate_ethics: Ética corporativa
+    diversity_programs: Programas de diversidad
+    employee_appreciation_and_recognition: Valoración y reconocimiento del empleado
+    employee_privacy: Privacidad del empleado
+    employee_retention: Retención del empleado
+    employment_equity: Equidad en el empleo
+    employment_law_and_standards: Derecho laboral y normas
+    executive_compensation: Compensación de ejecutivos
+    executive_recruitment: Reclutamiento de ejecutivos
+    global_compensation_and_benefits: Compensación y beneficios globales
+    global_legal_systems: Sistemas legales globales
+    global_mobility: Movilidad global
+    goal_management: Administración por objetivos
+    hr_audit: Auditoria de Recursos Humanos
+    hris_implementation: Implementación de sistemas de RH
+    hr_metrics_and_reporting: Mediciones y reportes de RH
+    hr_strategy: Estrategia de Recursos Humanos
+    industrial_relations: Relaciones Industriales
+    job_analysis_and_design: Análisis y diseño de trabajo
+    labour_relations: Relaciones laborales
+    leadership_development: Desarrollo de liderazgo
+    mergers_and_acquisitions: Fusiones y Adquisiciones
+    offshoring: Offshoring
+    organizational_culture: Cultura organizacional
+    organizational_design: Desarrollo de la organización
+    outsourcing: Subcontratación
+    pay_practices_and_systems: Sistemas y practicas de pago
+    pension_and_benefits: Pensiones y beneficios
+    performance_management: Administración de desempeño
+    recruitment_branding_and_marketing: Reclutamiento por fortalecimiento de la marca
+    restructuring: Reestructuración
+    shared_services_model: Modelos de servicios compartidos
+    succession_planning: Planes de sucesión
+    talent_review: Revisión de talento
+    training_design_and_implementation: Desarrollo e implementación de entrenamiento
+    workforce_planning: Planeación de la fuerza laboral
+    workplace_disputes_and_resolutions: Disputas y resoluciones laborales
+    workplace_policy: Politica laboral
+    workplace_safety: Politica de seguridad
+    3rd_party_sales: Ventas tercerizadas
+    account_management: Administración de cuentas
+    b2b_sales: Ventas B2B 
+    b2c_sales: Ventas B2C
+    b2g_sales___government: Ventas al gobierno
+    channel_management: Administración de canales
+    contract_negotiation: Negociación de contratos
+    demand_generation: Generación de demanda
+    direct_sales: Ventas directas
+    executive_presentations: Presentaciones ejecutivas
+    funnel_management: Administración de proceso de venta
+    go__to__market_planning: Planeación para ir mercado
+    inbound_sales: Ventas entrantes
+    metrics_dashboard_and_benchmarking: Cuadro de control de metricas y comparación con el mercado
+    oem_sales: Ventas de OEM
+    partner_management: Gestión de socios
+    product_development: Desarrollo de producto
+    product_selling: Venta de producto
+    sales_automation_and_operations: Ventas automatizadas y operaciones
+    sales_compensation_planning: Planeación de compensación por ventas
+    sales_culture_development: Desarrollo de cultura de ventas
+    salesforce_andoror_other_crm_systems: Sistemas CRM
+    sales_strategy: Estrategia de ventas
+    sales_training: Entreamiento en ventas
+    solution_selling: Venta de soluciones
+    strategic_partnerships: Socios estrategicos
+    strategic_planning: Planeación estrategica
+    vendor_management: Administración de proveedores
+    one_on_one_coaching_executives: Coaching uno a uno
+    team_coaching: Coaching de equipos
+    group_coaching: Coaching de grupo
+    business_coaching: Coaching de negocios
+    ontological_coaching: Coaching ontológico
+    personalorlife_coaching: Coaching personal y de vida
+    career_coaching: Coaching de carrera
+    performance_coaching: Coaching de desempeño
+    newly_assigned_leader_coaching: Coaching para nueva asignación
+    succesion_coaching: Coaching de sucesión
+    coaching_for_directors: Coaching para directores
+    coaching_for_managers: Coaching para gerentes
+    coaching_for_entrepreneurs: Coaching para emprendedores
+    coaching_for_students: Coaching para estudiantes
+    all_job_functions: Todas las funciones del negocio
+    marketing_tools_and_automation: Herramientas de mercadeo y automatización
+    operations: Operaciones
+    strategy_and_planning: Estrategia y planeación
+    company_leader: Lider de compañia
+    legal: Legal
+    procurement: Abastecimiento
+    finance_accounting: Contabilidad y finanzas
+    risk_compliance: Riesgo y Cumplimiento 
+    technology_software: Sistemas tecnológicos
+    human_resources: Recursos Humanos
+    sales_and_business_development: Ventas y desarrollo de negocios
+    coaching: Coaching
+    all_seniority_levels: Todos los niveles de experiencia
+    chief_executive_officer: CEO
+    president: Presidente
+    chief_executive____suite: C-Suite
+    general_manager: Gerente General
+    managing_director: Director General
+    senior_vice_president: Vicepresidente Senior
+    vice_president: Vicepresidente
+    executive_director: Director Ejecutivo
+    managing_partner: Socio director
+    director: Director
+    partner: Socio
+    manager: Gerente
+    all_coaching_types: Todos los tipos de coaching
+    One on One Coaching Executives: Coaching uno a uno
+    Business Coaching: Coaching de negocios
+    Ontological Coaching: Coaching ontológico
+    Career Coaching: Coaching de carrera
+    Performance Coaching: Coaching para desempeño
+    Newly Assigned Leader Coaching: Coaching por nueva asignación
+    Succession Coaching: Coaching de sucesión
+    Coaching for Directors: Coaching para directores
+    Coaching for Managers: Coaching para gerentes
+    Coaching for Entrepreneurs: Coaching para emprendedores
+    Coaching for Students: Coaching para estudiantes
+  # END -- INDUSTRIES / SKILLS / JOB FUNCTIONS / SENIORITY LEVEL
+
+
+  view_appointments:
+    form:
+      user: 'Usuario'
+      expert: 'Experto'
+      service: 'Servicio'
+      subject: 'Tema'
+      type: 'Tipo'
+      duration: 'Duración'
+      start_date: 'Hora de inicio'
+      end_date: 'Hora de terminación'
+      description: 'Descripción'
+      cancelled: 'Cancelada'
+      cancel_reason: 'Motivo de cancelación'
+    time_available:
+      hours_available: 'Horario disponible'
+      select:
+    checkout:
+      appointment: 'Cita'
+    new:
+      summary: 'Resumen'
+      industry: 'Industria'
+      functions: 'Funciones'
+      skills: 'Sub-funciones'
+      seniority_levels: 'Nivel de experiencia'
+      requirements: 'Requerimientos'
+      book_appointment: 'Programar cita'
+      selected_appointment_schedule: 'Disponibilidad seleccionada'
+      appointment_not_selected: 'Cita pendiente de agendar'
+      schedule_availables: 'Horarios disponibles'
+      close: 'Cerrar'
+    show:
+      appointment: 'Cita'
+  view_career_highlights:
+    form:
+      about_you: 'A cerca de ti'
+      tell_us_about_you: '(Cuéntanos sobre ti)'
+      welcome: 'Bienvenido'
+      general_information: 'Informacion general'
+      resume: 'Curriculum_Hoja de vida'
+      services: 'Servicios'
+      languages: 'Idiomas'
+      degree: 'Grado de estudios'
+      top_level_seniority: 'Cargos de mayor nivel'
+      work_industries: 'Industrias'
+      positions: 'Cargos'
+      career_highlights: 'Logros en tu carrera'
+      skills: 'Habilidades y Experiencias'
+      about_me: 'A cerca de mi'
+      schedule: 'Agenda'
+      summary: 'Resumen'
+      key_accomplishments: 'Mayores logros'
+      key_accomplishments_instructions: 'Comparte tus logros más relevantes de manera concisa y clara, para que las organizaciones o los profesionales puedan tener una mejor idea de tu experiencia'
+      date: 'Fecha'
+      highest_degree: 'Mayor grado de estudios'
+  view_client_mailer:
+    find_an_expert:
+      greeting: 'Hola'
+      content: Gracias por completar tu enrolamiento. Es hora de empezar! ¿Necesitas de un experto que te ayude a resolver un problema? ¿Quieres ser parte de un proceso de Mentoring o Coaching para acelerar tu carrera con éxito?
+      find_your_expert_now: 'ENCUENTRA A TU EXPERTO AHORA'
+      while_this_email: 'Si bien este correo electrónico está automatizado, somos seres humanos reales! Leemos y contestamos todos los correos electrónicos. Contactanos en customerservice@mindswithpurpose.com'
+      best_regards: 'Saludos cordiales!'
+      signature: 'El equipo Minds With Purpose'
+      ps: 'PD Siempre puedes iniciar tu sesión aquí:'
+    service_reminder:
+    welcome:
+  view_clients:
+    appointment_details:
+      appointment_information: Información sobre la cita
+      last_update: Última actualización
+      days_ago: dias
+      contact_person: persona a contactar
+      created: Creada
+      status_of_sessions: Estado de la sesión
+      close: Cerrar
+      cancelled: Cancelada
+      open: Abierto
+      duration: Duración
+      action: Actiones
+      description: Descripción
+    appointment_schedule:
+      selected_appointment_schedule: Cita seleccionada
+      appointment_schedule_not_selected_yet: Cita no seleccionada aún
+      schedule_availables: Horarios disponibles
+      close: Cerrar
+    expert_information:
+      about_the_user: Sobre el usuario
+      email: Email
+      location: Localidad
+      timezone: Zona horaria
+      position: Posición
+      company: Compañia_Organización
+      appointment_information: Información de la cita
+      last_update: Última actualización
+      days_ago: dias
+      contact_person: Nombre de contacto
+      created: Creada
+      status_of_sessions: Estado de la sesión
+      duration: Duración
+      client_filters_for: Filtros de cliente para
+      industries: Industrias
+      functions: Funciones
+      skills: Habilidades
+      seniority_levels: Niveles de Experiencia
+      description_of_the_service: Descripción del servicio
+      days_ago: dias
+      duration: Duración
+      created: Creada
+    past_appointments:
+      closed: Cerrado
+      cancelled: Cancelada
+      completed: Completada
+    invoices_information:
+      invoice: Factura
+      client: Cliente
+      service: Servicio
+      date: Fecha
+      due_date: Fecha de vencimiento
+      Amount: Monto
+      close: Cerrar
+    pending_appointments:
+      view_details: Ver detalles
+      pending: Pendiente
+      cancel_request: Cancelar requerimiento
+      no_pending_requests: Sin requerimientos pendientes
+      scheduled_for: Scheduled For
+    scheduled_appointments:
+      view_details: Ver detalles
+      scheduled: Agendado
+      cancel: Cancelado
+      no_scheduled_appointments: Sin citas agendadas
+    dashboard:
+      notifications: Notificaciones
+      settings: Ajustes
+      invoices: Facturas
+      sign_out: Salir
+      appointment_completed: Cita completada
+      projects: projectos
+      working_on: en proceso
+      n_a: N/A
+      rating: calificación
+      edit_profile: Editar perfil
+      get_your_expert: Contrata a un experto
+      appointments: Citas
+      packages: Paquetes
+      show_all: Muestra todo
+      in_progress: En proceso
+      scheduled: Agendado
+      pending: Pendientes
+      past: Pasadas
+      scheduled_sessions: Sesiones agendadas
+    experts_search:
+      pages: Pagina
+      mind_experts: Expertos
+      search_results: Buscar expertos
+      total_search_results: Resultado de la busqueda
+      find_first_available: Encontrar al primero disponible
+      projects_done: Projectos Completadas
+      grid_style: Grid Style
+      results_for: Resultados para
+      view_profile: Ver perfil
+      previous: Previous
+      page_navigation: Page Navigation
+    invoices:
+      date: Fecha
+      expert: Experto
+      service: Servicio
+      amount_paid: Monto pagado
+      status: Estado
+      actions: Actiones
+      pre_authorized: Pre-Autorizado
+      paid: Pagado
+      invoice: Factura
+      invoices: Facturas
+      download_pdf: Descargar PDF
+    welcome:
+      hello: Hola
+      welcome_message: Gracias por ser parte de nuestra comunidad en Minds With Purpose, para empezar nos gustaria conocer tu localidad y zona horaria
+      thank_you: Gracias
+    settings:
+      contact_information:
+        usage: Tu información de contacto solo será visisble para el equipo de Minds With Purpose y la usaremos para contactarte entre otras cosas para agendar una videoconferencia y conocerte, los usuarios – clientes y expertos no tendrán acceso a tus datos de contacto.
+      general_information:
+        please_wait: Por favor espera un momento...
+      tabs:
+        general_information: Información general
+        contact_information: Datos de contacto
+        positions: Puestos
+        billing: Facturación
+      work_history:
+        work_industry_speciality: Trabajo Industria Especialidad
+        company: Compañia
+        size: Tamaño
+        company_url: Url de la compañia
+        job_title: Titulo de puesto
+        location: Localidad
+        enter_dates: Ingresa fechas
+        from: Desde
+        to: Hasta
+        present: Actual
+  view_clients_information:
+    billing:
+      complete_booking: completar solicitud de cita ( paso 1 de 3 )
+      billing_information: Información de facturación
+    contacts:
+      complete_booking: completar solicitud de cita ( paso 2 de 3 )
+      contact_information: Información de contacto
+    payment:
+      complete_booking: completar solicitud de cita ( paso 3 de 3 )
+      pre_authorize_payment: Pre'autorización de pago
+      enter_your_card_information: Ingresa la información de tu tarjeta de credito
+      save_payment_information: Guarda la información de pago
+      fees: Matrícula
+  view_clients_onboarding:
+    services:
+      find_your_expert: Encuentra a tu Experto
+      select_the_product: Seleciona el producto que mejor cubre tus necesidades
+      minds_with_purpose_provides: Minds With Purpose proporciona una conexión con 3 tipos de servicio ofrecidos por la comunidad de Expertos registrados en la plataforma.
+      services: Selecciona el tipo de servicio que mejor cubre tus necesitadades
+      express_advice: Express Advise
+      express_advice_text: Express Advise te permite seleccionar a un Experto en especifico o la plataforma puede lanzar una notificación a un grupo de expertos que podrian ayudarte. El beneficio para ti es que puedas encontrar rapidamente a un experto disponible para ayudarte con una consulta de 20 minutos.
+      mentoring_with_purpose: Mentoring with Purpose
+      mentoring_text: Mentoring with Purpose inicia con una sesión introductoria de 30 minutos en donde el experto y tú confirmaran que son compatibles para un proceso de Mentoria. Una vez confirmada la compatibilidad puedes solicitar un paquete de 5 o 8 sesiones de 1 hora de mentoring.
+      project_in_mind:  Project in Mind (Coming soon)
+      project_in_mind_text: Project in Mind estará disponible proximamente.
+      coaching_with_purpose: Coaching with Purpose
+      coaching_text: Coaching with Purpose inicia con una sesión introductoria de 30 minutos en donde el experto y tú confirmaran que son compatibles para un proceso de Mentoria. Una vez confirmada la compatibilidad puedes solicitar un paquete de 5 o máximo 8 sesiones de 1 hora de coaching.
+    achieve_experiences:
+      what_do_you: ¿Qué te gustaria lograr con ésta experiencia, en lo personal y en lo profesional?
+      description: La descripción requiere de un mínimo de 150 caracteres
+      chars_remaining: Caracteres restantes
+    coaching_type:
+      what_type_of_coaching: ¿Qué tipo de Coaching estás buscando?
+      coaching_type: Coaching Type
+      why_are_you_looking_to_be_coached: ¿Por qué consideras que necesitas ser coacheado?
+    descriptions:
+      descriptions_require: La descripción requiere de un mínimo de 150 caracteres
+      coaching_service_question:
+      mentoring_service_question:
+      other_services: Please describe in detail what your needs are
+      chars_remaining:
+    industries:
+      select_the_work: 'Selecciona la industria o función en donde requieres de ayuda'
+      industries: ' Industrias'
+    seniority_levels:
+      select_two_levels: 'Selecciona al menos dos niveles de experiencia que el experto podria tener:'
+    skills:
+      skills: Habilidades y Experiencias
+      select_the_skill: Selecciona las competencias o áreas de experiencia en donde necesitas ayuda
+  view_education_histories:
+    form:
+      about_you: A cerca de ti
+      tell_us_about_you: Cuentanos sobre ti
+      welcome: Bienvenido
+      general_information: Información general
+      resume: Curriculum - Hoja de vida
+      services: Servicios
+      languages: Idiomas
+      degrees: Grados de estudio
+      top_level_seniority: Cargos de mayor nivel
+      work_industries: Industrias 
+      positions: Cargos
+      career_highlights: Mayores logros
+      skills: Habilidades y Experiencias
+      about_me: A cerca de mi
+      schedule: Agenda
+      summary: Resumen
+      studies_and_degrees: Estudios y grado educativo
+      this_information_wont_be_shared: Ésta información no será compartida con la comunidad, solo el equipo de Minds WIth Purpose tendrá acceso a ella para darte acceso a Expertos o Clientes dentro de la comunidad.
+      field_of_study: Área de estudio
+      degree: Grado academico
+      institution_name: Nombre de la institución
+      enter_dates: Ingresa las fechas
+      from: De
+      to: hasta
+  view_errors_http:
+    show:
+      error: Error
+      the_page_you_are_looking: La pagina que estás buscando no pudo ser encontrada
+      please_check_the_url: Por favor revisa la URL que escribiste en la barra de navegación.
+      something_went_wrong: Algo no funciono correctamente.
+      we_have_received: Hemos recibido una notificación automatica de error.
+      it_is_not_necessary:  No es necesario reportarlo.
+      we_will_fix_it: El problema será resuelto lo antes posible.
+  view_expert_mailer:
+    account_approved:
+    account_rejected:
+    appointment_notice:
+    enrollment_reminder:
+    finished_enrollment:
+    unfinished_enrollment:
+  view_experts:
+    education_histories:
+      create:
+        field_of_study: Área de estudios
+        degree: 'Grado academico'
+        enter_dates: 'Ingresa fechas'
+        from: De
+        to: Hasta
+        present: Presente
+      update:
+    appointment:
+    client_information:
+      about_the_user: Sobre el usuario
+      position: Cargos
+      expert_filters_for_this_search: Filtros expertos para esta búsqueda
+      service: Servicio
+      appointment_information: Información sobre la cita
+      last_update: Última actualización
+      days_ago: dias
+      contact_person: Persona a Contactar
+      created: Creada
+      status_of_sessions: Estado de la sesión
+      duration: Duración
+      industries: Industrias
+      functions:  Función_Area Función
+      skills: Habillidades y Experiencias
+      seniority_level: Nivel de experiencia
+      description_of_service: Descripción del servicio
+      why_are_you_looking_for_mentoring:
+      what_do_you_want_to_achieve:
+      why_are_you_looking_to_be_coached:
+      what_change_are_you_looking_to_make:
+      what_do_you_want_to_achieve_2:
+    pending_appointments:
+      view_details: Ver detalles
+      no_pending_requests: No hay solicitudes pendientes
+    scheduled_appointments:
+      scheduled: Programada
+      view_details: Ver detalles
+      no_scheduled_appointments: No hay citas agendadas
+    balance:
+      withdraw_balance_to_stripe: Transfiere tu saldo a tu cuenta de Stripe
+      nothing_to_withdraw: Nada para transferir
+      disconnect_stripe_account: Desconecta tu cuenta de Stripe
+      withdraw_balance_to_paypal: Transfiere tu saldo a tu cuenta de Paypal
+      error: ERROR 
+      contact_your_admin: Contacta a tu administrador – Problema de conexión con PAYPAL
+      connect_bank_account: Conecta tu cuenta de banco con Stripe
+      if_you_prefer_using :  Si prefieres usar PayPal, puedes cambiar tu metodo de pago en la sección de ajustes.
+      your_current_balance: Tu saldo actual
+      available_payout: Tu saldo disponible para transferir
+      date: Fecha
+      client: Cliente
+      service: Servicio
+      amount_paid: Monto pagado
+      status: Estado
+      paid: Pagado
+      pre_authorized: Pre-autorizado
+      missing_payment_details: Faltan detalles de pago
+      withdrawals: Retiros_Transferencias
+      fees: Matrícula
+      your_earning: Su ganancia
+    dashboard:
+      notifications: Notificaciones
+      settings: Ajusted
+      balance: Saldo
+      sign_out: Salir
+      edit_profile: Editar Perfil
+      appointments_completed: Citas completadas
+      project: projectos
+      working_on: procesos en curso
+      rating: Calificaciones
+      expert_details: Detalles del experto
+      services: Servicios
+      Industries: Industrias
+      job_function: Función_Area Función
+      skills: Habillidades y Experiencias
+      seniority_levels: Nivel de experiencia
+      appointments: Citas
+      packages: Paquetes
+      show_all: Muestra todo
+      in_progress: En proceso
+      scheduled: Agendadas
+      pending: Pendientes
+      past: Pasadas
+      scheduled_sessions: Sesiones agendadas
+      edit_profile: Editar perfil
+      about_me: Sobre mi
+      n_a: N/A
+      rating: Calificación
+      experts_details: Detalle expertos
+      services: Servicios
+      industries: Industrias
+      job_function: Area Función
+      skills: Habilidades
+      seniority_levels: Nivel de experiencia
+      appointments: Citas
+      packages: Paquetes
+      show_all: Mostrar todo
+      in_progress: En proceso
+      scheduled: Agendadas
+      pending: Pendientes
+      past: Pasadas
+      scheduled_sessions: Sesiones agendadas
+    profile:
+      request_express_advice: Solicita una sesión de Express Advise
+      request_understanding_session_for_mentoring: Solicita una sesión de entendimiento para Mentoring
+      request_understanding_session_for_coaching: Solicita una sesión de entendimiento para Coaching
+      contact_information:  Información de contacto
+      jobs: Trabajos
+      completed: Completados
+      projects: Projectos
+      working_on: En proceso
+      leave_a_message: Deja un mensaje
+      languages: Idiomas
+      skills: Habilidades Experiencia
+      subskills: Areas de experiencia
+      education: Escolaridad
+      work_experience: Experiencia de trabajo
+      awards_and_achievements: Logros y reconocimientos
+      in_progress: En proceso
+      rating: Rating Average
+      rating_metric: On Sessions
+  view_experts_onboarding:
+    tab_steps:
+    about:
+      about_yourself: A cerca de ti
+      please_consider: Considera que la siguiente información que proporciones sobre ti estará visible en tu perfil para los clientes que buscan a alguien con experiencias similares a las tuyas.
+      tell_us_about_yourself: Comentanos a cerca de ti
+      welcome: Bienvenido
+      general_information: Información general
+      resume: Curriculum Hoja de Vida
+      services: Servicios
+      languages: Idiomas
+      degrees: Grado Escolar
+      top_level_seniority: Cargos de mayor nivel
+      work_industries: Industrias
+      positions: Cargos
+      career_highlights: Mayores logros
+      skills: Habilidades y experiencias
+      about_me: A cerca de mi
+      schedule: Agenda
+      summary: Resumen
+    career_highlights:
+      fill_this_out: Comparte tus logros más relevantes de manera concisa y clara, para que las organizaciones o los profesionales puedan tener una mejor idea de tu experiencia
+      key_accomplishments: Mayores logros
+      date: Fecha
+    confirmation:
+      important: Importante!
+      your_information_has_been_submitted: Tu información ha sido enviada con éxito. Nuestro equipo estara en contacto contigo en los siguientes 3 dias habiles para agendar una videoconferencia contigo.
+      go_to_home_page: Ir al inicio
+    degrees:
+      studies_and_degrees: Estudios y grados academicos
+      this_information_wont_be_shared: Ésta información puede ser compartida con la comunidad, con el objetivo de que conozcan más sobre tu trayectoria y grados academicos.  
+      degrees: Grado academico
+      degree: Grado academico
+      studies: Estudios
+      institution_name: Nombre de la escuela
+      enter_dates: Ingresa fechas
+      present: Actualmente
+      from: Desde
+      to: Hasta
+      my_degres: Mis grados academicos
+    general_information:
+      contact_information: Información de Contacto
+      contact_data: La información de contacto solo será usada para contacto del equipo MWP contigo, el primer contacto será para agendar una cita para conocerte y saber que te motiva a ser un Experto.
+    languages:
+      we_recommend_you: Te recomendamos selecciones los idiomas que manejas de manera nativa o con fluides para hacer presentaciones y/o negocios.
+      language: Idioma
+      languages: Idiomas
+      select_your_languages: Selecciona tus idiomas
+      show_more: Mostrar todos
+      show_less: Mostrar menos
+    positions:
+      job_position: Cargo
+      we_recommend_you: Te recomendamos ingresar la información de los cargos que has desempeñado, de esa forma los clientes podrán conocerte mejor y seleccionarte para que les ayudes
+      work_history: Historia laboral
+      company: Compañia
+      company_url: Sitio web de la compañia
+      size: Tamaño de organización
+      job_title: Titulo del cargo
+      location: Localidad
+      enter_dates: Ingresar fechas
+      from: Desde
+      to: Hasta
+      present: Actual
+    resume:
+      your_resume: Tu Curriculum _ Hoja de vida
+      your_resume_wont_be_shared: Tu curriculum NO será compartido con los clientes o expertos de la comunidad. El equipo de Minds With Purpose lo utilizara para preparar la primer reunión contigo en donde se evaluará darte acceso a la plataforma.
+    schedule:
+      you_weekly_schedule: Tu agenda semanal
+      in_this_section: En ésta sección puedes incluir los dias y horarios de los 7 dias de la semana donde normalmente tienes disponibilidad para ayudar a un cliente que solicite de tu ayuda. Podrás hacer cambios las veces que requiereas, sin embargo las citas que tengas agendadas se deberán mantenerse o requerir de un cambio.
+    services:
+      select_your_portflio: Selecciona el tipo de servicios que podras ofrecer
+      please_select: Selecciona los servicios que estás interesado en proporcionar, asegurate haber leido las caracteristicas de los servicios disponibles antes de que los selecciones. Para Coaching With Purpose deberás contar con una acreditación - certificación de algún organismo internacional de Coaching y al menos 200 horas de experiencia.
+      select_services: Seleciona los servicios
+      services: Servicios
+    skills:
+      functions_and_skills: Functiones y hailidades
+      the_functions_and_skills: Las funciones y habilidades que selecciones ayudarán a que los clientes puedan encontrarte y solicitar de tus servicios.
+      functions: Aréas y funciones
+      your_skills: Tus habilidades y experiencia
+    summary:
+      please_review_and_edit: Por favor revisa y edita si es necesario tu perfil.
+      summary: Resumen
+      general_information: Información General
+      expert_information: Información del Experto
+      resume: Curriculum ' Hoja de Vida
+      languages: Idiomas
+      services: Servicios
+      job_function: Area - Función
+      industries: Industrias
+      years: Años
+      seniority_levels: Niveles de cargo
+      company_url: website de la compañia
+      degrees: Grado academico
+      career_highlights: Mayores logros
+      schedule: Agenda
+      hours: horas
+      monday: Lunes
+      tuesday: Martes
+      wednesday: Miércoles
+      thursday: Jueves
+      friday: Viernes
+      saturday: Sabado
+      sunday: Domingo
+      confirmation: Confirmacíon
+      position: Posición
+    top_level_seniority:
+      level_of_seniority: Nivel de Cargo
+      your_level_of_seniority: Tu nivel de cargo ayudará a otros a conocer tu nivel de experiencia para poder solicitarte una sesión de Consulta express, Mentoring With Purpose o Coaching With Purpose
+      top_level_of_seniority: Mayor(es) nivel de cargo
+      top_level_seniority_in_your_career: Mayor nivel de cargo
+    welcome:
+    work_industries:
+  view_invoices:
+  view_pages:
+    partials:
+      appointments_calendar:
+        appointments: Citas
+        list: Lista
+        close: Cerrado
+  view_payment_mailer:
+    paid_appointment:
+    pre_authorized_appointment:
+    send_receipt:
+    sent_payout:
+
+  view_profile_industries:
+    form:
+      about_you: A cerca de ti
+      tell_us_about_you: Dinos a cerca de ti
+      welcome: Bienvenido
+      general_information: Información general
+      resume: Curriculum - Hoja de vida
+      services: Servicios
+      languages: Idiomas
+      degrees: Grados educativos
+      top_level_seniority: Mayor nivel de cargo
+      work_industries: Industrias
+      positions: Posiciones
+      career_highlights: Mayores logros
+      skills: Habilidades Experiencia
+      about_me: Sobre mi
+      schedule: Agenda
+      summary: Resumen
+      we_recommend_you_to_fill: Te recomendamos seleccionar las industrias y áreas funcionales en donde tienes experiencia, ya que los clientes (Organizaciones o individuos) podrian estar buscando especificamente esa experiencia para seleccionar a un Experto.
+
+  view_rating:
+    show:
+      rank: Calificación
+      email: Email
+      location: Localidad
+      timezone: Zona horaria
+      position: Posición
+      company: Compañia
+      thank_you: Gracias por tu evaluación.
+      return_to_profile: Regresar a tu perfil
+      thank_you_for_your_evaluation: Gracias por tu evaluación.
+  view_sessions:
+    new:
+      access_the_application_as: Ingresa a la aplicación como
+      client_login: Ingreso Cliente
+      expert_login: Ingreso Experto
+    new_client:
+      login_as_client: Ingresa como Cliente
+      sign_in_with_facebook: Ingresa con tu perfil de Facebook
+      sign_in_with_linkedin: Ingresa con tu perfil de LinkedIn
+      by_signing_up: Al ingresar a la plataforma estás aceptando nuestras
+      terms_of_services: Términos de servicios
+    new_expert:
+      login_as_expert: Ingresa como Experto
+      sign_in_with_linkedin: Ingresa con Linkedin
+      by_signing_up: Al ingresar a la plataforma estás aceptando nuestras
+      terms_of_services: Términos de servicios
+  view_system:
+    header:
+      services: Servicios
+    navbar:
+      see_all_items: Ver todo
+      notifications: Notificaciones
+      profile: Perfil
+      settings: Configuración
+      invoices: Facturas
+      balance: Saldos
+      settings: Configuración
+      sign_out: Salir
+  view_users:
+    experts_edit:
+      avatar: Avatar
+      job: Cargos
+      company: Compañia
+      location: Location
+      payment_details: Detalles de pago
+      paypal_email: Paypal Email
+      submit: Enviar
+    edit_profile:
+      edit_profile: Editar perfil
+      please_review: Por favor revisa y en su caso edita si quieres modificar o agregar algo en tu perfil.
+      resume: Curriculum - Hoja de Vida
+      languages: Idiomas
+      services: Servicios
+      job_function: Cargo - Función
+      industries: Industrias
+      seniority_levels: Niveles de Cargo
+      positions: Cargos
+      degrees: Estudios
+      career_highlights: Logros en tu carrera
+      schedule: Agenda
+  view_video_conferences:
+    completed:
+      appointment_has_ended: La cita a terminado
+      go_back_to_dashboard: Regresa a tu perfil y dashboard
+      view_dashboard: Ver dashboard
+    programming_session:
+      programming_session: Programar paquetes de 5 u 8 sesiones
+      session: Sesion
+      schedule_project_sessions: Programar paquete de sesiones
+  view_work_histories:
+    form:
+      about_you: A cerca de ti
+      tell_us_about_your: Sobre ti
+      welcome: Bienvenido
+      general_information: Información general
+      resume: Curriculum - Hoja de vida
+      services: Servicios
+      languages: Idiomas
+      degrees: Estudios
+      top_level_seniority: Mayor nivel de cargo
+      work_industries: Industrias
+      positions: Posiciones
+      career_highlights: Logros en tu carrera
+      skills: Habilidades
+      about_me: Sobre mi
+      schedule: Agenda
+      summary: Resumen
+      we_recommend_you_to_fill: Ingresa la información sobre tus cargos y las compañias en donde has trabajado, ya que con esa información los clientes podrán tener una mejor idea de tu perfil para seleccionarte como Experto

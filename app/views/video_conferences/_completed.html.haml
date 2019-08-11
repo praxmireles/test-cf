@@ -1,0 +1,7 @@
+.col-md-12
+  %h2= t('view_video_conferences.completed.appointment_has_ended')
+  %p= t('view_video_conferences.completed.go_back_to_dasbhoard')
+  - if current_user.type == 'Client'
+    = link_to(t('view_video_conferences.completed.view_dashboard'), client_dashboard_path)
+  - else
+    = link_to(t('view_video_conferences.completed.view_dashboard'), expert_dashboard_path)

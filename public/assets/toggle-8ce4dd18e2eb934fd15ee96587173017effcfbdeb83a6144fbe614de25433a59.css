@@ -1,0 +1,43 @@
+/* line 1, /Volumes/D/dev/mindswithpurpose/app/assets/stylesheets/toggle.scss */
+.tooltip-toggle {
+  cursor: pointer;
+  position: relative;
+}
+/* line 7, /Volumes/D/dev/mindswithpurpose/app/assets/stylesheets/toggle.scss */
+.tooltip-toggle::before {
+  background-color: #000;
+  border-radius: 5px;
+  color: #fff;
+  content: attr(aria-label);
+  left: 80px;
+  padding: 1rem;
+  position: absolute;
+  text-transform: none;
+  top: -80px;
+  transition: all 0.5s ease;
+  width: 460px;
+}
+/* line 25, /Volumes/D/dev/mindswithpurpose/app/assets/stylesheets/toggle.scss */
+.tooltip-toggle::after {
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #000;
+  content: " ";
+  font-size: 0;
+  left: 9px;
+  line-height: 0;
+  margin-left: -5px;
+  position: absolute;
+  top: -12px;
+  width: 0;
+}
+/* line 40, /Volumes/D/dev/mindswithpurpose/app/assets/stylesheets/toggle.scss */
+.tooltip-toggle::before, .tooltip-toggle::after {
+  opacity: 0;
+  pointer-events: none;
+}
+/* line 47, /Volumes/D/dev/mindswithpurpose/app/assets/stylesheets/toggle.scss */
+.tooltip-toggle:focus::before, .tooltip-toggle:focus::after, .tooltip-toggle:hover::before, .tooltip-toggle:hover::after {
+  opacity: 1;
+  transition: all 0.75s ease;
+}

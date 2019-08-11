@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>README - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+  var index_rel_prefix = "./";
+</script>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/darkfish.js"></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="file">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+  <ul class="link-list" role="directory">
+    <li><a href="#label-Minds+With+Purpose+App">Minds With Purpose App</a>
+    <li><a href="#label-Readme">Readme</a>
+    <li><a href="#label-Prerequisites">Prerequisites</a>
+    <li><a href="#label-Setup">Setup</a>
+    <li><a href="#label-ENV">ENV</a>
+    <li><a href="#label-Database">Database</a>
+    <li><a href="#label-Docker">Docker</a>
+    <li><a href="#label-Run+Tests">Run Tests</a>
+    <li><a href="#label-Test+Coverage">Test Coverage</a>
+    <li><a href="#label-Bug+Tracking">Bug Tracking</a>
+    <li><a href="#label-Continuous+Integration">Continuous Integration</a>
+    <li><a href="#label-Pull+Request+Checklist">Pull Request Checklist</a>
+    <li><a href="#label-COMMIT+-28+CHANGELOG+-29">COMMIT ( CHANGELOG )</a>
+    <li><a href="#label-Type+of+changes+to+use+in+your+commits">Type of changes to use in your commits</a>
+    <li><a href="#label-VERSIONING">VERSIONING</a>
+    <li><a href="#label-Tasks">Tasks</a>
+    <li><a href="#label-Known+development+issues">Known development issues</a>
+    <li><a href="#label-ENV+variables+not+uploading">ENV variables not uploading</a>
+  </ul>
+</div>
+
+
+  <div id="project-metadata">
+    <div id="fileindex-section" class="nav-section">
+  <h3>Pages</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./Dockerfile.html">Dockerfile</a>
+  
+    <li><a href="./Gemfile.html">Gemfile</a>
+  
+    <li><a href="./Gemfile_lock.html">Gemfile.lock</a>
+  
+    <li><a href="./README_md.html">README</a>
+  
+    <li><a href="./Rakefile.html">Rakefile</a>
+  
+    <li><a href="./app/assets/config/manifest_js.html">manifest.js</a>
+  
+    <li><a href="./app/assets/images/favicon_ico.html">favicon.ico</a>
+  
+    <li><a href="./app/assets/images/img/avatars/readme_txt.html">readme</a>
+  
+    <li><a href="./app/assets/javascripts/application_js.html">application.js</a>
+  
+    <li><a href="./app/assets/javascripts/appointments_coffee.html">appointments.coffee</a>
+  
+    <li><a href="./app/assets/javascripts/authentications_coffee.html">authentications.coffee</a>
+  
+    <li><a href="./app/assets/javascripts/cable_js.html">cable.js</a>
+  
+    <li><a href="./app/assets/javascripts/cards_coffee.html">cards.coffee</a>
+  
+    <li><a href="./app/assets/javascripts/clients_coffee.html">clients.coffee</a>
+  
+    <li><a href="./app/assets/javascripts/experts_coffee.html">experts.coffee</a>
+  
+    <li><a href="./app/assets/javascripts/invoices_coffee.html">invoices.coffee</a>
+  
+    <li><a href="./app/assets/javascripts/notifications_coffee.html">notifications.coffee</a>
+  
+    <li><a href="./app/assets/javascripts/payments_coffee.html">payments.coffee</a>
+  
+    <li><a href="./app/assets/javascripts/requests_coffee.html">requests.coffee</a>
+  
+    <li><a href="./app/assets/javascripts/search_coffee.html">search.coffee</a>
+  
+    <li><a href="./app/assets/javascripts/sessions_coffee.html">sessions.coffee</a>
+  
+    <li><a href="./app/assets/javascripts/users_coffee.html">users.coffee</a>
+  
+    <li><a href="./app/assets/javascripts/video_conferences_coffee.html">video_conferences.coffee</a>
+  
+    <li><a href="./app/assets/stylesheets/application_css.html">application.css</a>
+  
+    <li><a href="./app/assets/stylesheets/application_css_scss.html">application.css.scss</a>
+  
+    <li><a href="./app/assets/stylesheets/appointments_scss.html">appointments.scss</a>
+  
+    <li><a href="./app/assets/stylesheets/authentications_scss.html">authentications.scss</a>
+  
+    <li><a href="./app/assets/stylesheets/boostrap_min_css.html">boostrap.min.css</a>
+  
+    <li><a href="./app/assets/stylesheets/bootstrap-datepicker_css.html">bootstrap-datepicker.css</a>
+  
+    <li><a href="./app/assets/stylesheets/bootstrap-datepicker3_css.html">bootstrap-datepicker3.css</a>
+  
+    <li><a href="./app/assets/stylesheets/bootstrap_overrides_scss.html">bootstrap_overrides.scss</a>
+  
+    <li><a href="./app/assets/stylesheets/cards_scss.html">cards.scss</a>
+  
+    <li><a href="./app/assets/stylesheets/clients_scss.html">clients.scss</a>
+  
+    <li><a href="./app/assets/stylesheets/colors_scss.html">colors.scss</a>
+  
+    <li><a href="./app/assets/stylesheets/css_new_template/css_vendor/animate_css.html">animate.css</a>
+  
+    <li><a href="./app/assets/stylesheets/css_new_template/css_vendor/bootstrap-colorpicker_min_css.html">bootstrap-colorpicker.min.css</a>
+  
+    <li><a href="./app/assets/stylesheets/css_new_template/css_vendor/bootstrap-datepicker_min_css.html">bootstrap-datepicker.min.css</a>
+  
+    <li><a href="./app/assets/stylesheets/css_new_template/css_vendor/bootstrap-datepicker3_min_css.html">bootstrap-datepicker3.min.css</a>
+  
+    <li><a href="./app/assets/stylesheets/css_new_template/css_vendor/bootstrap-theme_min_css.html">bootstrap-theme.min.css</a>
+  
+    <li><a href="./app/assets/stylesheets/css_new_template/css_vendor/dataTables_bootstrap_css.html">dataTables.bootstrap.css</a>
+  
+    <li><a href="./app/assets/stylesheets/css_new_template/css_vendor/magnific-popup_css.html">magnific-popup.css</a>
+  
+    <li><a href="./app/assets/stylesheets/css_new_template/css_vendor/morris_css.html">morris.css</a>
+  
+    <li><a href="./app/assets/stylesheets/css_new_template/css_vendor/owl_carousel_min_css.html">owl.carousel.min.css</a>
+  
+    <li><a href="./app/assets/stylesheets/css_new_template/css_vendor/owl_theme_default_min_css.html">owl.theme.default.min.css</a>
+  
+    <li><a href="./app/assets/stylesheets/css_new_template/css_vendor/pace-theme-minimal_css.html">pace-theme-minimal.css</a>
+  
+    <li><a href="./app/assets/stylesheets/css_new_template/css_vendor/pnotify_custom_css.html">pnotify.custom.css</a>
+  
+    <li><a href="./app/assets/stylesheets/css_new_template/css_vendor/prettify_css.html">prettify.css</a>
+  
+    <li><a href="./app/assets/stylesheets/css_new_template/css_vendor/select2-bootstrap_min_css.html">select2-bootstrap.min.css</a>
+  
+    <li><a href="./app/assets/stylesheets/css_new_template/css_vendor/select2_min_css.html">select2.min.css</a>
+  
+    <li><a href="./app/assets/stylesheets/css_new_template/css_vendor/sweetalert_css.html">sweetalert.css</a>
+  
+    <li><a href="./app/assets/stylesheets/css_new_template/css_vendor/timepicker_css.html">timepicker.css</a>
+  
+    <li><a href="./app/assets/stylesheets/css_new_template/css_vendor/toastr_min_css.html">toastr.min.css</a>
+  
+    <li><a href="./app/assets/stylesheets/css_new_template/style_css.html">style.css</a>
+  
+    <li><a href="./app/assets/stylesheets/custom_scss.html">custom.scss</a>
+  
+    <li><a href="./app/assets/stylesheets/experts_scss.html">experts.scss</a>
+  
+    <li><a href="./app/assets/stylesheets/invoices_scss.html">invoices.scss</a>
+  
+    <li><a href="./app/assets/stylesheets/jquery_printarea_scss.html">jquery.printarea.scss</a>
+  
+    <li><a href="./app/assets/stylesheets/layout_scss.html">layout.scss</a>
+  
+    <li><a href="./app/assets/stylesheets/notifications_scss.html">notifications.scss</a>
+  
+    <li><a href="./app/assets/stylesheets/payments_scss.html">payments.scss</a>
+  
+    <li><a href="./app/assets/stylesheets/requests_scss.html">requests.scss</a>
+  
+    <li><a href="./app/assets/stylesheets/search_scss.html">search.scss</a>
+  
+    <li><a href="./app/assets/stylesheets/sessions_scss.html">sessions.scss</a>
+  
+    <li><a href="./app/assets/stylesheets/users_scss.html">users.scss</a>
+  
+    <li><a href="./app/assets/stylesheets/video_conferences_scss.html">video_conferences.scss</a>
+  
+    <li><a href="./app/views/appointments/_form_html_haml.html">_form.html.haml</a>
+  
+    <li><a href="./app/views/appointments/checkout_html_haml.html">checkout.html.haml</a>
+  
+    <li><a href="./app/views/appointments/new_html_haml.html">new.html.haml</a>
+  
+    <li><a href="./app/views/appointments/show_html_haml.html">show.html.haml</a>
+  
+    <li><a href="./app/views/clients/achieve_experiences_html_haml.html">achieve_experiences.html.haml</a>
+  
+    <li><a href="./app/views/clients/descriptions_html_haml.html">descriptions.html.haml</a>
+  
+    <li><a href="./app/views/clients/industries_html_haml.html">industries.html.haml</a>
+  
+    <li><a href="./app/views/clients/services_html_haml.html">services.html.haml</a>
+  
+    <li><a href="./app/views/clients/skills_html_haml.html">skills.html.haml</a>
+  
+    <li><a href="./app/views/experts/_form_errors_html_haml.html">_form_errors.html.haml</a>
+  
+    <li><a href="./app/views/experts/_tab_steps_html_haml.html">_tab_steps.html.haml</a>
+  
+    <li><a href="./app/views/experts/about_html_haml.html">about.html.haml</a>
+  
+    <li><a href="./app/views/experts/career_highlights_html_haml.html">career_highlights.html.haml</a>
+  
+    <li><a href="./app/views/experts/confirmation_html_haml.html">confirmation.html.haml</a>
+  
+    <li><a href="./app/views/experts/degrees_html_haml.html">degrees.html.haml</a>
+  
+    <li><a href="./app/views/experts/general_information_html_haml.html">general_information.html.haml</a>
+  
+    <li><a href="./app/views/experts/languages_html_haml.html">languages.html.haml</a>
+  
+    <li><a href="./app/views/experts/positions_html_haml.html">positions.html.haml</a>
+  
+    <li><a href="./app/views/experts/profile_html_haml.html">profile.html.haml</a>
+  
+    <li><a href="./app/views/experts/resume_html_haml.html">resume.html.haml</a>
+  
+    <li><a href="./app/views/experts/schedule_html_haml.html">schedule.html.haml</a>
+  
+    <li><a href="./app/views/experts/services_html_haml.html">services.html.haml</a>
+  
+    <li><a href="./app/views/experts/skills_html_haml.html">skills.html.haml</a>
+  
+    <li><a href="./app/views/experts/top_level_seniority_html_haml.html">top_level_seniority.html.haml</a>
+  
+    <li><a href="./app/views/experts/welcome_html_haml.html">welcome.html.haml</a>
+  
+    <li><a href="./app/views/experts/work_industries_html_haml.html">work_industries.html.haml</a>
+  
+    <li><a href="./app/views/layouts/application_html_haml.html">application.html.haml</a>
+  
+    <li><a href="./app/views/sessions/new_html_haml.html">new.html.haml</a>
+  
+    <li><a href="./app/views/system/_header_html_haml.html">_header.html.haml</a>
+  
+    <li><a href="./config_ru.html">config.ru</a>
+  
+    <li><a href="./config/secrets_yml_sample.html">secrets.yml.sample</a>
+  
+    <li><a href="./coverage/assets/0_10_2/application_css.html">application.css</a>
+  
+    <li><a href="./coverage/assets/0_10_2/application_js.html">application.js</a>
+  
+    <li><a href="./coverage/index_html.html">index.html</a>
+  
+    <li><a href="./lib/tasks/custom_seeds_rake.html">custom_seeds.rake</a>
+  
+    <li><a href="./lib/templates/haml/scaffold/_form_html_haml.html">_form.html.haml</a>
+  
+    <li><a href="./log/-t_log.html">-t.log</a>
+  
+    <li><a href="./log/development_log.html">development.log</a>
+  
+    <li><a href="./log/test_log.html">test.log</a>
+  
+    <li><a href="./public/404_html.html">404.html</a>
+  
+    <li><a href="./public/422_html.html">422.html</a>
+  
+    <li><a href="./public/500_html.html">500.html</a>
+  
+    <li><a href="./public/apple-touch-icon-precomposed_png.html">apple-touch-icon-precomposed.png</a>
+  
+    <li><a href="./public/apple-touch-icon_png.html">apple-touch-icon.png</a>
+  
+    <li><a href="./public/favicon_ico.html">favicon.ico</a>
+  
+    <li><a href="./public/robots_txt.html">robots</a>
+  
+    <li><a href="./tmp/restart_txt.html">restart</a>
+  
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-label="Page README.md">
+
+<p><a href="https://semaphoreci.com/praxedismireles/mindswithpurpose"><img
+src="https://semaphoreci.com/api/v1/projects/71d32c3a-263e-489e-810a-2adf8ec56e32/2148083/badge.svg"></a></p>
+
+<h1 id="label-Minds+With+Purpose+App">Minds With Purpose App<span><a href="#label-Minds+With+Purpose+App">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<h1 id="label-Readme">Readme<span><a href="#label-Readme">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p>This <a href="README_md.html">README</a> would normally document whatever
+steps are necessary to get the application up and running.</p>
+
+<h2 id="label-Prerequisites">Prerequisites<span><a href="#label-Prerequisites">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>This application is running on * Rails 5.2.1 * Ruby 2.5.1 * Postgresql *
+Docker</p>
+
+<h1 id="label-Setup">Setup<span><a href="#label-Setup">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<h2 id="label-ENV">ENV<span><a href="#label-ENV">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>Details for the ENV variables are in the file. You can duplicate this file
+without the .sample to be setup in development</p>
+<ul><li>
+<p>/.env.yml.sample</p>
+</li></ul>
+
+<h2 id="label-Database">Database<span><a href="#label-Database">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>The database we&#39;re using for this project is postgresql</p>
+
+<p>Create database.yml from database.yml.sample</p>
+<ul><li>
+<p>/config/database.yml.sample</p>
+</li></ul>
+
+<p>You&#39;ll need the default values of DATABASE_ADAPTER DATABASE_HOST
+DATABASE_PORT DATABASE_USERNAME DATABASE_PASSWORD</p>
+
+<p>to start docker in development.</p>
+
+<h2 id="label-Docker">Docker<span><a href="#label-Docker">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>This project is set with Docker. Check the <code>Dockerfile</code> and
+<code>docker-compose.yml</code> for more config information.</p>
+
+<p>To get started install Docker. <a
+href="https://www.docker.com/community-edition#/download">www.docker.com/community-edition#/download</a></p>
+
+<p>** then create the container from the Dockerfile-Compose file**</p>
+
+<p><code>$ docker-compose build</code></p>
+
+<p>** Create the database **</p>
+
+<p><code>$ docker-compose run web rake db:create db:migrate db:seed
+RAILS_ENV=development</code></p>
+
+<p>** then start the container **</p>
+
+<p><code>$ docker-compose up web</code></p>
+
+<p>The app will be exposed at</p>
+
+<p><code>localhost:3000</code></p>
+
+<p><strong>To stop the container:</strong></p>
+
+<p><code>$ docker-compose stop</code></p>
+
+<p>To check the containter processes:</p>
+
+<p><code>$ docker-compose ps</code></p>
+
+<h1 id="label-Run+Tests">Run Tests<span><a href="#label-Run+Tests">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p>We&#39;re using Rubocop for checking the lint. To run the lint check.</p>
+
+<p><code>$ rubocop</code></p>
+
+<p>To run all the Unit Tests (and Integration Tests)</p>
+
+<p><code>$ rake test</code></p>
+
+<h1 id="label-Test+Coverage">Test Coverage<span><a href="#label-Test+Coverage">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p>The test coverage threshold for a PR is 80%. Simplecove generate the test
+coverage details in the <em>coverage</em> folder.</p>
+
+<blockquote>
+<p><a href="coverage/index_html.html">coverage/index.html</a></p>
+</blockquote>
+
+<h1 id="label-Bug+Tracking">Bug Tracking<span><a href="#label-Bug+Tracking">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p>We&#39;re tracking bugs with rollbar:</p>
+
+<p><a
+href="https://rollbar.com/richardsondx/MindWithPurpose">rollbar.com/richardsondx/MindWithPurpose</a></p>
+
+<h1 id="label-Continuous+Integration">Continuous Integration<span><a href="#label-Continuous+Integration">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p><a
+href="https://semaphoreci.com/praxedismireles/mindswithpurpose">semaphoreci.com/praxedismireles/mindswithpurpose</a></p>
+
+<h1 id="label-Pull+Request+Checklist">Pull <a href="Request.html">Request</a> Checklist<span><a href="#label-Pull+Request+Checklist">&para;</a> <a href="#top">&uarr;</a></span></h1>
+<ul><li>
+<p>Chek that rubocop test pass</p>
+</li><li>
+<p>Check that the Unit Test pass</p>
+</li></ul>
+
+<h1 id="label-COMMIT+-28+CHANGELOG+-29">COMMIT ( CHANGELOG )<span><a href="#label-COMMIT+-28+CHANGELOG+-29">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<h3 id="label-Type+of+changes+to+use+in+your+commits">Type of changes to use in your commits<span><a href="#label-Type+of+changes+to+use+in+your+commits">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p><code>ADDED</code> for new features.</p>
+
+<p><code>CHANGED</code> for changes in existing functionality.</p>
+
+<p><code>DEPRECATED</code> for soon-to-be removed features.</p>
+
+<p><code>REMOVED</code> for now removed features.</p>
+
+<p><code>FIXED</code> for any bug fixes.</p>
+
+<p><code>SECURITY</code> in case of vulnerabilities.</p>
+
+<p>Example of a commit message:</p>
+
+<blockquote>
+<p>e.g: FIXED issue with authenticaton, CHANGED login feature to use facebook,
+etc..</p>
+</blockquote>
+
+<h1 id="label-VERSIONING">VERSIONING<span><a href="#label-VERSIONING">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p>We are versioning the app by sprint. Tags are created at the end of each
+Sprint. This will allow to track the state of an app at different stages of
+the development. If a major issue is introduced, or there&#39;s major
+feature changes, it&#39;ll make it easier to fix it or have a tag of
+reference.</p>
+
+<p>To view all the existing tags from previous sprint type:</p>
+
+<blockquote>
+<p>$ git tag</p>
+</blockquote>
+
+<p>To create a tag type:</p>
+
+<blockquote>
+<p>$ git tag -a v1 -m “SPRINT 1”</p>
+</blockquote>
+
+<h1 id="label-Tasks">Tasks<span><a href="#label-Tasks">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p>This project is managed on ClickUps. To view the project click here <a
+href="https://app.clickup.com/69311">app.clickup.com/69311</a></p>
+
+<h1 id="label-Known+development+issues">Known development issues<span><a href="#label-Known+development+issues">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<h3 id="label-ENV+variables+not+uploading">ENV variables not uploading<span><a href="#label-ENV+variables+not+uploading">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>If your env variable stop updating as you change them. Try to stop the
+spring processes</p>
+
+<p><code>$ spring stop</code></p>
+</main>
+
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

@@ -1,0 +1,125 @@
+.panel
+  .panel-header= t('actions.new',  model: t("activerecord.models.appointment"))
+  .panel-content
+    .row
+      .col-xs-12.col-md-6
+        %h3
+          = t('view_appointments.new.summary')
+        %p
+          %b
+            = t('view_appointments.new.industry') + ':'
+            = @appointment.search_history.industry
+        %p
+          %b
+            = t('view_appointments.new.functions') + ':'
+            = @appointment.search_history.job_functions_names
+        %p
+          %b
+            = t('view_appointments.new.skills') + ':'
+            = @appointment.search_history.skills_names
+        %p
+          %b
+            = t('view_appointments.new.seniority_levels') + ':'
+            = @appointment.search_history.seniority_levels_names
+        %p
+          %b
+            = t('view_appointments.new.requirements')
+          %p ???
+        = simple_form_for @appointment, url: new_client_open_appointments_path(current_user, @appointment), html: { class: 'form-horizontal' } do |f|
+          = f.error_notification
+
+          .form-inputs
+            %pre#selected_date{style: "display: none;"}
+            %pre#selected_time{style: "display: none;"}
+            = hidden_field_tag :search_history_id, @search_history.id
+            = hidden_field_tag :expert_id, @expert.id
+            - if @first_available == "true"
+              = f.input :appointment_date, hint: false, required: true, as: :hidden, input_html: { value: nil }
+              = f.input :first_available, as: :hidden, input_html: { value: true }
+            - else
+              = f.input :start_date, required: true, as: :hidden, input_html: { value: nil }
+              - unless params[:expert_id].present?
+                %b First Available
+                = f.check_box :first_available, input_html: { value: params[:first_available] }
+
+          #appointments-calendar.clean-theme{ data: { "month-format" => "month YYY", "day-format" => "DD" } }
+          .form-actions{:style => "text-align:center"}
+            %br
+
+            = f.submit t('view_appointments.new.book_appointment'), class: 'btn btn-primary'
+      .col-xs-12.col-md-4.col-md-offset-1
+        .panel.b-primary.bt-sm
+          .panel-header
+            %h3.panel-title
+              %i.fa.fa-clock-o
+              = t('view_appointments.new.selected_appointment_schedule')
+          .panel-content
+            %p#selected-schedule
+              = t('view_appointments.new.appointment_not_selected')
+
+#appointments-schedules.modal{ tabindex: "-1", role: "dialog", "aria-labelledby" => "modal-primary-label" }
+  .modal-dialog{ role: "document" }
+    .modal-content
+      .modal-header.state.modal-primary
+        %button.close{ type: "button", "data-dismiss" => "modal", "aria-label" => "Close" }
+          %span{ "aria-hidden" => "true" }
+            &times;
+        %h4#modal-primary-label.modal-title
+          %i.fa.fa-clock-o
+          = t('view_appointments.new.schedules_availables')
+      .modal-body
+        .hours-available
+          loresm ipsum
+      .modal-footer
+        %button.btn.btn-default{ type: "button", "data-dismiss" => "modal" }
+          = t('view_appointments.new.close')
+
+:javascript
+  var appointmentsCalendar = jsCalendar.new("#appointments-calendar", "now", {
+      "monthFormat": "month YYYY",
+      "dayFormat": "DD"
+  })
+  getAppointmentsByMonth(new Date())
+  // var availability = #{@available_schedules_days.to_json.html_safe}
+  // console.log(availability)
+  // availability =['15/02/2019','01/03/2019'] <- FOR TEST
+  // appointmentsCalendar.select(availability);
+
+  appointmentsCalendar.onDateClick(function(event, date) {
+    $('.modal').find('.hours-available').html("");
+    $('#selected_date').html(date)
+
+    $.ajax({
+      method: "GET",
+      url: "/experts/#{@expert.id}/availabilities?date=" + moment(date).format('YYYY-MM-DD'),
+      success: function(data){
+        $('.modal').modal();
+      },
+      error: function(){
+        alert( "error" );
+      },
+      dataType: 'script'
+    });
+  });
+  appointmentsCalendar.onMonthChange(function(event, date) {
+    getAppointmentsByMonth(date)
+  });
+
+  function getAppointmentsByMonth(date){
+    var month = moment(date).month() + 1
+    var year = moment(date).year()
+    var url = "/experts/#{@expert.id}/appointments/by_month?month=" + month +"&year=" + year
+    $.ajax({
+      method: "GET",
+      url: url,
+      success: function(data){
+        console.log(data)
+        appointmentsCalendar.select(data);
+      },
+      error: function(error){
+        console.log(error )
+        //alert( "error" );
+      },
+
+    })
+  }

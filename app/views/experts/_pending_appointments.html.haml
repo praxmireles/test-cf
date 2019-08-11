@@ -1,0 +1,38 @@
+%h5{style: 'color: black;'} Pending
+- if @pending_requests.any?
+  - @pending_requests.each do |date|
+    %p= "#{t('view_clients.pending_appointments.pending')}" + date.first
+    - date.second.each do |appointment|
+      = link_to(modal_expert_path(appointment.id), remote: true, data: {target: "#appointmentUser", toggle: "modal"}) do
+        .card
+          .col-sm-7
+            =render partial: 'appointment', locals: {appointment: appointment}
+          .col-sm-5.cardDate
+            %p.date= date_to_time(set_in_timezone(appointment.start_date, current_user.id))
+            %input{type: "button", :value => t('view_clients.pending_appointments.view_details'), class: "class: 'btn btn-secondary"}
+            -# = link_to 'Accept', update_request_path(appointment.request.id, answer: 'accept', authenticity_token: form_authenticity_token), method: :put, class: 'btn-submit'
+            -# = link_to 'Reject', update_request_path(appointment.request.id, answer: 'reject', authenticity_token: form_authenticity_token), method: :put, class: 'btn-submit'
+        -# .card
+        -#   %row
+        -#
+        -#     - appointment_suggests = appointment.appointment_suggests("Client")
+        -#     - if appointment_suggests.length > 0
+        -#       %row
+        -#       .col-sm-12.cardDate
+        -#         .request{style:"text-align:left;width:100%;font-size:16pt;margin-bottom:20px"}
+        -#           #{appointment_suggests[0].user.fullname } request to change the appointment for #{appointment_suggests[0].start_date.strftime('%d/%m/%Y %H:%M') }
+        -#       %row
+        -#       .col-sm-6.cardDate
+        -#         %button.btn.btn-dashboard{style:"color:#000",type:"button",onclick:"showCalendarChangeFlow('#{ current_user.id }', '#{ appointment.expert.id }', '#{ appointment.id }')" }
+        -#           Suggest a Different  Time
+        -#       .col-sm-6.cardDate
+        -#         %button.btn.btn-dashboard{style:"color:#000",type:"button",onclick:"aceptChange('#{ appointment_suggests[0].id }')" }
+        -#           Accept Change
+        -#     -else
+        -#       .col-sm-12.cardDate
+        -#         %button.btn.btn-dashboard{style:"color:#000",type:"button",onclick:"showCalendarChangeFlow('#{ current_user.id }', '#{ appointment.expert.id }', '#{ appointment.id }')" }
+        -#           Suggest a Different  Time
+
+- else
+  .alert.alert-warning{style: "opacity: 0.8"}
+    %p No Pending Requests

@@ -1,0 +1,57 @@
+.row
+  .col-sm-8.col-sm-offset-2
+    .panel
+      .panel-header.panel-primary
+        = t('view_appointments.show.appointment')
+        = @user.name
+      .panel-body
+        .row
+          .col-sm-4
+            %b= t('.user:')
+            = @appointment.client
+          .col-sm-4
+            %b= t('.expert:')
+            = @appointment.expert
+          .col-sm-4
+            %b= t('.service:')
+            = @appointment.service
+        .row
+          .col-sm-4
+            %b= t('.subject:')
+            = @appointment.subject
+          .col-sm-4
+            %b= t('.type:')
+            = @appointment.type
+          .col-sm-4
+            %b= t('.video_session_token:')
+            = @appointment.video_session_token
+        .row
+          .col-sm-4
+            %b= t('.duration_in_min')
+            = @appointment.duration_in_min
+          .col-sm-4
+            %b= t('.day_of_week')
+            = @appointment.day_of_week
+          .col-sm-4
+            %b= t('.start_date')
+            = @appointment.start_date
+        .row
+          .col-sm-4
+            %b= t('.end_date')
+            = @appointment.end_date
+          .col-sm-4
+            %b= t('.cancelled:')
+            = @appointment.cancelled
+          .col-sm-4
+            %b= t('.canceled_reason:')
+            = @appointment.cancel_reason
+        .row
+          .col-sm-4
+            %b= t('.close_on:')
+            = format_date_long(@appointment.close_on) if @appointment.completed_on
+          .col-sm-4
+            %b= t('.created_at:')
+            = format_date_long(@appointment.created_at)
+          .col-sm-4
+            %b= t('.updated_at:')
+            = format_date_long(@appointment.updated_at)

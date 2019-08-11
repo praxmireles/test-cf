@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Expert - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+  var index_rel_prefix = "./";
+</script>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/darkfish.js"></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="User.html">User</a>
+  
+</div>
+
+    <div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+  
+  
+    <li><a class="include" href="Timeable.html">Timeable</a>
+  
+  
+  </ul>
+</div>
+
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-c-find_available_experts_today">::find_available_experts_today</a>
+    
+    <li ><a href="#method-c-find_match">::find_match</a>
+    
+    <li ><a href="#method-c-order_by_first_available">::order_by_first_available</a>
+    
+    <li ><a href="#method-i-available_today-3F">#available_today?</a>
+    
+    <li ><a href="#method-i-day_schedule">#day_schedule</a>
+    
+    <li ><a href="#method-i-next_7_days_schedule">#next_7_days_schedule</a>
+    
+    <li ><a href="#method-i-next_availability">#next_availability</a>
+    
+    <li ><a href="#method-i-profile_summary">#profile_summary</a>
+    
+    <li ><a href="#method-i-this_week_schedule">#this_week_schedule</a>
+    
+    <li ><a href="#method-i-unavailable_times">#unavailable_times</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Expert">
+  <h1 id="class-Expert" class="class">
+    class Expert
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-find_available_experts_today" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">find_available_experts_today</span><span
+            class="method-args">(experts_array, day = day_of_week)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>List of all the available experts for the given day of the week and expet
+array</p>
+
+<p>Params:</p>
+<ul><li>
+<p>expert_array: array of <a href="Expert.html">Expert</a></p>
+</li><li>
+<p>day: Day of the week. e.g: “Monday”, “Tuesday”, etc…</p>
+</li></ul>
+
+<p>Returns [Array]</p>
+          
+          
+
+          
+          <div class="method-source-code" id="find_available_experts_today-source">
+            <pre><span class="ruby-comment"># File app/models/users/expert.rb, line 144</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">find_available_experts_today</span>(<span class="ruby-identifier">experts_array</span>, <span class="ruby-identifier">day</span> = <span class="ruby-identifier">day_of_week</span>)
+  <span class="ruby-identifier">today_experts</span> = <span class="ruby-identifier">experts_array</span>.<span class="ruby-identifier">select</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">e</span>.<span class="ruby-identifier">availabilities</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">day_of_week:</span> <span class="ruby-identifier">day</span>).<span class="ruby-identifier">present?</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">sorted_experts</span> = <span class="ruby-identifier">today_experts</span>.<span class="ruby-identifier">sort_by</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">expert</span><span class="ruby-operator">|</span>
+    [<span class="ruby-identifier">expert</span>.<span class="ruby-identifier">day_schedule</span>(<span class="ruby-value">day:</span> <span class="ruby-identifier">day</span>).<span class="ruby-identifier">first</span>]
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">sorted_experts</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-find_match" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">find_match</span><span
+            class="method-args">(params)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>An array that match a search query from params</p>
+
+<p>Params:</p>
+<ul><li>
+<p>industries [Array]: A list of industries name</p>
+</li><li>
+<p>job_functions [Array]: A list of job_functions name</p>
+</li><li>
+<p>seniority_levels [Array]: A list of seniority levels name</p>
+</li><li>
+<p>skills [Array]: A list of skills name</p>
+</li></ul>
+
+<p>Returns [Array]</p>
+          
+          
+
+          
+          <div class="method-source-code" id="find_match-source">
+            <pre><span class="ruby-comment"># File app/models/users/expert.rb, line 48</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">find_match</span>(<span class="ruby-identifier">params</span>)
+  <span class="ruby-identifier">industry_ids</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:industries</span>].<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">industry_name</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">Industry</span>.<span class="ruby-identifier">find_by_name</span>(<span class="ruby-identifier">industry_name</span>).<span class="ruby-identifier">try</span>(<span class="ruby-value">:id</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">job_function_ids</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:job_functions</span>].<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">job_function</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">JobFunction</span>.<span class="ruby-identifier">find_by_name</span>(<span class="ruby-identifier">job_function</span>).<span class="ruby-identifier">try</span>(<span class="ruby-value">:id</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">seniority_level_ids</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:seniority_levels</span>].<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">seniority_level</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">SeniorityLevel</span>.<span class="ruby-identifier">find_by_name</span>(<span class="ruby-identifier">seniority_level</span>).<span class="ruby-identifier">try</span>(<span class="ruby-value">:id</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">skill_ids</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:skills</span>].<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">skill</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">Skill</span>.<span class="ruby-identifier">find_by_name</span>(<span class="ruby-identifier">skill</span>).<span class="ruby-identifier">try</span>(<span class="ruby-value">:id</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">industries_matches</span> = <span class="ruby-constant">ProfileIndustry</span>.<span class="ruby-identifier">where</span>(
+    <span class="ruby-value">industry_id:</span> <span class="ruby-identifier">industry_ids</span>
+  ).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">profile</span>.<span class="ruby-identifier">expert</span> }
+
+  <span class="ruby-identifier">job_functions_matches</span> = <span class="ruby-constant">ProfileJobFunction</span>.<span class="ruby-identifier">where</span>(
+    <span class="ruby-value">job_function_id:</span> <span class="ruby-identifier">job_function_ids</span>
+  ).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">profile</span>.<span class="ruby-identifier">expert</span> }
+
+  <span class="ruby-identifier">seniority_levels_matches</span> = <span class="ruby-constant">ProfileSeniorityLevel</span>.<span class="ruby-identifier">where</span>(
+    <span class="ruby-value">seniority_level_id:</span> <span class="ruby-identifier">seniority_level_ids</span>
+  ).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">profile</span>.<span class="ruby-identifier">expert</span> }
+
+  <span class="ruby-identifier">skills_matches</span> = <span class="ruby-constant">ProfileSkill</span>.<span class="ruby-identifier">where</span>(
+    <span class="ruby-value">skill_id:</span> <span class="ruby-identifier">skill_ids</span>
+  ).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">profile</span>.<span class="ruby-identifier">expert</span> }
+
+  <span class="ruby-identifier">intersection</span> = <span class="ruby-identifier">industries_matches</span> <span class="ruby-operator">|</span>
+                 <span class="ruby-identifier">job_functions_matches</span> <span class="ruby-operator">|</span>
+                 <span class="ruby-identifier">seniority_levels_matches</span> <span class="ruby-operator">|</span>
+                 <span class="ruby-identifier">skills_matches</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:first_available</span>] <span class="ruby-operator">==</span> <span class="ruby-keyword">true</span>
+    <span class="ruby-identifier">intersection</span> = <span class="ruby-identifier">order_by_first_available</span>(<span class="ruby-identifier">intersection</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">intersection</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-order_by_first_available" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">order_by_first_available</span><span
+            class="method-args">(experts_array)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Order an array of expert by first_available</p>
+
+<p>Params:</p>
+<ul><li>
+<p>experts_array: An array of <a href="Expert.html">Expert</a></p>
+</li></ul>
+
+<p>Returns [Array]</p>
+          
+          
+
+          
+          <div class="method-source-code" id="order_by_first_available-source">
+            <pre><span class="ruby-comment"># File app/models/users/expert.rb, line 99</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">order_by_first_available</span>(<span class="ruby-identifier">experts_array</span>)
+  <span class="ruby-identifier">experts</span> = []
+  <span class="ruby-identifier">next_7_days</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">day</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">find_available_experts_today</span>(<span class="ruby-identifier">experts_array</span>, <span class="ruby-identifier">day</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">expert</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">experts</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">expert</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">experts</span>.<span class="ruby-identifier">include?</span> <span class="ruby-identifier">expert</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">experts</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-available_today-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">available_today?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="available_today-3F-source">
+            <pre><span class="ruby-comment"># File app/models/users/expert.rb, line 20</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">available_today?</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">availabilities</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">day_of_week:</span> <span class="ruby-identifier">day_of_week</span>).<span class="ruby-identifier">empty?</span>
+    <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-day_schedule" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">day_schedule</span><span
+            class="method-args">(day: day_of_week, from_now: false)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Return the expert schedule for the given day of the week</p>
+
+<p>Params:</p>
+<ul><li>
+<p>day: Day of the week. e.g: “Monday”, “Tuesday”, etc…</p>
+</li><li>
+<p>from_now: when true, it will only return the day shedule from the current</p>
+</li></ul>
+
+<p>time</p>
+
+<p>Returns [Array]</p>
+          
+          
+
+          
+          <div class="method-source-code" id="day_schedule-source">
+            <pre><span class="ruby-comment"># File app/models/users/expert.rb, line 118</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">day_schedule</span>(<span class="ruby-value">day:</span> <span class="ruby-identifier">day_of_week</span>, <span class="ruby-value">from_now:</span> <span class="ruby-keyword">false</span>)
+  <span class="ruby-identifier">schedule</span> = []
+  <span class="ruby-identifier">availabilities</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">day_of_week:</span> <span class="ruby-identifier">day</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">availability</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">schedule</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">availability</span>.<span class="ruby-identifier">start_time</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">from_now</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">true</span>
+    <span class="ruby-identifier">next_time</span> = <span class="ruby-identifier">closest_next_time</span>(<span class="ruby-identifier">schedule</span>, <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">strftime</span>(<span class="ruby-string">&#39;%H:%M&#39;</span>))
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">next_time</span>
+      <span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">slice!</span>(<span class="ruby-value">0</span>, <span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">next_time</span>))
+      <span class="ruby-identifier">schedule</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">schedule</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-next_7_days_schedule" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">next_7_days_schedule</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>The schedule of an expert for the next 7 days starting today.</p>
+
+<p>Returns [Hash]</p>
+
+<pre>e.g:
+{
+  &quot;Monday&quot; =&gt; [&quot;08:00&quot;, &quot;10:30&quot;],
+  &quot;Tuesday&quot; =&gt; [&quot;16:00&quot;],
+  ...
+}</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="next_7_days_schedule-source">
+            <pre><span class="ruby-comment"># File app/models/users/expert.rb, line 211</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">next_7_days_schedule</span>
+  <span class="ruby-identifier">schedule</span> = {}
+  <span class="ruby-identifier">next_7_days</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">day</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">schedule</span>[<span class="ruby-identifier">day</span>] = <span class="ruby-identifier">day_schedule</span>(<span class="ruby-value">day:</span> <span class="ruby-identifier">day</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">schedule</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-next_availability" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">next_availability</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p><a href="Expert.html">Expert</a> next available day and time</p>
+
+<p>Returns [Hash]</p>
+          
+          
+
+          
+          <div class="method-source-code" id="next_availability-source">
+            <pre><span class="ruby-comment"># File app/models/users/expert.rb, line 160</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">next_availability</span>
+  <span class="ruby-identifier">first_availability</span> = {}
+  <span class="ruby-identifier">next_7_days_schedule</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">day</span>, <span class="ruby-identifier">_time</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">next_7_days_schedule</span>[<span class="ruby-identifier">day</span>].<span class="ruby-identifier">empty?</span>
+    <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">first_availability</span>.<span class="ruby-identifier">present?</span>
+    <span class="ruby-identifier">first_availability</span>[<span class="ruby-identifier">day</span>] = <span class="ruby-identifier">closest_next_time</span>(
+      <span class="ruby-identifier">next_7_days_schedule</span>[<span class="ruby-identifier">day</span>], <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">strftime</span>(<span class="ruby-string">&#39;%H:%M&#39;</span>)
+    )
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">first_availability</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-profile_summary" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">profile_summary</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>TODO: need to account for appointments</p>
+          
+          
+
+          
+          <div class="method-source-code" id="profile_summary-source">
+            <pre><span class="ruby-comment"># File app/models/users/expert.rb, line 29</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">profile_summary</span>
+  {
+    <span class="ruby-value">industries:</span> <span class="ruby-identifier">industries</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:name</span>),
+    <span class="ruby-value">skills:</span> <span class="ruby-identifier">skills</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:name</span>),
+    <span class="ruby-value">job_functions:</span> <span class="ruby-identifier">job_functions</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:name</span>),
+    <span class="ruby-value">languages:</span> <span class="ruby-identifier">languages</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:name</span>),
+    <span class="ruby-value">seniority_levels:</span> <span class="ruby-identifier">seniority_levels</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:name</span>)
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-this_week_schedule" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">this_week_schedule</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>The shedule of an expert for the current week Monday-Sunday</p>
+
+<p>Returns [Array]</p>
+          
+          
+
+          
+          <div class="method-source-code" id="this_week_schedule-source">
+            <pre><span class="ruby-comment"># File app/models/users/expert.rb, line 193</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">this_week_schedule</span>
+  <span class="ruby-identifier">schedule</span> = {}
+  <span class="ruby-identifier">week_days</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">day</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">schedule</span>[<span class="ruby-identifier">day</span>] = <span class="ruby-identifier">day_schedule</span>(<span class="ruby-value">day:</span> <span class="ruby-identifier">day</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">schedule</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-unavailable_times" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">unavailable_times</span><span
+            class="method-args">(day = day_of_week)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>List of unaivailable times</p>
+
+<p>Params:</p>
+<ul><li>
+<p>day: Day of the week. e.g: “Monday”, “Tuesday”, etc…</p>
+</li></ul>
+
+<p>Returns [Array]</p>
+          
+          
+
+          
+          <div class="method-source-code" id="unavailable_times-source">
+            <pre><span class="ruby-comment"># File app/models/users/expert.rb, line 179</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">unavailable_times</span>(<span class="ruby-identifier">day</span> = <span class="ruby-identifier">day_of_week</span>)
+  <span class="ruby-identifier">schedule</span> = <span class="ruby-identifier">base_times</span>
+  <span class="ruby-identifier">availabilities</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">day_of_week:</span> <span class="ruby-identifier">day</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">availability</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">delete_at</span>(
+      <span class="ruby-identifier">base_times</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">availability</span>.<span class="ruby-identifier">start_time</span>)
+    )
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">schedule</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

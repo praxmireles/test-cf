@@ -1,0 +1,111 @@
+= render partial: 'tab_steps'
+.row
+  .col-sm-10.col-sm-offset-1
+    .panel
+      .panel-header
+        %span.text-md= t('view_experts_onboading.schedule.you_weekly_schedule')
+
+      .panel-body.text-justify
+        %p= t('view_experts_onboading.schedule.in_this_section')
+
+.row
+  .col-sm-10.col-sm-offset-1
+    = form_tag create_availabilities_path, url: url_for(controller: 'availabilities', action: 'create'), method: :post do
+      .panel
+        .panel-header.text-md
+          %span= t('layout.schedule')
+        .panel-content
+          .row{:style => "margin:20px"}
+            .block-content
+              .row.items-push
+                .col-xl-12
+                  .jscalendar.fc.fc-unthemed.fc-ltr
+                    .fc-view-container{:style => ""}
+                      .fc-view.fc-agendaWeek-view.fc-agenda-view{:style => ""}
+                        %table.table.table-bordered
+                          %thead
+                            %tr{:style => "width:100%"}
+                              %th{:style => "width:12.5%"}= t('view_experts_onboarding.summary.hour')
+                              %th{:style => "width:12.5%"}= t('view_experts_onboarding.summary.monday')
+                              %th{:style => "width:12.5%"}= t('view_experts_onboarding.summary.tuesday')
+                              %th{:style => "width:12.5%"}= t('view_experts_onboarding.summary.wednesday')
+                              %th{:style => "width:12.5%"}= t('view_experts_onboarding.summary.thursday')
+                              %th{:style => "width:12.5%"}= t('view_experts_onboarding.summary.friday')
+                              %th{:style => "width:12.5%"}= t('view_experts_onboarding.summary.saturday')
+                              %th{:style => "width:12.5%"}= t('view_experts_onboarding.summary.sunday')
+
+                          %tbody
+                            - Time.zone = current_user.timezone.zone_name
+                            - @availabilities_slots.each do |x|
+                              %tr
+                                %td= "#{x}"
+                                - if current_user.availabilities.find_by(user_id: current_user.id, day_of_week: "monday",start_time: Time.zone.parse("#{Date.today.to_s} #{x}").in_time_zone('UTC'))
+                                  %td.no-week-day
+                                    = check_box_tag("availabilities[monday][#{x}]", "#{x}", true, style: 'display: none;')
+                                - else
+                                  %td.week-day
+                                    = check_box_tag("availabilities[monday][#{x}]", "#{x}", false, style: 'display: none;')
+                                - if current_user.availabilities.find_by(user_id: current_user.id, day_of_week: "tuesday", start_time: Time.zone.parse("#{Date.today.to_s} #{x}").in_time_zone('UTC'))
+                                  %td.no-week-day
+                                    = check_box_tag("availabilities[tuesday][#{x}]", "#{x}", true, style: 'display: none;')
+                                - else
+                                  %td.week-day
+                                    = check_box_tag("availabilities[tuesday][#{x}]", "#{x}", false, style: 'display: none;')
+                                - if current_user.availabilities.find_by(user_id: current_user.id, day_of_week: "wednesday", start_time: Time.zone.parse("#{Date.today.to_s} #{x}").in_time_zone('UTC'))
+                                  %td.no-week-day
+                                    = check_box_tag("availabilities[wednesday][#{x}]", "#{x}", true, style: 'display: none;')
+                                - else
+                                  %td.week-day
+                                    = check_box_tag("availabilities[wednesday][#{x}]", "#{x}", false, style: 'display: none;')
+                                - if current_user.availabilities.find_by(user_id: current_user.id, day_of_week: "thursday", start_time: Time.zone.parse("#{Date.today.to_s} #{x}").in_time_zone('UTC'))
+                                  %td.no-week-day
+                                    = check_box_tag("availabilities[thursday][#{x}]", "#{x}", true, style: 'display: none;')
+                                - else
+                                  %td.week-day
+                                    = check_box_tag("availabilities[thursday][#{x}]", "#{x}", false, style: 'display: none;')
+                                - if current_user.availabilities.find_by(user_id: current_user.id, day_of_week: "friday", start_time: Time.zone.parse("#{Date.today.to_s} #{x}").in_time_zone('UTC'))
+                                  %td.no-week-day
+                                    = check_box_tag("availabilities[friday][#{x}]", "#{x}", true, style: 'display: none;')
+                                - else
+                                  %td.week-day
+                                    = check_box_tag("availabilities[friday][#{x}]", "#{x}", false, style: 'display: none;')
+                                - if current_user.availabilities.find_by(user_id: current_user.id, day_of_week: "saturday", start_time: Time.zone.parse("#{Date.today.to_s} #{x}").in_time_zone('UTC'))
+                                  %td.no-week-day
+                                    = check_box_tag("availabilities[saturday][#{x}]", "#{x}", true, style: 'display: none;')
+                                - else
+                                  %td.week-day
+                                    = check_box_tag("availabilities[saturday][#{x}]", "#{x}", false, style: 'display: none;')
+                                - if current_user.availabilities.find_by(user_id: current_user.id, day_of_week: "sunday", start_time: Time.zone.parse("#{Date.today.to_s} #{x}").in_time_zone('UTC'))
+                                  %td.no-week-day
+                                    = check_box_tag("availabilities[sunday][#{x}]", "#{x}", true, style: 'display: none;')
+                                - else
+                                  %td.week-day
+                                    = check_box_tag("availabilities[sunday][#{x}]", "#{x}", false, style: 'display: none;')
+
+        .panel-footer{style: "text-align:center"}
+          .row
+            .col-md-4{:style=> "margin-top:3%"}
+
+              %a.btn.btn-lighter-1.btn-wide{:style => "margin-left:20%", href: "/experts/onboarding/about" }= t('buttons.back')
+
+            .col-md-4.col-md-offset-4{:style=> "margin-top:3%"}
+              = submit_tag t('buttons.save'), { class: "btn btn-primary btn-wide" }
+
+:javascript
+  $(document).ready(function () {
+    $(".week-day, .no-week-day").on("click", function () {
+      if ($(this).attr('class') === 'week-day') {
+        $(this).removeClass("week-day");
+        $(this).addClass("no-week-day");
+        var checkBoxSelector = $(this).find('input');
+        checkBoxSelector.attr('checked', true);
+        this.style.backgroundColor = "#c3deb7";
+      } else {
+        $(this).removeClass("no-week-day");
+        $(this).addClass("week-day");
+        var checkBoxSelector = $(this ).find('input');
+        checkBoxSelector.attr('checked', false);
+        this.style.backgroundColor = "#ffffff";
+      }
+    });
+  });

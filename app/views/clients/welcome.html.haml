@@ -1,0 +1,78 @@
+%br
+%br
+%br
+.row
+  .col-sm-6.col-sm-offset-3
+    .panel
+      .panel-header.panel-primary.text-center
+        %h3{:style => "color:white"}= "#{t('view_clients.settings.welcome.hello')} #{@user.fullname}!"
+      .panel-body
+        %h5.p.text-justifayed
+          = form_for @user, url: url_for(controller: 'clients', action: 'update'), method: :put, html: {class: "nifty_form"} do |f|
+            %p
+              = t('view_clients.welcome.welcome_message')
+            %br
+
+            -# TODO verificación con los métodos del usuario el timezone
+            -# para no pedirle en el inicio del cliente ya que si se dejan los
+            -# metodos agrega al experto y al cliente que el timezone
+            -# es de Los Angeles
+            
+            -# .text-center.small
+            = f.collection_select :timezone_id, Timezone.all.name_asc, :id, :name
+
+            .col-sm-4
+              &nbsp;
+            -# .row{:style => "display:notne;"}
+            -#   .col-sm-4
+            -#     = f.text_field :timezone_utc_difference, required: true, maxlength: 10
+            -#   .col-sm-4
+            -#     = f.text_field :timezone_continent, required: true, maxlength: 10
+            -#   .col-sm-4
+            -#     = f.text_field :timezone_name, required: true, maxlength: 10
+
+            %br
+            %p
+            = t('view_clients.settings.welcome.thank_you')
+
+            %hr
+            .row
+              .col-sm-2.col-sm-offset-8
+                = f.submit t("buttons.continue"), class: 'btn btn-primary'
+
+
+:javascript
+    function initAutocomplete() {
+      // Create the autocomplete object, restricting the search to geographical
+      // location types.
+      autocomplete = new google.maps.places.Autocomplete(
+          /** @type {!HTMLInputElement} */(document.getElementById('location')),
+          {types: ['geocode']});
+
+      // When the user selects an address from the dropdown, populate the address
+      // fields in the form.
+      autocomplete.addListener('place_changed', fillInAddress);
+    }
+    //TODO: FACTORIZAR
+    function fillInAddress() {
+      // Get the place details from the autocomplete object.
+      var place = autocomplete.getPlace();
+      var API_KEY  = "AIzaSyDlsC6-WlUgmRgSOFj6H_wCZ8O2ODB_QTY"
+      var lat  = place.geometry.location.lat()
+      var lng = place.geometry.location.lng()
+      var url = "https://maps.googleapis.com/maps/api/timezone/json?location=" + lat + ","+ lng + "&timestamp=1331161200&key=" + API_KEY
+      $.ajax({
+        url: url,
+        success: function(response){
+          var utc_difference = (response.rawOffset / 60) /60
+          var continent = response.timeZoneId.split("/")[0].replace("_"," ")
+          var name = response.timeZoneId.split("/")[1].replace("_"," " )
+
+          document.getElementById('client_timezone_utc_difference').value= utc_difference
+          document.getElementById('client_timezone_continent').value= continent
+          document.getElementById('client_timezone_name').value= name
+        },
+      });
+    }
+
+%script{:src => "https://maps.googleapis.com/maps/api/js?key=AIzaSyAJZh005PH0sabRv0JhsH51pIWOqZ9NaV0&libraries=places&language=en&callback=initAutocomplete"}

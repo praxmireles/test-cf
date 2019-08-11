@@ -1,0 +1,68 @@
+!!!
+%html.fixed{:lang => "en"}
+  %head
+    %meta{:charset => "UTF-8"}/
+    %meta{:content => "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no", :name => "viewport"}/
+    %title
+      - if params[:controller] == 'experts'
+        Expert
+      - elsif params[:controller] == 'clients'
+        Client
+    %link{:href => "favicon/apple-icon-120x120.png", :rel => "apple-touch-icon", :sizes => "120x120"}/
+    %link{:href => "favicon/android-icon-192x192.png", :rel => "icon", :sizes => "192x192", :type => "image/png"}/
+    %link{:href => "favicon/favicon-32x32.png", :rel => "icon", :sizes => "32x32", :type => "image/png"}/
+    %link{:href => "favicon/favicon-16x16.png", :rel => "icon", :sizes => "16x16", :type => "image/png"}/
+    / load progress bar
+
+    = javascript_include_tag 'jsCalendar.js'
+    = stylesheet_link_tag 'jsCalendar.css'
+
+    / BASIC css
+    / =========================================================
+    = stylesheet_link_tag "css_dashboard/bootstrap.css"
+    = stylesheet_link_tag "fonts/font-awesome.css"
+    = stylesheet_link_tag "css_dashboard/animate.css"
+    = stylesheet_link_tag "css_dashboard/prettify.css", :media => "screen"
+    / SECTION css
+    / =========================================================
+    / Notification msj
+    = stylesheet_link_tag "css_dashboard/toastr.min.css"
+    / Magnific popup
+    = stylesheet_link_tag "css_dashboard/magnific-popup.css"
+    / TEMPLATE css
+    / =========================================================
+    = stylesheet_link_tag "css_dashboard/style.css"
+    -# = stylesheet_link_tag "css_dashboard/calendar.css"
+    = stylesheet_link_tag "custom.css"
+  %body
+
+    %div.notifications.top-left
+    = yield
+  / BASIC scripts
+
+  / =========================================================
+  = javascript_include_tag "jquery/jquery-1.12.3.min.js"
+  = javascript_include_tag "bootstrap/js/bootstrap.min.js"
+  = javascript_include_tag 'bootstrap-notify.js'
+  = javascript_include_tag "nano-scroller/nano-scroller.js"
+  = javascript_include_tag "google-code-prettify/prettify.js"
+  / TEMPLATE scripts
+  / =========================================================
+  = javascript_include_tag "template-script.min.js"
+  = javascript_include_tag "template-init.min.js"
+  / SECTION script and examples
+  / =========================================================
+  / Notification msj
+  = javascript_include_tag "toastr/toastr.min.js"
+  / morris chart
+  = javascript_include_tag "chart-js/chart.min.js"
+  / Gallery with Magnific popup
+  = javascript_include_tag "magnific-popup/jquery.magnific-popup.min.js"
+  = javascript_include_tag "jquery_ujs"
+/ CUSTOM scripts
+/ =========================================================
+= javascript_include_tag "underscore.js"
+= javascript_include_tag "moments.js"
+-# = javascript_include_tag "calendar.min.js"
+= javascript_include_tag "peity.min.js"
+= javascript_include_tag "custom/custom.js"

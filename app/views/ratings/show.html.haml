@@ -1,0 +1,114 @@
+.modal-dialog.modal-lg
+  / Modal content
+  .modal-content
+    .modal-header
+      %button.close{"data-dismiss" => "modal", :type => "button"} ×
+      %h4.modal-title
+        = t('view_rating.show.rank')
+    .modal-body.container-fluid
+      .row
+        .col-sm-5
+          %div
+            .userHeader.mb-3
+              .col-sm-5.expertImage.pl-0
+                - if  @user.avatar.present?
+                  %img.img-responsive= image_tag  @user.avatar.url
+              .col-sm-7.px-0
+                %h3.userName.my-1= @user.fullname if signed_in?
+                .editProfile{:action => ""}
+                  %input{:disabled => "disable", :type => "text", :value => "#{@user.type}"}/
+        .col-sm-5
+        - if @user.type == "Expert"
+          .usermodalInfo.mb-4
+            %h4
+              %strong Email:
+              = "#{ @user.email}"
+            - if  @user.location.present?
+              %h4
+                %strong Location:
+                = "#{ @user.location}"
+            - if  @user.timezone.present?
+              %h4
+                %strong Timezone:
+                = "#{ @user.timezone.name}"
+            - if  @user.job.present?
+              %h4
+                %strong Position:
+                = "#{ @user.job}"
+            - if  @user.work_histories.present?
+              %h4
+                %strong Company:
+                =  @user.work_histories.first.company
+            - if  @user.linkedin_url.present?
+              %h4
+                = link_to "Linkedin",  @user.linkedin_url
+
+
+    .row
+      #tanks.col-sm-12{style:"font-size:24px;display:none;text-align:center"}
+        %hr
+        = t('view_rating.show.thank_you_for_your_evaluation')
+        %br
+        %br
+        .col-sm-4.col-sm-offset-4
+
+          - if current_user.type == "Client"
+            = link_to t('view_rating.show.return_to_profile'), client_dashboard_path, class: 'btn btn-info'
+          - else
+            = link_to t('view_rating.show.return_to_profile'), expert_dashboard_path, class: 'btn btn-info'
+    .row
+      %hr
+      .col-sm-3
+        &nbsp;
+      .col-sm-6
+
+        %div{style:"display:inline", onclick:"setRank(1)"}
+          %i.far.fa-star{style:"font-size:50px", data:{star:1}}
+        %div{style:"display:inline", onclick:"setRank(2)"}
+          %i.far.fa-star{style:"font-size:50px", data:{star:2}}
+        %div{style:"display:inline", onclick:"setRank(3)"}
+          %i.far.fa-star{style:"font-size:50px", data:{star:3}}
+        %div{style:"display:inline", onclick:"setRank(4)"}
+          %i.far.fa-star{style:"font-size:50px", data:{star:4},}
+        %div{style:"display:inline", onclick:"setRank(5)"}
+          %i.far.fa-star{style:"font-size:50px", data:{star:5}}
+      .col-sm-3
+        #button.btn.btn-primary{type:"button",style:"font-size:25px", onclick:"saveRank()"}
+          = t('buttons.save')
+    .row
+      %hr
+:javascript
+  let rate = 0
+  function setRank(rank){
+    rate = rank
+    for (var i = 1;i <=5 ; i++){
+      $("i[data-star='" + i + "']").removeClass("fas red").addClass("far")
+    }
+    for (var i = 1;i <= rank ; i++){
+      $("i[data-star='" + i + "']").removeClass("far").addClass("fas red")
+    }
+
+  }
+  function saveRank(){
+    console.log(rate)
+    if(rate ==0){
+      alert("Select at least one Star")
+      return
+    }
+    $.ajax({
+      method: "GET",
+      url: "/ratings/rate/save?user_id=#{@user.id}&rate=" + rate ,
+      success: function(response){
+        console.log(response)
+        if(response.success){
+          $(".btn.btn-primary").hide()
+          $("#tanks").show()
+
+        }
+      },
+      error: function(){
+        console.log(error )
+        //alert( "error" );
+      }
+    });
+  }

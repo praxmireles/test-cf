@@ -1,0 +1,60 @@
+%br
+%br
+%br
+
+.row
+  .col-sm-10.col-sm-offset-1
+    .panel
+      .panel-header
+        %span.text-md= t('layout.general_information')
+      .panel-content.text-md{:style => "text-align:justify"}
+        .row{:style => "margin:20px"}
+          .col-md-12
+            .row.justify-content-center{:style => "margin:0px;"}
+              .col-xl-12
+                = form_for @user, url: url_for(controller: 'clients', action: 'update' ),remote: true, method: :put, html: {class: "nifty_form"} do |f|
+                  = hidden_field_tag :authenticity_token, form_authenticity_token
+                  .row
+                    .col-sm-4
+                      %label{:for => "first_name"}= t('general_information.first_name')
+                      .input-group.mb-sm
+                        %span.input-group-addon.x-primary
+                          %i.fa.fa-user
+                        .small
+                          = f.text_field :first_name, required: true, maxlength: 33
+
+                    .col-sm-4
+                      %label{:for => "last_name"}= t('general_information.last_name')
+                      .input-group.mb-sm
+                        %span.input-group-addon.x-primary
+                          %i.fa.fa-user
+                        .small
+                          = f.text_field :last_name, required: true, maxlength: 33
+
+                    .col-sm-4
+                      %label{:for => "email"}= t('general_information.email')
+                      .input-group.mb-sm
+                        %span.input-group-addon.x-primary
+                          %i.fa.fa-at
+                        .small
+                          = f.text_field :email, required: true, maxlength: 33
+
+                  .row
+                    .col-sm-8
+                      %label{:for => "location"}= t('general_information.location')
+                      .input-group.mb-sm
+                        %span.input-group-addon.x-primary
+                          %i.fa.fa-map-marker
+                        = f.text_field :location, id: "location", maxlength: 40, required: true
+
+                  -# .row{:style => "display:none;"}
+                  -#   .col-sm-4
+                  -#     = f.text_field :timezone_utc_difference, required: true, maxlength: 10
+                  -#   .col-sm-4
+                  -#     = f.text_field :timezone_continent, required: true, maxlength: 10
+                  -#   .col-sm-4
+                  -#     = f.text_field :timezone_name, required: true, maxlength: 10
+                  %hr
+                  .row
+                    .col-sm-3.col-sm-offset-8
+                      = f.submit t('buttons.update'), class: "btn btn-primary btn-wide", data: { disable_with: t('view_clients.settings.general_information.please_wait')   }

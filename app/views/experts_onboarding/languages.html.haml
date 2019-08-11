@@ -1,0 +1,104 @@
+= render partial: 'tab_steps'
+.row
+  .col-sm-10.col-sm-offset-1
+    .panel
+      .panel-header
+        %span.text-md
+          = t('view_experts_onboarding.languages.language')
+      .panel-body.text-justify
+        %p 
+          = t('view_experts_onboarding.languages.we_recommend_you')
+.row
+  .col-sm-10.col-sm-offset-1
+    = form_tag create_profile_languages_path, url: url_for(controller: 'profile_languages', action: 'create'), method: :post do |f|
+      .panel
+        .panel-header.text-md
+          %span= t('view_experts_onboarding.languages.languages')
+        .panel-body
+          .col-xs-12
+            %h3
+              = t('view_experts_onboarding.languages.select_your_languages')
+            %br
+          .block-content
+            .row
+              .col-md-12
+                - Language.all.each_with_index do |language, index|
+                  - if index < 9
+                    .col-xl-2.col-md-2{style: " white-space: nowrap;  overflow:hidden"}
+                      .form-group
+                        .checkbox-custom.checkbox-inline.checkbox-primary
+                        = check_box_tag "languages[]", language.id, profile_language_exists?(language.id), data: {index: index}
+                        = language.name
+                  - if index == 9
+                    .clearfix
+                    .col-md-12{:style => "text-align:center"}
+                      %button.btn.btn-wide.btn-primary.show-language-button 
+                        = t('view_experts_onboarding.languages.show_more')
+                      %button.btn.btn-wide.btn-primary.show-less-language-button{:style => "display:none"}
+                        = t('view_experts_onboarding.languages.show_less')
+                  - elsif index > 9
+                    .col-xl-2.col-md-2.hidden-language{style: " white-space: nowrap; display:none;  overflow:hidden"}
+                      .form-group
+                        .checkbox-custom.checkbox-inline.checkbox-primary
+                        = check_box_tag "languages[]", language.id, profile_language_exists?(language.id), data: {index: index}
+                        = language.name
+
+        %hr
+        .panel-footer
+          .row
+            .col-sm-4
+              %a.btn.btn-lighter-1.btn-wide{:style => "margin-left:20%", href: "/experts/onboarding/services" }= t('buttons.back')
+            .col-sm-4.col-sm-offset-4
+              = submit_tag t('buttons.next'), { class: "btn btn-primary btn-wide" }
+
+
+
+
+
+
+            -# - if index < 7
+            -#   .col-md-2
+
+          -# - Language.all.each_with_index do |language, index|
+          -#   - if index < 7
+          -#     .col-md-2{style: " white-space: nowrap;  overflow:hidden"}
+          -#       .form-group
+          -#         .checkbox-custom.checkbox-inline.checkbox-primary
+          -#           = check_box_tag language.name, language.id, false, class: 'css-control-input check-language', id: language.id
+          -#           = label_tag :accepted, language.name, for: language.id, :class => "check"
+          -#     - if index == 6
+          -#       .clearfix
+          -#       .col-xs-12{:style => "text-align:center"}
+          -#         %button.btn.btn-wide.btn-primary.show-lenguage-button Show More
+          -#         %button.btn.btn-wide.btn-primary.show-less-lenguage-button{:style => "display:none"} Show Less
+          -#
+          -#   - elsif index == 7
+          -#     .clearfix
+          -#     %hr
+          -#     .col-xl-2.col-md-2.hidden-lenguage{style: " white-space: nowrap; display:none;  overflow:hidden"}
+          -#       .form-group
+          -#         .checkbox-custom.checkbox-inline.checkbox-primary
+          -#           = check_box_tag language.name, language.id, false, class: 'css-control-input check-llanguage ', id: language.id
+          -#           = label_tag :accepted, language.name, for: language.id, :class => "check"
+          -#   - else
+          -#     .col-xl-2.col-md-2.hidden-lenguage{style: " white-space: nowrap; display:none;  overflow:hidden"}
+          -#       .form-group
+          -#         .checkbox-custom.checkbox-inline.checkbox-primary
+          -#           = check_box_tag language.name, language.id, false, class: 'css-control-input check-llanguage ', id: language.id
+          -#           = label_tag :accepted, language.name, for: language.id, :class => "check"
+
+
+:javascript
+  $(".show-language-button").click(function(e){
+    e.preventDefault();
+    $(".hidden-language").show();
+    $(".show-less-language-button").show();
+    $(".show-language-button").hide();
+  })
+
+  $(".show-less-language-button").click(function(e){
+    e.preventDefault();
+    $(".hidden-language").hide();
+    $(".show-less-language-button").hide();
+    $(".show-language-button").show();
+  })

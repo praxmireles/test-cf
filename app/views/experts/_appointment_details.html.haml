@@ -1,0 +1,86 @@
+.modal-dialog.modal-lg
+  / Modal content
+  .modal-content
+    .modal-header
+      %button.close{"data-dismiss" => "modal", :type => "button"} ×
+      .chartContainer.col-sm-3.pl-4
+        %p.data-attributes
+          %span{"data-peity" => "{ \"fill\": [\"#85b93e\", \"#efefef\"], \"innerRadius\": 18, \"radius\": 30 }"} 1/2
+        %p.ammount 50%
+      .chartHeader.col-sm-9
+        %h4.my-1 Appointment Information
+        %p.my-1
+          Last update:
+          %span.greenText 3 days ago
+    .modal-body.container-fluid
+      .col-sm-12
+        / Projet Info
+        .panel.b-primary.bt-sm
+          .panel-content
+            %ul.user-contact-info.ph-sm
+              %li
+                %h4
+                  %i.color-primary.mr-md.fa.fa-user>
+                  = appointment.subject
+            / Company and contact person
+            .row
+              .col-sm-12.col-md-6.grayBackground
+                %h5.blueHeader Mentoring with Porpuse
+                %p.projectinfoCompany= appointment.service.type.titleize
+              .col-sm-12.col-md-6.grayBackground
+                %h5.greenText Contact Person
+                %p.blackText= appointment.client.fullname
+            / Created and status
+            .row
+              .col-sm-12.col-md-4
+                %h5.blueHeader Created
+                %p.projectinfoCompany= appointment.created_at.strftime('%D')
+              .col-sm-12.col-md-4
+                %h5.blueHeader Status of Sessions
+                .projectinfoCompany
+                  %ul.sessionsContainer
+                    - if appointment.close?
+                      Close
+                    - elsif appointment.cancelled?
+                      Cancelled
+                    - else
+                      Open
+                    -# %li= "#{appointment_pack.past_appointments.count} / #{appointment_pack.appointments.count}"
+              .col-sm-12.col-md-4
+                %h5.blueHeader Duration:
+                = "#{appointment.duration_in_min} min."
+
+            -# .row
+            -#   / Actions container
+            -#   .col-sm-12.col-sm-offset-5
+            -#     %h5.blueHeader.text-center Actions
+            -#     .actionsContainer
+            -#       %ul.sessionsContainer.actions.p-0
+            -#         %li.actionsBackground
+            -#           %a.sessionAnchor{:href => "sessions.html"}
+            -#             %i.fa.fa-plus{"aria-hidden" => "true"}
+            -#         %li.actionsBackground
+            -#           %a.sessionAnchor{:href => "sessions.html"}
+            -#             %i.fa.fa-pencil{"aria-hidden" => "true"}
+            -#         %li.actionsBackground
+            -#           %a.sessionAnchor{:href => "sessions.html"}
+            -#             %i.fa.fa-trash{"aria-hidden" => "true"}
+            / Service Description
+            .row
+              .col-sm-12
+                .descriptionContainer.grayBackground.py-2.px-2
+                  %h4{:style => "font-weight: bold;"} Description:
+                  %p.blackText= appointment.search_history.description
+              -#   .descriptionContainer.grayBackground.py-2.px-2
+              -#     %h4{:style => "font-weight: bold;"} Notes for the expert:
+              -#     %p.blackText Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat voluptatum et nobis voluptatem harum ipsa est quis, praesentium, eveniet illum, at nulla. Necessitatibus fugiat quisquam natus, perspiciatis aperiam quidem nobis.
+              -# .col-sm-12.col-md-6
+              -#   .descriptionContainer.grayBackground.py-2.px-2
+              -#     %h4{:style => "font-weight: bold;"} Notes visible for the Expert and Client:
+              -#     %p.blackText Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis asperiores, nesciunt cum laudantium voluptatum ullam.
+              -#   .descriptionContainer.grayBackground.py-2.px-2
+              -#     %h4{:style => "font-weight: bold;"} Shared documents:
+              -#     .sharedDocuments
+              -#   .descriptionContainer.grayBackground.py-2.px-2
+              -#     %h4{:style => "font-weight: bold;"} Agreements:
+              -#     %p.blackText Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis asperiores, nesciunt cum laudantium voluptatum ullam.

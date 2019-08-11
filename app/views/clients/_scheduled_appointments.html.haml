@@ -1,0 +1,31 @@
+%h5{style: 'color: black;'}
+  = t('view_clients.scheduled_appointments.scheduled')
+- if @scheduled_appointments.any?
+  - @scheduled_appointments.each do |date|
+    %p= date.first
+    - date.second.each do |appointment|
+      = link_to(modal_path(appointment.id), remote: true, data: {target: "#appointmentUser", toggle: "modal"}) do
+        .card
+          .col-sm-7
+            =render partial: 'appointment', locals: {appointment: appointment}
+          .col-sm-5.cardDate
+            = link_to t('view_clients.scheduled_appointments.cancel'), destroy_appointment_path(appointment.id), method: :delete, class: 'btn btn-lighter-1'
+            %p.date= date_to_time(set_in_timezone(appointment.start_date, current_user.id))
+        -# - appointment_suggests = appointment.appointment_suggests("Expert")
+        -# - if appointment_suggests.length > 0
+        -#   .card
+        -#     %row
+        -#       .col-sm-12.cardDate
+        -#         .request{style:"text-align:left;width:100%;font-size:16pt;margin-bottom:20px"}
+        -#           #{appointment_suggests[0].user.fullname } request to change the appointment for #{appointment_suggests[0].start_date.strftime('%d/%m/%Y %H:%M') }
+        -#       .col-sm-6.cardDate
+        -#         %button.btn.btn-dashboard{style:"color:#000",type:"button",onclick:"showCalendarChangeFlow('#{ current_user.id }', '#{ appointment.expert.id }', '#{ appointment.id }')" }
+        -#           Suggest Different Time
+        -#       .col-sm-6.cardDate
+        -#         %button.btn.btn-dashboard{style:"color:#000",type:"button",onclick:"aceptChange('#{ appointment_suggests[0].id }')" }
+        -#           Accept Change
+
+- else
+  .alert.alert-warning{style: "opacity: 0.8"}
+    %p
+      = t('view_clients.scheduled_appointments.no_scheduled_appointments')

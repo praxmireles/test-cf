@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module OmniauthStub - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+  var index_rel_prefix = "./";
+</script>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/darkfish.js"></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-c-facebook_response">::facebook_response</a>
+    
+    <li ><a href="#method-c-linkedin_response">::linkedin_response</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-OmniauthStub">
+  <h1 id="module-OmniauthStub" class="module">
+    module OmniauthStub
+  </h1>
+
+  <section class="description">
+    
+<p>Stub Response of an Ommniauth Authorization</p>
+
+  </section>
+
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-facebook_response" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">facebook_response</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="facebook_response-source">
+            <pre><span class="ruby-comment"># File lib/omniauth_stub.rb, line 4</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">facebook_response</span>
+  {
+    <span class="ruby-value">provider:</span> <span class="ruby-string">&#39;facebook&#39;</span>,
+    <span class="ruby-value">uid:</span> <span class="ruby-string">&#39;1234567&#39;</span>,
+    <span class="ruby-value">info:</span> {
+      <span class="ruby-value">email:</span> <span class="ruby-string">&#39;joe@bloggs.com&#39;</span>,
+      <span class="ruby-value">name:</span> <span class="ruby-string">&#39;Joe Bloggs&#39;</span>,
+      <span class="ruby-value">first_name:</span> <span class="ruby-string">&#39;Joe&#39;</span>,
+      <span class="ruby-value">last_name:</span> <span class="ruby-string">&#39;Bloggs&#39;</span>,
+      <span class="ruby-value">image:</span> <span class="ruby-string">&#39;http://graph.facebook.com/1234567/picture?type=square&#39;</span>,
+      <span class="ruby-value">verified:</span> <span class="ruby-keyword">true</span>
+    },
+    <span class="ruby-value">credentials:</span> {
+      <span class="ruby-value">token:</span> <span class="ruby-string">&#39;ABCDEF...&#39;</span>, <span class="ruby-comment"># OAuth 2.0 access_token, which you may wish to store</span>
+      <span class="ruby-value">expires_at:</span> <span class="ruby-value">1_321_747_205</span>, <span class="ruby-comment"># when the access token expires (it always will)</span>
+      <span class="ruby-value">expires:</span> <span class="ruby-keyword">true</span> <span class="ruby-comment"># this will always be true</span>
+    },
+    <span class="ruby-value">extra:</span> {
+      <span class="ruby-value">raw_info:</span> {
+        <span class="ruby-value">id:</span> <span class="ruby-string">&#39;1234567&#39;</span>,
+        <span class="ruby-value">name:</span> <span class="ruby-string">&#39;Joe Bloggs&#39;</span>,
+        <span class="ruby-value">first_name:</span> <span class="ruby-string">&#39;Joe&#39;</span>,
+        <span class="ruby-value">last_name:</span> <span class="ruby-string">&#39;Bloggs&#39;</span>,
+        <span class="ruby-value">link:</span> <span class="ruby-string">&#39;http://www.facebook.com/jbloggs&#39;</span>,
+        <span class="ruby-value">username:</span> <span class="ruby-string">&#39;jbloggs&#39;</span>,
+        <span class="ruby-value">location:</span> { <span class="ruby-value">id:</span> <span class="ruby-string">&#39;123456789&#39;</span>, <span class="ruby-value">name:</span> <span class="ruby-string">&#39;Palo Alto, California&#39;</span> },
+        <span class="ruby-value">gender:</span> <span class="ruby-string">&#39;male&#39;</span>,
+        <span class="ruby-value">email:</span> <span class="ruby-string">&#39;joe@bloggs.com&#39;</span>,
+        <span class="ruby-value">timezone:</span> <span class="ruby-value">-8</span>,
+        <span class="ruby-value">locale:</span> <span class="ruby-string">&#39;en_US&#39;</span>,
+        <span class="ruby-value">verified:</span> <span class="ruby-keyword">true</span>,
+        <span class="ruby-value">updated_time:</span> <span class="ruby-string">&#39;2011-11-11T06:21:03+0000&#39;</span>,
+        <span class="ruby-comment"># ...</span>
+      }
+    }
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-linkedin_response" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">linkedin_response</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="linkedin_response-source">
+            <pre><span class="ruby-comment"># File lib/omniauth_stub.rb, line 42</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">linkedin_response</span>
+  {
+    <span class="ruby-string">&quot;provider&quot;</span><span class="ruby-operator">=&gt;</span><span class="ruby-string">&quot;linkedin&quot;</span>,
+    <span class="ruby-string">&quot;uid&quot;</span><span class="ruby-operator">=&gt;</span><span class="ruby-string">&quot;AbC123&quot;</span>,
+    <span class="ruby-string">&quot;info&quot;</span><span class="ruby-operator">=&gt;</span> {
+      <span class="ruby-string">&quot;name&quot;</span><span class="ruby-operator">=&gt;</span><span class="ruby-string">&quot;John Doe&quot;</span>,
+      <span class="ruby-string">&quot;email&quot;</span><span class="ruby-operator">=&gt;</span><span class="ruby-string">&quot;john@doe.com&quot;</span>,
+      <span class="ruby-string">&quot;nickname&quot;</span><span class="ruby-operator">=&gt;</span><span class="ruby-string">&quot;John Doe&quot;</span>,
+      <span class="ruby-string">&quot;first_name&quot;</span><span class="ruby-operator">=&gt;</span><span class="ruby-string">&quot;John&quot;</span>,
+      <span class="ruby-string">&quot;last_name&quot;</span><span class="ruby-operator">=&gt;</span><span class="ruby-string">&quot;Doe&quot;</span>,
+      <span class="ruby-string">&quot;location&quot;</span><span class="ruby-operator">=&gt;</span><span class="ruby-string">&quot;Greater Boston Area, US&quot;</span>,
+      <span class="ruby-string">&quot;description&quot;</span><span class="ruby-operator">=&gt;</span><span class="ruby-string">&quot;Senior Developer, Hammertech&quot;</span>,
+      <span class="ruby-string">&quot;image&quot;</span><span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;http://m.c.lnkd.licdn.com/mpr/mprx/0_aBcD...&quot;</span>,
+      <span class="ruby-string">&quot;phone&quot;</span><span class="ruby-operator">=&gt;</span><span class="ruby-string">&quot;null&quot;</span>,
+      <span class="ruby-string">&quot;headline&quot;</span><span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;Senior Developer, Hammertech&quot;</span>,
+      <span class="ruby-string">&quot;industry&quot;</span><span class="ruby-operator">=&gt;</span><span class="ruby-string">&quot;Internet&quot;</span>,
+      <span class="ruby-string">&quot;urls&quot;</span><span class="ruby-operator">=&gt;</span>{
+        <span class="ruby-string">&quot;public_profile&quot;</span><span class="ruby-operator">=&gt;</span><span class="ruby-string">&quot;http://www.linkedin.com/in/johndoe&quot;</span>
+      }
+    },
+    <span class="ruby-string">&quot;credentials&quot;</span><span class="ruby-operator">=&gt;</span> {
+      <span class="ruby-string">&quot;token&quot;</span><span class="ruby-operator">=&gt;</span><span class="ruby-string">&quot;12312...&quot;</span>,
+      <span class="ruby-string">&quot;secret&quot;</span><span class="ruby-operator">=&gt;</span><span class="ruby-string">&quot;aBc...&quot;</span>
+    },
+    <span class="ruby-string">&quot;extra&quot;</span><span class="ruby-operator">=&gt;</span>
+    {
+      <span class="ruby-string">&quot;access_token&quot;</span><span class="ruby-operator">=&gt;</span> {
+        <span class="ruby-string">&quot;token&quot;</span><span class="ruby-operator">=&gt;</span><span class="ruby-string">&quot;12312...&quot;</span>,
+        <span class="ruby-string">&quot;secret&quot;</span><span class="ruby-operator">=&gt;</span><span class="ruby-string">&quot;aBc...&quot;</span>,
+        <span class="ruby-string">&quot;consumer&quot;</span><span class="ruby-operator">=&gt;</span><span class="ruby-keyword">nil</span>, <span class="ruby-comment"># &lt;OAuth::Consumer&gt;</span>
+        <span class="ruby-string">&quot;params&quot;</span><span class="ruby-operator">=&gt;</span> {
+          <span class="ruby-value">:oauth_token</span><span class="ruby-operator">=&gt;</span><span class="ruby-string">&quot;12312...&quot;</span>,
+          <span class="ruby-value">:oauth_token_secret</span><span class="ruby-operator">=&gt;</span><span class="ruby-string">&quot;aBc...&quot;</span>,
+          <span class="ruby-value">:oauth_expires_in</span><span class="ruby-operator">=&gt;</span><span class="ruby-string">&quot;5183999&quot;</span>,
+          <span class="ruby-value">:oauth_authorization_expires_in</span><span class="ruby-operator">=&gt;</span><span class="ruby-string">&quot;5183999&quot;</span>,
+        },
+        <span class="ruby-string">&quot;response&quot;</span><span class="ruby-operator">=&gt;</span><span class="ruby-keyword">nil</span> <span class="ruby-comment"># &lt;Net::HTTPResponse&gt;</span>
+      },
+      <span class="ruby-string">&quot;raw_info&quot;</span><span class="ruby-operator">=&gt;</span> {
+        <span class="ruby-string">&quot;firstName&quot;</span><span class="ruby-operator">=&gt;</span><span class="ruby-string">&quot;Joe&quot;</span>,
+        <span class="ruby-string">&quot;headline&quot;</span><span class="ruby-operator">=&gt;</span><span class="ruby-string">&quot;Senior Developer, Hammertech&quot;</span>,
+        <span class="ruby-string">&quot;id&quot;</span><span class="ruby-operator">=&gt;</span><span class="ruby-string">&quot;AbC123&quot;</span>,
+        <span class="ruby-string">&quot;industry&quot;</span><span class="ruby-operator">=&gt;</span><span class="ruby-string">&quot;Internet&quot;</span>,
+        <span class="ruby-string">&quot;lastName&quot;</span><span class="ruby-operator">=&gt;</span><span class="ruby-string">&quot;Doe&quot;</span>,
+        <span class="ruby-string">&quot;location&quot;</span><span class="ruby-operator">=&gt;</span> { <span class="ruby-string">&quot;country&quot;</span><span class="ruby-operator">=&gt;</span>{ <span class="ruby-string">&quot;code&quot;</span><span class="ruby-operator">=&gt;</span><span class="ruby-string">&quot;us&quot;</span> }, <span class="ruby-string">&quot;name&quot;</span><span class="ruby-operator">=&gt;</span><span class="ruby-string">&quot;Greater Boston Area&quot;</span> },
+        <span class="ruby-string">&quot;pictureUrl&quot;</span><span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;http://m.c.lnkd.licdn.com/mpr/mprx/0_aBcD...&quot;</span>,
+        <span class="ruby-string">&quot;publicProfileUrl&quot;</span><span class="ruby-operator">=&gt;</span><span class="ruby-string">&quot;http://www.linkedin.com/in/johndoe&quot;</span>
+      }
+    }
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

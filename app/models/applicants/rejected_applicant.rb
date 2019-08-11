@@ -1,0 +1,2 @@
+class RejectedApplicant < Applicant
+end

@@ -1,0 +1,24 @@
+:verbose: true
+#:schedule:
+#  schedule_preparer_worker:
+#    # cron: '0 0 * * * *'   # Runs every hours
+#    # every: '1h'
+#    every: '5m'
+#    class: SchedulePreparerWorker
+#    description: This jobs update all the scheduled appointments to In Progress
+#  auto_canceller_worker:
+#    every: '5m'
+#    class: 'AutoCancellerWorker'
+#    description: Delete any appointments request that was created 2 days ago
+#  check_pending_requests_worker:
+#    every: '1h'
+#    class: 'CheckPendingRequestsWorker'
+#    description: 'Email FirstAvailable experts when a request is left unsnaswered after a number of hours'
+#  unfinished_enrollment_worker:
+#    every: '1h'
+#    class: 'UnfinishedEnrollmentWorker'
+#    description: 'Verify that notification are sent If the expert leaves enrollement'
+:concurrency: 1
+:queues:
+  - [default, 5]
+  - [appointments, 7]
