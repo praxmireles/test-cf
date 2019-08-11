@@ -11,11 +11,11 @@ phases:
     commands:
       - echo Preparing database to run tests...
       #- cp config/database.yml.example config/database.yml
-      - RAILS_ENV=test bundle exec rake db:setup
+      #- RAILS_ENV=test bundle exec rake db:setup
       - RAILS_ENV=test bundle exec rake db:migrate
   build:
     commands:
       - echo Running rubocop check...
-      - rubocop
+      - rubocop --require rubocop-rspec
       - echo Running rspec tests...
       - bundle exec rspec spec/

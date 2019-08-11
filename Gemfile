@@ -29,6 +29,7 @@ gem 'coffee-rails'
 # A Ruby static code analyzer and formatter, based on the community Ruby style guide
 # https://github.com/rubocop-hq/rubocop
 gem 'rubocop', '~> 0.58.2', require: false
+gem 'rubocop-rspec'
 
 # Pg is the Ruby interface to the PostgreSQL RDBMS
 # https://github.com/ged/ruby-pg
