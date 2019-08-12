@@ -1,4 +1,4 @@
-[![Build Status](https://semaphoreci.com/api/v1/projects/71d32c3a-263e-489e-810a-2adf8ec56e32/2148083/badge.svg)](https://semaphoreci.com/praxedismireles/mindswithpurpose)
+[![Build Status](https://codebuild.us-east-2.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoieGMvWWJxcmk1OGVEdXJNZnhnMU1GNHcwU1lOK0RKZDQrYlFxNi8wbGtEYm1WYkxXcG95RnJBUldHRHZMbzFpOWlLTGZIbjJtNm05VC80bWlOZUx2bVRvPSIsIml2UGFyYW1ldGVyU3BlYyI6IjdzblR0aG9zOUx3OHd6QWwiLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=master)]
 
 
 Minds With Purpose App
