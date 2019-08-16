@@ -1,5 +1,5 @@
 # Use the barebones version of Ruby 2.5.1
-FROM ruby:2.5.1
+FROM 051455035623.dkr.ecr.us-east-2.amazonaws.com/ruby-dev:latest
 
 # Install dependencies:
 # - build-essential: To ensure certain gems can be compiled
