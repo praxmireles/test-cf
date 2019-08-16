@@ -1,0 +1,107 @@
+.content
+  .row
+    .col-md-4
+      %div
+        .profile-photo
+          -# = image_tag @expert.avatar.url, :class => "img-responsive" if @advisor.avatar.present?
+          = image_tag "apple-touch-icon-144x144-precomposed.png", :class => "img-responsive"
+          -#if @advisor.avatar.present? == false
+        %br
+
+        .user-header-info
+          %h2.user-name= current_user.username
+      .row
+        .col-sm-7
+          .panel.bg-scale-0.b-primary.bt-sm.mt-xl
+            .panel-content
+              %h4
+                %b About me
+              %ul.user-contact-info.ph-sm
+                %li
+                  %b
+                    %i.color-primary.mr-sm.fa.fa-globe
+                  =current_user.location
+                %li.mt-sm=current_user.profile.about
+      .row
+        .col-sm-7
+          .panel.b-primary.bt-sm
+            .panel-content
+              .widget-list.list-sm.list-left-element
+                %ul
+                  %li
+                    %a{:href => "#"}
+                      .left-element
+                        %i.fa.fa-check.color-success
+                      .text
+                        %span.title 95 Jobs
+                        %span.subtitle Completed
+                  %li
+                    %a{:href => "#"}
+                      .left-element
+                        %i.fa.fa-clock-o.color-warning
+                      .text
+                        %span.title 3 Projects
+                        %span.subtitle working on
+                  %li
+                    %a{:href => "#"}
+                      .left-element
+                        %i.fa.fa-envelope.color-primary
+                      .text
+                        %span.title Leave a Menssage
+    %br
+
+    %br
+    .col-sm-5
+      .panel.b-primary.bt-sm
+        .panel-heading
+          %h3
+            My Services
+
+          %h5.p
+            %strong.red New request,
+            %strong.green Complete,
+            %strong.blue In progress,
+            and
+            %strong Canceled.
+        %hr
+        .panel-body
+          %table.table.table-striped
+            %thead
+              %tr
+                %th.col-sm-2= "Progress"
+                %th.col-sm-4= "Type of service and name of the client"
+                %th.col-sm-2= "Status"
+                %th.col-sm-2= "Next Session"
+                %th.col-sm-1= "Actions"
+            %tbody
+              %tr
+                %td.small
+                  = render partial: "experts/progress_bar/circle_progress"
+                %td= "service and name"
+                %td= "status"
+                %td= "next session"
+                %td= "actions"
+    .col-sm-3
+      .container
+        %div{:style => "overflow:hidden;"}
+        .form-group
+          .row
+            .col-md-8
+              #datetimepicker12
+
+:javascript
+  $(function () {
+      $('#datetimepicker12').datetimepicker({
+          inline: true,
+          // sideBySide: false,
+          icons: {
+            date: "fa fa-calendar",
+            up: "fa fa-arrow-up",
+            down: "fa fa-arrow-down",
+            previous: "fa fa-chevron-left",
+            next: "fa fa-chevron-right",
+            clear: "fa fa-trash",
+            today: "fa fa-crosshairs"
+          }
+      });
+  });

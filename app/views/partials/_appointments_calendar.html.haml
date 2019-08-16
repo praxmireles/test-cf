@@ -1,0 +1,103 @@
+#appointments-calendar.clean-theme{ data: { "month-format" => "month YYY", "day-format" => "DD" } }
+
+#appointments-calendar-schedules.modal.fade{ tabindex: "-1", role: "dialog", "aria-labelledby" => "modal-primary-label" }
+  .modal-dialog{ role: "document" }
+    .modal-content
+      .modal-header.state.modal-primary
+        %button.close{ type: "button", "data-dismiss" => "modal", "aria-label" => "Close" }
+          %span{ "aria-hidden" => "true" }
+            &times;
+        %h4#modal-primary-label.modal-title
+          %i.fa.fa-clock-o
+          Appointmens 
+          #selected_date{style: "display:inline"}
+      .modal-body
+        .appointments_list
+          List
+
+      .modal-footer
+        %button.btn.btn-default{ type: "button", "data-dismiss" => "modal" , onclick:"dismiss_modal(event)"}
+          Close
+          
+
+:javascript
+
+  let arrDates = []
+
+  function dismiss_modal(event){
+    event.preventDefault();
+    console.log("dismiss_modal")
+  }
+
+  var appointmentsCalendar = jsCalendar.new("#appointments-calendar", "now", {
+    "monthFormat": "month YYYY",
+    "dayFormat": "DD"
+  })
+  //appointmentsCalendar.select(#{@scheduled_appointments_dates.to_json.html_safe});
+
+  
+
+  appointmentsCalendar.onDateClick(function(event, date) {
+    let date_selected=moment(date).format('DD-MM-YYYY')
+    if(arrDates.filter(e => e == date_selected ).length == 0){
+      alert( "There are no appointments scheduled for the " +date_selected )
+      return
+    }
+    $('#appointments-calendar-schedules').modal({
+      backdrop: "static",
+      keyboard:true
+    });
+   
+    $('#selected_date').html( moment(date).format('dddd MMMM YYYY'))
+    let arrAppointmentsList =  arrAppointments.filter((e)=> moment(e.start_date).format('DD-MM-YYYY')  == date_selected )
+    let listHTML = "<ul>"
+    arrAppointmentsList.map((e) =>  {
+      listHTML += "<li>"
+      if(e.user_type == "Expert"){
+        listHTML +=  e.client_name 
+      }else {
+        listHTML +=  e.expert_name 
+      }
+      listHTML += " " +   e.start_time + " - " +   e.end_time  
+      listHTML += " <div style='width:90%;margin-left:5px;background-color:#ECECEC;padding:5px'>"
+      listHTML += " <b>Sevice :</b> " +  e.service
+      listHTML += " <br> <b>Detail :</b> "  +e.description  
+      listHTML += "</div>"
+          
+    })
+    listHTML += "</ul>"
+    $('.modal').find('.appointments_list').html(listHTML);
+
+  });
+
+  appointmentsCalendar.onMonthChange(function(event, date) {
+    getAppointmentsByMonth(date)
+  });
+
+  function getAppointmentsByMonth(date){
+    var month = moment(date).month() + 1
+    var year = moment(date).year()
+    var url = "/appointments/#{@current_user.id}/active_appointments?month=" + month +"&year=" + year
+    $.ajax({
+      method: "GET",
+      url: url,
+      success: function(data){
+        arrAppointments= data
+        arrDates = []
+        arrAppointments.map((e)=>{
+          arrDates.push(  moment(e.start_date).format('DD-MM-YYYY') )
+        })
+        appointmentsCalendar.select(arrDates);
+      },
+      error: function(error){
+        console.log(error )
+        //alert( "error" );
+      },
+
+    })
+  }
+  onloadCalendar = function() {
+    getAppointmentsByMonth(new Date())
+  } 
+  window.addEventListener('load', onloadCalendar, false);
+

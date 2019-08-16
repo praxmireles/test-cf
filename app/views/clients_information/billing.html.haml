@@ -1,0 +1,89 @@
+%br
+%br
+%br
+%br
+.row
+  .col-sm-10.col-sm-offset-1
+    .panel
+      .panel-header
+        %span.text-md
+          = t('view_clients_information.billing.complete_booking')
+.row
+  .col-sm-10.col-sm-offset-1
+    .panel
+      .panel-content
+        .row{:style => "margin:20px"}
+          .block-content
+            .row
+              .col-sm-12
+                %h3 
+                  = t('view_clients_information.billing.billings_information')
+                %br
+                .row
+                  .col-sm-12.text-center
+                    .row
+  .col-sm-10.col-sm-offset-1
+    .panel
+      .panel-header
+        %span.text-md= t('layout.billing')
+      .panel-content.text-md{:style => "text-align:justify"}
+        .row{:style => "margin:20px"}
+          .col-md-12
+            .row.justify-content-center{:style => "margin:0px;"}
+              .col-xl-12
+                = form_for @billing, url: url_for(controller: 'billings', action: 'create', search_history_id: params[:search_history_id]), method: :post,  class: 'js-validation-material'  do |f|
+                  = hidden_field_tag :authenticity_token, form_authenticity_token
+                  .row
+                    .col-sm-12
+                      %label= t('billing.legal_name')
+                      .input-group.mb-sm
+                        %span.input-group-addon.x-primary
+                          %i.fas.fa-road
+                        .small
+                          = f.text_field :legal_name, required: true, maxlength: 50
+                    .col-sm-6
+                      %label= t('billing.street')
+                      .input-group.mb-sm
+                        %span.input-group-addon.x-primary
+                          %i.fas.fa-road
+                        .small
+                          = f.text_field :street, required: true, maxlength: 50
+
+                    .col-sm-6
+                      %label= t('billing.city')
+                      .input-group.mb-sm
+                        %span.input-group-addon.x-primary
+                          %i.fas.fa-city
+                        .small
+                          = f.text_field :city, required: true, maxlength: 40
+                  .row
+                    .col-sm-4
+                      %label= t('billing.state')
+                      .input-group.mb-sm
+                        %span.input-group-addon.x-primary
+                          %i.fas.fa-map
+                        .small
+                          = f.text_field :state, required: true, maxlength: 33
+
+                    .col-sm-4
+                      %label= t('billing.country')
+                      .input-group.mb-sm
+                        %span.input-group-addon.x-primary
+                          %i.fa.fa-location-arrow
+                        .small
+                          = f.text_field :country, required: true, maxlength: 33
+
+                    .col-sm-4
+                      %label= t('billing.zip')
+                      .input-group.mb-sm
+                        %span.input-group-addon.x-primary
+                          %i.fas.fa-map-marker-alt
+                        .small
+                          = f.text_field :zip, required: true, maxlength: 33
+                          = hidden_field_tag :payment_steps, value: true
+
+                  %hr
+                  .row
+                    .col-sm-3.col-sm-offset-8
+                      = link_to(t('buttons.back'), "#", class: 'btn btn-error')
+                      = f.submit t('buttons.next') ,class: "btn btn-primary btn-wide"

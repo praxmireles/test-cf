@@ -1,0 +1,2 @@
+class ApprovedApplicant < Applicant
+end

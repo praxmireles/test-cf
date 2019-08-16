@@ -1,0 +1,57 @@
+.row
+  .col-sm-10.col-sm-offset-1
+    .panel
+      .panel-header
+        %span.text-md= t('layout.contact_information')
+      .panel-content.text-md{:style => "text-align:justify"}
+        .row{:style => "margin:20px"}
+          .col-md-12
+            .row.justify-content-center{:style => "margin:0px;"}
+              .col-xl-12
+                = form_for @contact_information, url: url_for(controller: 'contact_informations', action: 'create'), method: :post,  class: 'js-validation-material'  do |c|
+                  = hidden_field :user_id, value: current_user
+                  %i
+                    %small *
+                    = t('view_clients.settings.contact_information.usage')
+                  .row
+                    .col-sm-6
+                      %label{:for => "title"}= t('contact_information.mobile')
+                      #phone.small= c.text_field :primary_mobile, maxlength: 50, required: true, as: :text
+
+                    .col-sm-6
+                      %label{:for => "title"}= t('contact_information.mobile_contact_time')
+                      .input-group.mb-sm
+                        %span.input-group-addon.x-primary
+                          %i.fa.fa-clock
+                        %small= c.select :mobile_contact_time, collection: Expert.hours.map{|h| [h,h]}
+                  .row
+                    .col-sm-6
+                      %label{:for => "title"}= t('contact_information.phone')
+                      #mobile.small= c.telephone_field :primary_phone, maxlength: 50, as: :text
+
+                    .col-sm-6
+                      %label{:for => "title"}= t('contact_information.phone_contact_time')
+                      .input-group.mb-sm
+                        %span.input-group-addon.x-primary
+                          %i.fa.fa-clock
+                        %small= c.select :phone_contact_time, collection: Expert.hours.map{|h| [h,h]}
+
+
+                  %hr
+                  .row
+                    .col-sm-3.col-sm-offset-8
+                      = c.submit t('buttons.update'), class: "btn btn-primary btn-wide"
+
+
+:javascript
+  $("#phone").intlTelInput({
+    formatOnInit: true,
+    separateDialCode: true,
+    utilsScript: "assets/libphonenumber/utils.js"
+  });
+
+  $("#mobile").intlTelInput({
+    formatOnInit: true,
+    separateDialCode: true,
+    utilsScript: "assets/libphonenumber/utils.js"
+  });

@@ -1,0 +1,19 @@
+Hi <%= @appointment.client.fullname %> and <%= @appointment.expert.fullname %>,
+
+This is a friendly reminder that your Express Advice video conference will begin in 15 min.
+
+Client: <%= @appointment.client.fullname %>
+Profile: Link
+Request: 
+Date and Time of requested session:  Day and 12:00
+
+Expert: NAME 
+Expert Profile: Link
+
+Click the link below to start your session
+<%= video_conference_url(appointment_id: @appointment.id) %>
+
+	
+Be sure to have all the necessary details to get the most from your session, thank you!
+
+Minds With Purpose Team

@@ -1,0 +1,5 @@
+- current_user.unread_notifications.order('created_at DESC').last(15).each do |notification|
+  %li
+    = link_to read_one_path(notification_id: notification.id), remote: true do
+      %p.notification-item{:class => ("notification_color" unless notification.type == 'ReadNotification'), :id => "notification_#{notification.id}", style: 'font-size: 12px; padding: 5px; margin: 6px 8px; border-radius: 3px; background: #efefef; cursor: pointer; border:1px solid #ddd;'}
+        = notification.translate_message

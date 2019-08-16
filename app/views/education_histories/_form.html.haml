@@ -1,0 +1,171 @@
+.row
+  .col-sm-12
+    %h4.section-subtitle
+      %b 
+        = t('view_education_histories.form.about_you')
+      %small
+        = '(' + t('view_education_histories.form.tell_us_about_you') + ')'
+    .panel
+      .panel-content
+        .form-wizard.wizard-block.wizard-icons
+          %form#wizard-5
+            .tab-steps
+              %ul
+                %li
+                  %a{ :href => "/experts/onboarding/welcome"}
+                    %span.tab-icon
+                      %i.fa.fa-smile-beam
+                    %span.tab-text
+                      = t('view_education_histories.form.welcome')
+                %li
+                  %a{ :href => "/experts/onboarding/general_information"}
+                    %span.tab-icon
+                      %i.fa.fa-address-card
+                    %span.tab-text
+                      = t('view_education_histories.form.general_information')
+                %li
+                  %a{:href => "/experts/onboarding/resume"}
+                    %span.tab-icon
+                      %i.fa.fa-receipt
+                    %span.tab-text
+                      = t('view_education_histories.form.resume')
+                %li
+                  %a{ :href => "/experts/onboarding/services"}
+                    %span.tab-icon
+                      %i.fa.fa-suitcase
+                    %span.tab-text
+                      = t('view_education_histories.form.services')
+                %li
+                  %a{:href => "/experts/onboarding/languages"}
+                    %span.tab-icon
+                      %i.fa.fa-language
+                    %span.tab-text
+                      = t('view_education_histories.form.languages')
+                %li.active
+                  %a{:href => "/experts/onboarding/degrees"}
+                    %span.tab-icon
+                      %i.fa.fa-graduation-cap
+                    %span.tab-text
+                      = t('view_education_histories.form.degrees')
+                %li
+                  %a{ :href => "/experts/onboarding/top_level_seniority"}
+                    %span.tab-icon
+                      %i.fa.fa-angle-double-up
+                    %span.tab-text
+                      = t('view_education_histories.form.top_level_seniority')
+                %li
+                  %a{:href => "/experts/onboarding/work_industries"}
+                    %span.tab-icon
+                      %i.fa.fa-industry
+                    %span.tab-text
+                      = t('view_education_histories.form.work_industries')
+                %li
+                  %a{:href => "/experts/onboarding/positions"}
+                    %span.tab-icon
+                      %i.fa.fa-signal
+                    %span.tab-text
+                      = t('view_education_histories.form.positions')
+                %li
+                  %a{ :href => "/experts/onboarding/career_highlights"}
+                    %span.tab-icon
+                      %i.fa.fa-star
+                    %span.tab-text
+                      = t('view_education_histories.form.career_highlights')
+                %li
+                  %a{:href => "/experts/onboarding/skills"}
+                    %span.tab-icon
+                      %i.fa.fa-user-plus
+                    %span.tab-text
+                      = t('view_education_histories.form.skills')
+                %li
+                  %a{:href => "/experts/onboarding/about"}
+                    %span.tab-icon
+                      %i.far.fa-user-circle
+                    %span.tab-text
+                      = t('view_education_histories.form.about_me')
+                %li
+                  %a{:href => "/experts/onboarding/schedule"}
+                    %span.tab-icon
+                      %i.fa.fa-calendar
+                    %span.tab-text
+                      = t('view_education_histories.form.schedule')
+                %li
+                  %a{:href => "/experts/onboarding/summary"}
+                    %span.tab-icon
+                      %i.fa.fa-align-justify
+                    %span.tab-text
+                      = t('view_education_histories.form.summary')
+.row
+  .col-sm-10.col-sm-offset-1
+    .panel
+      .panel-header
+        %span.text-md= "Studies and Degrees"
+      .panel-body.text-justify
+        %p 
+          = t('education_histories.form.this_information_wont_be_shared')
+
+.row
+  .col-sm-6.col-sm-offset-1
+    .panel
+      .panel-header
+        %span.text-md= t('layout.degrees')
+      .panel-content.text-md{:style => "text-align:justify"}
+        .row{:style => "margin:20px"}
+          .col-md-12
+            .row.justify-content-center{:style => "margin:0px;"}
+              .col-xl-12
+                = form_for @degrees, url: url_for(controller: 'education_histories', action: 'update'), method: :put, html: {class: "nifty_form"}, class: 'js-validation-material', id: 'save-degree-from' do |f|
+                  = hidden_field_tag :authenticity_token, form_authenticity_token
+
+
+                  .row
+                    .col-sm-12
+                      %label{:for => "field_of_study"}= t('view_education_histories.form.field_of_study')
+                      .input-group.mb-sm
+                        %span.input-group-addon.x-primary
+                          %i.fa.fa-pen
+                        = f.text_field :field_of_study, required: true, maxlength: 60, as: :text
+
+                  .row
+                    .col-sm-12
+                      %label{:for => "degree"}= t('view_education_histories.form.degree')
+                      .input-group.mb-sm
+                        %span.input-group-addon.x-primary
+                          %i.fa.fa-book-open
+                        = f.text_field :degree, required: true, maxlength: 60, as: :text
+
+                  .row
+                    .col-sm-12
+                      %label{:for => "institution_name"}= t('view_education_histories.form.institution_name')
+                      .input-group.mb-sm
+                        %span.input-group-addon.x-primary
+                          %i.fa.fa-pen
+                        = f.text_field :institution_name, required: true, maxlength: 60, as: :text
+
+                  .row
+                    %label.col-sm-12{:for => "example-daterange1"}= t('view_education_histories.form.enter_dates')
+                  .row
+                    .col-sm-12{:style => "padding:0px"}
+                      .input-daterange.input-group.mb-sm.js-datepicker-enabled{"data-autoclose" => "true", "data-date-format" => "dd/mm/yyyy", "data-today-highlight" => "true", "data-week-start" => "1"}
+                        %span.input-group-addon.x-primary.font-w600= t('view_education_histories.form.from') 
+                        #start_date2
+                          = f.date_field :from_date, required: true, "data-autoclose" => "true", "data-today-highlight" => "true", "data-week-start" => "1", placeholder: "mm/dd/yyyy", as: :date
+                        %span.input-group-addon.x-primary.font-w600= t('view_education_histories.form.to')
+                        #end_date2
+                          = f.date_field :to_date, "data-autoclose" => "true", "data-today-highlight" => "true", "data-week-start" => "1", placeholder: "mm/dd/yyyy", as: :date
+
+                  .row
+                    .col-sm-12
+                      = f.check_box :present, label: 'Present', id: "degree_present", for: "degree_present", :checked => "checked", :checked => false
+                      = t('view_education_histories.form.present')
+
+                  .form-group{:style => "text-align:center"}
+                    -# %button.btn.btn-primary.btn-wide.save-degree{:type => "submit"}= t('layout.save')
+                    = f.submit t('buttons.save'), class: "btn btn-primary btn-md"
+      %hr
+      .panel-footer
+        .row
+          .col-sm-4
+            %a.btn.btn-lighter-1.btn-wide{:style => "margin-left:20%", href: "/experts/onboarding/degrees" }= t('buttons.back')
+          .col-sm-4.col-sm-offset-4
+            %a.btn.btn-primary.btn-wide{ :style => "margin-left:20%", href: "/experts/onboarding/top_level_seniority" }= t('buttons.next')

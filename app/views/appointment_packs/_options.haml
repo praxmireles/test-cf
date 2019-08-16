@@ -1,0 +1,10 @@
+.panel
+  .panel-header.text-md
+    %span= t('layout.options')
+  .panel-content
+    = form_tag('/appointment_packs/summary') do
+      = label_tag 'Package Options'
+      = select_tag 'Package Options', options_for_select([ ["5 Sessions", 5], ["8 Sessions", 8] ], "5"), prompt: 'How many sessions?'
+      = " | "
+      = label_tag 'Service Type'
+      = select_tag 'Service', options_from_collection_for_select(@services, 'id', 'type')

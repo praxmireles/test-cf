@@ -1,0 +1,60 @@
+.panel-default>.panel-heading {
+  color: white !important;
+ background-color: #2c3e50 !important;
+ border-color: white !important;
+}
+
+.content-heading{
+  color: white;
+  margin-top: 30px;
+}
+
+.block.block-themed > .block-header {
+    border-bottom: none;
+    color: #fff;
+    background-color: #2c3e50 !important;
+}
+
+.item {
+    display: block;
+    width: 40px !important;
+    height: 40px !important;
+    text-align: center;
+    font-size: 28px;
+    font-weight: 300;
+    line-height: 40px !important;
+}
+
+.determinate{
+  background-color: #5BAAB4;
+}
+
+// Error Page
+.error-http {
+  text-align: center;
+
+  h2.error-blue {
+    color: #5BAAB4;
+    font-size: 220px;
+    text-transform: uppercase;
+  }
+
+  h3 {
+    color:  #5BAAB4;
+  }
+
+  .error-desc {
+    font-size: 18px;
+  }
+
+  .back {
+    padding-top: 25px;
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  span.emphasis {
+    color:  #5BAAB4;
+    font-weight: bold;
+  }
+}

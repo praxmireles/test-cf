@@ -1,0 +1,112 @@
+= render partial: 'tab_steps'
+.row
+  .col-sm-10.col-sm-offset-1
+    .panel
+      .panel-header
+        %span.text-md= "Work Industries/Speciality"
+      .panel-body
+        .text-align-justify
+          %p We recommend you to fill this out specifying the different Sectors or Industries where you have worked, since Organizations could look at specific Industries of proven experience to select an Expert.
+          %br
+%br
+
+.row
+  .col-sm-6.col-sm-offset-1
+    .panel
+      .panel-header
+        %span.text-md= "Select Your Work Industries/Speciality"
+      .panel-content.text-md{:style => "text-align:justify"}
+        .row{:style => "margin:20px"}
+          .col-md-12
+            .row.justify-content-center{:style => "margin:0px;"}
+              .col-xl-12
+                %h3= "Work Industries/Speciality"
+                -# = form_tag(work_industries_path, controller: :work_histories, remote: true, class: 'js-validation-material', id: 'work-industry-from') do |f|
+                = form_for @work_industry, :url => url_for(:controller => 'profile_industries', action: 'create'), method: :post do |f|
+                  = hidden_field_tag :authenticity_token, form_authenticity_token
+
+                  .row
+                    .col-sm-12
+                      %label{:for => "work_industry"}= t('work_industry.placeholders.name')
+                      .input-group.mb-sm
+                        %span.input-group-addon.x-primary
+                          %i.fa.fa-edit
+                        .small
+                          = f.collection_select  :industry_id, Industry.all, :id, :name
+                  .row
+                    .col-sm-12
+                      %label{:for => "work_industry"}= t('work_industry.placeholders.years')
+                      .input-group.mb-sm
+                        %span.input-group-addon.x-primary
+                          %i.fa.fa-clock
+                        .small
+                          = f.text_field :years, required: true, maxlength: 39
+
+                    .row
+                      .col-sm-6.col-sm-offset-3{:style => "text-align:center"}
+                        = f.submit t('buttons.save'),  class: 'btn btn-primary'
+
+      %hr
+
+      .panel-footer{style: "text-align:center"}
+        .row
+          .col-sm-4{:style=> "margin-top:3%"}
+            %a.btn.btn-lighter-1.btn-wide{:style => "margin-left:20%", href: "/experts/onboarding/top_level_seniority" }= t('buttons.back')
+
+          .col-sm-4.col-sm-offset-4{:style=> "margin-top:3%"}
+            %a.btn.btn-primary.btn-wide{:style => "margin-left:20%", href: "/experts/onboarding/positions" }= t('buttons.next')
+
+
+
+  .col-sm-4
+    .panel
+      .panel-header
+        %span.text-md= t('layout.your_work_Industries/Speciality')
+
+      .panel-content.div-to-add.text-md{:style => "text-align:justify"}
+        - @my_works.each do |works|
+          .panel
+            .panel-header
+              %span.text-md
+                = t(works.industry.locale)
+                %p= "#{works.years} years"
+              .panel-actions
+                %ul{:style => "color:white"}
+                  %li
+                    %span{:style => "color:white"}
+                      = link_to edit_profile_industry_path(works), id: works.id, style: "margin-left:10px;" do
+                        %i.fa.fa-pencil-alt
+                    %li
+                      = link_to destroy_profile_industry_path(works), method: :delete, style: "margin-left:10px;" do
+                        %i.fa.fa-trash
+
+:javascript
+    function initAutocomplete() {
+      // Create the autocomplete object, restricting the search to geographical
+      // location types.
+      autocomplete = new google.maps.places.Autocomplete(
+          /** @type {!HTMLInputElement} */(document.getElementById('location')),
+          {types: ['geocode']});
+
+      // When the user selects an address from the dropdown, populate the address
+      // fields in the form.
+      autocomplete.addListener('place_changed', fillInAddress);
+    }
+
+    function fillInAddress() {
+      // Get the place details from the autocomplete object.
+      var place = autocomplete.getPlace();
+
+    }
+    $("#work_industry_present").change(function(){
+      if ($('#work_industry_present').is(':checked')) {
+        $("#to_date").hide()
+        $("#from_date").next("span").hide()
+        $("#to_date").prop('disabled', true);
+      }else{
+        $("#to_date").show()
+        $("#from_date").next("span").show()
+        $("#to_date").prop('disabled', false);
+      }
+    });
+%script{:src => "https://maps.googleapis.com/maps/api/js?key=AIzaSyAJZh005PH0sabRv0JhsH51pIWOqZ9NaV0&libraries=places&language=en&callback=initAutocomplete"}

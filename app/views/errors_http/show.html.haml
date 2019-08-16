@@ -1,0 +1,26 @@
+%h3
+  = t('view_errors_htttp.show.error') + '#{@http_code}'
+
+.row
+  .col-md-12.error-http
+
+    %h2.error-blue= @http_code
+    - if @http_code == '404'
+      %h3
+        = t('view_errors_htttp.show.the_page_you_are_looking')
+      .error-desc
+      = t('view_errors_htttp.show.please_check_the_url')
+
+    - else
+      %h3
+        = t('view_errors_htttp.show.something_went_wrong')
+      .error-desc
+        = t('view_errors_htttp.show.we_have_received')
+        %span.emphasis
+          = t('view_errors_htttp.show.it_is_not_necessary')
+          = t('view_errors_htttp.show.we_will_fix_it')
+
+    .back
+      %i.fas.fa-arrow-left
+      = link_to login_path do
+        Return

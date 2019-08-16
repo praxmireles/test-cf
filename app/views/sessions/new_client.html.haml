@@ -1,0 +1,31 @@
+.wrap
+  / page BODY
+  / =========================================================
+  .page-body.animated.slideInDown
+    / =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    / LOGO
+    .logo.text-center
+      =image_tag "logo_minds_with_purpose-logo.png"
+
+.row
+  .col-sm-6.col-sm-offset-3
+    .panel.panel-default
+      .panel-body
+        .text-center
+          %h3
+            %strong.green{style: "color: #5EAAB3;"}
+            = t('view_sessions.new_client.login_as_client')
+          %hr
+          = link_to  '/auth/facebook', user_type: "Client", class: "btn btn-block", style: "background-color:#3C5A98; color:white" do
+            .fab.fa-facebook
+            &nbsp
+            = t('view_sessions.new_client.sign_in_with_facebook')
+          = link_to '/auth/linkedin?user_type=Client', user_type: "Client", class: "btn btn-block", style: "background-color:#006599; color:white" do
+            .fab.fa-linkedin
+            &nbsp
+            = t('view_sessions.new_client.sign_in_with_linkedin')
+
+          %p
+            = t('view_sessions.new_client.by_signing_up')
+            = link_to(t('view_sessions.new_client.terms_of_services'), clients_terms_services_path)
+

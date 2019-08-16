@@ -1,0 +1,55 @@
+%br
+%br
+
+.content
+  .row
+    .col-sm-10.col-sm-offset-1
+      .panel.bg-scale-0.b-primary.bt-sm.mt-xl
+        .row
+          .col-sm-5{:style => "background-color:#003F5A"}
+            %figure.text-center
+              =image_tag "registration_bg.svg"
+              -# Client service name
+              %h2.white
+                = show_service_name(@search_history.service)
+
+          .col-sm-5
+
+            %h4.main_question
+              %strong
+              = t('view_clients_onboarding.services.achieve_experiences')
+              = form_for @search_history, method: :put do |f|
+                .form-group
+                  %i.small
+                    = t('view_clients_onboarding.services.description')
+                  %br
+                  = f.text_area :achieve_experiences, maxlength: 500, id: 'experience', class: "form-control", style: "height:100px;", required: true, label: false
+                  = hidden_field_tag :current_path, 'achieve_experiences'
+
+                  = "#{t('view_clients_onboarding.services.chars_remaining')} : "
+                  %span#counter{"data-maximum-length" => 500}= 500
+                  = f.submit t('buttons.next'), class: 'btn btn-lighter-1 btn-wide', :style => "display: none; margin-left:20%"
+        .row
+          #bottom-wizard
+            .col-sm-1.col-sm-offset-6
+              = link_to(t('buttons.back'), previous_path(search_history_id: params[:search_history_id], current_path: 'achieve_experiences'), class: "btn btn-lighter-1 btn-wide", style: "margin-left: 20%")
+            .col-sm-5
+              = link_to(t('buttons.next'), '', class: 'btn btn-primary btn-wide next-button', :style => "margin-left:20%")
+
+:javascript
+  $(".next-button").click(function(e){
+    e.preventDefault();
+    $("input[name='commit']").click();
+  })
+
+  // Counter words
+  $(document).ready(function() {
+      var description = $("#experience");
+      var counter     = $("#counter");
+      var max_length  = counter.data("maximum-length");
+
+      description.keyup(function() {
+          counter.text(max_length - $(this).val().length);
+      });
+
+    });

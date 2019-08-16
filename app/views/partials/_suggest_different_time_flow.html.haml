@@ -1,0 +1,227 @@
+
+#appointments-change-flow.modal.fade{  tabindex: "-1", role: "dialog", "aria-labelledby" => "modal-primary-label" }
+  .modal-dialog{ role: "document" ,style:"height: 400px;width:800px"}
+    .modal-content
+      .modal-header.state.modal-primary
+        %button.close{ type: "button", "data-dismiss" => "modal", "aria-label" => "Close" }
+          %span{ "aria-hidden" => "true" }
+            &times;
+        %h4#modal-primary-label.modal-title
+          %i.fa.fa-clock-o
+          Appointments 
+          
+      .modal-body.col-md-12
+
+        .col-md-5{style:"height: 300px"}
+          #appointments-change-flow-calendar.clean-theme{ data: { "month-format" => "month YYY", "day-format" => "DD"} }
+
+        .col-md-7{style:"height: 400px;"}
+          %div
+          #selected_date{style: "display:inline"}
+          .appointments_list{style: "color:#000"}
+            List
+
+      .modal-footer
+        #btnClose.button.btn.btn-default{ type: "button", "data-dismiss" => "modal" , onclick:"dismiss_modal(event)"}
+          Close
+        #btnSave.button.btn.btn-default{ type: "button", onclick:"save(event)"}
+          Save
+                  
+
+:javascript
+
+  let arrDatesAvailable = []
+  let date_suggest =  ''
+  let time_suggest = ''
+  let user_id = 0
+  let appointment_id = 0
+  let expert_id = 0
+  function dismiss_modal(event){
+    event.preventDefault();
+    console.log("dismiss_modal")
+  }
+
+  var appointmentsCalendarChangeFlow = jsCalendar.new("#appointments-change-flow-calendar", "now", {
+    "monthFormat": "month YYYY",
+    "dayFormat": "DD",
+
+  })
+  //appointmentsCalendarChangeFlow.select(#{@scheduled_appointments_dates.to_json.html_safe});
+
+  function AcceptChangeFlow(date){
+    console.log("AceptChangeFlow")
+      
+  }
+  function showCalendarChangeFlow(userId,expertId,appointmentId){
+    user_id = userId
+    appointment_id = appointmentId
+    expert_id = expertId
+    let date_selected=moment(new Date()).format('DD-MM-YYYY')
+    getAppointmentsByMonthChangeFlow(date_selected)
+    $('#appointments-change-flow').modal({
+      backdrop: "static",
+      keyboard:true
+    });
+
+  }
+
+  function save(ele){
+    console.log(ele)
+    console.log(time_suggest)
+    console.log(date_suggest)
+    //var user_id = 2
+    //var appointment_id = 11
+    var start_date =  date_suggest + ' ' + time_suggest//moment(new Date()).format('DD/MM/YYYY HH:MM:SS')
+
+
+    var url = "/appointment/suggests_diferent_time_save?"
+    url += "user_id=" +user_id
+    url += "&appointment_id=" +appointment_id
+    url += "&start_date=" +start_date
+    $.ajax({
+      method: "GET",
+      url: url,
+      success: function(response){
+        console.log(response)
+        if(response.success){
+          var title = "Suggests diferent time"
+          var type = "success"
+          var icon = null
+          var message  = "The suggestion for appointment change was sent"
+          var delay = null
+    
+          Window.MWPApp.notify(title,type,icon,message,delay)
+          $('.modal').find('#btnClose').click()
+        }
+
+      },
+      error: function(error){
+        console.log(error )
+        //alert( "error" );
+      },
+    })
+  }
+  function aceptChange(appointment_suggests_id){
+    console.log(appointment_suggests_id)
+
+    var url = "/appointment/suggests_diferent_time_acept?"
+    url += "appointment_suggests_id=" +appointment_suggests_id
+
+    $.ajax({
+      method: "GET",
+      url: url,
+      success: function(response){
+        console.log(response)
+        if(response.success){
+          var title = "Suggests diferent time"
+          var type = "success"
+          var icon = null
+          var message  = "The suggestion for appointment change was sent"
+          var delay = null
+    
+          Window.MWPApp.notify(title,type,icon,message,delay)
+
+        }
+
+      },
+      error: function(error){
+        console.log(error )
+        //alert( "error" );
+      },
+    })
+  }
+  function setSuggest(ele){
+    time_suggest = ele.substring(0,6)
+    $('.modal').find('#btnSave').show()
+  }
+
+  function appointmentsCalendarChange(date){
+    let listHTML = '<div class="list-group">'
+    listHTML += '<a href="#" class="list-group-item list-group-item-action active">'
+    listHTML += moment(date).format('dddd DD MMMM YYYY')
+    listHTML += '</a>'
+    $('.modal').find('#btnSave').hide()
+
+    date_suggest =  moment(date).format('DD/MM/YYYY')
+    time_suggest = ''
+    console.log(date_suggest)
+    if( date_suggest < moment().format('DD/MM/YYYY')){
+      listHTML += '<a href="#" class="list-group-item list-group-item-action ">'
+      listHTML += 'The selected date is invalid'
+      listHTML += '</a>'
+      listHTML += "</div>"
+      $('.modal').find('.appointments_list').html(listHTML); 
+      return
+    }
+    
+    var url = "/experts/2/appointments/availabilities_booking_for_list?date=" + date_suggest
+    $.ajax({
+      method: "GET",
+      url: url,
+      success: function(data){
+        if(data.length == 0){
+          listHTML += '<a href="#" class="list-group-item list-group-item-action ">'
+          listHTML += 'No appointments available'
+          listHTML += '</a>'
+        }
+        data.map((e) =>  {
+          if(e[0].start_time){
+            listHTML += '<a '
+            listHTML += ' class=" list-group-item list-group-item-action '
+            if(!e[1]){
+              listHTML += ' disabled " '
+            }else{
+              listHTML += ' " href="javascript:setSuggest('
+              listHTML += "'" + e[0].start_time  +"'"  
+              listHTML += ')"'
+            }
+   
+            listHTML += '>'
+            listHTML += e[0].start_time
+            listHTML += '</a>'
+
+          }
+        })
+        listHTML += "</div>"
+        $('.modal').find('.appointments_list').html(listHTML);   
+      },
+      error: function(error){
+        console.log(error )
+        //alert( "error" );
+      },
+    })
+
+  }
+
+  appointmentsCalendarChangeFlow.onDateClick(function(event, date) {
+    appointmentsCalendarChange(date)
+  });
+
+  appointmentsCalendarChangeFlow.onMonthChange(function(event, date) {
+    getAppointmentsByMonthChangeFlow(date)
+  });
+
+  function getAppointmentsByMonthChangeFlow(date){
+    if(user_id ==0) return
+    var month = moment(date).month() + 1
+    var year = moment(date).year()
+    var url = "/experts/"+ expert_id +"/appointments/by_month?month=" + month +"&year=" + year
+    $.ajax({
+      method: "GET",
+      url: url,
+      success: function(data){
+        console.log(data)
+        appointmentsCalendarChangeFlow.select(data);
+      },
+      error: function(error){
+        console.log(error )
+        //alert( "error" );
+      },
+    })
+  }
+  onloadChangeFlow = function() {
+    console.log("window.onload ")
+    getAppointmentsByMonthChangeFlow(new Date())
+    appointmentsCalendarChange(new Date())
+  } 
+  window.addEventListener('load', onloadChangeFlow, false);

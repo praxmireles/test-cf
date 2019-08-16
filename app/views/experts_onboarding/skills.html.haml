@@ -1,0 +1,64 @@
+= render partial: 'tab_steps'
+.row
+  .col-sm-8.col-sm-offset-2
+    .panel
+      .panel-header
+        %span.text-md= t('view_experts_onboarding.skills.functions_and_skills')
+        .panel-actions
+          %ul
+            %li.action.toggle-panel.panel-expand
+              %span
+            %li.action
+              %span.fa.fa-bars.action{"aria-hidden" => "true"}
+      .panel-content.text-md{:style => "text-align:justify"}
+        %p= t('view_experts_onboarding.skills.the_functions_and_skills')
+
+  .row
+    .col-sm-8.col-sm-offset-2
+      = form_tag create_job_function_path, url: url_for(controller: 'profile_job_functions', action: 'create'), method: :post do
+        .panel
+          .panel-header.text-md
+            %span= t('view_experts_onboarding.skills.function')
+          .panel-content{style: "height: 390px"}
+            .nano{style: "overflow:scroll; position:relative;"}
+              .nano-content{style: "overflow:scroll; position:relative;"}
+                .row{:style => "margin:20px"}
+                  %h3= t('view_experts_onboarding.skills.your_skills')
+                  %br
+                  .block-content{style: "overflow-y: scroll;" }
+                    - @job_functions.each_with_index do |job_function, index|
+                      .col-md-6{style: " white-space: nowrap;  overflow:hidden"}
+                        = check_box_tag "job_functions[]", job_function.id, job_function_exist?(job_function.id), data:{index: index}, class: 'check-skill-father css-control-input'
+                        %strong= t(job_function.locale)
+                        %br
+                        .check-skill-son{:class => "check-skill-son"+index.to_s, :style => "display:none;"}
+                          - job_function.skills.order('name ASC').each do |skill|
+                            %p
+                              &nbsp;&nbsp;
+                              = check_box_tag "skills[]", skill.id, skill_exist?(skill.id), class: 'check-skill-father css-control-input'
+                              = t(skill.locale)
+                              %br
+
+          %hr
+
+          .panel-footer{style: "text-align:center"}
+            .row
+              .col-sm-4{:style=> "margin-top:3%"}
+                %a.btn.btn-lighter-1.btn-wide{:style => "margin-left:20%", href: "/experts/onboarding/career_highlights" }= t('buttons.back')
+
+              .col-sm-4.col-sm-offset-4{:style=> "margin-top:3%"}
+                = submit_tag t('buttons.next') , class: "btn btn-primary btn-wide"
+
+
+
+
+:javascript
+  $(".check-skill-father").change(function(){
+    if($(this).is(':checked')){
+      $(".check-skill-father").show();
+      var index_token = $(this).data("index");
+      $(".check-skill-son"+index_token+"").show();
+    }else{
+      $(".check-skill-son").hide();
+    }
+  });

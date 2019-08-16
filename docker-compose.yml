@@ -1,7 +1,60 @@
-version: '2'
+version: '3.0'
+
 services:
+  db:
+    image: postgres:9.6
+    restart: always
+    volumes:
+      - 'app-postgres:/var/lib/postgresql/data'
+    environment:
+      POSTGRES_USER: ${DATABASE_USERNAME}    
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+    ports:
+      - ${DATABASE_PORT}
+  
+  redis:
+    image: 'redis:3.2.6'
+    ports:
+      - '6379'
+    volumes:
+      - 'app-redis:/var/lib/redis/data'
+
   web:
     build: .
-    command: bin/rails server --port 3000 --binding 0.0.0.0
+    depends_on:
+      - 'db'
+      - 'redis'
     ports:
-      - "3000:3000"
+      - '$APP_PORT:$APP_PORT'
+    volumes:
+      - '.:/rails-application'
+    command: bundle exec rails server -b 0.0.0.0
+    environment:
+      DATABASE_HOST: db
+      RAILS_ENV: ${RAILS_ENV}
+      DATABASE_PORT: ${DATABASE_PORT}
+      POSTGRES_USER: ${DATABASE_USERNAME}     
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+
+  sidekiq:
+    build: .
+    depends_on:
+      - 'db'
+      - 'redis'
+    volumes:
+      - '.:/rails-application'
+    command: bundle exec sidekiq -C config/sidekiq.yml
+
+  cable:
+    build: .
+    depends_on:
+      - 'redis'
+    ports:
+      - '28080:28080'
+    volumes:
+      - '.:/rails-application'
+    command: puma -p 28080 cable/config.ru
+
+volumes:
+  app-redis:
+  app-postgres:

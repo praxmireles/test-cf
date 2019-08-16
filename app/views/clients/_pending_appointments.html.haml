@@ -1,0 +1,37 @@
+%h5{style: 'color: black;'}
+  = t('view_clients.pending_appointments.pending')
+- if @pending_requests.any?
+  - @pending_requests.each do |date|
+    %p= "#{t('view_clients.pending_appointments.scheduled_for')} " + date.first
+    - date.second.each do |appointment|
+      = link_to(modal_path(appointment.id), remote: true, data: {target: "#appointmentUser", toggle: "modal"}) do
+        .card
+          .col-sm-7
+            = render partial: 'appointment', locals: {appointment: appointment}
+          .col-sm-5.cardDate
+            = link_to t('view_clients.pending_appointments.cancel_request'), destroy_request_path(appointment.request.id), method: :delete, class: 'btn btn-lighter-1'
+            %p.date= date_to_time(set_in_timezone(appointment.start_date, current_user.id))
+        -# .card
+        -#   %row
+        -#
+        -#     - appointment_suggests = appointment.appointment_suggests("Client")
+        -#     - if appointment_suggests.length > 0
+        -#       %row
+        -#       .col-sm-12.cardDate
+        -#         .request{style:"text-align:left;width:100%;font-size:16pt;margin-bottom:20px"}
+        -#           #{appointment_suggests[0].user.fullname } request to change the appointment for #{appointment_suggests[0].start_date.strftime('%d/%m/%Y %H:%M') }
+        -#       %row
+        -#       .col-sm-6.cardDate
+        -#         %button.btn.btn-dashboard{style:"color:#000",type:"button",onclick:"showCalendarChangeFlow('#{ current_user.id }', '#{ appointment.expert.id }', '#{ appointment.id }')" }
+        -#           Suggest a Different  Time
+        -#       .col-sm-6.cardDate
+        -#         %button.btn.btn-dashboard{style:"color:#000",type:"button",onclick:"aceptChange('#{ appointment_suggests[0].id }')" }
+        -#           Accept Change
+        -#     -else
+        -#       .col-sm-12.cardDate
+        -#         %button.btn.btn-dashboard{style:"color:#000",type:"button",onclick:"showCalendarChangeFlow('#{ current_user.id }', '#{ appointment.expert.id }', '#{ appointment.id }')" }
+        -#           Suggest a Different  Time
+- else
+  .alert.alert-warning{style: "opacity: 0.8"}
+    %p
+      = t('view_clients.settings.pending_appointments.no_pending_requests')

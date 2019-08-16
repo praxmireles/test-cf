@@ -1,0 +1,32 @@
+= render partial: 'tab_steps'
+.row
+  .col-sm-10.col-sm-offset-1
+    .panel
+      .panel-header
+        %span.text-md= t('view_experts_onboarding.top_level_seniority.level_of_seniority')
+      .panel-content.text-justify
+        %p
+          = t('view_experts_onboarding.top_level_seniority.your_level_of_seniority')
+.row
+  .col-sm-10.col-sm-offset-1
+    = form_tag create_seniroity_levels_path, url: url_for(controller: 'profile_seniority_levels', action: 'create'), method: :post do
+      .panel
+        .panel-header
+          %span= t('view_experts_onboarding.top_level_seniority.top_level_of_seniority')
+        .panel-body
+          .row
+            .col-sm-12
+              %h3
+                = t('view_experts_onboarding.top_level_seniority.top_level_seniority_in_your_career')
+          .row.text-md{:style => "margin:20px; text-align:justify;"}
+            .col-md-12.text-center
+              - SeniorityLevel.all.each_with_index do |seniority_level, index|
+                = check_box_tag "seniority_level_ids[]", seniority_level.id, seniority_level_exists?(seniority_level.id), data:{index: index}
+                = t(seniority_level.locale)
+          %hr
+          .panel-footer
+            .row
+              .col-sm-4
+                %a.btn.btn-lighter-1.btn-wide{:style => "margin-left:20%", href: "/experts/onboarding/degrees" }= t('buttons.back')
+              .col-sm-4.col-sm-offset-4
+                = submit_tag t('buttons.next'), { class: "btn btn-primary btn-wid" }

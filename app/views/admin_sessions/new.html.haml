@@ -1,0 +1,16 @@
+%container
+  %row
+    %col
+      %h1 Admin Login
+      %p Log in with your admin credential
+
+      = form_for @admin_user, url: 'login', method: :post, class: 'form-control mt-5' do |f|
+        = f.label :email
+        = f.text_field :email
+        %br
+        %br
+        = f.label :password
+        = f.password_field :password 
+        %br
+        %br
+        = f.submit "log in"

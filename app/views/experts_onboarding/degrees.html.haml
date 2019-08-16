@@ -1,0 +1,225 @@
+= render partial: 'tab_steps'
+.row
+  .col-sm-10.col-sm-offset-1
+    .panel
+      .panel-header
+        %span.text-md
+          = t('view_experts_onboarding.degrees.studies_and_degrees')
+      .panel-body.text-justify
+        %p
+          = t('view_experts_onboarding.degrees.this_information_wont_be_shared')
+
+.row
+  .col-sm-6.col-sm-offset-1
+    .panel
+      .panel-header
+        %span.text-md= t('view_experts_onboarding.degrees.degrees')
+      .panel-content.text-md{:style => "text-align:justify"}
+        .row{:style => "margin:20px"}
+          .col-md-12
+            .row.justify-content-center{:style => "margin:0px;"}
+              .col-xl-12
+                = form_for @degrees, url: url_for(controller: 'education_histories', action: 'create'), method: :post, html: {class: "nifty_form"}, class: 'js-validation-material', id: 'save-degree-from' do |f|
+                  = hidden_field_tag :authenticity_token, form_authenticity_token
+
+
+                  .row
+                    .col-sm-12
+                      %label{:for => "field_of_study"}= t('view_experts_onboarding.degrees.studies')
+                      .input-group.mb-sm
+                        %span.input-group-addon.x-primary
+                          %i.fa.fa-pen
+                        = f.text_field :field_of_study, required: true, maxlength: 60, as: :text
+
+                  .row
+                    .col-sm-12
+                      %label{:for => "degree"}= t('view_experts_onboarding.degrees.degree')
+                      .input-group.mb-sm
+                        %span.input-group-addon.x-primary
+                          %i.fa.fa-book-open
+                        .small
+                          = f.select :degree, collection: EducationHistory.degrees.map{|d| [d]}
+
+                  .row
+                    .col-sm-12
+                      %label{:for => "institution_name"}
+                        = t('view_experts_onboarding.degrees.institution_name')
+                      .input-group.mb-sm
+                        %span.input-group-addon.x-primary
+                          %i.fa.fa-pen
+                        = f.text_field :institution_name, required: true, maxlength: 60, as: :text
+
+                  .row
+                    %label.col-sm-12{:for => "example-daterange1"}
+                      = t('view_experts_onboarding.degrees.enter_dates')
+                  .row
+                    .col-sm-12
+                      .input-daterange.input-group.mb-sm.js-datepicker-enabled{"data-autoclose" => "true", "data-date-format" => "dd/mm/yyyy", "data-today-highlight" => "true", "data-week-start" => "1"}
+                        %span.input-group-addon.x-primary.font-w600
+                          = t('view_experts_onboarding.degrees.from')
+                        #start_date2
+                          = f.date_field :from_date, required: true, "data-autoclose" => "true", "data-today-highlight" => "true", "data-week-start" => "1", placeholder: "mm/dd/yyyy", as: :date
+                        %span.input-group-addon.x-primary.font-w600
+                          = t('view_experts_onboarding.degrees.to')
+                        #end_date2
+                          = f.date_field :to_date, "data-autoclose" => "true", "data-today-highlight" => "true", "data-week-start" => "1", placeholder: "mm/dd/yyyy", as: :date
+
+                  .row
+                    .col-sm-12
+                      = f.check_box :present, label: "#{t('view_experts_onboarding.degrees.present')}", id: "degree_present", for: "degree_present", :checked => "checked", :checked => false
+                      = t('view_experts_onboarding.degrees.present')
+
+
+
+                  .form-group{:style => "text-align:center"}
+                    %button.btn.btn-primary.btn-wide.save-work_industry{:type => "submit"}= t('buttons.save')
+
+
+
+      %hr
+      .panel-footer
+        .row
+          .col-sm-4
+            %a.btn.btn-lighter-1.btn-wide{:style => "margin-left:20%", href: "/experts/onboarding/languages" }
+              = t('buttons.back')
+          .col-sm-4.col-sm-offset-4
+            %a.btn.btn-primary.btn-wide{ :style => "margin-left:20%", href: "/experts/onboarding/top_level_seniority" }
+              = t('buttons.next')
+
+  - if EducationHistory.present?
+    .col-sm-4
+      .panel
+        .panel-header
+          %span.text-md
+            = t('view_experts_onboarding.degrees.my_degrees')
+
+        .panel-content.div-to-add.text-md{:style => "text-align:justify"}
+          - @my_degrees.each do |degree|
+            .panel
+              .panel-header.panel-primary
+                %span.text-md{:style => "color:white"}= degree.field_of_study
+                .panel-actions{:style => "color:white"}
+                  = link_to edit_education_history_path(degree), id: degree.id do
+                    %i.fa.fa-pencil-alt{:style => "color:white"}
+                  = link_to destroy_education_history_path(degree), controller: 'education_histories', action: 'destroy', method: :delete, id: degree.id do
+                    %i.fa.fa-trash{:style => "color:white"}
+              .panel-content.text-md{:style => "text-align:justify"}
+                %p
+                  %small= degree.degree
+
+                - if degree.to_date.present? and degree.present == false
+                  %small= ("#{degree.from_date.strftime('%D')} - #{degree.to_date.strftime('%D')}")
+                - else
+                  %small= ("#{degree.from_date.strftime('%D')} - #{t('view_experts_onboarding.degrees.present')}")
+
+
+
+
+
+  :javascript
+
+    $("#degree_present").change(function(){
+      if ($('#degree_present').is(':checked')) {
+        $("#end_date2").hide()
+        $("#start_date2").next("span").hide()
+        $("#end_date2").prop('disabled', true);
+      }else{
+        $("#end_date2").show()
+        $("#start_date2").next("span").show()
+        $("#end_date2").prop('disabled', false);
+      }
+    });
+
+    $("#save-degree-from").validate({
+      highlight: function(label) {
+          $(label).closest('.form-group').removeClass('has-success').addClass('has-error');
+      },
+      success: function(label) {
+          $(label).closest('.form-group').removeClass('has-error');
+          label.remove();
+      },
+      errorPlacement: function(error, element) {
+        error.insertAfter($(element).closest('.form-group').find('label'));
+      }
+    });
+
+    $('#save-degree-from').on('submit', function(e) {
+      if (!$('#degree_present').is(':checked')) {
+        startDate = moment($("#start_date2").val(), 'MM/YYYY').format('YYYY-MM')
+        endDate = moment($("#end_date2").val(), 'MM/YYYY').format('YYYY-MM')
+        if (startDate > endDate) {
+          e.preventDefault();
+          alert("First date cannot be greater than second date.");
+          $("#start_date2").focus();
+          return false;
+        }else{
+
+          return true
+        }
+      }else{
+        return true
+      }
+    });
+
+    $('#start_date2').datepicker({
+        // format: 'dd/mm/yyyy',
+        autoclose: true,
+        minViewMode: 1,
+        format: 'mm/yyyy',
+        startDate: 1940 - (new Date()).getFullYear() + 'y',
+        endDate: '+0y'
+    }).on('changeDate', function(selected) {
+      startDate = new Date(selected.date.valueOf());
+      startDate.setDate(startDate.getDate(new Date(selected.date.valueOf())));
+      $('#end_date2').datepicker('setStartDate', startDate);
+    });
+    $('#end_date2').datepicker({
+        // format: 'dd/mm/yyyy',
+        autoclose: true,
+        minViewMode: 1,
+        format: 'mm/yyyy',
+        startDate: 1940 - (new Date()).getFullYear() + 'y',
+        endDate: '+0y'
+    });
+    var placeSearch, autocomplete;
+      var componentForm = {
+        street_number: 'short_name',
+        route: 'long_name',
+        locality: 'long_name',
+        administrative_area_level_1: 'short_name',
+        country: 'long_name',
+        postal_code: 'short_name'
+      };
+
+      function initAutocomplete() {
+        // Create the autocomplete object, restricting the search to geographical
+        // location types.
+        autocomplete = new google.maps.places.Autocomplete(
+            /** @type {!HTMLInputElement} */(document.getElementById('location')),
+            {types: ['geocode']});
+
+        // When the user selects an address from the dropdown, populate the address
+        // fields in the form.
+        autocomplete.addListener('place_changed', fillInAddress);
+      }
+
+      function fillInAddress() {
+        // Get the place details from the autocomplete object.
+        var place = autocomplete.getPlace();
+
+      //  for (var component in componentForm) {
+      //    document.getElementById(component).value = '';
+      //    document.getElementById(component).disabled = false;
+      //  }
+
+        // Get each component of the address from the place details
+        // and fill the corresponding field on the form.
+      //  for (var i = 0; i < place.address_components.length; i++) {
+      //    var addressType = place.address_components[i].types[0];
+      //    if (componentForm[addressType]) {
+      //      var val = place.address_components[i][componentForm[addressType]];
+      //      document.getElementById(addressType).value = val;
+      //    }
+      //  }
+      }
+  %script{:src => "https://maps.googleapis.com/maps/api/js?key=AIzaSyAJZh005PH0sabRv0JhsH51pIWOqZ9NaV0&libraries=places&language=en&callback=initAutocomplete"}

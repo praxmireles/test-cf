@@ -1,0 +1,67 @@
+%br
+%br
+
+.content
+  / content HEADER
+  / =========================================================
+  .content-header
+    / leftside content header
+    .leftside-content-header
+
+  / =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+  .animated.fadeInUp
+    / RESULTS
+    .row
+      .col-sm-12
+        .panel
+          .panel-content
+            %h4
+              = t('view_clients.experts_match.title')
+              %span.highlight
+                = t('view_clients.experts_match.highlight_title')
+            %h6
+              = t('view_clients.experts_search.total_search_results')
+              %b #{@appointments.count}
+            .search-results-grid
+              .row
+                - @appointments.each do |appointment|
+                  .col-sm-6.col-md-3
+                    %a{:href => expert_path(appointment.expert.id, search_history_id: appointment.search_history.id)}
+                      = image_tag appointment.expert.avatar.url, :class => "img-responsive" if appointment.expert.avatar.present?
+                      = image_tag "apple-touch-icon-144x144-precomposed.png", :class => "img-responsive" if appointment.expert.avatar.present? == false
+                    .search-item-content
+                      %a.search-title{:href => "#"}= appointment.expert.fullname
+                      %p
+                        %i.fa.fa-map-marker
+                        //localizacion del usuario
+                        = appointment.expert.location
+                      %p.text= "#{t('view_clients.experts_search.projects_done')}: " +  appointment.expert.completed_appointments.count.to_s
+
+                      - matching_skills(appointment.search_history.id, appointment.expert.skills).each do |skill|
+                        %a.badge.x-lighter-1.b-rounded{:href => "#"}= skill.name
+
+
+                      %p{:style => "text-align:center; margin-top:10px;"}
+                        = link_to(expert_path(appointment.expert.id, search_history_id: appointment.search_history.id), class: 'btn btn-primary btn-block') do
+                          %i.fa.fa-align-left
+                          = t('view_clients.experts_search.view_profile')
+
+            %nav{"aria-label" => "#{t('view_clients.experts_search.page_navigation')}"}
+              %ul.pagination
+                %li
+                  %a{"aria-label" => "#{t('view_clients.experts_search.previous')}", :href => "#"}
+                    %i.fa.fa-caret-left
+                %li.active
+                  %a{:href => "#"} 1
+                %li
+                  %a{:href => "#"} 2
+                %li
+                  %a{:href => "#"} 3
+                %li
+                  %a{:href => "#"} 4
+                %li
+                  %a{:href => "#"} 5
+                %li
+                  %a{"aria-label" => "#{t('buttons.next')}", :href => "#"}
+                    %i.fa.fa-caret-right
+/ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=

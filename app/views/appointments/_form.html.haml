@@ -1,0 +1,59 @@
+.panel.panel-default
+  .panel-heading= t(model: t("activerecord.models.appointment"))
+  .panel-body
+    .col-md-12
+      = simple_form_for @appointment, url: create_path, html: { class: 'form-horizontal' } do |f|
+        = f.error_notification
+
+        .form-inputs
+          .row
+            .col-sm-4.form-group
+              %label{:for => "user"} <%= t 'view_appointments.form.user' %>
+              %input#user.form-control{:name => "appointment[user_id]", :type => "text"}
+            .col-sm-4.form-group
+              %label{:for => "expert"} <%= t 'view_appointments.form.expert' %>
+              %input#expert.form-control{:name => "appointment[expert_id]", :type => "text"}
+            .col-sm-4.form-group
+              %label{:for => "service"} <%= t 'view_appointments.form.service' %>
+              %input#service.form-control{:name => "appointment[service_id]", :type => "text"}
+
+          .row
+            .col-sm-4.form-group
+              %label{:for => "subject"} <%= t 'view_appointments.form.subject' %>
+              %input#subject.form-control{:name => "appointment[subject]", :type => "text"}
+
+            .col-sm-4.form-group
+              %label{:for => "Type"} <%= t 'view_appointments.form.type' %>
+              %input#type.form-control{:name => "appointment[type]", :type => "text"}
+
+            .col-sm-4.form-group
+              %label{:for => "subject"} <%= t 'view_appointments.form.subject' %>
+              %input#subject.form-control{:name => "appointment[subject]", as: :string}
+
+          .row
+            .col-sm-4.form-group
+              %label{:for => "duration_in_min"}  <%= t 'view_appointments.form.duration' %>
+              %input#duration_in_min.form-control{:name => "appointment[duration_in_min]", as: :string}
+            .col-sm-4.form-group
+              %label{:for => "start_date"} <%= t 'view_appointments.form.start_date' %>
+              %input#start_date.form-control{:name => "appointment[start_date]", as: :string}
+            .col-sm-4.form-group
+              %label{:for => "end_date"} <%= t 'view_appointments.form.end_date' %>
+              %input#end_date.form-control{:name => "appointment[end_date]", as: :string}
+
+          .row
+            .col-sm-12.form-group
+              %label{:for => "description"} <%= t 'view_appointments.form.description' %>
+              %input#description.form-control{:name => "appointment[description]", as: :text}
+          .row
+            .col-sm-1.form-group
+              %label{:for => "cancelled"} <%= t 'view_appointments.form.cancelled' %>
+              %input#cancelled.form-control{:name => "appointment[cancelled]", type: :checkbox}
+            .col-sm-11.form-group
+              %label{:for => "cancel_reason"} <%= t 'view_appointments.form.cancelled_reason' %>
+              %input#cancel_reason.form-control{:name => "appointment[cancel_reason]", as: :text}
+
+
+          %hr
+          .form-actions
+            = f.button :submit, class: 'btn btn-primary'

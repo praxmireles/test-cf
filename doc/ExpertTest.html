@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class ExpertTest - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+  var index_rel_prefix = "./";
+</script>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/darkfish.js"></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="ActiveSupport/TestCase.html">ActiveSupport::TestCase</a>
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-i-setup">#setup</a>
+    
+    <li ><a href="#method-i-test_finds_today_availability">#test_finds_today_availability</a>
+    
+    <li ><a href="#method-i-test_it_find_match">#test_it_find_match</a>
+    
+    <li ><a href="#method-i-test_it_find_match_by_first_available">#test_it_find_match_by_first_available</a>
+    
+    <li ><a href="#method-i-test_it_order_by_first_available">#test_it_order_by_first_available</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-ExpertTest">
+  <h1 id="class-ExpertTest" class="class">
+    class ExpertTest
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-setup" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">setup</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="setup-source">
+            <pre><span class="ruby-comment"># File test/models/users/expert_test.rb, line 3</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">setup</span>
+  <span class="ruby-ivar">@expert_array</span> = []
+  <span class="ruby-value">3</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">expert</span> = <span class="ruby-identifier">create</span>(<span class="ruby-value">:expert_with_availabilities</span>)
+    <span class="ruby-identifier">profile</span> = <span class="ruby-identifier">create</span>(<span class="ruby-value">:profile</span>, <span class="ruby-value">user_id:</span> <span class="ruby-identifier">expert</span>.<span class="ruby-identifier">id</span>)
+
+    <span class="ruby-identifier">create</span>(
+      <span class="ruby-value">:profile_industry</span>,
+      <span class="ruby-value">profile_id:</span> <span class="ruby-identifier">profile</span>.<span class="ruby-identifier">id</span>,
+      <span class="ruby-value">industry_id:</span> <span class="ruby-constant">Industry</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">id</span>
+    )
+    <span class="ruby-identifier">create</span>(
+      <span class="ruby-value">:profile_job_function</span>,
+      <span class="ruby-value">profile_id:</span> <span class="ruby-identifier">profile</span>.<span class="ruby-identifier">id</span>,
+      <span class="ruby-value">job_function_id:</span> <span class="ruby-constant">JobFunction</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">id</span>
+    )
+    <span class="ruby-identifier">create</span>(
+      <span class="ruby-value">:profile_skill</span>,
+      <span class="ruby-value">profile_id:</span> <span class="ruby-identifier">profile</span>.<span class="ruby-identifier">id</span>,
+      <span class="ruby-value">skill_id:</span> <span class="ruby-constant">JobFunction</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">skills</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">id</span>
+    )
+    <span class="ruby-identifier">create</span>(
+      <span class="ruby-value">:profile_seniority_level</span>,
+      <span class="ruby-value">profile_id:</span> <span class="ruby-identifier">profile</span>.<span class="ruby-identifier">id</span>,
+      <span class="ruby-value">seniority_level_id:</span> <span class="ruby-constant">SeniorityLevel</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">id</span>
+    )
+
+    <span class="ruby-ivar">@expert_array</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">expert</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-value">2</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">expert</span> = <span class="ruby-identifier">create</span>(<span class="ruby-value">:expert_with_availabilities</span>)
+    <span class="ruby-identifier">profile</span> = <span class="ruby-identifier">create</span>(<span class="ruby-value">:profile</span>, <span class="ruby-value">user_id:</span> <span class="ruby-identifier">expert</span>.<span class="ruby-identifier">id</span>)
+
+    <span class="ruby-identifier">create</span>(
+      <span class="ruby-value">:profile_industry</span>,
+      <span class="ruby-value">profile_id:</span> <span class="ruby-identifier">profile</span>.<span class="ruby-identifier">id</span>,
+      <span class="ruby-value">industry_id:</span> <span class="ruby-constant">Industry</span>.<span class="ruby-identifier">second</span>.<span class="ruby-identifier">id</span>
+    )
+    <span class="ruby-identifier">create</span>(
+      <span class="ruby-value">:profile_job_function</span>,
+      <span class="ruby-value">profile_id:</span> <span class="ruby-identifier">profile</span>.<span class="ruby-identifier">id</span>,
+      <span class="ruby-value">job_function_id:</span> <span class="ruby-constant">JobFunction</span>.<span class="ruby-identifier">second</span>.<span class="ruby-identifier">id</span>
+    )
+    <span class="ruby-identifier">create</span>(
+      <span class="ruby-value">:profile_skill</span>,
+      <span class="ruby-value">profile_id:</span> <span class="ruby-identifier">profile</span>.<span class="ruby-identifier">id</span>,
+      <span class="ruby-value">skill_id:</span> <span class="ruby-constant">JobFunction</span>.<span class="ruby-identifier">second</span>.<span class="ruby-identifier">skills</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">id</span>
+    )
+    <span class="ruby-identifier">create</span>(
+      <span class="ruby-value">:profile_seniority_level</span>,
+      <span class="ruby-value">profile_id:</span> <span class="ruby-identifier">profile</span>.<span class="ruby-identifier">id</span>,
+      <span class="ruby-value">seniority_level_id:</span> <span class="ruby-constant">SeniorityLevel</span>.<span class="ruby-identifier">second</span>.<span class="ruby-identifier">id</span>
+    )
+
+    <span class="ruby-ivar">@expert_array</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">expert</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-test_finds_today_availability" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">test_finds_today_availability</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="test_finds_today_availability-source">
+            <pre><span class="ruby-comment"># File test/models/users/expert_test.rb, line 107</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">test_finds_today_availability</span>
+  <span class="ruby-identifier">ordered_expert</span> = <span class="ruby-constant">Expert</span>.<span class="ruby-identifier">find_available_experts_today</span>(<span class="ruby-ivar">@expert_array</span>)
+  <span class="ruby-identifier">assert_experts_are_in_order</span>(<span class="ruby-identifier">ordered_expert</span>, <span class="ruby-value">5</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-test_it_find_match" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">test_it_find_match</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="test_it_find_match-source">
+            <pre><span class="ruby-comment"># File test/models/users/expert_test.rb, line 61</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">test_it_find_match</span>
+  <span class="ruby-identifier">params</span> = {
+    <span class="ruby-value">industries:</span> [<span class="ruby-string">&#39;Accounting&#39;</span>],
+    <span class="ruby-value">job_functions:</span> [<span class="ruby-string">&#39;Marketing Tools and Automation&#39;</span>],
+    <span class="ruby-value">seniority_levels:</span> [<span class="ruby-string">&#39;Chief Executive Officer&#39;</span>],
+    <span class="ruby-value">skills:</span> [<span class="ruby-string">&#39;Advertising&#39;</span>],
+    <span class="ruby-value">first_available:</span> <span class="ruby-keyword">false</span>
+  }
+
+  <span class="ruby-identifier">actual</span> = <span class="ruby-constant">Expert</span>.<span class="ruby-identifier">find_match</span>(<span class="ruby-identifier">params</span>)
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">3</span>, <span class="ruby-identifier">actual</span>.<span class="ruby-identifier">count</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-test_it_find_match_by_first_available" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">test_it_find_match_by_first_available</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="test_it_find_match_by_first_available-source">
+            <pre><span class="ruby-comment"># File test/models/users/expert_test.rb, line 74</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">test_it_find_match_by_first_available</span>
+  <span class="ruby-identifier">params_one</span> = {
+    <span class="ruby-value">industries:</span> [<span class="ruby-string">&#39;Accounting&#39;</span>],
+    <span class="ruby-value">job_functions:</span> [<span class="ruby-string">&#39;Marketing Tools and Automation&#39;</span>],
+    <span class="ruby-value">seniority_levels:</span> [<span class="ruby-string">&#39;Chief Executive Officer&#39;</span>],
+    <span class="ruby-value">skills:</span> [<span class="ruby-string">&#39;Advertising&#39;</span>],
+    <span class="ruby-value">first_available:</span> <span class="ruby-keyword">false</span>
+  }
+
+  <span class="ruby-identifier">params_two</span> = {
+    <span class="ruby-value">industries:</span> [<span class="ruby-string">&#39;Accounting&#39;</span>],
+    <span class="ruby-value">job_functions:</span> [<span class="ruby-string">&#39;Marketing Tools and Automation&#39;</span>],
+    <span class="ruby-value">seniority_levels:</span> [<span class="ruby-string">&#39;Chief Executive Officer&#39;</span>],
+    <span class="ruby-value">skills:</span> [<span class="ruby-string">&#39;Advertising&#39;</span>],
+    <span class="ruby-value">first_available:</span> <span class="ruby-keyword">true</span>
+  }
+
+  <span class="ruby-identifier">expert_two</span> = <span class="ruby-constant">Expert</span>.<span class="ruby-identifier">find_match</span>(<span class="ruby-identifier">params_two</span>)
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">3</span>, <span class="ruby-identifier">expert_two</span>.<span class="ruby-identifier">count</span>
+
+  <span class="ruby-identifier">expert_one</span> = <span class="ruby-constant">Expert</span>.<span class="ruby-identifier">find_match</span>(<span class="ruby-identifier">params_one</span>)
+  <span class="ruby-identifier">timeslot_one</span> = <span class="ruby-identifier">expert_one</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:next_availability</span>)
+  <span class="ruby-identifier">timeslot_two</span> = <span class="ruby-identifier">expert_two</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:next_availability</span>)
+  <span class="ruby-identifier">ordered_time_slot_one</span> = <span class="ruby-identifier">sort_by_timeslot</span>(<span class="ruby-identifier">timeslot_one</span>)
+  <span class="ruby-identifier">ordered_time_slot_two</span> = <span class="ruby-identifier">sort_by_timeslot</span>(<span class="ruby-identifier">timeslot_two</span>)
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-identifier">ordered_time_slot_one</span>, <span class="ruby-identifier">ordered_time_slot_two</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-test_it_order_by_first_available" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">test_it_order_by_first_available</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="test_it_order_by_first_available-source">
+            <pre><span class="ruby-comment"># File test/models/users/expert_test.rb, line 102</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">test_it_order_by_first_available</span>
+  <span class="ruby-identifier">ordered_expert</span> = <span class="ruby-constant">Expert</span>.<span class="ruby-identifier">order_by_first_available</span>(<span class="ruby-ivar">@expert_array</span>)
+  <span class="ruby-identifier">assert_experts_are_in_order</span>(<span class="ruby-identifier">ordered_expert</span>, <span class="ruby-value">5</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

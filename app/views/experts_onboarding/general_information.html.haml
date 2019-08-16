@@ -1,0 +1,154 @@
+= render partial: 'tab_steps'
+
+.row
+  .col-sm-10.col-sm-offset-1
+    .panel
+      .panel-header
+        %span.text-md= t('layout.general_information')
+      .panel-content.text-md{:style => "text-align:justify"}
+        .row{:style => "margin:20px"}
+          .col-md-12
+            .row.justify-content-center{:style => "margin:0px;"}
+              .col-xl-12
+                = form_for @user, url: url_for(controller: 'experts', action: 'update'), method: :put, html: {class: "nifty_form expert-form"} do |f|
+                  = hidden_field_tag current_user
+                  = hidden_field_tag :authenticity_token, form_authenticity_token
+                  .row
+                    .col-sm-12.mb-5
+                      %img.img-responsive= image_tag current_user&.avatar.url if signed_in? and current_user.avatar.present?
+                  .row
+                    .col-sm-4
+                      %label{:for => "first_name"}= t('general_information.first_name')
+                      .input-group.mb-sm
+                        %span.input-group-addon.x-primary
+                          %i.fa.fa-user
+                        .small
+                          = f.text_field :first_name, required: true, maxlength: 33
+
+                    .col-sm-4
+                      %label{:for => "last_name"}= t('general_information.last_name')
+                      .input-group.mb-sm
+                        %span.input-group-addon.x-primary
+                          %i.fa.fa-user
+                        .small
+                          = f.text_field :last_name, required: true, maxlength: 33
+
+
+                    .col-sm-4
+                      %label{:for => "email"}= t('general_information.email')
+                      .input-group.mb-sm
+                        %span.input-group-addon.x-primary
+                          %i.fa.fa-at
+                        .small
+                          = f.text_field :email, required: true, maxlength: 33
+
+                  .row
+                    .col-sm-4
+                      %label{:for => "location"}= t('general_information.timezone')
+                      .small
+                        = f.collection_select :timezone_id, Timezone.all.name_asc, :id, :name
+
+                    .col-sm-6
+                      %label{:for => "location"}= t('general_information.location')
+                      .input-group.mb-sm
+                        %span.input-group-addon.x-primary
+                          %i.fa.fa-map-marker
+                        = f.text_field :location, id: "location", maxlength: 70, required: true
+                  -# %br
+                  -# .row
+                  -#   .col-sm-3.col-sm-offset-8
+                  -#     = f.submit "Update",class: "btn btn-primary btn-wide update-btn"
+
+                  %hr
+                  = f.fields_for :contact_information do |c|
+
+                    = hidden_field :user_id, value: current_user
+
+                    %h3
+                      = t('view_experts_onboarding.general_information.contact_information')
+                    %i
+                      %small * = t('view_experts_onboarding.general_information.contact_data')
+                    .row
+                      .col-sm-6
+                        %label{:for => "title"}
+                          = t('general_information.mobile')
+                        %br
+                        #phone.small= c.phone_field :primary_mobile, maxlength: 50, required: true, as: :text, value: current_user.contact_information&.primary_mobile
+
+
+                      .col-sm-6
+                        %label{:for => "title"}= t('general_information.mobile_contact_time')
+                        .input-group.mb-sm
+                          %span.input-group-addon.x-primary
+                            %i.fa.fa-clock
+                          %small= c.select :mobile_contact_time, collection: Expert.hours.map{|h| [h,h]}
+                    .row
+                      .col-sm-6
+                        %label{:for => "title"}= t('general_information.phone')
+                        .input-group.mb-sm
+                        #mobile.small= c.telephone_field :primary_phone, maxlength: 50, as: :text, value: current_user.contact_information&.primary_phone
+
+                      .col-sm-6
+                        %label{:for => "title"}= t('general_information.phone_contact_time')
+                        .input-group.mb-sm
+                          %span.input-group-addon.x-primary
+                            %i.fa.fa-clock
+                          %small= c.select :phone_contact_time, collection: Expert.hours.map{|h| [h,h]}
+
+
+                  %br
+                  .row
+                    .col-sm-2.col-sm-offset-10
+
+                  %hr
+                  .panel-footer
+                    .row
+                      .col-sm-4
+                        %a.btn.btn-lighter-1.btn-wide{:style => "margin-left:20%", href: "/experts/onboarding/welcome" }
+                          = t('buttons.back')
+
+                      .col-sm-4.col-sm-offset-4
+                        = f.submit t('buttons.next'), class: "btn btn-primary btn-wide next-btn", :style => "display: none; margin-left:20%"
+                        %a.btn.btn-primary.btn-wide.next-button{type: "submit", :style => "margin-left:20%", href: "/experts/onboarding/resume" }
+                          = t('buttons.next')
+
+
+
+:javascript
+    function initAutocomplete() {
+      // Create the autocomplete object, restricting the search to geographical
+      // location types.
+      autocomplete = new google.maps.places.Autocomplete(
+          /** @type {!HTMLInputElement} */(document.getElementById('location')),
+          {types: ['geocode']});
+
+      // When the user selects an address from the dropdown, populate the address
+      // fields in the form.
+      autocomplete.addListener('place_changed', fillInAddress);
+    }
+
+    function fillInAddress() {
+      // Get the place details from the autocomplete object.
+      var place = autocomplete.getPlace();
+
+    }
+
+    $(".next-button").click(function(e){
+      e.preventDefault();
+      $("input[name='commit']").click();
+    })
+
+    $(document).ready(function(){
+      $("#phone").intlTelInput({
+        formatOnInit: true,
+        separateDialCode: true,
+        utilsScript: "#{asset_path('libphonenumber/utils.js')}"
+      });
+
+      $("#mobile").intlTelInput({
+        formatOnInit: true,
+        separateDialCode: true,
+        utilsScript: "#{asset_path('libphonenumber/utils.js')}"
+      });
+    })
+%script{:src => "https://maps.googleapis.com/maps/api/js?key=AIzaSyAJZh005PH0sabRv0JhsH51pIWOqZ9NaV0&libraries=places&language=en&callback=initAutocomplete"}

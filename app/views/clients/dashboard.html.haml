@@ -1,0 +1,252 @@
+= render partial: 'partials/mwp_app'
+.wrap
+  / page HEADER
+  / =========================================================
+  .page-header
+    / LEFTSIDE header
+    .leftside-header
+      .logo
+        %a.on-click{:href => "request_view_client.html"}
+        = image_tag("logo-mwp-bco_preview.png", alt: 'logo', class: 'pl-4')
+    .rightside-header
+      .header-middle
+      .header-separator
+      #language.header-section
+      - if locale == :en
+        = link_to(locale_path(:en), method: :patch, style: 'color: black') do
+          %b
+            %u English
+        %span
+          = "-"
+          = link_to(locale_path(:es), method: :patch, style: 'color: black') do
+            Spanish
+      - elsif  locale == :es
+        = link_to(locale_path(:en), method: :patch, style: 'color: black') do
+          English
+        = "-"
+        = link_to(locale_path(:es), method: :patch, style: 'color: black') do
+          %b
+            %u Spanish
+      - else
+        English - Spanish
+      .header-separator
+      .btn-group.dropleft{:role => "group"}
+        .dropdown-toggle.dropdown-toggle-split{"aria-expanded" => "true", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+          %i.fas.fa-bell.icon-open.white
+          %span.notifications-btn.badge.badge-xs.badge-top-left.x-danger.unread-count{:id => "#{current_user.id}_unread_count"}= current_user&.unread_notifications.count
+        %ul.dropdown-menu{:style => "right: 0; left: auto; width: 500px;"}
+          %li
+            %a
+              %span.badge.x-danger.white.unread-count{:id => "#{current_user.id}_white_count"}= "#{current_user&.unread_notifications.count}"
+              = t('view_clients.dashboard.notifications')
+          .btnplus{:id => "#{current_user.id}_notifications"}
+            = render 'notification_list'
+          - unless current_user.unread_notifications.count < 10
+            %hr
+              .col-sm-5.col-sm-offset-5
+                = link_to 'Show more', client_notifications_path, class: 'btn btn-xs btn-primary'
+      .header-separator
+      - if current_user.present?
+        #user-headerbox.header-section
+          .user-header-wrap
+            .dropdown-toggle.dropdown-toggle-split{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+              .user-photo
+                = image_tag current_user&.avatar.url if current_user and current_user.avatar.present?
+              .user-info
+                %span.user-name
+                  = current_user.fullname if current_user
+
+                %span.user-profile= t("user_types.#{current_user.type.downcase}")
+            %ul.dropdown-menu{:style => "right: 0; left: auto;"}
+
+              %li
+                %a{:href => client_settings_path}
+                  = t('view_clients.settings.dashboard.settings')
+              %li
+                %a{:href => client_invoices_path}
+                  = t('view_clients.settings.dashboard.invoices')
+              %li
+                %a{:href => logout_path}
+                  = t('view_clients.settings.dashboard.sign_out')
+
+
+      / Log out
+      .header-separator
+      .btn-group.dropleft{:role => "group"}
+        .dropdown-toggle.dropdown-toggle-split{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+          %i.fa.fa-plus.icon-open{:style => "color:white"}
+        %ul.dropdown-menu{:style => "right: 0; left: auto;"}
+
+          %li
+            %a{:href => client_settings_path}
+              = t('view_clients.settings.dashboard.settings')
+          %li
+            %a{:href => client_invoices_path}
+              = t('view_clients.settings.dashboard.invoices')
+          %li
+            %a{:href => logout_path}
+              = t('view_clients.settings.dashboard.sign_out')
+      .header-separator
+
+      #menu-toggle.visible-xs.toggle-left-sidebar{"data-target" => "html", "data-toggle-class" => "left-sidebar-open"}
+        %i.fa.fa-bars{"aria-label" => "Toggle sidebar"}
+    / RIGHTSIDE header
+    .rightside-header
+  / page BODY
+  / =========================================================
+  .page-body
+  / CONTENT
+  / =========================================================
+  #section-start.content
+    / =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    .row.animated.fadeInUp
+      / USER INFO
+      .col-sm-12.col-md-3
+        %div
+          .userHeader.mb-3
+            .col-sm-5.expertImage.pl-0
+              %img.img-responsive= image_tag current_user&.avatar.url if signed_in? and current_user.avatar.present?
+            .col-sm-7.px-0
+              %h3.userName.my-1= current_user.fullname
+              %form.editProfile
+                = link_to t('view_clients.dashboard.edit_profile'), client_settings_path, class: 'btn btn-info'
+          / .panel.b-primary.bt-sm
+          /   .panel-content
+          /     %ul.user-contact-info.ph-sm
+          /       %li
+          /         %h4
+          /           %i.color-primary.mr-md.fa.fa-user>
+          /           About Me
+          /       %li.mt-sm.text-md
+          /         %p
+          .panel.b-primary.bt-sm
+            .panel-content
+              %ul.user-contact-info.ph-sm
+                %li.grayBackground.pl-4
+                  %p.my-1
+                    %i.color-green.mr-md.fa.fa-check
+                    %span #{current_user.completed_appointments.count}
+                    = t('view_clients.dashboard.appointment_completed')
+                %li.grayBackground.pl-4
+                  %p.my-1
+                    %i.color-alert.mr-md.fa.fa-clock-o
+                    %span 0 
+                    = t('view_clients.dashboard.projects')
+                    = t('view_clients.dashboard.working_on')
+                %li.grayBackground.pl-4
+                  %p.my-1
+                    %i.color-yellow.mr-md.fa.fa-star
+                    %span="#{current_user.ratings.average(:rate)}/5"
+                    = t('view_clients.dashboard.rating')
+            .panel.widgetbox.wbox-2.bg-scale-0
+              =link_to(services_path) do
+                .panel-content
+                  .row
+                    .col-xs-4
+                      %span.icon.fa.fa-search.color-darker-1
+                    .col-xs-8
+                      %h4.subtitle.color-darker-1
+                      %h1.title.color-primary
+                        = t('view_clients.dashboard.get_your_expert')
+          .panel.b-primary.bt-sm  
+            .panel.widgetbox.wbox-2.bg-scale-0
+              .panel-content
+                .row
+                  .col-xs-4
+                    %span.icon.fa.fa-star.color-darker-1
+                  .col-xs-8
+                    %h4.subtitle.color-darker-1
+                    = link_to(client_experts_match_path) do
+                      %h1.title.color-primary
+                        = t('view_clients.dashboard.expert_match')
+      / REQUEST VIEW
+      .col-sm-12.col-md-5
+        .panel.b-primary.bt-sm
+          .panel-content
+            / Nav tabs
+            .card
+              %ul.m.nav.nav-tabs{:role => "tablist"}
+                %li.active{:role => "presentation"}
+                  %a{"aria-controls" => "appointments", "data-toggle" => "tab", :href => "#appointments", :role => "tab"}
+                    = t('view_clients.dashboard.appointments')
+                %li{:role => "presentation"}
+                  %a{"aria-controls" => "packages", "data-toggle" => "tab", :href => "#packages", :role => "tab"}
+                    = t('view_clients.dashboard.packages')
+              / Tab panes
+              .tab-content
+                #appointments.tab-pane.active{:role => "tabpanel"}
+                  / Filters buttons
+                  #myBtnContainer.my-3
+                    %button.btnFilter.active{:onclick => "filterSelection('all')"}
+                      = t('view_clients.dashboard.show_all')
+                    %button.btnFilter{:onclick => "filterSelection('inProgress')"}
+                      = t('view_clients.dashboard.in_progress')
+                    %button.btnFilter{:onclick => "filterSelection('scheduled')"}
+                      = t('view_clients.dashboard.scheduled')
+                    %button.btnFilter{:onclick => "filterSelection('pending')"}
+                      = t('view_clients.dashboard.pending')
+                    %button.btnFilter{:onclick => "filterSelection('past')"}
+                      = t('view_clients.dashboard.past')
+                  / The filterable elements
+                  .containerInfo
+                    .filterDiv.pending.pending_appointments
+                      = render partial: 'pending_appointments'
+                    .filterDiv.inProgress.in_progress_appointments
+                      = render partial: 'in_progress_appointments'
+                    .filterDiv.scheduled
+                      = render partial: 'scheduled_appointments'
+                    .filterDiv.past
+                      = render partial: 'past_appointments'
+                #packages.tab-pane{:role => "tabpanel"}
+                  / The filterable elements
+                  .containerInfo
+                    = render partial: 'appointment_packs'
+      / =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+      / SCHEDULED SESSIONS
+      .col-sm-12.col-md-3
+        .panel.b-primary.bt-sm
+          .panel-content
+            %ul.user-contact-info.ph-sm
+              %li
+                %h4
+                  %i.color-primary.mr-md.fa.fa-user>
+                  = t('view_clients.dashboard.scheduled_sessions')
+              %li.mt-sm.text-md
+                #appointments-calendar.clean-theme{ data: { "month-format" => "month YYY", "day-format" => "DD" } }
+    / =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+  / scroll to top
+  %a.scroll-to-top{:href => "#"}
+    %i.fa.fa-angle-double-up
+/ Modals
+/ =========================================================
+/ Appointment User infoModal
+#appointmentUser.modal.fade{:role => "dialog"}
+  -# = render partial: 'expert_information', locals: {appointment: appointment}
+/ Appointment View Modal
+#appointmentView.modal.fade{:role => "dialog"}
+  -# = render partial: 'appointment_details', locals: {appointment: appointment}
+
+:javascript
+  window.setInterval(function(){
+    $.ajax({
+      type: "GET",
+      url: '/clients/reload_dashboard',
+      success: function(data, status){
+        console.log('reloaded dashboard');
+      },
+      dataType: 'script'
+    });
+  }, 60000);
+
+  var appointmentsCalendar = jsCalendar.new("#appointments-calendar", "now", {
+    "monthFormat": "month YYYY",
+    "dayFormat": "DD"
+  })
+  appointmentsCalendar.select(#{@scheduled_appointments_dates.to_json.html_safe});
+  
+  window.setInterval(function(){
+    $.ajax({
+      type: "get",
+      url: '/notifications/check_notification'
+    })
+  }, 5000);

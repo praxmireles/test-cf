@@ -1,0 +1,24 @@
+express_advice:
+  price: 37
+  duration_in_min: 20
+
+coaching:
+  price: 117
+  duration_in_min: 60
+  introduction:
+    price: 57
+    duration_in_min: 30
+
+mentoring:
+  price: 117
+  duration_in_min: 60
+  introduction:
+    price: 57
+    duration_in_min: 30
+
+project_in_mind:
+  price: 117
+  duration_in_min: 60
+  introduction:
+    price: 57
+    duration_in_min: 30

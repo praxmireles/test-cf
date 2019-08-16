@@ -1,0 +1,24 @@
+
+@import 'bootstrap-sprockets';
+@import 'bootstrap-social';
+@import 'bootstrap-datetimepicker';
+@import 'bootstrap';
+@import 'colors';
+@import 'fonts/font-awesome.min';
+@import 'jquery.printarea';
+// @import 'select2';
+// @import 'jquery.minicolors';
+// @import "dataTables/jquery.dataTables";
+// @import "dataTables/bootstrap/3/jquery.dataTables.bootstrap";
+// @import "dataTables/extras/dataTables.tableTools";
+@import "ie10-viewport-bug-workaround";
+@import "custom";
+// @import "jsCalendar";
+@import "layout";
+// Font awesome
+@import "font-awesome-sprockets";
+@import "font-awesome";
+@import "jsCalendar";
+@import "intlTelInput";
+@import "toggle";
+@import "dropzone/dropzone"

@@ -1,0 +1,36 @@
+.row
+  .col-sm-10.col-sm-offset-1
+    .panel
+      .panel-header.panel-primary
+        = page_entries_info @appointments
+        .btn-group.pull-right
+          - if can? :new, Appointment
+          = link_to t('actions.new',  model: t("activerecord.models.appointment")), new_appointment_path, class: 'btn btn-xs btn-success', id: 'panel-heading-link'
+      .panel-body
+        = form_tag destroy_appointments_path, method: :delete, id: "#{controller_name}" do
+          %table.table.table-striped
+            %thead
+              %tr
+                %th= t('.user')
+                %th= t('.expert')
+                %th= t('.service')
+                %th= t('.subject')
+                %th= t('.completed')
+                %th= t('.canceled')
+                - if have_any_index_action?(controller_name)
+                  %th= t('layouts.application.actions')
+
+            %tbody
+              - @appointments.each do |appointment|
+              %tr
+                %td= "appointment.user"
+                %td= "appointment.expert"
+                %td= "appointment.service"
+                %td= "appointment.subject"
+                %td= "appointment.completed"
+                %td= "appointment.canceled"
+                - if have_any_index_action?(controller_name)
+
+          - if can? :destroy, t('view_appointments.checkout.appointment')
+            = button_tag data: { confirm: t('actions.are_you_sure_multiple_destroy.male') }, title: "Destroy", class: 'btn btn-danger', id: 'delete-multiple-button' do
+              %i.fa.fa-trash= 'Destroy'

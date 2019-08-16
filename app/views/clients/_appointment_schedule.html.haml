@@ -1,0 +1,53 @@
+
+.col-xs-12.col-md-4.col-md-offset-1
+.panel.b-primary.bt-sm
+  .panel-header
+    %h3.panel-title
+      %i.fa.fa-clock-o
+        = t('views_clients.appointment_schedule')
+  .panel-content
+    %p#selected-schedule
+      = t('views_clients.appointment_schedule_not_selected_yet')
+
+#appointments-schedules.modal{ tabindex: "-1", role: "dialog", "aria-labelledby" => "modal-primary-label" }
+  .modal-dialog{ role: "document" }
+    .modal-content
+      .modal-header.state.modal-primary
+        %button.close{ type: "button", "data-dismiss" => "modal", "aria-label" => "Close" }
+          %span{ "aria-hidden" => "true" }
+            &times;
+        %h4#modal-primary-label.modal-title
+          %i.fa.fa-clock-o
+          = t('views_clients.settings.schedules_availables')
+      .modal-body
+        .hours-available
+          loresm ipsum
+      .modal-footer
+        %button.btn.btn-default{ type: "button", "data-dismiss" => "modal" }
+          = t('views_clients.settings.close')
+
+:javascript
+  var appointmentsCalendar = jsCalendar.new("#appointments-calendar", "now", {
+      "monthFormat": "month YYYY",
+      "dayFormat": "DD"
+  })
+  appointmentsCalendar.select(#{@available_schedules_days.to_json.html_safe});
+
+  appointmentsCalendar.onDateClick(function(event, date) {
+
+    $('.modal').find('.hours-available').html("");
+    $('#selected_date').html(date)
+
+    $.ajax({
+      method: "GET",
+      url: "/experts/availabilities?date=" + moment(date).format('YYYY-MM-DD'),
+      success: function(data){
+        $('.modal').modal();
+      },
+      error: function(){
+        console.log(error )
+        //alert( "error" );
+      },
+      dataType: 'script'
+    });
+  });

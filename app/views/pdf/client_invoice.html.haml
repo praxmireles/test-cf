@@ -1,0 +1,105 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %link{:href => "https://fonts.googleapis.com/css?family=Open+Sans", :rel => "stylesheet"}/
+    :css
+      body{
+      	margin: 35px 0px 0px 30px;
+      }
+      div.customer-data, div.invoice-data{
+      	float: left;
+      	width: 50%;
+      }
+      table.decription-table{
+      	width: 100%;
+      	/*border: 1px solid black;*/
+      }
+
+      table.decription-table td{
+      	border: 1px solid black;	
+      }
+      div.div-for-tab{
+      	width: 100%;
+      }
+    %title Invoice
+  %body
+    .container{:style => "margin: 0px auto; width: 900px;"}
+      .customer-data
+        %br/
+        %table.customer-data{:style => "width: 80%"}
+          %tr
+            %td{:valign => "top"}
+              %strong
+                = t('invoice.from') + ':'
+            %td
+              = @invoice.payment.appointment.expert.fullname
+              %br/
+              = t('invoice.business_name') + ':'
+              123456
+              / = {@invoice.payment.appointment.expert.company}
+          %tr
+            %td{:height => "10", :valign => "top"}
+            %td{:height => "10", :valign => "top"}
+          %tr
+            %td{:valign => "top"}
+              %strong
+                = t('invoice.bill_to') + ':'
+            %td{:valign => "top"}
+              123456
+              / = @invoice.payment.appointment.client.company
+              %br/
+              Attn: Hector Rosas
+              %br/
+              = @invoice.payment.appointment.client.location
+      .invoice-data
+        %h3{:style => "text-align: center;background: #e8e8e8;padding: 10px 0px;"} INVOICE
+        %table{:align => "center", :style => "width:100%;"}
+          %tr
+            %td
+              = t('invoice.invoice') + '#'
+            %td
+              = @invoice.id
+          %tr
+            %td
+              = t('invoice.date')
+            %td
+              = @invoice.date.strftime('%D')
+          %tr
+            %td
+              %strong
+                = t('invoice.due_date')
+            %td
+              = @invoice.due_date.strftime('%D')
+          %tr
+            %td
+              = t('invoice.total_amount')
+            %td
+              = (@invoice.payment.amount / 100)
+          %tr
+            %td
+              %strong
+                = t('invoice.total_due')
+            %td
+              = @invoice.payment.amount
+      %br/
+    %br/
+    .div-for-tab{:style => "width: 900px;margin: 20px auto;padding-top: 30px;clear: both;"}
+      %table.decription-table{:cellpadding => "0", :cellspacing => "0"}
+        %tr
+          %td{:colspan => "2", :height => "30", :style => "padding-left:10px;background: #e8e8e8;font-family: 'Open Sans', sans-serif;"}
+            = t('invoice.description') + '/' = t('invoice.memo')
+          %td{:align => "right", :height => "30", :style => "padding-right:15px;background: #e8e8e8;font-family: 'Open Sans', sans-serif;"}
+            = t('invoice.amount')
+        %tr
+          %td{:colspan => "2", :height => "30", :style => "padding-left:10px;font-family: 'Open Sans', sans-serif;"}= @invoice.payment.appointment.service.type.titleize
+          %td{:align => "right", :height => "30", :style => "padding-left:10px;font-family: 'Open Sans', sans-serif; padding-right: 15px;"}= @invoice.payment.amount
+        %tr
+          %td{:height => "70", :style => "padding-left:10px;font-family: 'Open Sans', sans-serif;", :width => "90"}
+          %td{:align => "center", :style => "font-family: 'Open Sans', sans-serif;", :valign => "center", :width => "5"}
+            = t('invoice.total_amount') + ':'
+          %td{:align => "right", :style => "padding-right: 15px;font-family: 'Open Sans', sans-serif;", :width => "5"}= @invoice.payment.amount
+    %div{:style => "float: right; margin-top: 30px;"}
+      %span{:style => "font-family: 'Open Sans', sans-serif;font-size:18px;margin-right:15px;float: left;"}
+      = t('invoice.invoce_created_via')
+      = wicked_pdf_image_tag("logo_minds_with_purpose-logo-pdf.png", size: "120x30")

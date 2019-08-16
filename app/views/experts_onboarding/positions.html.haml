@@ -1,0 +1,176 @@
+= render partial: 'tab_steps'
+%script{src:"https://cdnjs.cloudflare.com/ajax/libs/jquery-ujs/1.2.2/rails.min.js"}
+
+.row
+  .col-sm-10.col-sm-offset-1
+    .panel
+      .panel-header
+        %span.text-md
+          = t('view_experts_onboarding.positions.job_position')
+
+      .panel-body.text-justify
+        %p
+          = t('view_experts_onboarding.positions.we_recommend_you')
+
+%br
+
+.row
+  .col-sm-6.col-sm-offset-1
+    .panel
+      .panel-header
+        %span.text-md= t('layout.work_industries/Speciality')
+      .panel-content.text-md{:style => "text-align:justify"}
+        .row{:style => "margin:20px"}
+          .col-md-12
+            .row.justify-content-center{:style => "margin:0px;"}
+              .col-xl-12
+                %h3
+                  = t('view_experts_onboarding.positions.work_history')
+                -# = form_tag(work_industries_path, controller: :work_histories, remote: true, class: 'js-validation-material', id: 'work-industry-from') do |f|
+                = form_for @positions, :url => url_for(:controller => 'work_histories', action: 'create'), method: :post do |f|
+                  = hidden_field_tag :authenticity_token, form_authenticity_token
+
+                  .row
+                    .col-sm-12
+                      %label{:for => "Company"}= t('view_experts_onboarding.positions.company')
+                      .input-group.mb-sm
+                        %span.input-group-addon.x-primary
+                          %i.fa.fa-building
+                        .small
+                          = f.text_field :company, maxlength: 60, required: true
+                  .row
+                    .col-sm-12
+                      %label{:for => "Company"}= t('view_experts_onboarding.positions.company_url')
+                      .input-group.mb-sm
+                        %span.input-group-addon.x-primary
+                          %i.fa.fa-building
+                        .small
+                          = f.url_field :company_url, maxlength: 60, placeholder: "http://"
+                  .row
+                    .col-sm-12
+                      %label{:for => "title"}
+                        = t('view_experts_onboarding.positions.size')
+                      .input-group.mb-sm
+                        %span.input-group-addon.x-primary
+                          %i.fa.fa-sitemap
+                        .small
+                          = f.select :size, collection: WorkHistory.sizes.map{|s| [s,s]}
+                  .row
+                    .col-sm-12
+                      %label{:for => "title"}= t('view_experts_onboarding.positions.job_title')
+                      .input-group.mb-sm
+                        %span.input-group-addon.x-primary
+                          %i.fa.fa-pen
+                        .small
+                          = f.text_field :title, maxlength: 60, required: true
+                  .row
+                    .col-sm-11
+                      %label{:for => "location"}= t('view_experts_onboarding.positions.location')
+                      .input-group.mb-sm
+                        %span.input-group-addon.x-primary
+                          %i.fa.fa-map-marker
+                        = f.text_field :location, id: "location", maxlength: 53, required: true
+
+                  .row
+                    %label.col-sm-12{:for => "example-daterange1"}= t('view_experts_onboarding.positions.enter_dates')
+                  .row
+                    .col-sm-12
+                      .input-daterange.input-group.mb-sm.js-datepicker-enabled{"data-autoclose" => "true", "data-date-format" => "dd/mm/yyyy", "data-today-highlight" => "true", "data-week-start" => "1"}
+                        %span.input-group-addon.x-primary.font-w600= t('view_experts_onboarding.positions.from')
+                        #from_date
+                          = f.date_field :from_date, required: true, "data-autoclose" => "true", "data-today-highlight" => "true", "data-week-start" => "1", placeholder: "mm/dd/yyyy", as: :date
+                        %span.input-group-addon.x-primary.font-w600= t('view_experts_onboarding.positions.to')
+                        #to_date
+                          = f.date_field :to_date, "data-autoclose" => "true", "data-today-highlight" => "true", "data-week-start" => "1", placeholder: "mm/dd/yyyy", as: :date
+
+                  .row
+                    .col-sm-12
+                      = f.check_box :present, label: t('view_experts_onboarding.positions.present'), id: "work_industry_present", for: "work_industry_present", :checked => "checked", :checked => false
+                      = t('view_experts_onboarding.positions.present')
+
+                  .form-group{:style => "text-align:center"}
+                    %button.btn.btn-primary.btn-wide.save-work_industry{:type => "submit"}= t('buttons.save')
+
+      %hr
+      .panel-footer
+        .row
+          .col-sm-4
+            %a.btn.btn-lighter-1.btn-wide{:style => "margin-left:20%", href: "/experts/onboarding/work_industries" }= t('buttons.back')
+          .col-sm-4.col-sm-offset-4
+            %a.btn.btn-primary.btn-wide{type: "submit", :style => "margin-left:20%", href: "/experts/onboarding/career_highlights" }= t('buttons.next')
+
+
+
+
+  .col-sm-4
+    .panel
+      .panel-header
+        %span.text-md= t('layout.work_history')
+
+      .panel-content.div-to-add.text-md{:style => "text-align:justify"}
+        - @my_positions.each do |position|
+          .panel
+            .panel-header.panel-primary
+              %span.text-md{:style => "color:white"}
+                = position.title
+              .panel-actions
+
+                = link_to edit_work_history_path(position), id:position.id, style: "margin-left:10px;" do
+                  %i.fa.fa-pencil-alt{:style => "color:white"}
+                = link_to destroy_work_history_path(position), method: :delete, style: "margin-left:10px;" do
+                  %i.fa.fa-trash{:style => "color:white"}
+            .panel-content.text-md{:style => "text-align:justify"}
+              %p
+                %small
+                  %strong= "#{t('view_experts_onboarding.positions.company')}:"
+                  #{position.company}
+              - if position.company_url.present?
+                %p
+                  %small
+                    %strong
+                      = link_to "#{t('view_experts_onboarding.positions.company_url')}", position.company_url
+              %p
+                %small
+                  %strong= "#{t('view_experts_onboarding.positions.location')}:"
+                  #{position.location}
+              %p
+                %small
+                  %strong= "#{t('view_experts_onboarding.positions.size')}:"
+                  #{position.size}
+              %p
+                - if position.to_date.present? and position.present == false
+                  %small= ("#{position.from_date.strftime('%D')} - #{position.to_date.strftime('%D')}")
+                - else
+                  %small= ("#{position.from_date.strftime('%D')} - #{t('view_experts_onboarding.positions.present')}")
+
+
+:javascript
+    function initAutocomplete() {
+      // Create the autocomplete object, restricting the search to geographical
+      // location types.
+      autocomplete = new google.maps.places.Autocomplete(
+          /** @type {!HTMLInputElement} */(document.getElementById('location')),
+          {types: ['geocode']});
+
+      // When the user selects an address from the dropdown, populate the address
+      // fields in the form.
+      autocomplete.addListener('place_changed', fillInAddress);
+    }
+
+    function fillInAddress() {
+      // Get the place details from the autocomplete object.
+      var place = autocomplete.getPlace();
+
+    }
+    $("#work_industry_present").change(function(){
+      if ($('#work_industry_present').is(':checked')) {
+        $("#to_date").hide()
+        $("#from_date").next("span").hide()
+        $("#to_date").prop('disabled', true);
+      }else{
+        $("#to_date").show()
+        $("#from_date").next("span").show()
+        $("#to_date").prop('disabled', false);
+      }
+    });
+%script{:src => "https://maps.googleapis.com/maps/api/js?key=AIzaSyAJZh005PH0sabRv0JhsH51pIWOqZ9NaV0&libraries=places&language=en&callback=initAutocomplete"}

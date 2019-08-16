@@ -1,0 +1,820 @@
+#brand-icon{
+  margin-top: -10px;
+}
+
+/*
+ * Base structure
+ */
+
+/* Move down content because we have a fixed navbar that is 50px tall */
+
+
+
+/*
+ * Global add-ons
+ */
+
+.sub-header {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+/*
+ * Top navigation
+ * Hide default border to remove 1px line.
+ */
+.navbar-fixed-top {
+  border: 0;
+}
+
+/*
+ * Sidebar
+ */
+
+/* Hide for mobile, show later */
+.sidebar {
+  margin-top: -2px;
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 51px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    background-color: #222222;
+    border-right: 1px solid #eee;
+  }
+}
+
+/* Sidebar navigation */
+.nav-sidebar {
+  margin-right: -21px; /* 20px padding + 1px border */
+  margin-bottom: 20px;
+  margin-left: -20px;
+}
+.nav-sidebar > li > a {
+  padding-right: 20px;
+  padding-left: 20px;
+}
+.nav-sidebar > .active > a,
+.nav-sidebar > .active > a:hover,
+.nav-sidebar > .active > a:focus {
+  color: #fff;
+  background-color: #428bca;
+}
+
+
+/*
+ * Main content
+ */
+
+.main {
+  padding: 20px;
+}
+@media (min-width: 768px) {
+  .main {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+}
+.main .page-header {
+  margin-top: 0;
+}
+
+
+/*
+ * Placeholder dashboard ideas
+ */
+
+.placeholders {
+  margin-bottom: 30px;
+  text-align: center;
+}
+.placeholders h4 {
+  margin-bottom: 0;
+}
+.placeholder {
+  margin-bottom: 20px;
+}
+.placeholder img {
+  display: inline-block;
+  border-radius: 50%;
+}
+
+.no-week-day{
+  background-color: #c3deb7;
+  cursor: pointer;
+}
+
+.week-day{
+  background-color: #FFFFFF;
+  cursor: pointer;
+}
+
+.selected-no-week-day{
+  background-color: #c3deb7;
+}
+
+.selected-week-day{
+  background-color: #FFFFFF;
+}
+
+.form-horizontal .form-group{
+  margin-left:10px;
+}
+#panel-heading-link{
+  margin-top:-5%;
+}
+
+/*=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+[Custom Dashboard Stylesheet]
+
+Project:    Minds with porpouse
+Version:    1.0
+author:     Ariel Molina
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=*/
+/*rewrite proyect classes*/
+.content {
+  margin-left: 0;
+}
+.modal-body {
+  // height: 70vh;
+  // overflow: scroll;
+}
+@media (min-width: 768px) {
+  .modal-dialog {
+    margin: 5% auto !important;
+  }
+}
+
+/*Padding and margin control classes*/
+.blackText {
+  color: #000 !important;
+}
+.flexRow {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  -ms-flex-direction: row;
+  -o-flex-direction: row;
+  flex-direction: row;
+  justify-content: flex-start;
+  -ms-align-items: center;
+  align-items: center;
+}
+.m-0 {
+  margin: 0 !important;
+}
+.m-1 {
+  margin: 0.25rem !important;
+}
+.m-2 {
+  margin: 0.5rem !important;
+}
+.m-3 {
+  margin: 0.75rem !important;
+}
+.m-4 {
+  margin: 1rem !important;
+}
+.mb-0 {
+  margin-bottom: 0 !important;
+}
+.mb-1 {
+  margin-bottom: 0.25rem !important;
+}
+.mb-2 {
+  margin-bottom: 0.5rem !important;
+}
+.mb-3 {
+  margin-bottom: 0.75rem !important;
+}
+.mb-4 {
+  margin-bottom: 1rem !important;
+}
+.mt-0 {
+  margin-top: 0 !important;
+}
+.mt-1 {
+  margin-top: 0.25rem !important;
+}
+.mt-2 {
+  margin-top: 0.5rem !important;
+}
+.mt-3 {
+  margin-top: 0.75rem !important;
+}
+.mt-4 {
+  margin-top: 1rem !important;
+}
+.mx-0 {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+.mx-1 {
+  margin-left: 0.25rem !important;
+  margin-right: 0.25rem !important;
+}
+.mx-2 {
+  margin-left: 0.5rem !important;
+  margin-right: 0.5rem !important;
+}
+.mx-3 {
+  margin-left: 0.75rem !important;
+  margin-right: 0.75rem !important;
+}
+.mx-4 {
+  margin-left: 1rem !important;
+  margin-right: 1rem !important;
+}
+.my-0 {
+  margin-bottom: 0 !important;
+  margin-top: 0 !important;
+}
+.my-1 {
+  margin-bottom: 0.25rem !important;
+  margin-top: 0.25rem !important;
+}
+.my-2 {
+  margin-bottom: 0.5rem !important;
+  margin-top: 0.5rem !important;
+}
+.my-3 {
+  margin-bottom: 0.75rem !important;
+  margin-top: 0.75rem !important;
+}
+.my-4 {
+  margin-bottom: 1rem !important;
+  margin-top: 1rem !important;
+}
+.p-0 {
+  padding: 0 !important;
+}
+.pb-0 {
+  padding-bottom: 0 !important;
+}
+.pb-1 {
+  padding-bottom: 0.25rem !important;
+}
+.pb-2 {
+  padding-bottom: 0.5rem !important;
+}
+.pb-3 {
+  padding-bottom: 0.75rem !important;
+}
+.pb-4 {
+  padding-bottom: 1rem !important;
+}
+.py-0 {
+  padding-bottom: 0 !important;
+  padding-top: 0 !important;
+}
+.py-1 {
+  padding-bottom: 0.25rem !important;
+  padding-top: 0.25rem !important;
+}
+.py-2 {
+  padding-bottom: 0.5rem !important;
+  padding-top: 0.5rem !important;
+}
+.py-3 {
+  padding-bottom: 0.75rem !important;
+  padding-top: 0.75rem !important;
+}
+.py-4 {
+  padding-bottom: 1rem !important;
+  padding-top: 1rem !important;
+}
+.px-0 {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+.px-1 {
+  padding-left: 0.25rem !important;
+  padding-right: 0.25rem !important;
+}
+.px-2 {
+  padding-left: 0.5rem !important;
+  padding-right: 0.5rem !important;
+}
+.px-3 {
+  padding-left: 0.75rem !important;
+  padding-right: 0.75rem !important;
+}
+.px-4 {
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+}
+.pl-0 {
+  padding-left: 0 !important;
+}
+.pr-0 {
+  padding-right: 0 !important;
+}
+.pl-1 {
+  padding-left: 0.25rem !important;
+}
+.pl-2 {
+  padding-left: 0.5rem !important;
+}
+.pl-3 {
+  padding-left: 0.75rem !important;
+}
+.pl-4 {
+  padding-left: 1rem !important;
+}
+/*Custom color classes*/
+.color-primary {
+  color: #73b5bd !important;
+}
+.b-primary {
+  border-color: #73b5bd !important;
+}
+.color-green {
+  color: #82b634;
+}
+.color-alert {
+  color: #fea32a;
+}
+.color-yellow {
+  color: #ffff00;
+}
+/*Custom project classes*/
+.userHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.expertImage {
+  overflow: hidden;
+  width: 100%;
+  max-width: 250px;
+  max-height: 200px;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  -ms-flex-direction: row;
+  -o-flex-direction: row;
+  flex-direction: row;
+  justify-content: center;
+  -ms-align-items: center;
+  align-items: center;
+}
+.expertImage img {
+  width: 100%;
+  height: auto;
+}
+.editProfile input[type=submit] {
+  background: #33cccc;
+  padding: 5px 8px;
+  border:0 none;
+  cursor:pointer;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  color: #FFF;
+  text-align: center;
+}
+.editProfile input[type=text] {
+  background: #33cccc;
+  padding: 5px 8px;
+  border:0 none;
+  cursor:default;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  color: #FFF;
+  text-align: center;
+  width: 100%;
+}
+.grayBackground {
+  background: #f7f7f7;
+  margin: 0.5rem auto;
+}
+.grayBackground i {
+  font-size: 18px;
+}
+.grayBackground p {
+  color: #c6c4c8;
+}
+.grayBackground span {
+  color: #000;
+  font-weight: bold;
+}
+/* Expert request tabs */
+#myBtnContainer {
+  text-align: right;
+}
+.nav-tabs { border-bottom: 2px solid #DDD; }
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover { border-width: 0; }
+.nav-tabs > li > a { border: none; color: #666; }
+.nav-tabs > li.active > a, .nav-tabs > li > a:hover { border: none; color: #73b5bd !important; background: transparent; }
+.nav-tabs > li > a::after { content: ""; background: #73b5bd; height: 2px; position: absolute; width: 100%; left: 0px; bottom: -1px; transition: all 250ms ease 0s; transform: scale(0); }
+.nav-tabs > li.active > a::after, .nav-tabs > li:hover > a::after { transform: scale(1); }
+.tab-nav > li > a::after { background: #33cccc none repeat scroll 0% 0%; color: #fff; }
+.tab-content{padding:20px 10px;}
+.card {background: #FFF none repeat scroll 0% 0%; box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3); margin-bottom: 30px; }
+
+/*Package and Appointments info styles*/
+.containerInfo {
+  overflow: hidden;
+}
+.containerInfo h5 {
+  font-weight: bold;
+  margin: 0;
+  color: #FFF;
+}
+.packageDiv {
+  color: #ffffff;
+  width: 100%;
+  text-align: left;
+  margin: 2px;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  -ms-flex-direction: row;
+  -o-flex-direction: row;
+  flex-direction: row;
+  justify-content: flex-start;
+  -ms-align-items: center;
+  align-items: center;
+}
+.filterDiv {
+  color: #ffffff;
+  width: 100%;
+  text-align: left;
+  margin: 2px;
+  display: none;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  -ms-flex-direction: row;
+  -o-flex-direction: row;
+  flex-direction: row;
+  justify-content: flex-start;
+  -ms-align-items: center;
+  align-items: center;
+}
+.show {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+}
+.btnFilter {
+  border: none;
+  outline: none;
+  padding: 12px 16px;
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+.btnFilter:hover {
+  background-color: #ddd;
+}
+.btnFilter.activeBtn {
+  background-color: #666;
+  color: white;
+}
+.packageDiv p,
+.filterDiv p {
+  color: #9e9e9e;
+  margin: 0 auto;
+}
+.packageDiv .card,
+.filterDiv .card {
+  padding: 10px 0;
+  width: 99%;
+  border-radius: 5px;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  -ms-flex-direction: row;
+  -o-flex-direction: row;
+  flex-direction: row;
+}
+.inProgress .card {
+  background: #db6653;
+}
+.scheduled .card {
+  background: #2cb76b;
+}
+.pending .card {
+  background: #66b3bc;
+}
+.past .card {
+  background: #a6a5a7;
+}
+.packageDiv .card h3,
+.filterDiv .card h3 {
+  margin: 10px 0;
+  color: #FFF;
+}
+.packageDiv .card p,
+.filterDiv .card p {
+  color: #FFF;
+}
+.cardBtn {
+  background: #000;
+  color: #FFF;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+.packageDiv .card .cardInfo,
+.packageContainer .cardInfo,
+.filterDiv .card .cardInfo {
+  display: -webkit-inline-flex;
+  display: -moz-inline-flex;
+  display: -ms-inline-flex;
+  display: -o-inline-flex;
+  display: inline-flex;
+  justify-content: flex-start;
+  -ms-align-items: center;
+  align-items: center;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  -ms-flex-direction: row;
+  -o-flex-direction: row;
+  flex-direction: row;
+}
+.packageDiv .card .cardInfo .imageInfo,
+.packageContainer .cardInfo .imageInfo,
+.filterDiv .card .cardInfo .imageInfo {
+  width: 30px;
+  height: 30px;
+  overflow: hidden;
+  display: -webkit-inline-flex;
+  display: -moz-inline-flex;
+  display: -ms-inline-flex;
+  display: -o-inline-flex;
+  display: inline-flex;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  -ms-flex-direction: row;
+  -o-flex-direction: row;
+  flex-direction: row;
+  justify-content: center;-ms-align-items: center;
+  align-items: center;
+}
+.packageDiv .card .cardInfo .imageInfo img,
+.packageContainer .cardInfo .imageInfo img,
+.filterDiv .card .cardInfo .imageInfo img {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.packageDiv .card .cardInfo p,
+.packageContainer .cardInfo p,
+.filterDiv .card .cardInfo p {
+  margin: 0;
+  margin-left: 10px;
+  cursor: pointer;
+}
+.packageDiv .card .cardDate,
+.filterDiv .card .cardDate,
+.packageDate {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  -o-flex-direction: column;
+  flex-direction: column;
+  justify-content: space-around;
+  -ms-align-items: center;
+  align-items: center;
+  text-align: center;
+}
+.packageDiv .card .cardDate input,
+.filterDiv .card .cardDate input,
+.packageDate input {
+  width: 100%;
+  background: #FFF;
+  border: none;
+  border-radius: 10px;
+  color: #000;
+  font-weight: bold;
+}
+.scheduled .card .cardDate input,
+.pending .card .cardDate input {
+  color: black;
+}
+.past .card .cardDate input {
+  background: transparent;
+  color: #000;
+  cursor: default;
+}
+.packageDiv .card .cardDate .date,
+.filterDiv .card .cardDate .date {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.packageContainer .titleContainer {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  -ms-flex-direction: row;
+  -o-flex-direction: row;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-right: 10px;
+}
+.usermodalInfo h4:before {
+  content: '\f061';
+  font-family: 'FontAwesome';
+}
+.userNeeds {
+  border-radius: 30px;
+  padding: 8px 15px;
+}
+.userNeeds .taskSubject ,
+.userNeeds .taskNumber {
+  color: #969696;
+  margin: 0;
+}
+.userNeeds .taskInstruction,
+.userNeeds .taskDescription {
+  font-weight: bold;
+  font-size: 18px;
+}
+.userNeeds .taskDescription {
+  max-height: 200px;
+  height: 200px;
+  overflow: scroll;
+}
+.questionConatiner {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  -o-flex-direction: column;
+  flex-direction: column;
+}
+.questionConatiner .questionTitle {
+  font-weight: bold;
+  font-size: 18px;
+  margin: 8px 0;
+}
+.chartContainer {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  -o-flex-direction: column;
+  flex-direction: column;
+  justify-content: center;
+  -ms-align-items: center;
+  align-items: center;
+}
+.chartContainer svg {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+.chartContainer .ammount {
+  margin: auto;
+  position: absolute;
+}
+.chartHeader {
+  font-weight: bold;
+}
+.greenText {
+  color: #69a89c;
+}
+.blueHeader {
+  color: #27baef;
+  font-weight: bold;
+}
+.projectinfoCompany {
+  color: #000 !important;
+  font-weight: bold;
+}
+.sessionsContainer li {
+  display: inline-block;
+  list-style: none;
+}
+.sessionsContainer li a {
+  color: #000;
+}
+.sessionsContainer li a:hover {
+  color: #69a89c;
+}
+.actions {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  -ms-flex-direction: row;
+  -o-flex-direction: row;
+  flex-direction: row;
+  -ms-align-items: center;
+  align-items: center;
+  justify-content: center;
+}
+.actionsBackground {
+  background: #f7f7f7;
+  padding: 0.5rem;
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
+  line-height: 20px;
+  text-align: center;
+  border: 1px solid #fefefe;
+}
+.sessionsList {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  -ms-flex-direction: row;
+  -o-flex-direction: row;
+  flex-direction: row;
+  justify-content: space-between;
+  -ms-align-items: center;
+  align-items: center;
+}
+.sessionsTitle {
+  color: #000 !important;
+  font-weight: bold;
+  margin: 10px 0;
+  border-bottom: 1px solid #efefef;
+}
+.sessionBtn {
+  background: #189279;
+  color: #FFF;
+  border-radius: 10px;
+  transition: all 0.25s ease-in-out;
+}
+.sessionBtn:hover {
+  color: #189279;
+  background: #efefef;
+}
+.sessionBtn i {
+  padding: 15px;
+}
+
+a.btn-submit {
+  width: 100%;
+  background: #FFF;
+  border: none;
+  border-radius: 10px;
+  color: #000;
+  font-weight: bold;
+  padding: 2px;
+}
+
+
+
+@media only screen and (min-width: 768px){
+  /*rewrite proyect classes*/
+  html.fixed .content-header {
+    left: 0;
+  }
+}

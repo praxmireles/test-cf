@@ -1,0 +1,37 @@
+= render partial: 'tab_steps'
+.row
+  .col-sm-10.col-sm-offset-1
+    .panel.bg-scale-0.b-primary.bt-sm.mt-xl
+      .panel-header
+        %span.text-md Welcome to Minds with Purpose
+      .panel-content.text-md{:style => "text-align:justify"}
+        %p{:style => "color:black"} Welcome to Minds with Purpose. Thank you for being interested on giving back through sharing your experience using our platform. Please take the proper time to carefully create your profile and consider that it will contain the information that makes the connection between you and professionals and entrepreneurs who require your Expert Mind.
+        %p{:style => "color:black"} To create your profile we request you to sign using your LinkedIn profile, unfortunately, LinkedIn only allows us to import a small amount of your profile. Please make sure you have access to your resume and experience  in your hard disk, you will be requested with:
+        %ul.col-lg-12{:style => "color:black; text-align:justify"}
+          %li  General information (e-mail, telephone, etc.)
+          %li  Your resume
+          %li  Languages
+          %li  Studies
+          %li  Industries
+          %li  Positions
+          %li  Highlights
+          %li  Skills
+          %li  Available spots in your agenda
+        .clearfix
+        %p{:style => "color:black"} We encourage you to read our Terms and Conditions as well our Privacy Policy before filling your profile. The process normally takes 20 to 30 minutes.
+
+      .panel-footer
+        .row
+          .col-sm-4.col-sm-offset-8
+            %a.btn.btn-lighter-1.btn-wide{href: "/experts/onboarding/general_information" }= t('buttons.next')
+
+
+
+      -#= video_tag("trailer")
+      -# if request.location.present?
+        - address = Geocoder.search("#{request.location.ip}")
+        - formatted_address = Geocoder.search("address[1].latitude},#{address[1].longitude}") if address[1].present?
+        = address[1].data['address']['formattedAddress'] if address[1].present?
+        = "Geodata: #{address}"
+        = "Address: #{address[1].data['address']['formattedAddress']}" if address[1].present?
+        -#= "Time Zone: #{address[0].data['address']['formattedAddress']}" if address[0].present?

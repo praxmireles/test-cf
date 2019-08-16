@@ -1,0 +1,67 @@
+%br
+%br
+.content
+  .row
+    .col-sm-10.col-sm-offset-1
+      .panel.bg-scale-0.b-primary.bt-sm.mt-xl
+        .row
+          .col-sm-5{:style => "background-color:#003F5A"}
+            #left_form
+              %figure.text-center
+                =image_tag "registration_bg.svg"
+              %h2.white
+                = t('view_clients_onboarding.services.find_your_expert')
+              %p.service_text.white
+                = t('view_clients_onboarding.services.minds_with_purpose_provides')
+              %a#more_info{"data-target" => "#more-info", "data-toggle" => "modal", :href => "index.html#0"}
+                %i.pe-7s-info
+          .col-sm-5
+            #wizard_container
+              #top-wizard
+                #progressbar
+              / /top-wizard
+              -# = simple_form_for "option", :autocomplete => "off",  html: { class: 'form-horizontal', :autocomplete => "off", id: "regForm" } do |f|
+              -# %input#website{:name => "website", :type => "text", :value => ""}/
+              / Leave for security protection, read docs for details
+              #middle-wizard
+                .step
+                  %h3.main_question
+                    %strong
+                    = t('view_clients_onboarding.services.select_the_product')
+                  .row
+                    .col-md-12
+                      = form_for @search_history do |f|
+                        = hidden_field_tag :current_path, 'service'
+                        .form-group.radio_input
+                          %label
+                            = f.radio_button :service, t('services.express_advice'), class: 'icheck required service_type'
+                            %span.tooltip-toggle{"aria-label" => t('view_clients_onboarding.services.express_advice_text'), :tabindex => "0"}
+                              %span.label-text
+                                = t('view_clients_onboarding.services.express_advice')
+                        .form-group.radio_input
+                          %label
+                            = f.radio_button :service, t('services.mentoring'), class: 'icheck required service_type'
+                            %span.tooltip-toggle{"aria-label" => t('view_clients_onboarding.services.mentoring_text'), :tabindex => "0"}
+                              %span.label-text= t('view_clients_onboarding.services.mentoring_with_purpose')
+                        .form-group.radio_input
+                          %label
+                            = f.radio_button :service, t('services.project_in_mind)'), disabled: true , class: 'icheck required service_type'
+                            %span.tooltip-toggle{"aria-label" => t('view_clients_onboarding.services.project_in_mind_text'), :tabindex => "0"}
+                              %span.label-text= t('view_clients_onboarding.services.project_in_mind')
+                        .form-group.radio_input
+                          %label
+                            = f.radio_button :service, t('services.coaching'), class: 'icheck required service_type'
+                            %span.tooltip-toggle{"aria-label" => t('view_clients_onboarding.services.coaching_text'), :tabindex => "0"}
+                              %span.label-text 
+                                = t('services.coaching_with_purpose')
+
+                            = f.submit t('buttons.next'), class: 'btn btn-lighter-1 btn-wide', :style => "display: none; margin-left:20%"
+                  .row
+                    .col-sm-3.col-sm-offset-9
+                      = link_to(t('buttons.next'), '', class: 'btn btn-lighter-1 btn-wide next-button', :style => "margin-left:20%")
+
+:javascript
+  $(".next-button").click(function(e){
+    e.preventDefault();
+    $("input[name='commit']").click();
+  })

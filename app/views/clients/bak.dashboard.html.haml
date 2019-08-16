@@ -1,0 +1,204 @@
+.content
+  %br
+  %br
+  .row
+    .col-md-4
+      %div
+        .col-sm-10
+          .panel.widgetbox.wbox-2.bg-scale-0
+            %a{:href => "/clients/onboarding/services"}
+              .panel-content
+                .row
+                  .col-xs-4
+                    %span.icon.fa.fa-search.color-darker-1
+                  .col-xs-8
+                    %h4.subtitle.color-darker-1
+                    %h1.title.color-primary Get your expert
+              -# .panel.widgetbox.wbox-2.bg-lighter-2.color-light
+              -#   %a{:href => "#"}
+              -#     .panel-content
+              -#       .row
+              -#         .col-xs-4
+              -#           %span.icon.fa.fa-user.color-darker-2
+              -#         .col-xs-8
+              -#           %h4.subtitle.color-darker-2 New Users
+              -#           %h1.title.color-w 105
+              -# .panel.widgetbox.wbox-2.bg-darker-2.color-light
+              -#   %a{:href => "#"}
+              -#     .panel-content
+              -#       .row
+              -#         .col-xs-4
+              -#           %span.icon.fa.fa-envelope.color-lighter-1
+              -#         .col-xs-8
+              -#           %h4.subtitle.color-lighter-1 New Messages
+              -#           %h1.title.color-light 124
+
+        -# .col-sm-6
+        -#   .panel
+        -#     .panel-content
+        -#       %h5
+        -#         %b First semester
+        -#         Sells
+        -#       %p.section-text
+        -#         Lorem ipsum
+        -#         %span.highlight dolor sit amet
+        -#         consectetur adipisicing elit. Assumenda fugit inventore ipsam nam, qui voluptatibus
+        -#       %canvas#area-chart{:height => "160", :width => "400"}
+
+      -# .row
+        .col-sm-4
+          %div
+            .col-sm-10
+              .panel.b-primary.bt-md
+                .panel-content.p-none
+                  .widget-list.list-to-do
+                    %h4.list-title To do List
+                    %button.add-item.btn.btn-o.btn-primary.btn-xs
+                      %i.fa.fa-plus
+                    %ul
+                      %li
+                        .checkbox-custom.checkbox-primary
+                          %input#check-h1{:type => "checkbox", :value => "option1"}/
+                          %label.check{:for => "check-h1"} Accusantium eveniet ipsam neque
+                      %li
+                        .checkbox-custom.checkbox-primary
+                          %input#check-h2{:checked => "checked", :type => "checkbox", :value => "option1"}/
+                          %label.check{:for => "check-h2"} Lorem ipsum dolor sit
+                      %li
+                        .checkbox-custom.checkbox-primary
+                          %input#check-h3{:type => "checkbox", :value => "option1"}/
+                          %label.check{:for => "check-h3"} Dolor eligendi in ipsum sapiente
+                      %li
+                        .checkbox-custom.checkbox-primary
+                          %input#check-h4{:type => "checkbox", :value => "option1"}/
+                          %label.check{:for => "check-h4"} Natus recusandae vel
+                      %li
+                        .checkbox-custom.checkbox-primary
+                          %input#check-h5{:type => "checkbox", :value => "option1"}/
+                          %label.check{:for => "check-h5"} Adipisci amet officia tempore ut
+                      %li
+                        .checkbox-custom.checkbox-primary
+                          %input#check-h6{:type => "checkbox", :value => "option1"}/
+                          %label.check{:for => "check-h6"} Possimus repellat repellendus
+
+    .col-sm-6
+      .tabs.mt-none
+        / Tabs Header
+        %ul.nav.nav-tabs.nav-justified
+          %li.active
+            %a{"data-toggle" => "tab", :href => "#home"} Express Advisings
+          %li
+            %a{"data-toggle" => "tab", :href => "#profile"} Coachings
+          %li
+            %a{"data-toggle" => "tab", :href => "#messages"} Mentorings
+          %li
+            %a{"data-toggle" => "tab", :href => "#settings"} Open Invitations
+          %li
+            %a{"data-toggle" => "tab", :href => "#schedule"} Waiting schedule
+
+        / Tabs Content
+        .tab-content
+          #home.tab-pane.fade.in.active
+            - if @express_advices.any?
+              .table-responsive
+                %table.table.table-striped.table-hover
+                  %thead
+                    %tr
+                      %th Schedule
+                      %th
+                      %th Expert
+                      %th
+                  %tbody
+                    - @express_advices.each do |appointment|
+                      %tr
+                        %td= appointment.appointment_date.to_formatted_s(:long)
+                        %td= appointment.subject
+                        %td= appointment.advisor.fullname
+                        %td
+                          = link_to "system_tools_video_testing_api_path", target: "blank", class: "btn btn-info" do
+                            %span.fa.fa-video-camera
+            - else
+              .alert.alert-danger{style: "opacity: 0.8"}
+                %p No Appointments
+          #profile.tab-pane.fade
+            - if @coachings.any?
+              .table-responsive
+                %table.table.table-striped.table-hover
+                  %thead
+                    %tr
+                      %th
+                      %th Expert
+                      %th
+                  %tbody
+                    - @coachings.each do |coaching|
+                      %tr
+                        %td= link_to t(coaching.locale), coaching_path(coaching)
+                        %td= "coaching.advisor.fullname"
+                        %td
+            - else
+              .alert.alert-danger{style: "opacity: 0.8"}
+                %p No Coachings
+
+          #messages.tab-pane.fade
+            - if @mentorings.any?
+              %table.table.table-stripped.table-hover
+                %thead
+                  %tr
+                    %th
+                    %th Expert
+                    %th
+                %tbody
+                  - @mentorings.each do |coaching|
+                    %tr
+                      %td= link_to t(coaching.locale), mentoring_my_work_center_path(coaching)
+                      %td= "coaching.advisor.fullname"
+                      %td
+            - else
+              .alert.alert-danger{style: "opacity: 0.8"}
+                %p No Mentorings
+
+          #settings.tab-pane.fade
+            %table.table.table-stripped.table-hover
+              %thead
+                %tr
+                  %th
+                  %th
+                  %th
+              %tbody
+                - @requests.each do |request|
+                  %tr{ "data-project-id" => "project.id" }
+                    %td= "project.name"
+                    %td
+                    %td
+                      = link_to "Cancel", "#"
+          #schedule.tab-pane.fade
+            %table.table.table-stripped
+              %thead
+                %tr
+                  %th
+                  %th
+                  %th
+              %tbody
+                - @projects_no_scheduled.each do |project|
+                  %tr{ "data-project-id" => "project.id" }
+                    %td= "project.name"
+                    %td= "project.project_type"
+                    %td
+                      = link_to "Re-send reminder of schedule", "#"
+                      |
+                      = link_to "Cancel", "#"
+
+  -# .row
+  -#   / =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+  -#   / PIE CHART
+  -#   .col-sm-4
+  -#     .col-sm-10
+  -#       .panel
+  -#         .panel-content
+  -#           %h5
+  -#             %b Lorem ipsum dolor sit
+  -#           %p
+  -#             Dolor sit amet
+  -#             %span.highlight consectetur
+  -#             erte
+  -#           %canvas#pie-chart{:height => "260", :width => "400"}

@@ -1,0 +1,138 @@
+.modal-dialog.modal-lg
+  / Modal content
+  .modal-content
+    .modal-header
+      %button.close{"data-dismiss" => "modal", :type => "button"} ×
+      %h4.modal-title= t('view_experts.client_information.about_the_user')
+    .modal-body.container-fluid
+      .col-sm-5
+        %div
+          .userHeader.mb-3
+            .col-sm-5.expertImage.pl-0
+              - if appointment.client.avatar.present?
+                %img.img-responsive= image_tag appointment.client.avatar.url
+            .col-sm-7.px-0
+              %h3.userName.my-1= appointment.client.fullname if signed_in?
+              .editProfile{:action => ""}
+                %input{:disabled => "disable", :type => "text", :value => "CLIENT"}/
+      .col-sm-5
+        .usermodalInfo.mb-4
+          %h4
+            %strong= "#{t('general_information.email')}:"
+            = "#{appointment.client.email}"
+          - if appointment.client.location.present?
+            %h4
+              %strong= "#{t('general_information.location')}:"
+              = "#{appointment.client.location}"
+          - if appointment.client.timezone.present?
+            %h4
+              %strong= "#{t('general_information.timezone')}:"
+              = "#{appointment.client.timezone.name}"
+          - if appointment.client.job.present?
+            %h4
+              %strong= "#{t('view_experts.client_information.position')}:"
+              = "#{appointment.client.job}"
+          - if appointment.service.present?
+            %h4
+              %strong= "#{t('view_experts.client_information.service')}:"
+              = appointment.service.type.titleize
+
+
+      %br
+
+      .col-sm-12
+        .chartContainer.col-sm-3.pl-4
+          %p.data-attributes
+            %span{"data-peity" => "{ \"fill\": [\"#85b93e\", \"#efefef\"], \"innerRadius\": 18, \"radius\": 30 }"}
+          -# %p.ammount 50%
+        .chartHeader.col-sm-9
+          %h4.my-1= t('view_experts.client_information.appointment_information')
+          %p.my-1
+            = t('view_experts.client_information.last_update') + ':'
+            %span.greenText
+              = appointment.client.updated_at 
+      %hr
+
+      .col-sm-12
+        / Projet Info
+        .panel.b-primary.bt-sm
+          .panel-content
+            %ul.user-contact-info.ph-sm
+              %li
+                %h4
+                  %i.color-primary.mr-md.fa.fa-user>
+                  = appointment.subject
+
+      .col-sm-12.col-md-6.grayBackground
+        %h5.blueHeader= t('services.mentoring_with_purpose')
+        %p.projectinfoCompany= appointment.service.type.titleize
+      .col-sm-12.col-md-6.grayBackground
+        %h5.greenText= t('view_experts.client_information.contact_person')
+        %p.blackText= appointment.client.fullname
+
+      .col-sm-12.col-md-4
+        %h5.greenText= t('view_experts.client_information.created')
+        %p.projectinfoCompany= appointment.created_at.strftime("%D")
+
+      .col-sm-12.col-md-4
+        - if appointment.appointment_packs.any?
+          %h5.blueHeader= t('view_experts.client_information.status_of_sessions')
+          .projectinfoCompany
+            %ul.sessionsContainer
+              %li= "#{appointment.appointment_pack.completed_appointments_count} / #{appointment.appointment_pack.appointments.count}"
+      / Actions container
+      .row
+        .col-sm-12.col-md-4
+          %h5.blueHeader= t('view_experts.client_information.duration')
+          = "#{appointment.duration_in_min} min."
+      - if appointment.search_history.industry.present?
+        %hr
+        .row
+          .col-sm-12.col-sm-6
+            .descriptionContainer.grayBackground.py-2.px-2
+              %h4{:style => "font-weight: bold;"}= t('view_experts.client_information.expert_filters_for_this_search') + ':'
+              %strong= "#{t('view_experts.client_information.industries')}:"
+              %ul
+                %li= appointment.search_history.industry_name
+              %strong= "#{t('view_experts.client_information.functions')}:"
+              %ul
+                %li= appointment.search_history.job_functions_names
+              %strong= "#{t('view_experts.client_information.skills')}:"
+              %ul
+                %li= appointment.search_history.skills_names
+              %strong= "#{t('view_experts.client_information.seniority_level')}:"
+              %ul
+                %li= appointment.search_history.seniority_levels_names
+
+
+
+      - if appointment.service.id == 1
+        .col-sm-12
+          .userNeeds.panel.b-primary.bt-sm.mt-4
+            %h4.taskInstruction= "#{t('view_experts.client_information.description_of_service')}:"
+            %p= appointment.search_history.description
+
+
+
+      .col-sm-12
+        - if appointment.service.id == 2
+          #questionOne.questionConatiner.panel.b-primary.bt-sm
+            %p.questionTitle= "#{t('view_experts.client_information.why_are_you_looking_for_mentoring')}"
+            %p.questionResponse= appointment.search_history.description
+          #questionTwo.questionConatiner.panel.b-primary.bt-sm
+            %p.questionTitle= "#{t('view_experts.client_information.what_do_you_want_to_achieve')}"
+            %p.questionResponse= appointment.search_history.achieve_experiences
+        - if appointment.service.id == 3
+          #questionThree.questionConatiner.panel.b-primary.bt-sm
+            %p.questionTitle= "#{t('view_experts.client_information.why_are_you_looking_to_be_coached')}"
+            %p.questionResponse= appointment.search_history.description
+          #questionFour.questionConatiner.panel.b-primary.bt-sm
+            %p.questionTitle= "#{t('view_experts.client_information.what_change_are_you_looking_to_make')}"
+            %p.questionResponse= appointment.search_history.what_changes
+          #questionFive.questionConatiner.panel.b-primary.bt-sm
+            %p.questionTitle= "#{t('view_experts.client_information.what_do_you_want_to_achieve_2')}"
+            %p.questionResponse= appointment.search_history.achieve_experiences
+      - if appointment.type == "OpenAppointment"
+        .col-sm-4.col-sm-offset-5
+          = link_to t('buttons.accept'), update_request_path(appointment.request.id, answer: 'accept', authenticity_token: form_authenticity_token), method: :put, class: 'btn btn-primary'
+          = link_to t('buttons.reject'), update_request_path(appointment.request.id, answer: 'reject', authenticity_token: form_authenticity_token), method: :put, class: 'btn btn-secondary'

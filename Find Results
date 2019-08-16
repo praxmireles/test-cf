@@ -1,0 +1,964 @@
+Searching 14979 files for "PUBLISHABLE_KEY"
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/.env:
+   41  
+   42  # Stripe Key
+   43: STRIPE_PUBLISHABLE_KEY=pk_test_RMO8D3fS54pWPhYxEHujWVOW
+   44  STRIPE_SECRET_KEY=sk_test_0xDwBEX4pS83Wc49dftL5lZx
+   45  
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/.env.sample:
+   40  
+   41  # Stripe Key
+   42: PUBLISHABLE_KEY=
+   43  SECRET_KEY=
+   44  
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/log/test.log:
+    File too large, skipping
+
+2 matches across 2 files
+
+
+Searching 15020 files for "contact_informations"
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/app/controllers/clients_controller.rb:
+    6      @user = current_user
+    7      @contact_information = current_user
+    8:                            .contact_informations.first || current_user
+    9:                            .contact_informations.new
+   10      @billing = current_user.billing.first || current_user.billing.new
+   11      @positions = current_user.work_histories.new
+   ..
+   74    def billing
+   75      @user = current_user
+   76:     @contact_information = current_user.contact_informations.create
+   77      @billing = current_user.billing
+   78      @positions = current_user.work_histories.create
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/app/controllers/clients_information_controller.rb:
+    8  
+    9    def contacts
+   10:     @contact_information = current_user.contact_informations.create
+   11    end
+   12  
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/app/controllers/contact_informations_controller.rb:
+   26  
+   27    def destroy
+   28:     current_user.contact_informations.find(
+   29        params[:contact_information_id]
+   30      ).destroy
+   ..
+   34  
+   35    def in_payment_steps(contact)
+   36:     if contact.save && current_user.type == 'Client' && params[:controller] == 'contact_informations'
+   37        true
+   38      else
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/app/controllers/experts_onboarding_controller.rb:
+   23    def general_information
+   24      @user = current_user
+   25:     @contact_information = current_user.contact_informations.create
+   26      add_to_completed_steps('welcome')
+   27      set_current_onboarding_step
+   ..
+  137  
+  138    def profile_information_are_present?
+  139:     if current_user.contact_informations.present? &&
+  140         current_user.first_name &&
+  141         current_user.last_name &&
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/app/models/contact_information.rb:
+    3  # == Schema Information
+    4  #
+    5: # Table name: contact_informations
+    6  #
+    7  #  id               :bigint(8)        not null, primary key
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/app/models/users/expert.rb:
+   86    has_many :cancelled_requests, foreign_key: :expert_id, dependent: :delete_all
+   87  
+   88:   # has_many :contact_informations, class_name: 'ContactInformation',
+   89    #                                 foreign_key: :user_id, dependent: :delete_all
+   90    has_one :balance, foreign_key: :user_id, dependent: :delete
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/app/views/clients/settings/_contact_information.html.haml:
+    9              .row.justify-content-center{:style => "margin:0px;"}
+   10                .col-xl-12
+   11:                 = form_for @contact_information, url: url_for(controller: 'contact_informations', action: 'create'), method: :post,  class: 'js-validation-material'  do |c|
+   12                    = hidden_field :user_id, value: current_user
+   13                    %i
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/app/views/experts_onboarding/general_information.html.haml:
+   70  
+   71                  %hr
+   72:                 = form_for @contact_information, url: url_for(controller: 'contact_informations', action: 'create'), method: :post,  class: 'js-validation-material contact-info-form'  do |c|
+   73                    = hidden_field :user_id, value: current_user
+   74  
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/app/views/experts_onboarding/summary.html.haml:
+   39              = current_user.timezone.name
+   40  
+   41:         - current_user.contact_informations.each do |contact_information|
+   42            - if contact_information.primary_phone.present?
+   43              %p
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/app/views/users/edit_profile.html.haml:
+   39              = current_user.timezone.name
+   40  
+   41:         - current_user.contact_informations.each do |contact_information|
+   42            - if contact_information.primary_phone.present?
+   43              %p
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/config/routes.rb:
+   26      # resources :cards
+   27      # resources :career_highlights
+   28:     resources :contact_informations
+   29      # resources :education_histories
+   30      # resources :industries
+   ..
+  305      end
+  306  
+  307:     scope :contact_informations, controller: :contact_informations do
+  308        post '/', action: :create
+  309        put '/:contact_information_id', action: :update
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/coverage/.resultset.json:
+  501          null
+  502        ],
+  503:       "/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/app/controllers/admin/contact_informations_controller.rb": [
+  504          1,
+  505          1,
+  ...
+ 1778          null
+ 1779        ],
+ 1780:       "/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/app/helpers/contact_informations_helper.rb": [
+ 1781          1,
+ 1782          null
+ ....
+ 2816          null
+ 2817        ],
+ 2818:       "/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/app/controllers/contact_informations_controller.rb": [
+ 2819          null,
+ 2820          1,
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/coverage/index.html:
+  262        
+  263        <tr>
+  264:         <td class="strong"><a href="#b0e3f3ec8eeee17c051ce1b4209fc2fb417978f4" class="src_link" title="app/controllers/admin/contact_informations_controller.rb">app/controllers/admin/contact_informations_controller.rb</a></td>
+  265          <td class="red strong">75.0 %</td>
+  266          <td>24</td>
+  ...
+  852        
+  853        <tr>
+  854:         <td class="strong"><a href="#0568210fe745b3f11940c74d00a1d01e02edafaa" class="src_link" title="app/controllers/contact_informations_controller.rb">app/controllers/contact_informations_controller.rb</a></td>
+  855          <td class="red strong">29.17 %</td>
+  856          <td>49</td>
+  ...
+ 1822        
+ 1823        <tr>
+ 1824:         <td class="strong"><a href="#cb3385cb04313d1a390e5ebbc6433584e5a10f3a" class="src_link" title="app/helpers/contact_informations_helper.rb">app/helpers/contact_informations_helper.rb</a></td>
+ 1825          <td class="green strong">100.0 %</td>
+ 1826          <td>2</td>
+ ....
+ 3210        
+ 3211        <tr>
+ 3212:         <td class="strong"><a href="#b0e3f3ec8eeee17c051ce1b4209fc2fb417978f4" class="src_link" title="app/controllers/admin/contact_informations_controller.rb">app/controllers/admin/contact_informations_controller.rb</a></td>
+ 3213          <td class="red strong">75.0 %</td>
+ 3214          <td>24</td>
+ ....
+ 3800        
+ 3801        <tr>
+ 3802:         <td class="strong"><a href="#0568210fe745b3f11940c74d00a1d01e02edafaa" class="src_link" title="app/controllers/contact_informations_controller.rb">app/controllers/contact_informations_controller.rb</a></td>
+ 3803          <td class="red strong">29.17 %</td>
+ 3804          <td>49</td>
+ ....
+ 5138        
+ 5139        <tr>
+ 5140:         <td class="strong"><a href="#cb3385cb04313d1a390e5ebbc6433584e5a10f3a" class="src_link" title="app/helpers/contact_informations_helper.rb">app/helpers/contact_informations_helper.rb</a></td>
+ 5141          <td class="green strong">100.0 %</td>
+ 5142          <td>2</td>
+ ....
+ 9366          <div class="source_table" id="b0e3f3ec8eeee17c051ce1b4209fc2fb417978f4">
+ 9367    <div class="header">
+ 9368:     <h3>app/controllers/admin/contact_informations_controller.rb</h3>
+ 9369      <h4><span class="red">75.0 %</span> covered</h4>
+ 9370      <div>
+ ....
+ 20007            
+ 20008            
+ 20009:           <code class="ruby">                           .contact_informations.first || current_user</code>
+ 20010          </li>
+ 20011        
+ .....
+ 20013            
+ 20014            
+ 20015:           <code class="ruby">                           .contact_informations.new</code>
+ 20016          </li>
+ 20017        
+ .....
+ 20415            
+ 20416            
+ 20417:           <code class="ruby">    @contact_information = current_user.contact_informations.create</code>
+ 20418          </li>
+ 20419        
+ .....
+ 20878            
+ 20879            
+ 20880:           <code class="ruby">    @contact_information = current_user.contact_informations.create</code>
+ 20881          </li>
+ 20882        
+ .....
+ 22211          <div class="source_table" id="0568210fe745b3f11940c74d00a1d01e02edafaa">
+ 22212    <div class="header">
+ 22213:     <h3>app/controllers/contact_informations_controller.rb</h3>
+ 22214      <h4><span class="red">29.17 %</span> covered</h4>
+ 22215      <div>
+ .....
+ 22388            
+ 22389            
+ 22390:           <code class="ruby">    current_user.contact_informations.find(</code>
+ 22391          </li>
+ 22392        
+ .....
+ 22436            
+ 22437            
+ 22438:           <code class="ruby">    if contact.save &amp;&amp; current_user.type == &#39;Client&#39; &amp;&amp; params[:controller] == &#39;contact_informations&#39;</code>
+ 22439          </li>
+ 22440        
+ .....
+ 23796            
+ 23797            
+ 23798:           <code class="ruby">    @contact_information = current_user.contact_informations.create</code>
+ 23799          </li>
+ 23800        
+ .....
+ 24480            
+ 24481            
+ 24482:           <code class="ruby">    if current_user.contact_informations.present? &amp;&amp;</code>
+ 24483          </li>
+ 24484        
+ .....
+ 61320          <div class="source_table" id="cb3385cb04313d1a390e5ebbc6433584e5a10f3a">
+ 61321    <div class="header">
+ 61322:     <h3>app/helpers/contact_informations_helper.rb</h3>
+ 61323      <h4><span class="green">100.0 %</span> covered</h4>
+ 61324      <div>
+ .....
+ 72697            
+ 72698            
+ 72699:           <code class="ruby"># Table name: contact_informations</code>
+ 72700          </li>
+ 72701        
+ .....
+ 79628            <span class="hits">1</span>
+ 79629            
+ 79630:           <code class="ruby">  has_many :contact_informations, class_name: &#39;ContactInformation&#39;,</code>
+ 79631          </li>
+ 79632        
+ .....
+ 80337            <span class="hits">1</span>
+ 80338            
+ 80339:           <code class="ruby">  has_many :contact_informations, class_name: &#39;ContactInformation&#39;,</code>
+ 80340          </li>
+ 80341        
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/db/schema.rb:
+  217    end
+  218  
+  219:   create_table "contact_informations", force: :cascade do |t|
+  220      t.bigint "user_id"
+  221      t.string "primary_phone"
+  ...
+  227      t.string "mobile_contact_time"
+  228      t.string "phone_contact_time"
+  229:     t.index ["user_id"], name: "index_contact_informations_on_user_id"
+  230    end
+  231  
+  ...
+  552    add_foreign_key "cards", "users"
+  553    add_foreign_key "career_highlights", "users"
+  554:   add_foreign_key "contact_informations", "users"
+  555    add_foreign_key "education_histories", "users"
+  556    add_foreign_key "industry_experiences", "users"
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/db/migrate/20180811000509_create_contact_informations.rb:
+    1  class CreateContactInformations < ActiveRecord::Migration[5.2]
+    2    def change
+    3:     create_table :contact_informations do |t|
+    4        t.references :user, foreign_key: true
+    5        t.string :primary_phone
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/db/migrate/20181010152128_add_contact_time_columns_to_contact_information.rb:
+    1  class AddContactTimeColumnsToContactInformation < ActiveRecord::Migration[5.2]
+    2    def change
+    3:     add_column :contact_informations, :mobile_contact_time, :string
+    4:     add_column :contact_informations, :phone_contact_time, :string
+    5    end
+    6  end
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/doc/CreateContactInformations.html:
+  125            
+  126            <div class="method-source-code" id="change-source">
+  127:             <pre><span class="ruby-comment"># File db/migrate/20180811000509_create_contact_informations.rb, line 2</span>
+  128  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">change</span>
+  129:   <span class="ruby-identifier">create_table</span> <span class="ruby-value">:contact_informations</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span>
+  130      <span class="ruby-identifier">t</span>.<span class="ruby-identifier">references</span> <span class="ruby-value">:user</span>, <span class="ruby-value">foreign_key:</span> <span class="ruby-keyword">true</span>
+  131      <span class="ruby-identifier">t</span>.<span class="ruby-identifier">string</span> <span class="ruby-value">:primary_phone</span>
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/log/development.log:
+    <binary>
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/log/test.log:
+    File too large, skipping
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/tmp/cache/assets/sprockets/v3.0/2q/2Q_yi2Z4plqw7zWLK5_7HkzohDifLr3SPLQUiuBlvhc.cache:
+    <binary>
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/tmp/cache/assets/sprockets/v3.0/49/49SBpzWnAZiHHWf6okuS76fQ0Q-DduPRdK2iBNYssdw.cache:
+    <binary>
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/tmp/cache/assets/sprockets/v3.0/5S/5sj9FwhSdvx6NlFncH8NBsck4uXS1cwvQ5XECRp9RQA.cache:
+    <binary>
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/tmp/cache/assets/sprockets/v3.0/8i/8IMZbS-PY2FraLrOh2vKipQPcewNj4IhR_d6TAOXOqk.cache:
+    <binary>
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/tmp/cache/assets/sprockets/v3.0/8q/8qH-vOzWC4GzW7CqEOYFkiWEpBqlB6X8N5C_rGLk_dU.cache:
+    <binary>
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/tmp/cache/assets/sprockets/v3.0/9Y/9YpVdQhDOaIL8L40RqYInkiSnQw93TrrgQbfcDZ8lN8.cache:
+    <binary>
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/tmp/cache/assets/sprockets/v3.0/a0/A0_ICNYaKOgRBK4qSAhMffOKj3pcvy7FyznR_NZ2bJk.cache:
+    <binary>
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/tmp/cache/assets/sprockets/v3.0/AX/aX8WFawfCWMkRXejRbH5cIfUe-hLheQnOT-LI7jtFKE.cache:
+    <binary>
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/tmp/cache/assets/sprockets/v3.0/b7/b7eiGlsRPSvgpr1OIEtN2BaiYrCeARTiRzfzZtycSnk.cache:
+    <binary>
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/tmp/cache/assets/sprockets/v3.0/B8/B8BWd5O0s7rn0j_EGKKs1mDY96EPofI1PBNLimu7iJA.cache:
+    <binary>
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/tmp/cache/assets/sprockets/v3.0/cx/CXAW8qE8RmHeUk84D2yrt4zLIfqBwxsP880R-gMWYsU.cache:
+    <binary>
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/tmp/cache/assets/sprockets/v3.0/eT/EtyBhLsGnYi8W4-xqZ6XD6qi71Dv-bcA_p26OymA_n8.cache:
+    <binary>
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/tmp/cache/assets/sprockets/v3.0/eu/eUmiRgSc-Xxo0WP7AmSjDdzkfXnB1roi8OXrlocdzug.cache:
+    <binary>
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/tmp/cache/assets/sprockets/v3.0/f5/f5y9GdKMDdRpQyS_Olt994QplC7b1xnCZf5tqakUZOk.cache:
+    <binary>
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/tmp/cache/assets/sprockets/v3.0/gk/GkLPWWDLOaWnKXpC6_KiwYDgoJRHDxl67cX8dTqBy-Q.cache:
+    <binary>
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/tmp/cache/assets/sprockets/v3.0/HW/Hw4otGSHR8yHBB_wpDuK0jH5zZrStqvoLnJ6xvpg2VE.cache:
+    <binary>
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/tmp/cache/assets/sprockets/v3.0/ix/IxXrVyX_nsX7UAl9ZfhH29tJc6msFO42Q4IH9dAYbT8.cache:
+    <binary>
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/tmp/cache/assets/sprockets/v3.0/jG/jGErGUq4wrOxR9MRsXTYB_G8p3AXDrNpJSJCeOvC2k4.cache:
+    <binary>
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/tmp/cache/assets/sprockets/v3.0/OT/OThpU33xd7cLXCfplEADXZz7rUM_xqEydE7pQVfsrhg.cache:
+    <binary>
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/tmp/cache/assets/sprockets/v3.0/pK/pK1txWSqyOt9g4rAR_FywEUAGNlXn2x2d44rnNueJtM.cache:
+    <binary>
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/tmp/cache/assets/sprockets/v3.0/so/sODBaZMYjrqYHFvo0-V-2gedStwvF9DiFPZO5moPo9A.cache:
+    <binary>
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/tmp/cache/assets/sprockets/v3.0/Sq/sQEaRVaCZWc9YAPVPrbzCEDkCGYjAJs3yRV4URQ03vM.cache:
+    <binary>
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/tmp/cache/assets/sprockets/v3.0/tJ/tJtTUkNYG00Pzv1S5HoBiFJYCvVsLsNRhDbQ9NxMNDY.cache:
+    <binary>
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/tmp/cache/assets/sprockets/v3.0/uw/UwcVpOWViKfrJq2tosSd67xuSHhVUytLmfKJ0SjWQHs.cache:
+    <binary>
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/tmp/cache/assets/sprockets/v3.0/Wn/wn60cWf4z4ofL4ZMoQIH7qKzQV811h8shvtBHZ45LWM.cache:
+    <binary>
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/tmp/cache/assets/sprockets/v3.0/x9/X95qe71Gs_GqSWvnMViosxmq8RcRiJMusWgjpKHQCjs.cache:
+    <binary>
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/tmp/cache/assets/sprockets/v3.0/XN/XN3wwwfCn-XHWW9zAy-H764xw1xKoslbCw3PvjKM9lk.cache:
+    <binary>
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/tmp/cache/assets/sprockets/v3.0/z8/Z8iij4lJwhYYld3dEoM746Erqvkf-dUF5B_0b_ijR1U.cache:
+    <binary>
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/tmp/cache/assets/sprockets/v3.0/zK/ZkKFOh_ECq0irAsQUlqqErrBBWfDOxhcI92PRxQnlas.cache:
+    <binary>
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/tmp/cache/assets/sprockets/v3.0/ZX/Zx6h1WjmrA58Jgr_GRyvcnW6_ybpc5RsiDLoPBRdnL8.cache:
+    <binary>
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/tmp/cache/assets/sprockets/v3.0/ZY/zYI_aMfti9wOLpqC15jJ_6-Iqfx83vke32JsC7MEcic.cache:
+    <binary>
+
+1811 matches across 49 files
+
+
+Searching 15020 files for ".contact_informations"
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/app/controllers/clients_information_controller.rb:
+    8  
+    9    def contacts
+   10:     @contact_information = current_user.contact_informations.create
+   11    end
+   12  
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/app/controllers/contact_informations_controller.rb:
+   26  
+   27    def destroy
+   28:     current_user.contact_informations.find(
+   29        params[:contact_information_id]
+   30      ).destroy
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/app/controllers/experts_onboarding_controller.rb:
+   23    def general_information
+   24      @user = current_user
+   25:     @contact_information = current_user.contact_informations.create
+   26      add_to_completed_steps('welcome')
+   27      set_current_onboarding_step
+   ..
+  137  
+  138    def profile_information_are_present?
+  139:     if current_user.contact_informations.present? &&
+  140         current_user.first_name &&
+  141         current_user.last_name &&
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/app/views/experts_onboarding/summary.html.haml:
+   39              = current_user.timezone.name
+   40  
+   41:         - current_user.contact_informations.each do |contact_information|
+   42            - if contact_information.primary_phone.present?
+   43              %p
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/app/views/users/edit_profile.html.haml:
+   39              = current_user.timezone.name
+   40  
+   41:         - current_user.contact_informations.each do |contact_information|
+   42            - if contact_information.primary_phone.present?
+   43              %p
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/coverage/index.html:
+ 20007            
+ 20008            
+ 20009:           <code class="ruby">                           .contact_informations.first || current_user</code>
+ 20010          </li>
+ 20011        
+ .....
+ 20013            
+ 20014            
+ 20015:           <code class="ruby">                           .contact_informations.new</code>
+ 20016          </li>
+ 20017        
+ .....
+ 20415            
+ 20416            
+ 20417:           <code class="ruby">    @contact_information = current_user.contact_informations.create</code>
+ 20418          </li>
+ 20419        
+ .....
+ 20878            
+ 20879            
+ 20880:           <code class="ruby">    @contact_information = current_user.contact_informations.create</code>
+ 20881          </li>
+ 20882        
+ .....
+ 22388            
+ 22389            
+ 22390:           <code class="ruby">    current_user.contact_informations.find(</code>
+ 22391          </li>
+ 22392        
+ .....
+ 23796            
+ 23797            
+ 23798:           <code class="ruby">    @contact_information = current_user.contact_informations.create</code>
+ 23799          </li>
+ 23800        
+ .....
+ 24480            
+ 24481            
+ 24482:           <code class="ruby">    if current_user.contact_informations.present? &amp;&amp;</code>
+ 24483          </li>
+ 24484        
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/log/test.log:
+    File too large, skipping
+
+13 matches across 6 files
+
+
+Searching 15020 files for ".contact_informations"
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/app/controllers/contact_informations_controller.rb:
+   26  
+   27    def destroy
+   28:     current_user.contact_informations.find(
+   29        params[:contact_information_id]
+   30      ).destroy
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/app/controllers/experts_onboarding_controller.rb:
+   23    def general_information
+   24      @user = current_user
+   25:     @contact_information = current_user.contact_informations.create
+   26      add_to_completed_steps('welcome')
+   27      set_current_onboarding_step
+   ..
+  137  
+  138    def profile_information_are_present?
+  139:     if current_user.contact_informations.present? &&
+  140         current_user.first_name &&
+  141         current_user.last_name &&
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/app/views/experts_onboarding/summary.html.haml:
+   39              = current_user.timezone.name
+   40  
+   41:         - current_user.contact_informations.each do |contact_information|
+   42            - if contact_information.primary_phone.present?
+   43              %p
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/app/views/users/edit_profile.html.haml:
+   39              = current_user.timezone.name
+   40  
+   41:         - current_user.contact_informations.each do |contact_information|
+   42            - if contact_information.primary_phone.present?
+   43              %p
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/coverage/index.html:
+ 20007            
+ 20008            
+ 20009:           <code class="ruby">                           .contact_informations.first || current_user</code>
+ 20010          </li>
+ 20011        
+ .....
+ 20013            
+ 20014            
+ 20015:           <code class="ruby">                           .contact_informations.new</code>
+ 20016          </li>
+ 20017        
+ .....
+ 20415            
+ 20416            
+ 20417:           <code class="ruby">    @contact_information = current_user.contact_informations.create</code>
+ 20418          </li>
+ 20419        
+ .....
+ 20878            
+ 20879            
+ 20880:           <code class="ruby">    @contact_information = current_user.contact_informations.create</code>
+ 20881          </li>
+ 20882        
+ .....
+ 22388            
+ 22389            
+ 22390:           <code class="ruby">    current_user.contact_informations.find(</code>
+ 22391          </li>
+ 22392        
+ .....
+ 23796            
+ 23797            
+ 23798:           <code class="ruby">    @contact_information = current_user.contact_informations.create</code>
+ 23799          </li>
+ 23800        
+ .....
+ 24480            
+ 24481            
+ 24482:           <code class="ruby">    if current_user.contact_informations.present? &amp;&amp;</code>
+ 24483          </li>
+ 24484        
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/log/test.log:
+    File too large, skipping
+
+12 matches across 5 files
+
+
+Searching 15020 files for ".contact_informations"
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/app/controllers/experts_onboarding_controller.rb:
+   23    def general_information
+   24      @user = current_user
+   25:     @contact_information = current_user.contact_informations.create
+   26      add_to_completed_steps('welcome')
+   27      set_current_onboarding_step
+   ..
+  137  
+  138    def profile_information_are_present?
+  139:     if current_user.contact_informations.present? &&
+  140         current_user.first_name &&
+  141         current_user.last_name &&
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/app/views/experts_onboarding/summary.html.haml:
+   39              = current_user.timezone.name
+   40  
+   41:         - current_user.contact_informations.each do |contact_information|
+   42            - if contact_information.primary_phone.present?
+   43              %p
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/app/views/users/edit_profile.html.haml:
+   39              = current_user.timezone.name
+   40  
+   41:         - current_user.contact_informations.each do |contact_information|
+   42            - if contact_information.primary_phone.present?
+   43              %p
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/coverage/index.html:
+ 20007            
+ 20008            
+ 20009:           <code class="ruby">                           .contact_informations.first || current_user</code>
+ 20010          </li>
+ 20011        
+ .....
+ 20013            
+ 20014            
+ 20015:           <code class="ruby">                           .contact_informations.new</code>
+ 20016          </li>
+ 20017        
+ .....
+ 20415            
+ 20416            
+ 20417:           <code class="ruby">    @contact_information = current_user.contact_informations.create</code>
+ 20418          </li>
+ 20419        
+ .....
+ 20878            
+ 20879            
+ 20880:           <code class="ruby">    @contact_information = current_user.contact_informations.create</code>
+ 20881          </li>
+ 20882        
+ .....
+ 22388            
+ 22389            
+ 22390:           <code class="ruby">    current_user.contact_informations.find(</code>
+ 22391          </li>
+ 22392        
+ .....
+ 23796            
+ 23797            
+ 23798:           <code class="ruby">    @contact_information = current_user.contact_informations.create</code>
+ 23799          </li>
+ 23800        
+ .....
+ 24480            
+ 24481            
+ 24482:           <code class="ruby">    if current_user.contact_informations.present? &amp;&amp;</code>
+ 24483          </li>
+ 24484        
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/log/test.log:
+    File too large, skipping
+
+11 matches across 4 files
+
+
+Searching 15020 files for ".contact_informations"
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/app/controllers/experts_onboarding_controller.rb:
+  137  
+  138    def profile_information_are_present?
+  139:     if current_user.contact_informations.present? &&
+  140         current_user.first_name &&
+  141         current_user.last_name &&
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/app/views/experts_onboarding/summary.html.haml:
+   39              = current_user.timezone.name
+   40  
+   41:         - current_user.contact_informations.each do |contact_information|
+   42            - if contact_information.primary_phone.present?
+   43              %p
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/app/views/users/edit_profile.html.haml:
+   39              = current_user.timezone.name
+   40  
+   41:         - current_user.contact_informations.each do |contact_information|
+   42            - if contact_information.primary_phone.present?
+   43              %p
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/coverage/index.html:
+ 20007            
+ 20008            
+ 20009:           <code class="ruby">                           .contact_informations.first || current_user</code>
+ 20010          </li>
+ 20011        
+ .....
+ 20013            
+ 20014            
+ 20015:           <code class="ruby">                           .contact_informations.new</code>
+ 20016          </li>
+ 20017        
+ .....
+ 20415            
+ 20416            
+ 20417:           <code class="ruby">    @contact_information = current_user.contact_informations.create</code>
+ 20418          </li>
+ 20419        
+ .....
+ 20878            
+ 20879            
+ 20880:           <code class="ruby">    @contact_information = current_user.contact_informations.create</code>
+ 20881          </li>
+ 20882        
+ .....
+ 22388            
+ 22389            
+ 22390:           <code class="ruby">    current_user.contact_informations.find(</code>
+ 22391          </li>
+ 22392        
+ .....
+ 23796            
+ 23797            
+ 23798:           <code class="ruby">    @contact_information = current_user.contact_informations.create</code>
+ 23799          </li>
+ 23800        
+ .....
+ 24480            
+ 24481            
+ 24482:           <code class="ruby">    if current_user.contact_informations.present? &amp;&amp;</code>
+ 24483          </li>
+ 24484        
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/log/test.log:
+    File too large, skipping
+
+10 matches across 4 files
+
+
+Searching 15020 files for ".contact_informations"
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/app/views/experts_onboarding/summary.html.haml:
+   39              = current_user.timezone.name
+   40  
+   41:         - current_user.contact_informations.each do |contact_information|
+   42            - if contact_information.primary_phone.present?
+   43              %p
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/app/views/users/edit_profile.html.haml:
+   39              = current_user.timezone.name
+   40  
+   41:         - current_user.contact_informations.each do |contact_information|
+   42            - if contact_information.primary_phone.present?
+   43              %p
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/coverage/index.html:
+ 20007            
+ 20008            
+ 20009:           <code class="ruby">                           .contact_informations.first || current_user</code>
+ 20010          </li>
+ 20011        
+ .....
+ 20013            
+ 20014            
+ 20015:           <code class="ruby">                           .contact_informations.new</code>
+ 20016          </li>
+ 20017        
+ .....
+ 20415            
+ 20416            
+ 20417:           <code class="ruby">    @contact_information = current_user.contact_informations.create</code>
+ 20418          </li>
+ 20419        
+ .....
+ 20878            
+ 20879            
+ 20880:           <code class="ruby">    @contact_information = current_user.contact_informations.create</code>
+ 20881          </li>
+ 20882        
+ .....
+ 22388            
+ 22389            
+ 22390:           <code class="ruby">    current_user.contact_informations.find(</code>
+ 22391          </li>
+ 22392        
+ .....
+ 23796            
+ 23797            
+ 23798:           <code class="ruby">    @contact_information = current_user.contact_informations.create</code>
+ 23799          </li>
+ 23800        
+ .....
+ 24480            
+ 24481            
+ 24482:           <code class="ruby">    if current_user.contact_informations.present? &amp;&amp;</code>
+ 24483          </li>
+ 24484        
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/log/test.log:
+    File too large, skipping
+
+9 matches across 3 files
+
+
+Searching 15020 files for ".contact_informations"
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/app/views/users/edit_profile.html.haml:
+   39              = current_user.timezone.name
+   40  
+   41:         - current_user.contact_informations.each do |contact_information|
+   42            - if contact_information.primary_phone.present?
+   43              %p
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/coverage/index.html:
+ 20007            
+ 20008            
+ 20009:           <code class="ruby">                           .contact_informations.first || current_user</code>
+ 20010          </li>
+ 20011        
+ .....
+ 20013            
+ 20014            
+ 20015:           <code class="ruby">                           .contact_informations.new</code>
+ 20016          </li>
+ 20017        
+ .....
+ 20415            
+ 20416            
+ 20417:           <code class="ruby">    @contact_information = current_user.contact_informations.create</code>
+ 20418          </li>
+ 20419        
+ .....
+ 20878            
+ 20879            
+ 20880:           <code class="ruby">    @contact_information = current_user.contact_informations.create</code>
+ 20881          </li>
+ 20882        
+ .....
+ 22388            
+ 22389            
+ 22390:           <code class="ruby">    current_user.contact_informations.find(</code>
+ 22391          </li>
+ 22392        
+ .....
+ 23796            
+ 23797            
+ 23798:           <code class="ruby">    @contact_information = current_user.contact_informations.create</code>
+ 23799          </li>
+ 23800        
+ .....
+ 24480            
+ 24481            
+ 24482:           <code class="ruby">    if current_user.contact_informations.present? &amp;&amp;</code>
+ 24483          </li>
+ 24484        
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/log/test.log:
+    File too large, skipping
+
+8 matches across 2 files
+
+
+Searching 15020 files for ".contact_informations"
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/coverage/index.html:
+ 20007            
+ 20008            
+ 20009:           <code class="ruby">                           .contact_informations.first || current_user</code>
+ 20010          </li>
+ 20011        
+ .....
+ 20013            
+ 20014            
+ 20015:           <code class="ruby">                           .contact_informations.new</code>
+ 20016          </li>
+ 20017        
+ .....
+ 20415            
+ 20416            
+ 20417:           <code class="ruby">    @contact_information = current_user.contact_informations.create</code>
+ 20418          </li>
+ 20419        
+ .....
+ 20878            
+ 20879            
+ 20880:           <code class="ruby">    @contact_information = current_user.contact_informations.create</code>
+ 20881          </li>
+ 20882        
+ .....
+ 22388            
+ 22389            
+ 22390:           <code class="ruby">    current_user.contact_informations.find(</code>
+ 22391          </li>
+ 22392        
+ .....
+ 23796            
+ 23797            
+ 23798:           <code class="ruby">    @contact_information = current_user.contact_informations.create</code>
+ 23799          </li>
+ 23800        
+ .....
+ 24480            
+ 24481            
+ 24482:           <code class="ruby">    if current_user.contact_informations.present? &amp;&amp;</code>
+ 24483          </li>
+ 24484        
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/log/test.log:
+    File too large, skipping
+
+7 matches in 1 file
+
+
+Searching 15020 files for "build_contact_informations"
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/log/test.log:
+    File too large, skipping
+
+0 matches
+
+Searching 15021 files for "contact_information.primary_phone.present?
+contact_information.primary_phone.present"
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/log/test.log:
+    File too large, skipping
+
+0 matches
+
+Searching 15021 files for "        - if contact_information.primary_phone.present?
+"
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/app/views/experts_onboarding/summary.html.haml:
+   39              = current_user.timezone.name
+   40  
+   41:         - if contact_information.primary_phone.present?
+   42:           %p
+   43              %strong= t('users.primary_phone:')
+   44              = contact_information.primary_phone
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/app/views/users/edit_profile.html.haml:
+   39              = current_user.timezone.name
+   40  
+   41:         - if contact_information.primary_phone.present?
+   42:           %p
+   43              %strong= t('users.primary_phone:')
+   44              = contact_information.primary_phone
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/log/test.log:
+    File too large, skipping
+
+2 matches across 2 files
+
+
+Searching 15022 files for "redirect_to balance_expert_pathe"
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/app/controllers/payouts_controller.rb:
+   12    def destroy
+   13      current_user.update_attributes(stripe_account_id: nil)
+   14:     redirect_to balance_expert_path
+   15    end
+   16  end
+
+/Users/richardson/Work/MindsWithPurpose/mindswithpurpose/log/test.log:
+    File too large, skipping
+

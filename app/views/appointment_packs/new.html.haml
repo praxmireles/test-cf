@@ -1,0 +1,264 @@
+%br
+%br
+.content
+  .row
+    .col-xl-12
+      .apppointment_pack_options
+        = render partial: 'appointment_packs/options'
+      .appointment_pack_calendar
+        = render partial: 'appointment_packs/calendar'
+      .appointment_pack_summary
+        = render partial: 'appointment_packs/summary'
+
+:javascript
+
+  var app =  {
+    init: function(){
+      this.initializeHandlers();
+      this.initializeDateTimeAttrOnCalendar();
+
+      // Event Listener
+      // $(document).ready(function() {
+      //   this.packageOptionSelectListener();
+      //   this.serviceSelectListener();
+      // })
+
+
+      // Set Selectors
+      this.packageOptionSelector = $('#Package_Options');
+      this.serviceSelector = $('#Service');
+      this.expertIdSelector = $('#expert_id');
+
+      // Array of Date Selected by the client
+      this.dates_selected = [];
+      // Id of the Expert
+      this.expert_id = this.expertIdSelector.text();
+      // Package Option selected by the client
+      this.package_option = this.packageOptionSelector.val();
+      // Service Selected by the Expert (Mentoring or Coaching)
+      this.service_id = this.serviceSelector.val();
+
+      // MAX NUMBER of CALENDAR SELECTIONS
+      this.max_selection = parseInt(this.package_option);
+    },
+
+    initializeHandlers: function(){
+      this.calendarClickHandler();
+      this.nextButtonHandler();
+      this.previousButtonHandler();
+    },
+
+    initializeDateTimeAttrOnCalendar: function(){
+      // Add a data-date to every element in the calendar
+      var tableTDSelector = $('table td');
+  
+      var i;
+      var v = 0;
+      for (i = 1; i < tableTDSelector.length; i++) {
+        var date = $(tableTDSelector[i]).closest('table').find('th').eq($(tableTDSelector[i]).index()).text();
+        var time = $(tableTDSelector[i]).children().val();
+        var formatedDate = date + " " + time;
+        $(tableTDSelector[i]).children().attr('data-date', formatedDate)
+        v = v + 1
+        if (v == 8){
+          i++
+          v = 0;
+        }
+      }
+    },
+
+    reinitializeMaxSelection: function(){
+      // MAX NUMBER of CALENDAR SELECTIONS
+      app.max_selection = parseInt(this.package_option);
+      // reload_summary
+    },
+
+    // FUNCTION MANAGING SELECTIONS
+
+    selectCheckbox: function(tdSelector, checkboxSelector){
+      $(tdSelector).removeClass("week-day");
+      $(tdSelector).addClass("no-week-day");
+      checkboxSelector.attr('checked', true);
+      tdSelector.style.backgroundColor = "#c3deb7";
+    },
+
+    unSelectChecbox: function(tdSelector, checkboxSelector){
+      $(tdSelector).removeClass("no-week-day");
+      $(tdSelector).addClass("week-day");
+      checkboxSelector.attr('checked', false);
+      tdSelector.style.backgroundColor = "#ffffff";
+    },
+
+    pushDateSelected: function(selection){
+      var date = $(selection).closest('table').find('th').eq($(selection).index()).text();
+      var time = $(selection).children().val();
+      var formatedDate = date + " " + time
+      selected_date = formatedDate;
+      // Add to dates_selected array
+      app.dates_selected.push(selected_date);
+
+      // update_display()
+      console.log('dates_selected: ' + app.dates_selected);
+      app.updateDateSelectionSummary(app.dates_selected);
+    },
+
+    removeDateSelected: function(selection){
+      selected_date = $(selection).children().attr('id')
+
+      // Remove from dates_selected array
+      var index = app.dates_selected.indexOf(selected_date);
+      app.dates_selected.splice(index, 1);
+
+      // update_display()
+      console.log('dates_selected: ' + app.dates_selected);
+      app.updateDateSelectionSummary(app.dates_selected);
+    },
+
+    updateDateSelectionSummary: function(dateSelectionArray){
+      $.ajax({
+          method: "GET",
+          url: "/appointment_packs/calendar/summary",
+          data: {
+            service_id: app.service_id,
+            package_option: app.package_option,
+            expert_id: app.expert_id,
+            dates_selected: app.dates_selected
+          }
+        })
+          .done(function( msg ) {
+            // alert( "Data Saved: " + msg );
+          });
+    },
+
+    packageOptionSelectListener: function(){
+      // TODO: WORK IN PROGRESS
+      app.packageOptionSelector.on("change", function(){
+        var options = {package_options: $(this).val()}
+        console.log('PackagedOption changed..')
+        reinitializeMaxSelection(options);
+      })
+    },
+
+    serviceSelectListener: function(){
+      // TODO: WORK IN PROGRESS
+      app.serviceSelector.on("change", function(){
+        var options = {service_id: $(this).val()}
+        reloadDatesSelected(options)
+      })
+    },
+
+    // CLICK HANDLERS
+    calendarClickHandler: function(){
+      $(".week-day, .no-week-day").on("click", function () {
+        if ($(this).hasClass('available')) {
+          if ($(this).hasClass('week-day')) {
+            if (app.dates_selected.length < app.max_selection) {
+              var checkBoxSelector = $(this).find('input');
+              app.selectCheckbox(this, checkBoxSelector);
+              app.pushDateSelected(this);
+            } else {
+              alert("You've selected your maximum number of appointments");
+            }
+
+          } else {
+            var checkBoxSelector = $(this ).find('input');
+            app.unSelectChecbox(this, checkBoxSelector);
+            app.removeDateSelected(this);
+          }
+        }
+      });
+    },
+
+    nextButtonHandler: function(){
+      var nextWeekButtonSelector = $('.next-week');
+      nextWeekButtonSelector.on('click', function (e) {
+        e.preventDefault();
+        var end_of_current_week = $('th.end_of_current_week').text();
+
+        $.ajax({
+          method: "GET",
+          url: "/appointment_packs/calendar/next_week",
+          data: {
+            end_of_current_week: end_of_current_week,
+            expert_id: app.expert_id,
+            dates_selected: app.dates_selected
+          }
+        })
+          .done(function( msg ) {
+            app.initializeDateTimeAttrOnCalendar();
+            app.reloadDatesSelected();
+            app.initializeHandlers();
+          });
+      })
+    },
+
+    previousButtonHandler: function(){
+      var previousWeekButtonSelector = $('.previous-week');
+      previousWeekButtonSelector.on('click', function (e) {
+        e.preventDefault();
+        var beginning_of_current_week = $('th.beginning_of_current_week').text();
+
+        $.ajax({
+          method: "GET",
+          url: "/appointment_packs/calendar/previous_week",
+          data: {
+            beginning_of_current_week: beginning_of_current_week,
+            expert_id: app.expert_id,
+            dates_selected: app.dates_selected
+          }
+        })
+          .done(function( msg ) {
+            app.initializeDateTimeAttrOnCalendar();
+            app.reloadDatesSelected();
+            app.initializeHandlers();
+          });
+      });
+    },
+
+    reloadDatesSelected: function(options){
+      // Update Summary based on selection from session
+      var service_id;
+      if ((typeof options !== 'undefined') && (typeof options["service_id"] !== 'undefined')) {
+        service_id = options["service_id"]
+        package_options = options["package_options"]
+      } else {
+        service_id = app.service_id
+      }
+
+      var package_options;
+      if ((typeof options !== 'undefined') && (typeof options["package_options"] !== 'undefined')){
+        package_options = options["package_options"]
+      } else {
+        package_options = app.package_options
+      }
+
+      $.ajax({
+          method: "GET",
+          url: "/appointment_packs/calendar/summary",
+          data: {
+            service_id: service_id,
+            package_option: package_options,
+            expert_id: app.expert_id,
+          }
+        })
+          .done(function( response ) {
+            // Update the visible sessions
+            app.selectDatesFromDateSelectedArray();
+          });
+    },
+
+    selectDatesFromDateSelectedArray: function(){
+      
+      for (i = 0; i < app.dates_selected.length; i++) {
+        var checkboxSelector = $("input[data-date='"+ app.dates_selected[i] +"']");
+        var tdSelector = $(checkboxSelector.parent())[0]
+        if (checkboxSelector.attr('data-date') == app.dates_selected[i]){
+          app.selectCheckbox(tdSelector, checkboxSelector)
+        }
+      }
+    }
+  }
+
+
+
+  app.init();

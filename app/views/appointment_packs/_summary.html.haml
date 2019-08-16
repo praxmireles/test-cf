@@ -1,0 +1,28 @@
+- # @selected_dates.each do |selection|
+.panel
+  .panel-header.text-md
+    %span= t('layout.summary')
+  .panel-content
+    Expert
+    .user-photo
+      = image_tag( @expert&.avatar.url, style:'width: 100px;')
+    %ul.user-contact-info.ph-sm
+      %li.text-left
+        %ul.dateSelected
+          Appointments Selections with
+          = @expert.fullname
+          -  @dates_selected.each_with_index do |date, index|
+            %li
+              %span{data: {id: index}}= "#{index + 1 } | #{date}"
+              - # %span
+              - #   %b{style: 'color: red;'} Remove
+      %li.text-right
+        %h4
+          Package of 5 Sessions for 
+          = @service.type
+        %br
+        %h5= "#{@dates_selected.length} sessions scheduled"
+        %h5{id: 'session_unscheduled', data: {count: (session_unscheduled_count(@package_option, @dates_selected))}}= "#{session_unscheduled_count(@package_option, @dates_selected)} sessions unschedueld"
+
+        %h1= number_to_currency(@service.price * @dates_selected.length)
+        = link_to(t('buttons.pay_for_package'), appointment_pack_checkout_path(dates_selected: @dates_selected, package_option: @package_option, expert_id: @expert.id, service_id: @service), class: 'btn btn-primary btn-wide', disabled: (true unless session_unscheduled_count(@package_option, @dates_selected) == 0) )

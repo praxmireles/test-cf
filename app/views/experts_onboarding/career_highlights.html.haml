@@ -1,0 +1,207 @@
+= render partial: 'tab_steps'
+.row
+  .col-sm-10.col-sm-offset-1
+    .panel
+      .panel-header
+        %span.text-md= "Key Accomplishments"
+      .panel-body.text-justify
+        %p
+          = t('view_expert_onboarding.career_highlight.fill_this_out')
+
+.row
+  .col-sm-6.col-sm-offset-1
+    .panel
+      .panel-header
+        %span.text-md
+          = t('view_expert_onboarding.career_highlight.key_accomplishments')
+      .panel-body.text-justify
+        .row{:style => "margin:20px"}
+          .col-xs-12
+            = form_for @career_highlight, url: url_for(controller: 'career_highlights', action: 'create'), method: :post, class: 'js-validation-material', id: 'career-highlight-from' do |f|
+              .form-inputs
+
+                = hidden_field_tag :"id"
+                = hidden_field_tag :authenticity_token, form_authenticity_token
+                .form-group.row
+                  .col-sm-12
+                    %label{:for => "name"}
+                      =  t('career_highlights.index.name')
+                    .input-group.mb-sm
+                      %span.input-group-addon.x-primary
+                        %i.fa.fa-edit
+                      = f.text_field :name, required: true, maxlength: 70
+
+
+                .form-group.row
+                  .col-sm-12
+                    %label{:for => "description"}= t('career_highlights.index.description')
+                    .input-group.mb-sm
+                      %span.input-group-addon.x-primary
+                        %i.fa.fa-edit
+                      = f.text_area :description, required: true, input_html: {minlength: 20, maxlength: 350}, size: "69"
+
+
+                .form-group.row
+                  .col-sm-12
+                    %label
+                      = t('view_expert_onboarding.career_highlight.date')
+                    #datetimepicker1.input-group.date
+                      %span.input-group-addon.x-primary{:style=>"width:40px;"}
+                        %i.fa.fa-calendar-alt
+                      = f.date_field :date, maxlength: 10, as: :date, required: true
+
+
+                .form-group.row
+                  %label.col-12= t('degrees.index.highest')
+                  .col-12
+                    .form-group
+                      .checkbox-custom.checkbox-inline.checkbox-primary
+                        %input.custom-control-input{:checked => "checked", :name => "highest", :type => "checkbox", :value => "false", :id => "degree_highest", :checked => false}
+                        = label_tag :accepted, "Highest", for: "degree_highest", :class => "check"
+
+                .form-group{:style => "text-align:center"}
+                  %button.btn.btn-primary.btn-wide.save-career_highlight{:type => "submit"}= t('layout.save')
+
+      %hr
+      .panel-footer
+        .row
+          .col-sm-4
+            %a.btn.btn-lighter-1.btn-wide{:style => "margin-left:20%", href: "/experts/onboarding/positions" }= t('buttons.save')
+          .col-sm-4.col-sm-offset-4
+
+            %a.btn.btn-primary.btn-wide{type: "submit", :style => "margin-left:20%", href: "/experts/onboarding/skills" }= t('buttons.next')
+
+
+  .col-sm-4
+    .panel
+      .panel-header
+        %span.text-md= t('layout.your_career_highlights')
+
+      .panel-content.div-to-add.text-md{:style => "text-align:justify"}
+        - @my_career_highlights.each do |career_highlight|
+          .panel
+            .panel-header.panel-primary
+              %span.text-md{:style => "color:white"}= career_highlight.name
+              %span.text-md{:style => "color:white"}= career_highlight.highest ? '(Highest)' : ''
+              .panel-actions
+                = link_to edit_career_highlight_path(career_highlight), id: career_highlight.id, style: "margin-left:10px" do
+                  %i.fa.fa-pencil-alt{:style => "color:white"}
+                = link_to(destroy_career_highlight_path(career_highlight), controller:'career_highlights', action: 'destroy', method: :delete, id: career_highlight.id) do
+                  %i.fa.fa-trash{:style => "color:white"}
+            .panel-content.text-md{:style => "text-align:justify"}
+              %p
+                %small= career_highlight.description
+              %p
+                %small
+                  Date:
+                  = career_highlight.date.strftime('%D')
+
+
+
+
+:javascript
+
+  $("#degree_current").change(function(){
+    if ($('#degree_current').is(':checked')) {
+      $("#end_date2").hide()
+      $("#start_date2").next("span").hide()
+      $("#end_date2").prop('disabled', true);
+    }else{
+      $("#end_date2").show()
+      $("#start_date2").next("span").show()
+      $("#end_date2").prop('disabled', false);
+    }
+  });
+
+  $("#save-degree-from").validate({
+    highlight: function(label) {
+        $(label).closest('.form-group').removeClass('has-success').addClass('has-error');
+    },
+    success: function(label) {
+        $(label).closest('.form-group').removeClass('has-error');
+        label.remove();
+    },
+    errorPlacement: function(error, element) {
+      error.insertAfter($(element).closest('.form-group').find('label'));
+    }
+  });
+
+  $('#save-degree-from').on('submit', function(e) {
+    if (!$('#degree_current').is(':checked')) {
+      startDate = moment($("#start_date2").val(), 'MM/YYYY').format('YYYY-MM')
+      endDate = moment($("#end_date2").val(), 'MM/YYYY').format('YYYY-MM')
+      if (startDate > endDate) {
+        e.preventDefault();
+        alert("First date cannot be greater than second date.");
+        $("#start_date2").focus();
+        return false;
+      }else{
+
+        return true
+      }
+    }else{
+      return true
+    }
+  });
+
+  $('#start_date2').datepicker({
+      // format: 'dd/mm/yyyy',
+      autoclose: true,
+      minViewMode: 1,
+      format: 'mm/yyyy',
+      startDate: 1940 - (new Date()).getFullYear() + 'y',
+      endDate: '+0y'
+  }).on('changeDate', function(selected) {
+    startDate = new Date(selected.date.valueOf());
+    startDate.setDate(startDate.getDate(new Date(selected.date.valueOf())));
+    $('#end_date2').datepicker('setStartDate', startDate);
+  });
+  $('#end_date2').datepicker({
+      // format: 'dd/mm/yyyy',
+      autoclose: true,
+      minViewMode: 1,
+      format: 'mm/yyyy',
+      startDate: 1940 - (new Date()).getFullYear() + 'y',
+      endDate: '+0y'
+  });
+  var placeSearch, autocomplete;
+    var componentForm = {
+      street_number: 'short_name',
+      route: 'long_name',
+      locality: 'long_name',
+      administrative_area_level_1: 'short_name',
+      country: 'long_name',
+      postal_code: 'short_name'
+    };
+
+    function initAutocomplete() {
+      // Create the autocomplete object, restricting the search to geographical
+      // location types.
+      autocomplete = new google.maps.places.Autocomplete(
+          /** @type {!HTMLInputElement} */(document.getElementById('location')),
+          {types: ['geocode']});
+
+      // When the user selects an address from the dropdown, populate the address
+      // fields in the form.
+      autocomplete.addListener('place_changed', fillInAddress);
+    }
+
+    function fillInAddress() {
+      // Get the place details from the autocomplete object.
+      var place = autocomplete.getPlace();
+
+    //  for (var component in componentForm) {
+    //    document.getElementById(component).value = '';
+    //    document.getElementById(component).disabled = false;
+    //  }
+
+      // Get each component of the address from the place details
+      // and fill the corresponding field on the form.
+    //  for (var i = 0; i < place.address_components.length; i++) {
+    //    var addressType = place.address_components[i].types[0];
+    //    if (componentForm[addressType]) {
+    //      var val = place.address_components[i][componentForm[addressType]];
+    //      document.getElementById(addressType).value = val;
+    //    }
+    //  }
+    }

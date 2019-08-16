@@ -1,0 +1,6 @@
+$('.in_progress_appointments').html("<%= escape_javascript(render partial: 'in_progress_appointments', locals: {in_progress_appointments: @in_progress_appointments})%>")
+$('.pending_appointments').html("<%= escape_javascript(render partial: 'pending_appointments', locals: {pending_appointments: @pending_appointments})%>")
+$('.scheduled_appointments').html("<%= escape_javascript(render partial: 'scheduled_appointments', locals: {scheduled_appointments: @scheduled_appointments})%>")
+$('.past_appointments').html("<%= escape_javascript(render partial: 'past_appointments', locals: {past_appointments: @past_appointments})%>")
+$('.appointment_packs').html("<%= escape_javascript(render partial: 'appointment_packs', locals: {appointment_packs: @appointment_packs})%>")
+$('.past_appointment_packs').html("<%= escape_javascript(render partial: 'past_appointment_packs', locals: {appointment_packs: @past_appointment_packs})%>")

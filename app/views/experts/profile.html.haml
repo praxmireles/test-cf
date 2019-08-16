@@ -1,0 +1,203 @@
+.content
+
+  %br
+  %br
+
+  .row
+    .col-md-4
+      %div
+        .profile-photo
+          = image_tag @expert.avatar.url, :class => "img-responsive" if @expert.avatar.present?
+        .user-header-info
+          %h2.user-name= @expert.first_name
+          - if @search_history.present?
+            - if @search_history.service == "ExpressAdvice"
+              = link_to(new_client_open_appointments_path(search_history_id: @search_history.id, expert_id: @expert.id), data: { animation: "fadeInUp", timeout: "400"}) do
+                %h5.user-position
+                  %i.fa.fa-align-left
+                    = t('view_experts.profile.request_express_advice')
+              %br
+            - elsif @search_history.service == "Mentoring"
+              = link_to(new_client_open_appointments_path(search_history_id: @search_history.id, expert_id: @expert.id), data: { animation: "fadeInUp", timeout: "400"}) do
+                %h5.user-position
+                  %i.fa.fa-align-left
+                    = t('view_experts.profile.request_understanding_session_for_mentoring')
+            - elsif @search_history.service == "Coaching"
+              = link_to(new_client_open_appointments_path(search_history_id: @search_history.id, expert_id: @expert.id), data: { animation: "fadeInUp", timeout: "400"}) do
+                %h5.user-position
+                  %i.fa.fa-align-left
+                    = t('view_experts.profile.request_understanding_session_for_coaching')
+              %br
+
+
+
+      .panel.bg-scale-0.b-primary.bt-sm.mt-xl
+        .panel-content
+          %h4
+            %b About me
+          %ul.user-contact-info.ph-sm
+            %li.mt-sm= @expert.profile.about
+
+      / =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+      / CONTACT INFO
+      .panel.bg-scale-0.b-primary.bt-sm.mt-xl
+        .panel-content
+          %h4
+            %b
+              = t('view_experts.profile.contact_information')
+          %ul.user-contact-info.ph-sm
+            %li
+              %b
+                %i.color-primary.mr-sm.fa.fa-globe
+              = @expert.location
+
+      / =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+      / LIST
+      .panel.b-primary.bt-sm
+        .panel-content
+          .widget-list.list-sm.list-left-element
+            %ul
+              %li
+                %a{:href => "#"}
+                  .left-element
+                    %i.fa.fa-check.color-success
+                  .text
+                    %span.title= @expert.work_histories.count
+                    = t('view_experts.profile.jobs')
+                    %span.subtitle
+                      = t('view_experts.profile.completed')
+              %li
+                %a{:href => "#"}
+                  .left-element
+                    %i.fa.fa-clock-o.color-alert
+                  .text
+                    %span.title= @expert.work_histories.count
+                    = t('view_experts.profile.projects')
+                    %span.subtitle
+                      = t('view_experts.profile.working_on')
+              %li
+                %a{:href => "#"}
+                  .left-element
+                    %i.fa.fa-check.color-warning
+                  .text
+                    %span.title
+                      = @expert.ratings.empty? ? t('view_experts.dashboard.n_a') : "#{@expert.ratings.average(:rate).to_f.round(2)} / #{@expert.ratings.count}"
+                    = t('view_experts.profile.rating')
+                    %span.subtitle
+                      = t('view_experts.profile.rating_metric')
+              / %li
+              /   %a{:href => "#"}
+              /     .left-element
+              /       %i.fa.fa-envelope.color-primary
+              /     .text
+              /       %span.title
+              /         = t('view_experts.profile.leave_a_message')
+      - if appointment_from_search_history(@search_history.id).try(:was_completed?)
+        .panel.b-primary.bt-sm  
+          .panel.widgetbox.wbox-2.bg-scale-0
+            .panel-content
+              .row
+                .col-xs-4
+                  %span.icon.fa.fa-calendar-check-o.color-darker-1
+                .col-xs-8
+                  %h4.subtitle.color-darker-1
+                  = link_to(new_client_appointment_packs_path(expert_id: @expert.id)) do
+                    %h1.title.color-primary
+                      = t('view_experts.profile.book_appointment_package')
+      / =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+      / TIMELINE
+
+    .col-sm-8
+      .timeline.animated.fadeInUp
+        .timeline-box
+          .timeline-icon.bg-primary
+            %i.fa.fa-flag
+          .timeline-content
+            %h4.tl-title
+              = t('view_experts.profile.languages')
+            - @expert.languages.each do |language|
+              %span.label.label-primary{style: "margin-top: 4px !important; font-size:11px; display: inline-block; padding: 7px; background-color:#5BAAB4;"}= language.name
+          .timeline-footer
+            %span
+        .timeline-box
+          .timeline-icon.bg-primary
+            %i.fa.fa-tasks
+          .timeline-content
+            %h4.tl-title
+              = t('view_experts.profile.skills')
+            .row{:style=> "margin:0px"}
+              - @expert.job_functions.each do |function|
+                %span.label.label-primary{style: "margin-top: 4px !important; font-size:11px; display: inline-block; padding: 7px; background-color:#5BAAB4;"}= t(function.locale)
+          .timeline-footer
+            %span
+        .timeline-box
+          .timeline-icon.bg-primary
+            %i.fa.fa-tasks
+          .timeline-content
+            %h4.tl-title
+              = t('view_experts.profile.subskills')
+            - @expert.skills.each do |skill|
+              %span.label.label-primary{style: "margin-top: 4px !important;display: inline-block; font-size:11px; padding: 7px; background-color:#5BAAB4;" }= t(skill.locale)
+          .timeline-footer
+            %span
+        .timeline-box
+          .timeline-icon.bg-primary
+            %i.fa.fa-graduation-cap
+          .timeline-content
+            %h4.tl-title
+              = t('view_experts.profile.education')
+            - @expert.education_histories.each do |education_history|
+              .row
+                .col-lg-12
+                  .col-md-9
+                    %h4{:style => "font-weight:900"}= education_history.degree
+                    %p= education_history.field_of_study
+                  %p
+                    - if education_history.present?
+                      = DateTime.now
+                      - if education_history.to_date.present?
+                        = distance_of_time_in_words education_history.from_date, education_history.to_date
+                      - else
+                        = distance_of_time_in_words education_history.from_date
+                .col-md-3
+                  %h4= "Graduating in 2015"
+                  %span.label.label-success{:style => "background-color:#5BAAB4;"}= t('view_experts.profile.in_progress')
+            %hr
+          .timeline-footer
+            %span
+        .timeline-box
+          .timeline-icon.bg-primary
+            %i.fa.fa-briefcase
+          .timeline-content
+            %h4.tl-title
+              = t('view_experts.profile.work_experience')
+            .row
+              - @expert.work_histories.each do |work_history|
+                .col-lg-6
+                  .col-lg-12
+                    %h4{:style => "font-weight:900"}= work_history.title
+                    %h5= work_history.company
+                    %h5= "4 years"
+                    = "#{work_history.from_date.strftime('%B %Y')} - #{ work_history.present? ? "Current" : work_history.to_date&.strftime('%B %Y') }"
+                    = work_history.location
+                    %hr
+
+          .timeline-footer
+            %span
+        .timeline-box
+          .timeline-icon.bg-primary
+            %i.fa.fa-briefcase
+          .timeline-content
+            %h4.tl-title
+              = t('view_experts.profile.awards_and_achievements')
+            .row
+              - @expert.career_highlights.each do |career_highlight|
+                .row
+                  .col-lg-12
+                    .col-lg-12
+                      %h4{:style => "font-weight:900"}= career_highlight.name
+                      %h5= career_highlight.date.strftime('%B %Y')
+                      %p= career_highlight.description
+                  %hr
+          .timeline-footer
+            %span

@@ -1,0 +1,68 @@
+  = render partial: "system/header"
+
+
+-# .row
+-#   .col-sm-8.col-sm-offset-2
+-#     .row
+-#       .col-sm-5{:style => "background-color:#003F5A"}
+-#         #left_form
+-#           %figure.text-center
+-#             =image_tag "registration_bg.svg"
+%main
+  #form_container
+    .row
+      .col-sm-4.col-sm-offset-2{:style => "background-color:#003F5A"}
+        #left_form
+          %figure
+            =image_tag "registration_bg.svg"
+          %h2.white
+            = t('view_clients_onboarding.services.find_your_expert_mind')
+          %p.service_text.white-color
+            = t('view_clients_onboarding.services.minds_with_purpose_provides')
+          %a#more_info{"data-target" => "#more-info", "data-toggle" => "modal", :href => "index.html#0"}
+            %i.pe-7s-info
+      .col-sm-5
+        #wizard_container
+          #top-wizard
+            #progressbar
+          / /top-wizard
+          -# = simple_form_for "option", :autocomplete => "off",  html: { class: 'form-horizontal', :autocomplete => "off", id: "regForm" } do |f|
+          -# %input#website{:name => "website", :type => "text", :value => ""}/
+          / Leave for security protection, read docs for details
+          #middle-wizard
+            .step
+              %h3.main_question
+                %strong
+                = t('view_clients_onboarding.services.select_the_product')
+              .row
+                .col-md-12
+                  .form-group.radio_input
+                    %label
+                      %input.icheck.required.service_type{:name => "search_option[service_type]", :type => "radio", :value => "CE", :id => "radio_express"}
+                      = t('view_clients_onboarding.services.express_advice')
+                  .form-group.radio_input
+                    %label
+                      %input.icheck.required.service_type{:name => "search_option[service_type]", :type => "radio", :value => "ME", :id => "radio_mentoring"}
+                       = t('view_clients_onboarding.services.mentoring_with_purpose')
+                  .form-group.radio_input
+                    %label
+                      %input.icheck.required.service_type{:name => "search_option[service_type]", :type => "radio", :value => "PR", :id => "radio_project", disabled: true}
+                      = t('view_clients_onboarding.services.project_in_mind')
+                  .form-group.radio_input
+                    %label
+                      %input.icheck.required.service_type{:name => "search_option[service_type]", :type => "radio", :value => "CO", :id => "radio_coaching"}
+                      = t('view_clients_onboarding.services.coaching_with_purpose')
+
+:javascript
+  $(".service_type").change(function(){
+   if ($(".service_type:checked").val() == "CE" ){
+    $("#service_text").text("Express Advise can allow you to request a specific expert or the platform can send a notificaction to a group of experts who can help you with your problem. The benefit to you is that you can quickly find and expert available to help you for a 20 minutes consultation.")
+   }else if($(".service_type:checked").val() == "ME"){
+    $("#service_text").text("Mentoring with Purpose starts with a 30 minutes introductory session to confirm that there is a good fit for both The Expert Mind and you. Once a Mentoring Agreements is in place you will book a set of 5 or 8 one hour sessions.")
+   }else if($(".service_type:checked").val() == "CO"){
+    $("#service_text").text("Project in Mind starts with 30 minutes introductory sessions to confirm that there is a good fit for both The Expert Mind and your Project.")
+   }else if($(".service_type:checked").val() == "PR"){
+    $("#service_text").text("Coaching with Porpuse starts with a 30 minutes introductory session where the client and expert coach discuss the client's needs to confirm that there is a good fit. One a Coaching Agreement is in place you will book a set of 5 or 8 one hour sessions (maximum.)")
+   }
+
+  })

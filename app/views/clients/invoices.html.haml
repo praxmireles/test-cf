@@ -1,0 +1,52 @@
+%br
+%br
+%br
+.row
+  .col-sm-10.col-sm-offset-1
+    .panel
+      .panel-header
+        %span.text-md= t('view_clients.invoices.invoices')
+      .panel-content.text-md{:style => "text-align:justify"}
+        .row{:style => "margin:20px"}
+          .col-md-12
+            .row.justify-content-center{:style => "margin:0px;"}
+              .col-xl-12
+                .table-responsive
+                  %table.table.table-striped
+                    %thead
+                      %tr
+                        %th
+                          = t('view_clients.invoices.date')
+                        %th
+                          = t('view_clients.invoices.expert')
+                        %th
+                          = t('view_clients.invoices.service')
+                        %th
+                          = t('view_clients.invoices.amount_paid')
+                        %th
+                          = t('view_clients.invoices.status')
+                        %th
+                          = t('view_clients.invoices.actions')
+                    %tbody
+                      - @invoices.each do |invoice|
+                        %tr
+                          %td
+                            = invoice.date.strftime( '%D' )
+                          %td
+                            = invoice.payment.appointment.expert.fullname
+                          %td
+                            = invoice.payment.appointment.service.type.titleize
+                          %td
+                            = "$ #{invoice.payment.amount / 100}"
+                          %td
+                            - if invoice.paid_on.blank?
+                              = t('view_clients.invoices.pre_authorized')
+                            - else
+                              = t('view_clients.invoices.paid')
+                          %td
+                            %button.btn.btn-primary{"data-target" => "#invoice", "data-toggle" => "modal", :type => "button"}
+                              = t('view_clients.invoices.invoice')
+                            = render partial: 'invoices_information', locals: {invoice: invoice}
+                            = link_to t('view_clients.invoices.download_pdf'), pdf_client_invoice_path(format: :pdf, id: invoice.id), class: 'btn btn-info'
+                            /Invoice for expert
+                            /=# link_to "Download Pdf", pdf_expert_invoice_path(format: :pdf, id: invoice.id), class: 'btn btn-info'

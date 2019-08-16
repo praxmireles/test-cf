@@ -1,0 +1,28 @@
+-# - content_for :javascripts do
+-# = javascript_include_tag 'bootstrap/tab'
+= render partial: 'partials/mwp_app'
+- if current_user.type == "Client"
+  .page-body
+    #section-start.content
+      .row
+        .col-md-1
+        .col-md-10
+          = render partial: 'clients/settings/tabs'
+          .tab-content{:style => "background-color:#FFF;height:700px"}
+            #general_information.tab-pane.active
+              = render  "clients/settings/general_information"
+            #contact_information.tab-pane
+              = render partial: "clients/settings/contact_information"
+            #work_history.tab-pane
+              = render partial: 'clients/settings/work_history'
+            #billing.tab-pane
+              = render partial: 'clients/settings/billing'
+        .col-md-1
+
+
+-# HACK: JqueryUI Tab feature might be Incompatible with Bootstrap JS Tab
+:javascript
+  $(document).on('shown.bs.tab', 'a[data-toggle="tab"]', function (e) {
+    var pane = $(this)[0].getAttribute('href');
+    $(pane).removeClass('show')
+  });

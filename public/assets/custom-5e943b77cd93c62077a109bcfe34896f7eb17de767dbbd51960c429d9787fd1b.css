@@ -1,0 +1,1115 @@
+/* line 1, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+#brand-icon {
+  margin-top: -10px;
+}
+
+/*
+ * Base structure
+ */
+/* Move down content because we have a fixed navbar that is 50px tall */
+/*
+ * Global add-ons
+ */
+/* line 17, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.sub-header {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+/*
+ * Top navigation
+ * Hide default border to remove 1px line.
+ */
+/* line 26, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.navbar-fixed-top {
+  border: 0;
+}
+
+/*
+ * Sidebar
+ */
+/* Hide for mobile, show later */
+/* line 35, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.sidebar {
+  margin-top: -2px;
+  display: none;
+}
+
+@media (min-width: 768px) {
+  /* line 41, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+  .sidebar {
+    position: fixed;
+    top: 51px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    /* Scrollable contents if viewport is shorter than content. */
+    background-color: #222222;
+    border-right: 1px solid #eee;
+  }
+}
+/* Sidebar navigation */
+/* line 57, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.nav-sidebar {
+  margin-right: -21px;
+  /* 20px padding + 1px border */
+  margin-bottom: 20px;
+  margin-left: -20px;
+}
+
+/* line 62, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.nav-sidebar > li > a {
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+/* line 66, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.nav-sidebar > .active > a,
+.nav-sidebar > .active > a:hover,
+.nav-sidebar > .active > a:focus {
+  color: #fff;
+  background-color: #428bca;
+}
+
+/*
+ * Main content
+ */
+/* line 78, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.main {
+  padding: 20px;
+}
+
+@media (min-width: 768px) {
+  /* line 82, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+  .main {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+}
+/* line 87, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.main .page-header {
+  margin-top: 0;
+}
+
+/*
+ * Placeholder dashboard ideas
+ */
+/* line 96, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.placeholders {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+/* line 100, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.placeholders h4 {
+  margin-bottom: 0;
+}
+
+/* line 103, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.placeholder {
+  margin-bottom: 20px;
+}
+
+/* line 106, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.placeholder img {
+  display: inline-block;
+  border-radius: 50%;
+}
+
+/* line 111, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.no-week-day {
+  background-color: #c3deb7;
+  cursor: pointer;
+}
+
+/* line 116, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.week-day {
+  background-color: #FFFFFF;
+  cursor: pointer;
+}
+
+/* line 121, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.selected-no-week-day {
+  background-color: #c3deb7;
+}
+
+/* line 125, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.selected-week-day {
+  background-color: #FFFFFF;
+}
+
+/* line 129, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.form-horizontal .form-group {
+  margin-left: 10px;
+}
+
+/* line 132, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+#panel-heading-link {
+  margin-top: -5%;
+}
+
+/*=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+[Custom Dashboard Stylesheet]
+
+Project:    Minds with porpouse
+Version:    1.0
+author:     Ariel Molina
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=*/
+/*rewrite proyect classes*/
+/* line 145, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.content {
+  margin-left: 0;
+}
+
+@media (min-width: 768px) {
+  /* line 153, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+  .modal-dialog {
+    margin: 5% auto !important;
+  }
+}
+/*Padding and margin control classes*/
+/* line 159, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.blackText {
+  color: #000 !important;
+}
+
+/* line 162, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.flexRow {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  -ms-flex-direction: row;
+  -o-flex-direction: row;
+  flex-direction: row;
+  justify-content: flex-start;
+  -ms-align-items: center;
+  align-items: center;
+}
+
+/* line 177, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.m-0 {
+  margin: 0 !important;
+}
+
+/* line 180, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.m-1 {
+  margin: 0.25rem !important;
+}
+
+/* line 183, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.m-2 {
+  margin: 0.5rem !important;
+}
+
+/* line 186, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.m-3 {
+  margin: 0.75rem !important;
+}
+
+/* line 189, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.m-4 {
+  margin: 1rem !important;
+}
+
+/* line 192, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.mb-0 {
+  margin-bottom: 0 !important;
+}
+
+/* line 195, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.mb-1 {
+  margin-bottom: 0.25rem !important;
+}
+
+/* line 198, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.mb-2 {
+  margin-bottom: 0.5rem !important;
+}
+
+/* line 201, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.mb-3 {
+  margin-bottom: 0.75rem !important;
+}
+
+/* line 204, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.mb-4 {
+  margin-bottom: 1rem !important;
+}
+
+/* line 207, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.mt-0 {
+  margin-top: 0 !important;
+}
+
+/* line 210, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.mt-1 {
+  margin-top: 0.25rem !important;
+}
+
+/* line 213, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.mt-2 {
+  margin-top: 0.5rem !important;
+}
+
+/* line 216, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.mt-3 {
+  margin-top: 0.75rem !important;
+}
+
+/* line 219, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.mt-4 {
+  margin-top: 1rem !important;
+}
+
+/* line 222, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.mx-0 {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* line 226, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.mx-1 {
+  margin-left: 0.25rem !important;
+  margin-right: 0.25rem !important;
+}
+
+/* line 230, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.mx-2 {
+  margin-left: 0.5rem !important;
+  margin-right: 0.5rem !important;
+}
+
+/* line 234, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.mx-3 {
+  margin-left: 0.75rem !important;
+  margin-right: 0.75rem !important;
+}
+
+/* line 238, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.mx-4 {
+  margin-left: 1rem !important;
+  margin-right: 1rem !important;
+}
+
+/* line 242, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.my-0 {
+  margin-bottom: 0 !important;
+  margin-top: 0 !important;
+}
+
+/* line 246, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.my-1 {
+  margin-bottom: 0.25rem !important;
+  margin-top: 0.25rem !important;
+}
+
+/* line 250, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.my-2 {
+  margin-bottom: 0.5rem !important;
+  margin-top: 0.5rem !important;
+}
+
+/* line 254, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.my-3 {
+  margin-bottom: 0.75rem !important;
+  margin-top: 0.75rem !important;
+}
+
+/* line 258, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.my-4 {
+  margin-bottom: 1rem !important;
+  margin-top: 1rem !important;
+}
+
+/* line 262, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.p-0 {
+  padding: 0 !important;
+}
+
+/* line 265, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.pb-0 {
+  padding-bottom: 0 !important;
+}
+
+/* line 268, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.pb-1 {
+  padding-bottom: 0.25rem !important;
+}
+
+/* line 271, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.pb-2 {
+  padding-bottom: 0.5rem !important;
+}
+
+/* line 274, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.pb-3 {
+  padding-bottom: 0.75rem !important;
+}
+
+/* line 277, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.pb-4 {
+  padding-bottom: 1rem !important;
+}
+
+/* line 280, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.py-0 {
+  padding-bottom: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* line 284, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.py-1 {
+  padding-bottom: 0.25rem !important;
+  padding-top: 0.25rem !important;
+}
+
+/* line 288, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.py-2 {
+  padding-bottom: 0.5rem !important;
+  padding-top: 0.5rem !important;
+}
+
+/* line 292, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.py-3 {
+  padding-bottom: 0.75rem !important;
+  padding-top: 0.75rem !important;
+}
+
+/* line 296, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.py-4 {
+  padding-bottom: 1rem !important;
+  padding-top: 1rem !important;
+}
+
+/* line 300, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.px-0 {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* line 304, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.px-1 {
+  padding-left: 0.25rem !important;
+  padding-right: 0.25rem !important;
+}
+
+/* line 308, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.px-2 {
+  padding-left: 0.5rem !important;
+  padding-right: 0.5rem !important;
+}
+
+/* line 312, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.px-3 {
+  padding-left: 0.75rem !important;
+  padding-right: 0.75rem !important;
+}
+
+/* line 316, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.px-4 {
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+}
+
+/* line 320, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.pl-0 {
+  padding-left: 0 !important;
+}
+
+/* line 323, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.pr-0 {
+  padding-right: 0 !important;
+}
+
+/* line 326, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.pl-1 {
+  padding-left: 0.25rem !important;
+}
+
+/* line 329, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.pl-2 {
+  padding-left: 0.5rem !important;
+}
+
+/* line 332, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.pl-3 {
+  padding-left: 0.75rem !important;
+}
+
+/* line 335, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.pl-4 {
+  padding-left: 1rem !important;
+}
+
+/*Custom color classes*/
+/* line 339, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.color-primary {
+  color: #73b5bd !important;
+}
+
+/* line 342, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.b-primary {
+  border-color: #73b5bd !important;
+}
+
+/* line 345, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.color-green {
+  color: #82b634;
+}
+
+/* line 348, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.color-alert {
+  color: #fea32a;
+}
+
+/* line 351, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.color-yellow {
+  color: #ffff00;
+}
+
+/*Custom project classes*/
+/* line 355, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.userHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+/* line 361, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.expertImage {
+  overflow: hidden;
+  width: 100%;
+  max-width: 250px;
+  max-height: 200px;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  -ms-flex-direction: row;
+  -o-flex-direction: row;
+  flex-direction: row;
+  justify-content: center;
+  -ms-align-items: center;
+  align-items: center;
+}
+
+/* line 380, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.expertImage img {
+  width: 100%;
+  height: auto;
+}
+
+/* line 384, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.editProfile input[type=submit] {
+  background: #33cccc;
+  padding: 5px 8px;
+  border: 0 none;
+  cursor: pointer;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  color: #FFF;
+  text-align: center;
+}
+
+/* line 394, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.editProfile input[type=text] {
+  background: #33cccc;
+  padding: 5px 8px;
+  border: 0 none;
+  cursor: default;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  color: #FFF;
+  text-align: center;
+  width: 100%;
+}
+
+/* line 405, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.grayBackground {
+  background: #f7f7f7;
+  margin: 0.5rem auto;
+}
+
+/* line 409, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.grayBackground i {
+  font-size: 18px;
+}
+
+/* line 412, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.grayBackground p {
+  color: #c6c4c8;
+}
+
+/* line 415, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.grayBackground span {
+  color: #000;
+  font-weight: bold;
+}
+
+/* Expert request tabs */
+/* line 420, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+#myBtnContainer {
+  text-align: right;
+}
+
+/* line 423, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.nav-tabs {
+  border-bottom: 2px solid #DDD;
+}
+
+/* line 424, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+  border-width: 0;
+}
+
+/* line 425, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.nav-tabs > li > a {
+  border: none;
+  color: #666;
+}
+
+/* line 426, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.nav-tabs > li.active > a, .nav-tabs > li > a:hover {
+  border: none;
+  color: #73b5bd !important;
+  background: transparent;
+}
+
+/* line 427, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.nav-tabs > li > a::after {
+  content: "";
+  background: #73b5bd;
+  height: 2px;
+  position: absolute;
+  width: 100%;
+  left: 0px;
+  bottom: -1px;
+  transition: all 250ms ease 0s;
+  transform: scale(0);
+}
+
+/* line 428, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.nav-tabs > li.active > a::after, .nav-tabs > li:hover > a::after {
+  transform: scale(1);
+}
+
+/* line 429, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.tab-nav > li > a::after {
+  background: #33cccc none repeat scroll 0% 0%;
+  color: #fff;
+}
+
+/* line 430, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.tab-content {
+  padding: 20px 10px;
+}
+
+/* line 431, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.card {
+  background: #FFF none repeat scroll 0% 0%;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+  margin-bottom: 30px;
+}
+
+/*Package and Appointments info styles*/
+/* line 434, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.containerInfo {
+  overflow: hidden;
+}
+
+/* line 437, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.containerInfo h5 {
+  font-weight: bold;
+  margin: 0;
+  color: #FFF;
+}
+
+/* line 442, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.packageDiv {
+  color: #ffffff;
+  width: 100%;
+  text-align: left;
+  margin: 2px;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  -ms-flex-direction: row;
+  -o-flex-direction: row;
+  flex-direction: row;
+  justify-content: flex-start;
+  -ms-align-items: center;
+  align-items: center;
+}
+
+/* line 456, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.filterDiv {
+  color: #ffffff;
+  width: 100%;
+  text-align: left;
+  margin: 2px;
+  display: none;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  -ms-flex-direction: row;
+  -o-flex-direction: row;
+  flex-direction: row;
+  justify-content: flex-start;
+  -ms-align-items: center;
+  align-items: center;
+}
+
+/* line 471, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.show {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+}
+
+/* line 478, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.btnFilter {
+  border: none;
+  outline: none;
+  padding: 12px 16px;
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+/* line 485, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.btnFilter:hover {
+  background-color: #ddd;
+}
+
+/* line 488, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.btnFilter.activeBtn {
+  background-color: #666;
+  color: white;
+}
+
+/* line 492, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.packageDiv p,
+.filterDiv p {
+  color: #9e9e9e;
+  margin: 0 auto;
+}
+
+/* line 497, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.packageDiv .card,
+.filterDiv .card {
+  padding: 10px 0;
+  width: 99%;
+  border-radius: 5px;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  -ms-flex-direction: row;
+  -o-flex-direction: row;
+  flex-direction: row;
+}
+
+/* line 513, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.inProgress .card {
+  background: #db6653;
+}
+
+/* line 516, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.scheduled .card {
+  background: #2cb76b;
+}
+
+/* line 519, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.pending .card {
+  background: #66b3bc;
+}
+
+/* line 522, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.past .card {
+  background: #a6a5a7;
+}
+
+/* line 525, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.packageDiv .card h3,
+.filterDiv .card h3 {
+  margin: 10px 0;
+  color: #FFF;
+}
+
+/* line 530, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.packageDiv .card p,
+.filterDiv .card p {
+  color: #FFF;
+}
+
+/* line 534, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.cardBtn {
+  background: #000;
+  color: #FFF;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+
+/* line 541, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.packageDiv .card .cardInfo,
+.packageContainer .cardInfo,
+.filterDiv .card .cardInfo {
+  display: -webkit-inline-flex;
+  display: -moz-inline-flex;
+  display: -ms-inline-flex;
+  display: -o-inline-flex;
+  display: inline-flex;
+  justify-content: flex-start;
+  -ms-align-items: center;
+  align-items: center;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  -ms-flex-direction: row;
+  -o-flex-direction: row;
+  flex-direction: row;
+}
+
+/* line 558, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.packageDiv .card .cardInfo .imageInfo,
+.packageContainer .cardInfo .imageInfo,
+.filterDiv .card .cardInfo .imageInfo {
+  width: 30px;
+  height: 30px;
+  overflow: hidden;
+  display: -webkit-inline-flex;
+  display: -moz-inline-flex;
+  display: -ms-inline-flex;
+  display: -o-inline-flex;
+  display: inline-flex;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  -ms-flex-direction: row;
+  -o-flex-direction: row;
+  flex-direction: row;
+  justify-content: center;
+  -ms-align-items: center;
+  align-items: center;
+}
+
+/* line 577, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.packageDiv .card .cardInfo .imageInfo img,
+.packageContainer .cardInfo .imageInfo img,
+.filterDiv .card .cardInfo .imageInfo img {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* line 585, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.packageDiv .card .cardInfo p,
+.packageContainer .cardInfo p,
+.filterDiv .card .cardInfo p {
+  margin: 0;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+/* line 592, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.packageDiv .card .cardDate,
+.filterDiv .card .cardDate,
+.packageDate {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  -o-flex-direction: column;
+  flex-direction: column;
+  justify-content: space-around;
+  -ms-align-items: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* line 610, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.packageDiv .card .cardDate input,
+.filterDiv .card .cardDate input,
+.packageDate input {
+  width: 100%;
+  background: #FFF;
+  border: none;
+  border-radius: 10px;
+  color: #000;
+  font-weight: bold;
+}
+
+/* line 620, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.scheduled .card .cardDate input,
+.pending .card .cardDate input {
+  color: red;
+}
+
+/* line 624, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.past .card .cardDate input {
+  background: transparent;
+  color: #000;
+  cursor: default;
+}
+
+/* line 629, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.packageDiv .card .cardDate .date,
+.filterDiv .card .cardDate .date {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+/* line 635, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.packageContainer .titleContainer {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  -ms-flex-direction: row;
+  -o-flex-direction: row;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-right: 10px;
+}
+
+/* line 649, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.usermodalInfo h4:before {
+  content: '\f061';
+  font-family: 'FontAwesome';
+}
+
+/* line 653, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.userNeeds {
+  border-radius: 30px;
+  padding: 8px 15px;
+}
+
+/* line 657, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.userNeeds .taskSubject,
+.userNeeds .taskNumber {
+  color: #969696;
+  margin: 0;
+}
+
+/* line 662, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.userNeeds .taskInstruction,
+.userNeeds .taskDescription {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+/* line 667, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.userNeeds .taskDescription {
+  max-height: 200px;
+  height: 200px;
+  overflow: scroll;
+}
+
+/* line 672, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.questionConatiner {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  -o-flex-direction: column;
+  flex-direction: column;
+}
+
+/* line 684, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.questionConatiner .questionTitle {
+  font-weight: bold;
+  font-size: 18px;
+  margin: 8px 0;
+}
+
+/* line 689, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.chartContainer {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  -o-flex-direction: column;
+  flex-direction: column;
+  justify-content: center;
+  -ms-align-items: center;
+  align-items: center;
+}
+
+/* line 707, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.chartContainer svg {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
+/* line 715, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.chartContainer .ammount {
+  margin: auto;
+  position: absolute;
+}
+
+/* line 719, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.chartHeader {
+  font-weight: bold;
+}
+
+/* line 722, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.greenText {
+  color: #69a89c;
+}
+
+/* line 725, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.blueHeader {
+  color: #27baef;
+  font-weight: bold;
+}
+
+/* line 729, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.projectinfoCompany {
+  color: #000 !important;
+  font-weight: bold;
+}
+
+/* line 733, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.sessionsContainer li {
+  display: inline-block;
+  list-style: none;
+}
+
+/* line 737, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.sessionsContainer li a {
+  color: #000;
+}
+
+/* line 740, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.sessionsContainer li a:hover {
+  color: #69a89c;
+}
+
+/* line 743, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.actions {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  -ms-flex-direction: row;
+  -o-flex-direction: row;
+  flex-direction: row;
+  -ms-align-items: center;
+  align-items: center;
+  justify-content: center;
+}
+
+/* line 758, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.actionsBackground {
+  background: #f7f7f7;
+  padding: 0.5rem;
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
+  line-height: 20px;
+  text-align: center;
+  border: 1px solid #fefefe;
+}
+
+/* line 768, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.sessionsList {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  -ms-flex-direction: row;
+  -o-flex-direction: row;
+  flex-direction: row;
+  justify-content: space-between;
+  -ms-align-items: center;
+  align-items: center;
+}
+
+/* line 783, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.sessionsTitle {
+  color: #000 !important;
+  font-weight: bold;
+  margin: 10px 0;
+  border-bottom: 1px solid #efefef;
+}
+
+/* line 789, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.sessionBtn {
+  background: #189279;
+  color: #FFF;
+  border-radius: 10px;
+  transition: all 0.25s ease-in-out;
+}
+
+/* line 795, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.sessionBtn:hover {
+  color: #189279;
+  background: #efefef;
+}
+
+/* line 799, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+.sessionBtn i {
+  padding: 15px;
+}
+
+/* line 803, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+a.btn-submit {
+  width: 100%;
+  background: #FFF;
+  border: none;
+  border-radius: 10px;
+  color: #000;
+  font-weight: bold;
+  padding: 2px;
+}
+
+@media only screen and (min-width: 768px) {
+  /*rewrite proyect classes*/
+  /* line 817, /Volumes/D/dev/mwp_ensamble/app/assets/stylesheets/custom.scss */
+  html.fixed .content-header {
+    left: 0;
+  }
+}

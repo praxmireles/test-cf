@@ -1,0 +1,51 @@
+.row
+  .col-sm-10.col-sm-offset-1
+    .panel
+      .panel-header
+        %span.text-md= t('layout.degrees')
+      .panel-content.text-md{:style => "text-align:justify"}
+        .row{:style => "margin:20px"}
+          .col-md-12
+            .row.justify-content-center{:style => "margin:0px;"}
+              .col-xl-12
+                -# = form_tag(method: :post, remote:true, class: 'js-validation-material', id: 'save-degree-from') do
+                = form_for @degrees, url: education_histories_path, html: {class: "nifty_form"}, class: 'js-validation-material', id: 'save-degree-from' do |f|
+                  = hidden_field_tag :advisor_id, "Id"
+                  = hidden_field_tag :authenticity_token, form_authenticity_token
+
+                  .row
+                    .col-sm-12
+                      %label{:for => "title"}= t('view_education_histories.create.field_of_study')
+                      .input-group.mb-sm
+                        %span.input-group-addon.x-primary
+                          %i.fa.fa-pen
+                        = f.text_field :field_of_study, required: true, maxlength: 60, as: :text
+
+                  .row
+                    .col-sm-12
+                      %label{:for => "degree"}= t('view_education_histories.create.degree')
+                      .input-group.mb-sm
+                        %span.input-group-addon.x-primary
+                          %i.fa.fa-book-open
+                        = f.text_field :degree, required: true, maxlength: 60, as: :text
+
+                  .row
+                    %label.col-sm-12{:for => "example-daterange1"}= t('view_education_histories.create.enter_dates')
+                  .row
+                    .col-sm-12{:style => "padding:0px"}
+                      .input-daterange.input-group.mb-sm.js-datepicker-enabled{"data-autoclose" => "true", "data-date-format" => "dd/mm/yyyy", "data-today-highlight" => "true", "data-week-start" => "1"}
+                        %span.input-group-addon.x-primary.font-w600= t('view_education_histories.create.from')
+                        #start_date2
+                          = f.text_field :from_date, required: true, "data-autoclose" => "true", "data-today-highlight" => "true", "data-week-start" => "1"
+                        %span.input-group-addon.x-primary.font-w600= t('view_education_histories.create.to')
+                        #end_date2
+                          = f.text_field :to_date, "data-autoclose" => "true", "data-today-highlight" => "true", "data-week-start" => "1"
+
+                  .row
+                    .col-sm-12
+                    .checkbox-custom.checkbox-inline.checkbox-primary
+                      %input.custom-control-input{:checked => "checked", :name => "current", :type => "checkbox", :id => "degree_present", :checked => false, value: 1}
+                      = label_tag :present, t('view_education_histories.create.present'), for: "degree_present", :class => "check"
+
+                  .form-group{:style => "text-align:center"}
+                    = f.submit t('buttons.save'), class: "btn btn-primary btn-md"

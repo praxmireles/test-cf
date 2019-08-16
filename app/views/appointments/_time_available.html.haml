@@ -1,0 +1,25 @@
+%table.table
+  %thead
+    %tr
+      %th{:scope => "col"}= t('view_appointments.time_available.hours_available')
+      %th{:scope => "col"}
+  %tbody
+    - @times.each do |time|
+      %tr{class: 'time-available', data: {time: time}}
+        %th{:scope => "row"}
+          = time
+        %td
+          =link_to(t('view_appointments.time_available.select'), "", class: 'btn btn-primary time-available-btn')
+:javascript
+  $('.time-available-btn').click(function(e){
+    e.preventDefault()
+    var time = this.parentElement.parentElement.attributes["data-time"].value
+    $('#selected_time').html(time);
+    var date = $("#selected_date").html();
+    var formatedDate = moment(date).format('MMMM Do YYYY');
+    var formatedDatetime =  formatedDate + " " + time
+    var formatedDatetimeHtml = "<b>" + formatedDate + " at " + moment(time, "h:mm A").format("hh:mm A") + "</b>"
+    $('#selected-schedule').html(formatedDatetimeHtml);
+    $('#open_appointment_start_date').val(moment(formatedDatetime, "MMMM Do YYYY h:mm A").format())
+    $('.modal').modal('hide');
+  })

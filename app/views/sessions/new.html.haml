@@ -1,0 +1,26 @@
+.wrap
+  / page BODY
+  / =========================================================
+  .page-body.animated.slideInDown
+    / =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    / LOGO
+    .logo.text-center
+      =image_tag "logo_minds_with_purpose-logo.png"
+
+
+.row
+  .col-sm-6.col-sm-offset-3
+    .panel.panel-default
+      .panel-body
+        .text-center
+          %h3
+            %strong.green{style: "color: #5EAAB3;"}
+              = t('view_sessions.new.access_the_application_as')
+        %hr
+        .text-center
+
+          = link_to clients_login_path, class: "btn btn-info", style: "background-color:#3C5A98; color:white" do
+            = t('view_sessions.new.client_login')
+          \
+          = link_to experts_login_path, class: "btn btn-info", style: "background-color:#006599; color:white" do
+            = t('view_sessions.new.expert_login')

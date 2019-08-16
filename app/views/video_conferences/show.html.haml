@@ -1,0 +1,575 @@
+
+%script{:src => "https://static.opentok.com/v2/js/opentok.js"}
+%script{:src => "https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"}
+/ %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"}
+/ %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"}
+%script{:src => "https://cdnjs.cloudflare.com/ajax/libs/livestamp/1.1.2/livestamp.min.js"}
+= csrf_meta_tag
+.content
+  .wrapper
+    .col-3
+      #screen-preview
+      .wrapper-videos
+        #videos
+          #subscriber
+          #publisher
+          .session-timer{  data: { appointment_id: @appointment.id, end_date: "#{@appointment.end_date.utc}"}} Initializing session...
+        .row-2
+          %nav.navbar.navbar-expand-lg.bg-primary{role: "navigation"}
+            %a.navbar-brand{:style => "color:#000"}
+              volume
+            %a.navbar-brand
+              %input.slider{:type=>"range", :min=>"1", :max=>"100", :value=>"50", :id=>"myRange"}
+
+            %button.navbar-brand{:id=> 'btnHideChat', :class => 'btn btn-primary share-screen',  :onclick => 'hideChat();'}Hide chat
+            %button.navbar-brand{:id => 'btnShowChat', :class => 'btn btn-primary share-screen hide',  :onclick => 'showChat();'}Show chat
+            %button.navbar-brand{:class => 'btn btn-primary share-screen',  :onclick => 'screenshare();'}Share Screen
+            %button.navbar-brand{:class => 'btn btn-primary share-screen',  :onclick => 'leaveSession();'}Leave Session
+
+            %button.navbar-brand{:class => 'btn btn-danger stop-share', :style => "display:none", :onclick => 'stopSharing();'}Stop Share
+            - if @appointment.search_history
+              - if (@appointment.search_history.service == 'ExpressAdvice'|| @appointment.search_history.service == 'Mentoring') || (@appointment.search_history.service == 'Coaching')
+
+                %button.navbar-brand{ style:"color:#000",type:"button",onclick:"showCalendarChangeFlow('#{ current_user.id }', '#{ @appointment.expert.id }', '#{ @appointment.id }')" } Program 5 or 8 hour sesison
+              -# #btnHideCalendar.button.navbar-brand.hide{style:"color:#000",type:"button",onclick:"hideCalendarChangeFlow()"} Hide Program 5 or 8 hour sesison
+              -# = link_to "Program 5 or 8 hour sesison with this Expert Mind", toggle: 'modal'
+
+
+
+    #divChat.col-2
+      - if current_user.type == 'Client'
+        = link_to('View Dashbord', client_dashboard_path)
+      - else
+        = link_to('View Dashbord', expert_dashboard_path)
+
+        %i.fas.fa-backward
+
+      #textchat
+        .title MWP Chat
+        %p.history
+        %form
+          %input.msgTxt{:placeholder => "Input your text here", :type => "text"}/
+:javascript
+
+  // credentials
+  var apiKey = "#{@api_key}";
+  var sessionId = "#{@session_id}";
+  var token = "#{@token}";
+  var screenSharingPublisher;
+  var suscriber
+  var publisher
+
+  let arrDatesAvailable = []
+  let date_suggest =  ''
+  let time_suggest = ''
+  let user_id = 0
+  let appointment_id = "#{@appointment.id}"
+  let expert_id = "#{ @appointment.expert.id }"
+  let arrDaysSelected =[]
+
+  var videoConferenceApp = {
+    init: function(){
+      this.handleCountdown();
+    },
+    handleCountdown: function(){
+      var sessionTimerSelector = $('.session-timer');
+      // Set the date we're counting down to | e.g "Jan 5, 2019 15:37:25"
+      var y = "#{@appointment.end_date.strftime('%Y')}"
+      var m = "#{@appointment.end_date.strftime('%m')}"
+      var d = "#{@appointment.end_date.strftime('%d')}"
+      var h = "#{@appointment.end_date.strftime('%k')}"
+      var min = "#{@appointment.end_date.strftime('%M')}"
+      var s = "#{@appointment.end_date.strftime('%S')}"
+      var ms = "#{@appointment.end_date.strftime('%L')}"
+      var am_pm = "#{@appointment.end_date.strftime('%p')}"
+      var end_date = new Date(Date.UTC(y,m,d,h,min,s));
+      //end_date.getTime()
+      countDownDate = end_date.getTime() -2419200078
+      // Update the count down every 1 second
+      var x = setInterval(function() {
+        // Get todays date and time
+
+        var now = new Date().getTime() -2419200078
+
+        // Find the distance between now and the count down date
+        var distance = countDownDate - now;
+        console.log(countDownDate )
+        console.log(now)
+        console.log(distance)
+
+        // Time calculations for days, hours, minutes and seconds
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        console.log(hours)
+        // Display the result in the element with class="session-timer"
+        sessionTimerSelector.html(hours + "h " + minutes + "m " + seconds + "s ");
+
+        // If the count down is finished, write some text
+        if (distance < 0 || hours > 5) {
+          sessionTimerSelector.html(0 + "h " + 0 + "m " + 0 + "s ");
+          clearInterval(x);
+          sessionTimerSelector.val("EXPIRED");
+          videoConferenceApp.terminateSession();
+        }else{
+          sessionTimerSelector.html(hours + "h " + minutes + "m " + seconds + "s ");
+        }
+      }, 1000);
+    },
+    terminateSession: function(){
+      // Terminate the session
+      var l = (window.location.href).indexOf('video_conferences')
+      var href = (window.location.href).substring(0,l)
+
+      var sessionTimerSelector = $('.session-timer');
+      //var appointmentId = "#{@session_id}"; //sessionTimerSelector.attr('data-appointment-id')
+      var endAppointmentPath = '/video_conferences/' + appointment_id
+      var urlRank = href +  "/appointments/"+ appointment_id + '/rate/show'
+      //document.location.reload(urlRank)
+      $.ajax({
+        method: "DELETE",
+        url:  endAppointmentPath,
+        beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+        dataType : 'script',
+        success: function(data,m){
+          // nothin
+          console.log('successfuly ended the appointment');
+          window.location.replace(urlRank)
+        },
+        error: function(data, status, error){
+          // nothing
+          console.log('failed ending the appointment');
+          window.location.replace(urlRank)
+        }
+      })
+    }
+  };
+
+  videoConferenceApp.init();
+
+
+  function hideChat(){
+    $("#divChat").removeClass("show").addClass("hide")
+    $("#btnHideChat").removeClass("show").addClass("hide")
+    $("#btnShowChat").removeClass("hide").addClass("show")
+  }
+
+  function showChat(){
+    $("#divChat").removeClass("hide").addClass("show")
+    $("#btnHideChat").removeClass("hide").addClass("show")
+    $("#btnShowCalendar").removeClass("show").addClass("hide")
+    $("#btnHideCalendar").removeClass("hide").addClass("show")
+  }
+
+  function showCalendar(){
+
+    hideChat()
+    $("#divCalendar").removeClass("hide").addClass("show")
+    $("#divCalendar").removeClass("hide").addClass("show")
+    $("#btnShowCalendar").removeClass("hide").addClass("show")
+    $("#btnHideCalendar").removeClass("show").addClass("hide")
+  }
+
+  function hideCalendar(){
+
+    showChat()
+    $("#divCalendar").removeClass("show").addClass("hide")
+
+  }
+
+
+  // connect to session
+  if (OT.checkSystemRequirements() == 1) {
+    var session = OT.initSession(apiKey, sessionId);
+
+  } else {
+    alert('The client does not support WebRTC.');
+  }
+
+
+  // Connect to the Session using a 'token'
+  session.connect(token, function(error) {
+    if (error) {
+      console.log("Error connecting: ", error.name, error.message);
+    } else {
+      publisher = OT.initPublisher('publisher', {
+                                              frameRate: 80,
+                                              insertMode: 'append',
+                                              width: '100%',
+                                              height: '100%'
+                                            }
+                                    );
+      session.publish(publisher);
+      console.log("Connected to the session.");
+      fullScreen();
+    }
+  });
+
+  // create subscriber
+  // Attach event handlers
+  session.on({
+    streamCreated: function(event) {
+    // This function runs when another client publishes a stream (eg. session.publish())
+      // Create a container for a new Subscriber, assign it an id using the streamId, put it inside
+      // the element with id="subscribers"
+      var subContainer = document.createElement('div');
+      subContainer.id = 'stream-' + event.stream.streamId;
+      document.getElementById('subscriber').appendChild(subContainer);
+      var subContainerId = document.getElementById('stream-' + event.stream.streamId);
+      subContainer.style.width = '100%';
+      subContainer.style.height = '100%';
+      if(event.stream.videoType === 'screen') {
+        $(".OT_root").hide();
+      } else {
+
+      }
+
+      // Subscribe to the stream that caused this event, put it inside the container we just made
+      suscriber = session.subscribe(event.stream, subContainer,{audioVolume : 50, width: '100%', height: '100%'}, function(error) {
+        if (error) {
+          console.error('Failed to subscribe', error);
+        }
+      });
+      fullScreen();
+    }
+  });
+
+
+  // For Google Chrome only, register your extension by ID. You can
+  // find it at chrome://extensions once the extension is installed.
+  // The last parameter assumes you are using the latest version (version 2)
+  // of the OpenTok Chrome extension source code.
+  OT.registerScreenSharingExtension('chrome', 'fpbojgimpcfgaikgpfgjabidflmkbbhe', 2);
+  function screenshare() {
+    OT.checkScreenSharingCapability(function(response) {
+      if (!response.supported || response.extensionRegistered === false) {
+        alert('This browser does not support screen sharing.');
+      //  } else if (response.extensionInstalled === false) {
+      //    alert('Please install the screen sharing extension and load your app over https.');
+      } else {
+        // Screen sharing is available. Publish the screen.
+        var screenPublisherElement = document.createElement('div');
+        screenSharingPublisher = OT.initPublisher(screenPublisherElement, {videoSource: 'screen', fitMode: "contain", width: '100%', height: '400px'});
+        session.publish(screenSharingPublisher, function(error) {
+          if (error) {
+            alert('Could not share the screen: ' + error.message);
+          }else{
+            $(".share-screen").hide();
+            $(".stop-share").show();
+          }
+        });
+
+      }
+    });
+  }
+
+  function leaveSession(){
+    videoConferenceApp.terminateSession()
+  }
+
+  session.on("streamDestroyed", function(event) {
+    $(".OT_root").show();
+  })
+
+  function stopSharing(){
+    session.unpublish(screenSharingPublisher);
+    $(".share-screen").show();
+    $(".stop-share").hide();
+  }
+
+  function startSharingScreen(){
+    screenshare();
+  }
+
+
+  // Receive a message and append it to the history
+  var msgHistory = document.querySelector('.history');
+  session.on('signal:msg', function signalCallback(event) {
+    var msg = document.createElement('p');
+    msg.textContent = event.data;
+    msg.className = event.from.connectionId === session.connection.connectionId ? 'mine' : 'theirs';
+    msgHistory.appendChild(msg);
+    msg.scrollIntoView();
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  });
+
+
+  // Text chat
+  var form = $('form');
+  var msgTxt = document.querySelector('.msgTxt');
+
+  // Send a signal once the user enters data in the form
+  $(form).submit(function(event){
+    event.preventDefault();
+
+    session.signal({
+      type: 'msg',
+      data: msgTxt.value
+    }, function signalCallback(error) {
+      if (error) {
+        console.error('Error sending signal:', error.name, error.message);
+      } else {
+        msgTxt.value = '';
+      }
+    });
+  });
+
+  // Make Full screen video Box
+  function resizePublisher(e) {
+    var isInFullScreen = (document.fullscreenElement && document.fullscreenElement !== null) ||
+      (document.webkitFullscreenElement && document.webkitFullscreenElement !== null) ||
+      (document.mozFullScreenElement && document.mozFullScreenElement !== null) ||
+      (document.msFullscreenElement && document.msFullscreenElement !== null);
+    var publisher_id = $(e.target).parent().attr('id')
+    var publisher = document.getElementById(publisher_id);
+
+    if (!isInFullScreen) {
+      if (publisher.requestFullscreen) {
+          publisher.requestFullscreen();
+      } else if (publisher.mozRequestFullScreen) {
+          publisher.mozRequestFullScreen();
+      } else if (publisher.webkitRequestFullScreen) {
+          publisher.webkitRequestFullScreen();
+      } else if (publisher.msRequestFullscreen) {
+          publisher.msRequestFullscreen();
+      }
+    }else {
+      if (document.exitFullscreen) {
+          document.exitFullscreen();
+      } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+      } else if (document.mozCancelFullScreen) {
+          document.mozCancelFullScreen();
+      } else if (document.msExitFullscreen) {
+          document.msExitFullscreen();
+      }
+    }
+  }
+
+  //Ful screen button appening on video boxes
+  function fullScreen() {
+
+    $(".OT_mute").after("<button class='OT_edge-bar-item OT_mute OT_mode-auto expand-icon', onclick='resizePublisher(event);'></button>")
+  };
+
+  var slider = document.getElementById("myRange");
+
+
+  slider.oninput = function() {
+    if(!suscriber) return
+    suscriber.setAudioVolume( this.value)
+    console.log( this.value)
+  }
+
+  //window.addEventListener('load', , false);
+:css
+  body, html {
+    background-color: gray;
+    height: 100%;
+  }
+
+  #videos {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #subscriber {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+  }
+
+  #publisher {
+    position: absolute;
+    width: 360px;
+    height: 240px;
+    bottom: 10px;
+    left: 10px;
+    z-index: 100;
+    border: 3px solid white;
+    border-radius: 3px;
+  }
+  .session-timer{
+    position: absolute;
+    bottom: 10px;
+    top:10px;
+    left: calc(100% - 400px);
+    z-index: 200;
+    font-size: 40px;
+    text-align: right;
+  }
+  #textchat {
+    position: relative;
+    width: 100%;
+    float: right;
+    right: 0;
+    height: 95%;
+    background-color:#EEEEEE;
+  }
+  #divCalendar{
+    position: relative;
+    width: 100%;
+    float: right;
+    right: 0;
+    height: 95%;
+    background-color:#FFF;
+  }
+  #appointments {
+    width: 100%;
+    right: 0;
+    height: 95%;
+    background-color:#FFF;
+    margin-top:20px;
+    padding-top:20px
+  }
+  .title{
+
+    background-color:#EEEEEE;
+    padding:10px;
+  }
+  .history {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color:#EEEEEE;
+
+
+  }
+  .h3-chat{
+    margin:5px;
+    text-align:left;
+    background-color:gray;
+    font-weight: bold;
+    font-size: 20px
+  }
+  .msgTxt {
+    height: 60px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+  .history .mine {
+    width: 75%;
+    color: #000;
+    float: right;
+    padding: 10px;
+    background-color: #FFF;
+    margin:10px;
+    border-radius: 10px;
+  }
+  .history .theirs {
+    width: 75%;
+    color: #000;
+    float: left;
+    padding: 10px;
+    background-color: #fff;
+    margin:10px;
+    border-radius: 10px;
+  }
+
+  .content{
+    background-color: gray !important;
+    margin: 0px !important;
+    padding: 0px !important;
+    height:100%
+  }
+  .wrapper{
+    display: flex;
+    flex-direction: row wrap;
+    align-items: stretch ;
+    height:100%
+
+  }
+  .hide{
+    display:none
+  }
+  .show{
+    display:''
+  }
+  .col-3{
+    flex-grow:3;
+    background-color: #000 !important;
+    margin:5px;
+  }
+  .col-2{
+    width: 450px;
+    background-color: #CCC !important;
+
+    margin:5px;
+  }
+  .col-1{
+    flex-grow:1;
+    background-color: tomato !important;
+    margin:5px;
+  }
+
+  .wrapper-videos{
+    display: flex;
+    flex-direction: column ;
+    align-items: stretch ;
+    height: 100%;
+  }
+  .row-1{
+    flex-grow: 1 ;
+    flex-shrink: 1;
+
+    margin:5px;
+  }
+  .row-2{
+
+    flex-grow: 2 ;
+    flex-shrink: 2;
+    background-color: #000 !important;
+    margin:5px;
+  }
+  .row-3{
+    flex-grow: 3 ;
+    flex-shrink: 3;
+    background-color: #000 !important;
+    margin:5px;
+  }
+  .title{
+    margin:15px;
+    text-align:left;
+
+    font-weight: bold;
+    font-size: 20px
+  }
+
+  /* The slider itself */
+  .slider {
+    position: relative;
+    float:left;
+    writing-mode: bt-lr; /* IE */
+    -webkit-appearance: slider-vertical; /* WebKit */
+    width: 8px;
+    height: 55px;
+    padding: 0 5px;
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    width: 100%; /* Full-width */
+    height: 25px; /* Specified height */
+    background: #d3d3d3; /* Grey background */
+    outline: none; /* Remove outline */
+    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+
+  }
+
+  /* Mouse-over effects */
+  .slider:hover {
+    opacity: 1; /* Fully shown on mouse-over */
+  }
+  .button{
+    width: 100%;
+  }
+  /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */

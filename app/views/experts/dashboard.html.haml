@@ -1,0 +1,277 @@
+= javascript_include_tag "bootstrap-notify.js"
+= javascript_include_tag "mwp_app/index.js"
+.wrap
+  / page HEADER
+  / =========================================================
+  .page-header
+
+    / LEFTSIDE header
+    .leftside-header
+      .logo
+        = image_tag("logo-mwp-bco_preview.png", alt: 'logo', class: 'pl-4')
+
+    .rightside-header
+      .header-middle
+      .header-separator
+      #language.header-section
+      - if locale == :en
+        = link_to(locale_path(:en), method: :patch, style: 'color: black') do
+          %b
+            %u English
+        %span
+          = "-"
+          = link_to(locale_path(:es), method: :patch, style: 'color: black') do
+            Spanish
+      - elsif  locale == :es
+        = link_to(locale_path(:en), method: :patch, style: 'color: black') do
+          English
+        = "-"
+        = link_to(locale_path(:es), method: :patch, style: 'color: black') do
+          %b
+            %u Spanish
+      - else
+        English - Spanish
+      .header-separator
+      .btn-group.dropleft{:role => "group"}
+        .dropdown-toggle.dropdown-toggle-split{"aria-expanded" => "true", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+          %i.fas.fa-bell.icon-open.white
+          %span.notifications-btn.badge.badge-xs.badge-top-left.x-danger.unread-count{:id => "#{current_user.id}_unread_count"}= current_user&.unread_notifications.count
+        %ul.dropdown-menu{:style => "right: 0; left: auto; width: 500px;"}
+          %li
+            %a
+              %span.badge.x-danger.white.unread-count{:id => "#{current_user.id}_white_count"}= "#{current_user&.unread_notifications.count}"
+              = t('view_experts.dashboard.notifications')
+          .btnplus{:id => "#{current_user.id}_notifications"}
+            = render 'clients/notification_list'
+          - unless current_user.unread_notifications.count < 10
+            %hr
+              .col-sm-5.col-sm-offset-5
+                = link_to 'Show more', expert_notifications_path, class: 'btn btn-xs btn-primary'
+      .header-separator
+      - if signed_in?
+        #user-headerbox.header-section
+          .user-header-wrap
+            .dropdown-toggle.dropdown-toggle-split{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+              .user-photo
+                =image_tag current_user&.avatar.url if signed_in? and current_user.avatar.present?
+              .user-info
+                %span.user-name
+                  = current_user.fullname if signed_in?
+
+                %span.user-profile= t("user_types.#{current_user.type.downcase}")
+            %ul.dropdown-menu{:style => "right: 0; left: auto;"}
+
+              %li
+                %a{:href => "/users/edit"}
+                  = t('view_experts.dashboard.settings')
+              %li
+                %a{:href => balance_expert_path}
+                  = t('view_experts.dashboard.balance')
+              %li
+                %a{:href => logout_path}
+                  = t('view_experts.dashboard.sign_out')
+
+
+      / Log out
+      .header-separator
+      .btn-group.dropleft{:role => "group"}
+        .dropdown-toggle.dropdown-toggle-split{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+          %i.fa.fa-plus.icon-open{:style => "color:white"}
+        %ul.dropdown-menu{:style => "right: 0; left: auto;"}
+
+          %li
+            %a{:href => "/users/edit"}
+              = t('view_experts.dashboard.setttings')
+          %li
+            %a{:href => balance_expert_path}
+              = t('view_experts.dashboard.balance')
+          %li
+            %a{:href => logout_path}
+              = t('view_experts.dashboard.sign_out')
+      .header-separator
+
+      #menu-toggle.visible-xs.toggle-left-sidebar{"data-target" => "html", "data-toggle-class" => "left-sidebar-open"}
+        %i.fa.fa-bars{"aria-label" => "Toggle sidebar"}
+    / RIGHTSIDE header
+    .rightside-header
+  / page BODY
+  / =========================================================
+  .page-body
+  / CONTENT
+  / =========================================================
+  #section-start.content
+    / =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    -# TODO check what is the function in CSS
+    .row.animated.fadeInUp
+      / USER INFO
+      .col-sm-12.col-md-3
+        %div
+          .userHeader.mb-3
+            .col-sm-5.expertImage.pl-0
+              %img.img-responsive= image_tag current_user&.avatar.url if signed_in? and current_user.avatar.present?
+            .col-sm-7.px-0
+              %h3.userName.my-1= current_user.full_name
+              %form.editProfile
+                = link_to t('view_experts.dashboard.edit_profile'), edit_profile_path, class: 'btn btn-info'
+          .panel.b-primary.bt-sm
+            .panel-content
+              %ul.user-contact-info.ph-sm
+                %li
+                  %h4
+                    %i.color-primary.mr-md.fa.fa-user>
+                    = t('view_experts.dashboard.about_me')
+                %li.mt-sm.text-md
+                  %p= current_user.profile.about
+          .panel.b-primary.bt-sm
+            .panel-content
+              %ul.user-contact-info.ph-sm
+                %li.grayBackground.pl-4
+                  %p.my-1
+                    %i.color-green.mr-md.fa.fa-check
+                    %span #{current_user.completed_appointments.count}
+                    = t('view_experts.dashboard.appointments_completed')
+                %li.grayBackground.pl-4
+                  %p.my-1
+                    %i.color-alert.mr-md.fa.fa-clock-o
+                    %span #{current_user.work_histories.count}
+                    = t('view_experts.dashboard.projects')
+                    = t('view_experts.dashboard.working_on')
+                %li.grayBackground.pl-4
+                  %p.my-1
+                    %i.color-warning.mr-md.fa.fa-check
+                    %span
+                      = current_user.ratings.empty? ? t('view_experts.dashboard.n_a') : "#{current_user.ratings.average(:rate).to_f.round(2)} / #{current_user.ratings.count}"
+                    = t('view_experts.dashboard.rating')
+            .panel.b-primary.bt-sm
+              .panel-content
+                %ul.user-contact-info.ph-sm
+                  %li
+                    %h4
+                      %i.color-primary.mr-md.fa.fa-user>
+                      = t('view_experts.dashboard.experts_details')
+                  %li.mt-sm.text-md
+                    %p
+                      %b
+                        = t('view_experts.dashboard.services')
+                    - current_user.services.each do |s|
+                      %ul
+                        %li= s.name.titleize
+                    %p
+                      %b
+                        = t('view_experts.dashboard.industries')
+                    - current_user.profile.industries.each do |industry|
+                      %ul
+                        %li= t(industry.industry.locale)
+                    %p
+                      %b
+                        = t('view_experts.dashboard.job_function')
+                    - current_user.job_functions.each do |job_function|
+                      %ul{:style => "padding-left:14px;"}
+                        %li= t(job_function.all_job_function&.locale)
+                    %p
+                      %b
+                        = t('view_experts.dashboard.skills')
+                    - current_user.skills.each do |skill|
+                      %ul{:style => "padding-left:14px;"}
+                        %li= t(skill.locale)
+                    %p
+                      %b
+                        = t('view_experts.dashboard.seniority_level')
+                    - current_user.seniority_levels.each do |seniority_level|
+                      %ul
+                        %li= seniority_level.short_name if seniority_level.seniority_level_id
+      / REQUEST VIEW
+      .col-sm-12.col-md-5
+        .panel.b-primary.bt-sm
+          .panel-content
+            / Nav tabs
+            .card
+              %ul.m.nav.nav-tabs{:role => "tablist"}
+                %li.active{:role => "presentation"}
+                  %a{"aria-controls" => "appointments", "data-toggle" => "tab", :href => "#appointments", :role => "tab"}
+                    = t('view_experts.dashboard.appointments')
+                %li{:role => "presentation"}
+                  %a{"aria-controls" => "packages", "data-toggle" => "tab", :href => "#packages", :role => "tab"}
+                    = t('view_experts.dashboard.packages')
+              / Tab panes
+              .tab-content
+                #appointments.tab-pane.active{:role => "tabpanel"}
+                  / Filters buttons
+                  #myBtnContainer.my-3
+                    %button.btnFilter.active{:onclick => "filterSelection('all')"}
+                      = t('view_experts.dashboard.show_all')
+                    %button.btnFilter{:onclick => "filterSelection('inProgress')"}
+                      = t('view_experts.dashboard.in_progress')
+                    %button.btnFilter{:onclick => "filterSelection('scheduled')"}
+                      = t('view_experts.dashboard.scheduled')
+                    %button.btnFilter{:onclick => "filterSelection('pending')"}
+                      = t('view_experts.dashboard.pending')
+                    %button.btnFilter{:onclick => "filterSelection('past')"}
+                      = t('view_experts.dashboard.past')
+                  / The filterable elements
+                  .containerInfo
+                    .filterDiv.pending.pending_appointments
+                      = render partial: 'pending_appointments'
+                    .filterDiv.inProgress.in_progress_appointments
+                      = render partial: 'in_progress_appointments'
+                    .filterDiv.scheduled.scheduled_appointments
+                      = render partial: 'scheduled_appointments'
+                    .filterDiv.past.past_appointments
+                      = render partial: 'past_appointments'
+                #packages.tab-pane{:role => "tabpanel"}
+                  / The filterable elements
+                  .containerInfo
+                    = render partial: 'appointment_packs'
+      / =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+      / SCHEDULED SESSIONS
+      .col-sm-12.col-md-3
+        .panel.b-primary.bt-sm
+          .panel-content
+            %ul.user-contact-info.ph-sm
+              %li
+                %h4
+                  %i.color-primary.mr-md.fa.fa-user>
+                  = t('view_experts.dashboard.scheduled_sessions')
+              %li.mt-sm.text-md
+                #appointments-calendar.clean-theme{ data: { "month-format" => "month YYY", "day-format" => "DD" } }
+    / =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+  / scroll to top
+  %a.scroll-to-top{:href => "#"}
+    %i.fa.fa-angle-double-up
+/ Modals
+/ =========================================================
+/ Appointment User infoModal
+-# delete .fade
+#appointmentUser.modal{:role => "dialog"}
+  -# = render partial: "client_information", locals: {appointment: appointment}
+
+/ Appointment View Modal
+-# delete .fade
+#appointmentView.modal{:role => "dialog"}
+  -# = render partial: "appointment_details", locals: {appointment: appointment}
+
+:javascript
+  window.setInterval(function(){
+    $.ajax({
+      type: "GET",
+      url: '/experts/reload_dashboard',
+      success: function(data, status){
+        console.log('reloaded dashboard');
+      },
+      dataType: 'script'
+    });
+  }, 60000);
+
+  var appointmentsCalendar = jsCalendar.new("#appointments-calendar", "now", {
+    "monthFormat": "month YYYY",
+    "dayFormat": "DD"
+  })
+
+  appointmentsCalendar.select(#{@scheduled_appointments_dates.to_json.html_safe});
+
+  window.setInterval(function(){
+    $.ajax({
+      type: "get",
+      url: '/notifications/check_notification'
+    })
+  }, 5000);

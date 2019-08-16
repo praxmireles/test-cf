@@ -1,0 +1,43 @@
+%br
+%br
+.content
+  .row
+    .col-sm-10.col-sm-offset-1
+      .panel.bg-scale-0.b-primary.bt-sm.mt-xl
+        .row
+          .col-sm-5{:style => "background-color:#003F5A"}
+            %figure.text-center
+              =image_tag "registration_bg.svg"
+              -# Client service name
+              %h2.white
+                = show_service_name(@search_history.service)
+              %a#more_info{"data-target" => "#more-info", "data-toggle" => "modal", :href => "index.html#0"}
+                %i.pe-7s-info
+          .col-sm-5
+            #middle-wizard
+              %h3.main_question
+                %strong
+                = t('view_clients_onboarding.coaching_type.what_type_of_coaching')
+          .row
+            .col-sm-5
+              %p
+              = t('view_clients_onboarding.coaching_type.coaching_type') + ":"
+              %br
+              = form_for @search_history, method: :put do |f|
+                = f.select :coaching_type, CoachingType.pluck(:name), {}, :required => true, :prompt => t('view_clients_onboarding.coaching_type.why_are_you_looking_to_be_coached'), class: ".js-select2 .form-control"
+                = f.submit t('buttons.next'), class: 'btn btn-lighter-1 btn-wide', :style => "display: none; margin-left:20%"
+                = hidden_field_tag :current_path, 'coaching_type'
+
+        .row
+          #bottom-wizard
+            .col-sm-1.col-sm-offset-6
+              = link_to(t('buttons.back'), previous_path(search_history_id: params[:search_history_id], current_path: 'coaching_type'), class: "btn btn-lighter-1 btn-wide", style: "margin-left: 20%")
+            .col-sm-5
+              = link_to(t('buttons.next'), '', class: 'btn btn-primary btn-wide next-button', :style => "margin-left:20%")
+
+
+:javascript
+  $(".next-button").click(function(e){
+    e.preventDefault();
+    $("input[name='commit']").click();
+  })

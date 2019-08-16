@@ -1,0 +1,5 @@
+$('.unread-count').html("<%= current_user&.unread_notifications.count %>");
+$('.dropleft').removeClass('open');
+var notification_id = '#notification_<%= @notification.id %>';
+$(notification_id).removeClass('notification_color');
+
