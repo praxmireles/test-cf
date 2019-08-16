@@ -1,0 +1,168 @@
+AllCops:
+  TargetRubyVersion: 2.5.1
+  Exclude:
+    - 'db/schema.rb'
+    - 'db/migrate/**/*'
+    - 'bin/**/*'
+    - 'config.ru'
+    - 'config/spring.rb'
+    - 'vendor/**/*'
+
+  DisplayCopNames: true
+  DisplayStyleGuide: true
+
+Metrics/MethodLength:
+  Max: 40
+  Exclude:
+    - 'lib/omniauth_stub.rb'
+    - 'config/initializers/simple_form.rb'
+    - 'test/models/users/expert_test.rb'
+    - 'app/models/users/expert.rb'
+    - 'lib/stripe_response.rb'
+    - 'app/models/concerns/notificable.rb'
+    - 'db/seeds/fake_appointments.rb'
+    - 'db/seeds/fake_appointment_packs.rb'
+    - 'app/models/requests/pending_request.rb'
+    - 'app/controllers/search_histories_controller.rb'
+
+Metrics/ClassLength:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - 'config/routes.rb'
+    - 'test/**/*'
+    - 'app/models/concerns/**'
+    - 'app/controllers/concerns/**'
+    - 'db/seeds/fake_appointments.rb'
+    - 'config/environments/development.rb'
+    - 'lib/tasks/populate_tznames.rake'
+
+Metrics/PerceivedComplexity:
+  Exclude:
+    - 'app/models/users/expert.rb'
+    - 'app/controllers/search_histories_controller.rb'
+    - 'app/controllers/experts_onboarding_controller.rb'
+
+Metrics/AbcSize:
+  Max: 19
+  Exclude:
+      - 'test/models/users/expert_test.rb'
+      - 'app/models/users/expert.rb'
+      - 'app/models/appointment.rb'
+      - 'app/controllers/cards_controller.rb'
+      - 'app/models/concerns/notificable.rb'
+      - 'db/seeds/fake_appointments.rb'
+      - 'db/seeds/fake_appointment_packs.rb'
+      - 'app/models/requests/pending_request.rb'
+      - 'app/controllers/video_conferences_controller.rb'
+      - 'app/controllers/experts_controller.rb'
+      - 'app/controllers/search_histories_controller.rb'
+      - 'app/controllers/concerns/marketplaceable.rb'
+      - 'app/models/configuration.rb'
+      - 'app/controllers/authentications_controller.rb'
+
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - 'app/models/concerns/notificable.rb'
+    - 'app/models/users/expert.rb'
+    - 'app/controllers/search_histories_controller.rb'
+    - 'app/controllers/experts_onboarding_controller.rb'
+
+Style/ClassAndModuleChildren:
+  Exclude:
+    - 'test/test_helper.rb'
+
+Metrics/LineLength:
+  Max: 120
+  Exclude:
+    - 'Rakefile'
+    - 'Gemfile'
+    - 'config/environments/production.rb'
+    - 'config/environments/staging.rb'
+    - 'config/environments/development.rb':
+    - 'config/environments/test.rb'
+    - 'config/initializers/assets.rb'
+    - 'config/initializers/backtrace_silencers.rb'
+    - 'config/initializers/cookies_serializer.rb'
+    - 'config/initializers/filter_parameter_logging.rb'
+    - 'config/initializers/inflections.rb'
+    - 'config/initializers/mime_types.rb'
+    - 'config/initializers/new_framework_defaults.rb'
+    - 'config/initializers/session_store.rb'
+    - 'config/initializers/wrap_parameters.rb'
+    - 'config/puma.rb'
+    - 'config/application.rb'
+    - 'db/seeds.rb'
+    - 'db/seeds/languages.rb'
+    - 'lib/omniauth_stub.rb'
+    - 'config/initializers/simple_form.rb'
+    - 'test/models/**/*'
+    - 'test/controllers/video_conferences_controller_test.rb'
+    - 'app/uploaders/*'
+    - 'db/seeds/fake_appointments.rb'
+    - 'db/seeds/fake_appointment_packs.rb'
+    - 'app/dashboards/*'
+    - 'app/models/concerns/notificable.rb'
+    - 'app/controllers/clients_onboarding_controller.rb'
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+  Exclude:
+    - 'Gemfile'
+    - 'Rakefile'
+    - 'config/initializers/session_store.rb'
+    - 'config/initializers/wrap_parameters.rb'
+    - 'config/puma.rb'
+
+Bundler/OrderedGems:
+  Exclude:
+    - 'Gemfile'
+
+Style/Documentation:
+  Exclude:
+    - 'config/application.rb'
+    - 'test/test_helper.rb'
+    - 'app/controllers/application_controller.rb'
+    - 'app/models/application_record.rb'
+    - 'app/mailers/application_mailer.rb'
+    - 'app/helpers/**/*'
+    - 'app/models/**/*'
+    - 'test/**/*'
+    - 'app/controllers/admin/*'
+    - 'config/initializers/administrate_will_paginate_fix.rb'
+    - 'app/dashboards/**/*'
+    - 'app/uploaders/document_uploader.rb'
+    - 'app/controllers/pages_controller.rb'
+    - 'app/controllers/package_payments_controller.rb'
+    - 'app/controllers/appointment_packs_controller.rb'
+
+
+Lint/UselessAssignment:
+  Exclude:
+    - 'app/mailers/*'
+
+Metrics/ModuleLength:
+  Exclude:
+    - 'lib/omniauth_stub.rb'
+    - 'lib/stripe_response.rb'
+    - 'app/models/concerns/notificable.rb'
+    - 'db/seeds/fake_appointments.rb'
+    - 'db/seeds/fake_appointment_packs.rb'
+    - 'app/controllers/concerns/marketplaceable.rb'
+Style/HashSyntax:
+  Exclude:
+    - 'test/controllers/**/*'
+    - 'lib/omniauth_stub.rb'
+Layout/SpaceAroundOperators:
+  Exclude:
+    - 'test/controllers/**/*'
+    - 'lib/omniauth_stub.rb'
+Style/StringLiterals:
+  Exclude:
+    - 'test/controllers/**/*'
+    - 'lib/omniauth_stub.rb'
+Style/TrailingCommaInHashLiteral:
+  Exclude:
+    - 'test/controllers/**/*'
+    - 'lib/omniauth_stub.rb'

@@ -70,7 +70,6 @@ class Appointment < ApplicationRecord
   before_save :assing_day_of_the_week
   after_save  :prepare_scheduled_appointment
 
-
   has_and_belongs_to_many :appointment_packs
 
   has_paper_trail
@@ -141,12 +140,12 @@ class Appointment < ApplicationRecord
   def prepare_scheduled_appointment
     return unless type == 'ScheduledAppointment'
     AppointmentInProgressWorker.perform_at(
-        self.start_date,
-        self.id
+      start_date,
+      id
     )
     UpcomingAppointmentWorker.perform_at(
-        self.start_date - 15.minute,
-        self.id
+      start_date - 15.minute,
+      id
     )
   end
 
@@ -160,10 +159,11 @@ class Appointment < ApplicationRecord
         appointment.id
       )
 
+      next unless appointment.start_date < 16.minutes.from_now
       UpcomingAppointmentWorker.perform_at(
         appointment.start_date - 15.minute,
         appointment.id
-      ) if appointment.start_date < 16.minutes.from_now
+      )
     end
   end
 

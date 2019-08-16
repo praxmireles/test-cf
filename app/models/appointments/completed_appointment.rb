@@ -65,12 +65,11 @@ class CompletedAppointment < Appointment
     expert.balance.calculate_total_amount!
   end
 
-  private 
+  private
 
   def amount_due_to_expert
     Configuration.first.present? ? (price * (1 - Configuration.first.service_fees)) : 0
   end
-
 
   # rubocop:enable Metrics/AbcSize
 end

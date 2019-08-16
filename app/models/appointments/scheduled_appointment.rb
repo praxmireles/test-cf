@@ -43,7 +43,7 @@ class ScheduledAppointment < Appointment
 
   validates_uniqueness_of :start_date, scope: :expert_id
   validates_uniqueness_of :start_date, scope: :user_id
-  
+
   def start!
     opentok_session = create_session(user_id, id)
     self.type = 'InProgressAppointment'
