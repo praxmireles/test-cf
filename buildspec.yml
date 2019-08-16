@@ -16,6 +16,6 @@ phases:
   build:
     commands:
       - echo Running rubocop check...
-      - rubocop
+      #- rubocop
       - echo Running rspec tests...
       - bundle exec rspec spec/
