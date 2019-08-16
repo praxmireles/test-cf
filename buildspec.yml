@@ -7,12 +7,23 @@ phases:
       - bundle install --with test
   pre_build:
     commands:
+      - echo Build started on `date`
       - echo Preparing database to run tests...
       - RAILS_ENV=test bundle exec rake db:setup
       - RAILS_ENV=test bundle exec rake db:migrate
+      - echo Logging in to Amazon ECR...
+      - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
   build:
     commands:
       - echo Running rubocop check...
       - RAILS_ENV=test rubocop
       - echo Running rspec tests...
       - RAILS_ENV=test bundle exec rspec spec/
+      - echo Building the Docker image...          
+      - docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG .
+      - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker image...
+      - docker push IMAGE_REPO_NAME:$CODEBUILD_RESOLVED_SOURCE_VERSION
