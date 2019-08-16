@@ -12,9 +12,6 @@
 
 ActiveRecord::Schema.define(version: 2019_06_22_083632) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "access_tokens", force: :cascade do |t|
     t.bigint "user_id"
     t.string "provider"
@@ -572,7 +569,7 @@ ActiveRecord::Schema.define(version: 2019_06_22_083632) do
     t.integer "current_card_id"
     t.string "locale", default: "en"
     t.string "current_onboarding_step"
-    t.string "completed_steps", default: [], array: true
+    t.string "completed_steps", default: "--- []\n"
     t.string "stripe_account_id"
     t.string "files"
     t.boolean "is_business", default: false
@@ -617,51 +614,4 @@ ActiveRecord::Schema.define(version: 2019_06_22_083632) do
     t.index ["user_id"], name: "index_work_histories_on_user_id"
   end
 
-  add_foreign_key "appointment_packs", "services"
-  add_foreign_key "appointment_packs", "users"
-  add_foreign_key "appointment_packs_appointments", "appointment_packs"
-  add_foreign_key "appointment_packs_appointments", "appointments"
-  add_foreign_key "appointment_suggests", "appointments"
-  add_foreign_key "appointment_suggests", "users"
-  add_foreign_key "appointments", "requests"
-  add_foreign_key "appointments", "search_histories"
-  add_foreign_key "appointments", "users"
-  add_foreign_key "availabilities", "users"
-  add_foreign_key "balance_items", "appointments", on_delete: :cascade
-  add_foreign_key "balance_items", "balances"
-  add_foreign_key "balance_items", "users"
-  add_foreign_key "balances", "users"
-  add_foreign_key "billings", "users"
-  add_foreign_key "cards", "users"
-  add_foreign_key "career_highlights", "users"
-  add_foreign_key "contact_informations", "users"
-  add_foreign_key "education_histories", "users"
-  add_foreign_key "industry_experiences", "users"
-  add_foreign_key "introductions", "services"
-  add_foreign_key "invoices", "payments", on_delete: :cascade
-  add_foreign_key "invoices", "users"
-  add_foreign_key "notifications", "users"
-  add_foreign_key "payments", "users"
-  add_foreign_key "profile_industries", "industries"
-  add_foreign_key "profile_industries", "profiles"
-  add_foreign_key "profile_job_functions", "job_functions"
-  add_foreign_key "profile_job_functions", "profiles"
-  add_foreign_key "profile_languages", "languages"
-  add_foreign_key "profile_languages", "profiles"
-  add_foreign_key "profile_seniority_levels", "profiles"
-  add_foreign_key "profile_seniority_levels", "seniority_levels"
-  add_foreign_key "profile_skills", "profiles"
-  add_foreign_key "profile_skills", "skills"
-  add_foreign_key "profiles", "users"
-  add_foreign_key "ratings", "appointments"
-  add_foreign_key "ratings", "users"
-  add_foreign_key "requests", "search_histories"
-  add_foreign_key "requests", "users"
-  add_foreign_key "search_histories", "users"
-  add_foreign_key "shared_documents", "appointments"
-  add_foreign_key "shared_documents", "users"
-  add_foreign_key "skills", "job_functions"
-  add_foreign_key "users_services", "services"
-  add_foreign_key "users_services", "users"
-  add_foreign_key "work_histories", "users"
 end
