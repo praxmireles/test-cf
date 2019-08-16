@@ -1,9 +1,38 @@
 # Use the barebones version of Ruby 2.5.1
-FROM 051455035623.dkr.ecr.us-east-2.amazonaws.com/ruby-dev:latest
+FROM ruby:2.5.1
+
+# Install dependencies:
+# - build-essential: To ensure certain gems can be compiled
+# - nodejs: Compile assets
+# - libpq-dev: Communicate with postgres through the postgres gem
+# - postgresql-client-9.4: In case you want to talk directly to postgres
+#RUN apt-get update && apt-get install -qq -y build-essential nodejs libpq-dev postgresql-client-9.4.4 --fix-missing --no-install-recommends
+
+RUN apt-get update -qq && apt-get install -y build-essential libpq-dev
+
+RUN apt-get update
+#RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends apt-utils
+
+ENV DEBIAN_FRONTEND teletype
+RUN apt-get install dialog apt-utils -y
+
+# Set an environment variable to store where the app is installed to inside of the Docker image.
+ENV INSTALL_PATH /Mindwithpurpose
+RUN mkdir -p $INSTALL_PATH
+
+# This sets the context of where commands will be ran in and is documented on Docker's website extensively.
+WORKDIR $INSTALL_PATH
 
 # Copy current gems
 COPY Gemfile Gemfile
 COPY Gemfile.lock  Gemfile.lock
+
+# For capybara-webkit
+RUN apt-get install -y libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x xvfb libqtwebkit4 libqt4-dev
+RUN apt-get install build-essential libgl1-mesa-dev libqtwebkit-dev -y
+RUN apt-get install qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x qt4-qmake -y
+
+RUN gem install bundler
 
 # Finish establishing our Ruby enviornment
 RUN bundle install
