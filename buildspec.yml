@@ -12,7 +12,7 @@ phases:
       - RAILS_ENV=test bundle exec rake db:setup
       - RAILS_ENV=test bundle exec rake db:migrate
       - echo Logging in to Amazon ECR...
-      - $(aws ecr get-login --region $AWS_DEFAULT_REGION)
+      - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
   build:
     commands:
       - echo Running rubocop check...
