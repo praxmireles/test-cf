@@ -17,8 +17,3 @@ phases:
       - RAILS_ENV=test rubocop
       - echo Running rspec tests...
       - RAILS_ENV=test bundle exec rspec spec/
-  post_build:
-    commands:
-      - echo Build completed on `date`
-      - echo Pushing the Docker image...
-      - docker push $IMAGE_REPO_NAME:$CODEBUILD_RESOLVED_SOURCE_VERSION
