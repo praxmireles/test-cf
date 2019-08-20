@@ -21,6 +21,6 @@ phases:
       - echo Pushing the Docker image...
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME-$ENVIRONMENT:$CODEBUILD_RESOLVED_SOURCE_VERSION
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME-$ENVIRONMENT:$IMAGE_TAG
-      - printf '[{"name":"$IMAGE_REPO_NAME-$ENVIRONMENT","imageUri":"%s"}]' $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME-$ENVIRONMENT:$IMAGE_TAG > imagedefinitions.json
+      - printf '[{"name":"'$IMAGE_REPO_NAME-$ENVIRONMENT'","imageUri":"%s"}]' $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME-$ENVIRONMENT:$IMAGE_TAG > imagedefinitions.json
 artifacts:
     files: imagedefinitions.json
