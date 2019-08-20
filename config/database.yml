@@ -3,16 +3,15 @@ DEFAULTS: &DEFAULTS
   encoding: unicode
   host: <%= ENV["DATABASE_HOST"] %>
   port: <%= ENV["DATABASE_PORT"] %>
+  database: <%= ENV["DATABASE_NAME"] %>
   username: <%= ENV["DATABASE_USERNAME"] %>
   password: <%= ENV["DATABASE_PASSWORD"] || 'password' %>
 
 production:
   <<: *DEFAULTS
-  database: <%= ENV["PRODUCTION_DATABASE"] %>
 
 development:
   <<: *DEFAULTS
-  database: <%= ENV["DEVELOPMENT_DATABASE"] %>
 
 test: &test
   <<: *DEFAULTS
@@ -20,5 +19,4 @@ test: &test
   database: db/test.sqlite3
 
 staging:
-  <<: *DEFAULTS
-  database: <%= ENV["STAGING_DATABASE"] %>      
+  <<: *DEFAULTS    
