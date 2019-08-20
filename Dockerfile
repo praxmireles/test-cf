@@ -52,8 +52,5 @@ EXPOSE 3000
 # Expose a volume so that nginx will be able to read in assets in production.
 VOLUME ["$INSTALL_PATH/public"]
 
-# Configure an entry point, so we don't need to specify "bundle exec" for each of our commands.
-ENTRYPOINT ["bundle", "exec"]
-
-# The default command that gets ran will be to start the Unicorn server.
-CMD bundle exec rails server -b 0.0.0.0
+# Start the application server
+ENTRYPOINT ./entrypoint.sh
