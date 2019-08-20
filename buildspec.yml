@@ -9,7 +9,7 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Preparing database to run tests...
-      - RAILS_ENV=test bundle exec rake db:setup
+      - RAILS_ENV=test bundle exec rake db:seed
       - RAILS_ENV=test bundle exec rake db:migrate
   build:
     commands:
