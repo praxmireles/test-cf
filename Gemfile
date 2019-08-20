@@ -276,3 +276,5 @@ group :staging, :production do
   # Log outgoing HTTP requests in ruby
   gem 'httplog'
 end
+
+gem 'unicorn', '~> 5.1.0'
