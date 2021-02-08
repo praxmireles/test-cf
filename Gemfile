@@ -105,7 +105,7 @@ gem 'simple_form', '~> 4.0.1'
 
 # Solution for file uploads for Rails
 # https://github.com/carrierwaveuploader/carrierwave
-gem 'carrierwave', '~> 1.0'
+gem 'carrierwave', '~> 1.3'
 
 # HTML-based templating language that converts\ HTML into responsive email-ready HTML.
 # https://github.com/zurb/inky-rb
