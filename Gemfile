@@ -60,7 +60,7 @@ gem 'roo', '~> 2.7.1'
 
 # OmniAuth is a flexible authentication system utilizing Rack middleware
 # https://github.com/omniauth/omniauth
-gem 'omniauth', '~> 1.8'
+gem 'omniauth', '~> 1.9'
 
 # Facebook OAuth2 Strategy for OmniAuth.
 # https://github.com/mkdynamic/omniauth-facebook
